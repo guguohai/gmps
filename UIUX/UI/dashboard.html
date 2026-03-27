@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>售后工作台 (Dashboard) v10 - PRODUCT SERVICE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#d5e5ef",
+              "on-primary": "#f7f7ff",
+              "surface-container-low": "#eef4fa",
+              "secondary-fixed-dim": "#bfd7f4",
+              "on-surface-variant": "#52616a",
+              "background": "#f6fafe",
+              "on-primary-container": "#004fa8",
+              "surface-container": "#e5eff7",
+              "on-tertiary-fixed": "#484a4a",
+              "primary-dim": "#004fa9",
+              "secondary": "#4a617a",
+              "inverse-surface": "#0a0f12",
+              "secondary-container": "#cfe4ff",
+              "on-surface": "#26343d",
+              "primary-fixed": "#d8e2ff",
+              "on-tertiary-container": "#5a5c5c",
+              "surface": "#f6fafe",
+              "tertiary-container": "#f4f3f3",
+              "surface-dim": "#cadde9",
+              "on-error": "#fff7f6",
+              "error-container": "#fe8983",
+              "error": "#9f403d",
+              "tertiary-dim": "#525354",
+              "primary-container": "#d8e2ff",
+              "on-tertiary": "#f9f9f9",
+              "on-secondary-container": "#3d546c",
+              "primary-fixed-dim": "#c2d4ff",
+              "secondary-dim": "#3e556e",
+              "on-error-container": "#752121",
+              "tertiary-fixed": "#f4f3f3",
+              "on-secondary": "#f7f9ff",
+              "surface-container-high": "#ddeaf3",
+              "outline-variant": "#a4b4be",
+              "inverse-primary": "#4a8eff",
+              "on-secondary-fixed": "#2a4159",
+              "on-background": "#26343d",
+              "surface-container-highest": "#d5e5ef",
+              "tertiary": "#5e5f5f",
+              "surface-tint": "#005bc0",
+              "on-primary-fixed": "#003d85",
+              "primary": "#005bc0",
+              "surface-bright": "#f6fafe",
+              "on-secondary-fixed-variant": "#465d76",
+              "on-tertiary-fixed-variant": "#656666",
+              "outline": "#6e7d86",
+              "tertiary-fixed-dim": "#e5e5e5",
+              "inverse-on-surface": "#999da1",
+              "secondary-fixed": "#cfe4ff",
+              "on-primary-fixed-variant": "#0058ba"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #F5F7FA; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 docked full-width top-0 z-50 flex justify-between items-center h-16 px-6 w-full fixed" style="border-bottom: 1px solid #cbd0dd;">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-lg" data-alt="modern minimalist blue and white brand logo for a technology service platform" src="https://lh3.googleusercontent.com/aida/ADBb0uj1vyxs6y7-MyrVvNCR_rg6Pa4NM8Ds7Zd3dGz_x8Bm7s7Ber9mH1z6tl-Zd0SpF13qYCSxU0HP8yXJOk6zsRC_PAwx7XzhnxGKPIOCIMK2mt66L_oPZ2zPlTXu_8PGMy6a1gEeOzt5Iex8HkxwRh-YseA4-G8HDezeLSfqcr-TiPvQTRKUAdC8Tp54fpJZGBvEBop2R7LD6Wdtkae4mH1du7HbPdaAmk_6hL1uJnp93w3mqkYzJj4IPbzod8Z-JHs7S5ukqhrldw" style=""/>
+<span class="text-lg font-bold text-[#6e7891] dark:text-slate-300 tracking-tight font-headline">PRODUCT SERVICE</span>
+</div>
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">barcode</span>
+<input class="pl-10 pr-4 py-3 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all" placeholder="Scan barcode" style="background-color: #f5f7fa; width: 364px;" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full text-slate-500 transition-colors">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 cursor-pointer hover:opacity-80 transition-opacity relative group" onclick="this.querySelector('.user-dropdown').classList.toggle('hidden')">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-[#cbd5e1]" style="background-color: #e3e7ed;">
+<span class="material-symbols-outlined text-2xl text-slate-700">person</span>
+</div>
+<div class="user-dropdown hidden absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 py-2 z-50 text-sm font-medium">
+<a class="flex items-center gap-3 px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300" href="#">
+<span class="material-symbols-outlined text-lg">language</span>
+                    Language
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-700 text-red-500" href="#">
+<span class="material-symbols-outlined text-lg">logout</span>
+                    Logout
+                </a>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-16">
+<!-- SideNavBar -->
+<aside class="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-sm font-medium z-40 transition-all duration-300" id="sidebar" style="border-right: 1px solid #cbd0dd;">
+<div class="py-4">
+<nav class="space-y-1">
+<!-- Active State: Dashboard -->
+<a class="text-[#007bff] font-bold border-r-4 border-[#007bff] bg-blue-50/50 dark:bg-blue-900/20 flex items-center px-6 py-3 transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Expandable: Users -->
+<div>
+<button class="w-full flex items-center justify-between px-6 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#007bff] transition-all group">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+<span>Users</span>
+</div>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<div class="bg-slate-50/50 dark:bg-slate-800/30 py-1">
+<a class="block pl-14 py-2 text-xs text-slate-500 hover:text-primary transition-colors" href="#">User List</a>
+<a class="block pl-14 py-2 text-xs text-slate-500 hover:text-primary transition-colors" href="#">Permission Management</a>
+</div>
+</div>
+<!-- Expandable: Product -->
+<div>
+<button class="w-full flex items-center justify-between px-6 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#007bff] transition-all">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-3" data-icon="inventory_2">inventory_2</span>
+<span>Product</span>
+</div>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<a class="flex items-center px-6 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#007bff] transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="confirmation_number">confirmation_number</span>
+<span>Service Tickets</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#007bff] transition-all" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto border-t border-slate-100 dark:border-slate-800">
+<button class="w-full flex items-center px-6 py-4 text-slate-400 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined mr-3" data-icon="menu_open">menu_open</span>
+<span class="text-xs font-semibold">Collapse</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 min-h-screen bg-[#F5F7FA] p-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">After-sales Overview</h1>
+<p class="text-slate-500 text-sm mt-1">Real-time monitoring of service operations and agent performance.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+                    Last 30 Days
+                </button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-lg">add</span>
+                    New Ticket
+                </button>
+</div>
+</div>
+<!-- KPI Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-50 rounded-lg text-orange-500">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<span class="text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+12%</span>
+</div>
+<p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">Pending Tasks</p>
+<h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">128</h3>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 rounded-lg text-blue-500">
+<span class="material-symbols-outlined">running_with_errors</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-full">Steady</span>
+</div>
+<p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">In Progress</p>
+<h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">45</h3>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-purple-50 rounded-lg text-purple-500">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<span class="text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">-0.4h</span>
+</div>
+<p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">Avg. Response</p>
+<h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">2.4h</h3>
+</div>
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-emerald-50 rounded-lg text-emerald-500">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<span class="text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+24</span>
+</div>
+<p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">Completed Today</p>
+<h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">89</h3>
+</div>
+</div>
+<!-- Bento Layout Content -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Main Analytics Section (Left Column) -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<!-- Service Volume Trends Chart -->
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-bold font-headline text-on-surface text-[12px]">Service Volume Trends</h2>
+<div class="flex items-center gap-2">
+<span class="flex items-center gap-1 text-[10px] text-slate-500">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Volume
+                            </span>
+</div>
+</div>
+<div class="h-64 w-full flex items-end justify-between gap-4 px-4 relative">
+<!-- Grid lines simulated with absolute divs -->
+<div class="absolute inset-x-4 top-0 border-t border-slate-100 w-full h-0"></div>
+<div class="absolute inset-x-4 top-1/4 border-t border-slate-100 w-full h-0"></div>
+<div class="absolute inset-x-4 top-2/4 border-t border-slate-100 w-full h-0"></div>
+<div class="absolute inset-x-4 top-3/4 border-t border-slate-100 w-full h-0"></div>
+<!-- Bars -->
+<div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+<div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 42%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">42</div>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 font-medium">Mon</span>
+</div>
+<div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+<div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 65%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">65</div>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 font-medium">Tue</span>
+</div>
+<div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+<div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 52%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">52</div>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 font-medium">Wed</span>
+</div>
+<div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+<div class="relative w-full max-w-[40px] bg-primary rounded-t-lg transition-all cursor-pointer duration-300 shadow-lg shadow-primary/20" style="height: 88%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">88</div>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 font-medium">Thu</span>
+</div>
+<div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+<div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 72%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">72</div>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 font-medium">Fri</span>
+</div>
+<div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+<div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 40%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">40</div>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 font-medium">Sat</span>
+</div>
+<div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+<div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 35%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">35</div>
+</div>
+<span class="text-[10px] text-slate-400 mt-2 font-medium">Sun</span>
+</div>
+</div>
+</div>
+<!-- Recent Service Requests Table -->
+<div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-50 flex justify-between items-center">
+<h2 class="font-bold font-headline text-on-surface text-[12px]">Recent Service Requests</h2>
+<button class="text-xs text-primary font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50/50 text-slate-500 text-[10px] uppercase font-bold tracking-wider">
+<tr>
+<th class="px-6 py-4">ID</th>
+<th class="px-6 py-4">Customer</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Priority</th>
+<th class="px-6 py-4">Assigned To</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-xs font-bold text-primary">#SR-2041</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200"></div>
+<span class="text-xs font-medium">David Chen</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">In Progress</span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-xs text-red-500 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> High
+                                    </span>
+</td>
+<td class="px-6 py-4 text-xs text-slate-600">Sarah Jenkins</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-xs font-bold text-primary">#SR-2040</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200"></div>
+<span class="text-xs font-medium">Maria Garcia</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold bg-orange-100 text-orange-700">Pending</span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-xs text-orange-500 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span> Medium
+                                    </span>
+</td>
+<td class="px-6 py-4 text-xs text-slate-600">Robert Fox</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-xs font-bold text-primary">#SR-2039</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200"></div>
+<span class="text-xs font-medium">James Wilson</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Completed</span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1 text-xs text-slate-400 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Low
+                                    </span>
+</td>
+<td class="px-6 py-4 text-xs text-slate-600">Sarah Jenkins</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Activity Stream (Right Column) -->
+<div class="col-span-12 lg:col-span-4">
+<div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm h-full">
+<h2 class="font-bold font-headline text-on-surface mb-6 text-[12px]">Activity Stream</h2>
+<div class="space-y-6">
+<div class="relative pl-6 border-l-2 border-slate-100">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white"></div>
+<p class="text-xs font-bold text-on-surface">Ticket #SR-2041 Updated</p>
+<p class="text-[11px] text-slate-500 mt-1">Status changed to 'In Progress' by Sarah Jenkins.</p>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">2 minutes ago</p>
+</div>
+<div class="relative pl-6 border-l-2 border-slate-100">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-4 border-white"></div>
+<p class="text-xs font-bold text-on-surface">New Customer Registered</p>
+<p class="text-[11px] text-slate-500 mt-1">Acme Corp signed up via the self-service portal.</p>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">1 hour ago</p>
+</div>
+<div class="relative pl-6 border-l-2 border-slate-100">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-orange-500 border-4 border-white"></div>
+<p class="text-xs font-bold text-on-surface">Priority Escalation</p>
+<p class="text-[11px] text-slate-500 mt-1">Ticket #SR-1988 marked as 'Critical' by system monitor.</p>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">3 hours ago</p>
+</div>
+<div class="relative pl-6 border-l-2 border-slate-100">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-200 border-4 border-white"></div>
+<p class="text-xs font-bold text-on-surface">Weekly Report Generated</p>
+<p class="text-[11px] text-slate-500 mt-1">The system has automated the performance summary.</p>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">Yesterday</p>
+</div>
+<div class="relative pl-6 border-l-2 border-slate-100">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white"></div>
+<p class="text-xs font-bold text-on-surface">Agent Login</p>
+<p class="text-[11px] text-slate-500 mt-1">Robert Fox started their shift.</p>
+<p class="text-[10px] text-slate-400 mt-2 font-medium">Yesterday</p>
+</div>
+</div>
+<button class="w-full mt-8 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-500 hover:bg-slate-50 transition-colors">
+                        Load more activities
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
