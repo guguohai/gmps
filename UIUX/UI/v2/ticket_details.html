@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工单详情 | Ticket Details - PRODUCT SERVICE</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    
+    <!-- Uicons Icons -->
+    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet">
+    
+    <!-- Uicons Custom CSS for fi-sr -->
+    <style>
+        @font-face {
+            font-family: 'uicons-solid';
+            src: url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff2') format('woff2'),
+                 url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        [class^="fi-sr-"] {
+            font-family: 'uicons-solid' !important;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+    
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#005bc0",
+                        "on-surface": "#26343d",
+                        "on-surface-variant": "#52616a",
+                        "background": "#F5F7FA",
+                        "outline": "#cbd0dd",
+                        "surface": "#ffffff",
+                        "secondary": "#4a617a",
+                        "error": "#9f403d"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .no-scrollbar::-webkit-scrollbar { 
+            display: none; 
+        }
+        .no-scrollbar { 
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F5F7FA; 
+        }
+        h1, h2, h3, .font-headline { 
+            font-family: 'Manrope', sans-serif; 
+        }
+        .heroicon {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="text-on-surface bg-background min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-outline fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <!-- Logo & Brand -->
+            <div class="flex items-center gap-2">
+                <img alt="PRODUCT SERVICE Logo" class="w-10 h-10 rounded-lg" src="logo.png"/>
+                <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="relative hidden md:block">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z"></path>
+                </svg>
+                <input class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all" 
+                       style="background-color: #f5f7fa; width: 364px;" 
+                       type="text" 
+                       placeholder="Scan barcode"/>
+            </div>
+        </div>
+        
+        <!-- Right Actions -->
+        <div class="flex items-center gap-4">
+            <button class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center" title="Language">
+                <i class="fi fi-rr-globe text-[20px] leading-none"></i>
+            </button>
+            <div class="flex items-center gap-3 pl-4 border-l border-slate-200 cursor-pointer">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center bg-[#e3e7ed]">
+                    <i class="fi fi-sr-user text-[20px]"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Layout -->
+    <div class="flex pt-16 min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="bg-white border-r border-outline fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40">
+            <nav class="py-4 flex-1 space-y-1">
+                <!-- Dashboard -->
+                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all" href="./dashboard.html">
+                    <i class="fi fi-rr-dashboard w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                    <span class="text-[13px]">Dashboard</span>
+                </a>
+                
+                <!-- Users Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-users-alt w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">Users</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">User List</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="#">Permission Management</a>
+                    </div>
+                </div>
+                
+                <!-- Product Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-box w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">Product</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="#">List</a>
+                    </div>
+                </div>
+                
+                <!-- Service Tickets Menu Group - Active -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-ticket w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">Service Tickets</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./ticket_list.html">List</a>
+                    </div>
+                </div>
+                
+                <!-- Settings -->
+                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all" href="#">
+                    <svg class="heroicon w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <!-- Collapse Button -->
+            <div class="border-t border-slate-100 p-4">
+                <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors" onclick="toggleSidebar()">
+                    <svg class="heroicon w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"/></svg>
+                    <span class="text-xs font-semibold uppercase">Collapse</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 flex-1 p-5 overflow-y-auto w-full">
+            <!-- Breadcrumb -->
+            <nav class="mb-5 text-sm font-medium">
+                <span class="text-primary">工单管理</span>
+                <span class="mx-2 text-slate-500">></span>
+                <span class="text-primary">工单列表</span>
+                <span class="mx-2 text-slate-500">></span>
+                <span class="text-slate-500">工单详情</span>
+            </nav>
+            
+            <div class="space-y-8 w-full">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">Ticket #TK-20231027-01</h2>
+                            <span class="px-2 py-0.5 bg-blue-100 text-primary text-[10px] font-bold rounded uppercase">维修中</span>
+                        </div>
+                        <p class="text-xs text-on-surface-variant">Created on Oct 27, 2023 10:45 AM • Last updated 2 hours ago</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button class="px-3 py-1.5 bg-white border border-outline text-slate-600 text-xs font-semibold rounded hover:bg-slate-50 transition-colors flex items-center gap-1.5">
+                            <svg class="heroicon w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                            条码打印
+                        </button>
+                        <button class="px-3 py-1.5 bg-white border border-outline text-slate-600 text-xs font-semibold rounded hover:bg-slate-50 transition-colors flex items-center gap-1.5">
+                            <svg class="heroicon w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+                            库存申请
+                        </button>
+                        <button class="px-3 py-1.5 bg-white border border-outline text-slate-600 text-xs font-semibold rounded hover:bg-slate-50 transition-colors flex items-center gap-1.5">
+                            <i class="bi bi-files text-base"></i>
+                            工单复制
+                        </button>
+                        <button class="px-5 py-1.5 bg-primary text-white text-xs font-bold rounded shadow-sm hover:opacity-90 transition-all flex items-center gap-1.5">
+                            <i class="bi bi-save text-base"></i>
+                            保存
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Info Cards Grid -->
+                <div class="grid grid-cols-12 gap-6 w-full">
+                    <!-- Basic Info Card -->
+                    <div class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                <i class="bi bi-info-circle text-primary text-lg"></i>
+                                基础信息
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">工单编号</label>
+                                    <p class="text-sm font-medium">TK-20231027-01</p>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">SAP SO No</label>
+                                    <p class="text-sm font-medium text-primary">SO-8829011</p>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
+                                    <p class="text-sm font-medium">维修中</p>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">原工单编号</label>
+                                    <p class="text-sm font-medium text-slate-300">—</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Email & SMS Notifications -->
+                            <div class="space-y-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center mb-1">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">电子邮件</label>
+                                        <i class="bi bi-clock-history text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors ml-[15px]" style="line-height: 1;"></i>
+                                    </div>
+                                    <div class="flex gap-[10px]">
+                                        <select class="flex-1 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
+                                            <option>Repair Completion Notification</option>
+                                            <option>Delay Notice Template</option>
+                                            <option>Quotation Approval</option>
+                                        </select>
+                                        <button class="w-[60px] min-w-[60px] flex-shrink-0 bg-[#f5f7fa] text-[12px] font-bold rounded-lg hover:bg-slate-200 transition-all h-[38px] border-none whitespace-nowrap text-[#666666] flex items-center justify-center">发送</button>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center mb-1">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">短信通知</label>
+                                        <i class="bi bi-clock-history text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors ml-[15px]" style="line-height: 1;"></i>
+                                    </div>
+                                    <div class="flex gap-[10px]">
+                                        <select class="flex-1 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
+                                            <option>Repair Status Update SMS</option>
+                                            <option>Pickup Confirmation SMS</option>
+                                            <option>Payment Received SMS</option>
+                                        </select>
+                                        <button class="w-[60px] min-w-[60px] flex-shrink-0 bg-[#f5f7fa] text-[12px] font-bold rounded-lg hover:bg-slate-200 transition-all h-[38px] border-none whitespace-nowrap text-[#666666] flex items-center justify-center">发送</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Customer Info Card -->
+                    <div class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                <i class="bi bi-person text-secondary text-lg"></i>
+                                客户信息
+                            </h3>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-8">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">客户姓名</label>
+                                <p class="text-sm font-medium">Jameson Vance</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">电话号码</label>
+                                <p class="text-sm font-medium">+86 138-8822-1922</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">邮箱</label>
+                                <p class="text-sm font-medium">vance.design@example.com</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">国家</label>
+                                <p class="text-sm font-medium">中国 (China)</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">收货类型</label>
+                                <div>
+                                    <span class="inline-flex items-center px-2 py-0.5 bg-blue-50 text-primary text-[10px] font-bold rounded uppercase">快递</span>
+                                </div>
+                            </div>
+                            <div class="col-span-1 md:col-span-3 space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">收货地址</label>
+                                <p class="text-sm font-medium">上海市静安区南京西路 1266 号恒隆广场一座 45 楼</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Receipt Info Card -->
+                    <div class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                <i class="bi bi-receipt text-slate-500 text-lg"></i>
+                                受理信息
+                            </h3>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">接收日期</label>
+                                <p class="text-sm font-medium">2023-10-27</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">受理渠道类型</label>
+                                <p class="text-sm font-medium">邮寄 (Official Website)</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">受理渠道</label>
+                                <p class="text-sm font-medium">Online Support</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">是否再维修</label>
+                                <p class="text-sm font-medium">否</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">是否紧急维修</label>
+                                <p class="text-sm font-medium">是</p>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">购买日期</label>
+                                <p class="text-sm font-medium">2023-05-12</p>
+                            </div>
+                            <div class="col-span-2 space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">客户请求分类</label>
+                                <p class="text-sm font-medium">镜架损坏 / 漆面剥落</p>
+                            </div>
+                            <div class="col-span-4 p-4 bg-[#f5f7fa] rounded-lg">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">客户反馈内容</label>
+                                <p class="text-sm leading-relaxed text-on-surface">The temple of the frame is showing signs of paint peeling after 5 months of normal usage. Requesting a full restoration or replacement of the left temple arm.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Info Card -->
+                    <div class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50 flex justify-between items-center">
+                            <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                <i class="bi bi-eyeglasses text-slate-500 text-lg"></i>
+                                产品信息
+                            </h3>
+                            <button class="flex items-center gap-1 text-[12px] font-bold text-primary hover:bg-blue-50 px-2 py-1 rounded transition-colors uppercase">
+                                <i class="bi bi-pencil text-[12px]"></i>
+                                定价
+                            </button>
+                        </div>
+                        <div class="p-6 space-y-5">
+                            <div class="space-y-1 border-b border-slate-50 pb-3">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
+                                <p class="text-sm font-bold text-on-surface">V8 Turbo Max</p>
+                            </div>
+                            <div class="space-y-1 border-b border-slate-50 pb-3">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">产品 ID</label>
+                                <p class="text-sm font-mono text-primary font-bold">PRD-88219</p>
+                            </div>
+                            <div class="space-y-1 border-b border-slate-50 pb-3">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">类别</label>
+                                <p class="text-sm font-medium">Titanium Frame</p>
+                            </div>
+                            <div class="space-y-1 border-b border-slate-50 pb-3">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">库存状态</label>
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    <p class="text-sm font-bold text-green-600">IN STOCK</p>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修可行性</label>
+                                <p class="text-sm text-green-600 font-bold flex items-center gap-1">
+                                    <i class="bi bi-check-circle text-sm"></i> 
+                                    高 (High)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Repair Info Card -->
+                    <div class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                <i class="bi bi-tools text-slate-500 text-lg"></i>
+                                维修信息
+                            </h3>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-5">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">预计出库日期</label>
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="date" value="2023-11-05"/>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">问题现象</label>
+                                    <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>Surface Paint Peeling (漆面剥落)</option>
+                                        <option>Hinge Loose</option>
+                                        <option>Lens Scratch</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">问题描述</label>
+                                    <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" placeholder="Enter detailed technical description..." rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="space-y-5">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修工程师</label>
+                                    <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>Linus Zhao (Senior Eng.)</option>
+                                        <option>Sarah Chen (Junior Eng.)</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修内容</label>
+                                    <div class="p-3 bg-blue-50/50 border border-blue-100 rounded-lg text-sm font-medium text-primary">
+                                        Temple Arm Replacement & Full Surface Polish
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">费用类型</label>
+                                        <p class="text-sm font-medium">无偿 (Warranty)</p>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修费用</label>
+                                        <p class="text-xl font-extrabold text-on-surface font-headline">¥ 0.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Logistics Info Card -->
+                    <div class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                <i class="bi bi-postcard text-slate-500 text-lg"></i>
+                                物流信息
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-slate-500 font-medium">是否出库完成</span>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-5 bg-slate-100 rounded-full relative">
+                                        <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-400">Pending</span>
+                                </div>
+                            </div>
+                            <div class="space-y-5">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">配送方式</label>
+                                    <p class="text-sm font-medium">SF Express (Standard)</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">物流单号</label>
+                                    <div class="flex items-center justify-between p-3 bg-[#f5f7fa] rounded-lg">
+                                        <span class="text-sm font-mono font-bold">SF12345678</span>
+                                        <button class="text-primary hover:scale-110 transition-transform" title="Copy">
+                                            <i class="bi bi-clipboard text-lg"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-blue-50/50 rounded-xl border border-blue-100 flex items-start gap-3">
+                                <i class="bi bi-compass text-primary text-xl"></i>
+                                <div class="space-y-1">
+                                    <p class="text-[10px] font-bold text-primary uppercase">Tracking Update</p>
+                                    <p class="text-xs text-slate-600 leading-tight">Package waiting for repair completion at Shanghai PDC Center.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Toggle menu expand/collapse - only one menu can be open at a time
+        function toggleMenu(btn) {
+            const content = btn.nextElementSibling;
+            const allMenus = document.querySelectorAll('.menu-content');
+            
+            // Close all other menus
+            allMenus.forEach(menu => {
+                if (menu !== content) {
+                    menu.classList.add('hidden');
+                }
+            });
+            
+            // Toggle current menu
+            content.classList.toggle('hidden');
+        }
+        
+        // Toggle sidebar collapse
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('w-64');
+            sidebar.classList.toggle('w-20');
+        }
+    </script>
+</body>
+</html>

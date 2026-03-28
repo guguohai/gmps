@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>售后工作台 (Dashboard) - PRODUCT SERVICE</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    
+    <!-- Uicons Icons -->
+    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet">
+    <link href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css' rel='stylesheet'>
+    
+    <!-- Uicons Custom CSS for fi-sr -->
+    <style>
+        @font-face {
+            font-family: 'uicons-solid';
+            src: url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff2') format('woff2'),
+                 url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        [class^="fi-sr-"] {
+            font-family: 'uicons-solid' !important;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+    
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#d5e5ef",
+                        "on-primary": "#f7f7ff",
+                        "surface-container-low": "#eef4fa",
+                        "secondary-fixed-dim": "#bfd7f4",
+                        "on-surface-variant": "#52616a",
+                        "background": "#f6fafe",
+                        "on-primary-container": "#004fa8",
+                        "surface-container": "#e5eff7",
+                        "on-tertiary-fixed": "#484a4a",
+                        "primary-dim": "#004fa9",
+                        "secondary": "#4a617a",
+                        "inverse-surface": "#0a0f12",                
+                        "secondary-container": "#cfe4ff",
+                        "on-surface": "#26343d",
+                        "primary-fixed": "#d8e2ff",
+                        "on-tertiary-container": "#5a5c5c",
+                        "surface": "#f6fafe",
+                        "tertiary-container": "#f4f3f3",
+                        "surface-dim": "#cadde9",
+                        "on-error": "#fff7f6",
+                        "error-container": "#fe8983",
+                        "error": "#9f403d",
+                        "tertiary-dim": "#525354",
+                        "primary-container": "#d8e2ff",
+                        "on-tertiary": "#f9f9f9",
+                        "on-secondary-container": "#3d546c",
+                        "primary-fixed-dim": "#c2d4ff",
+                        "secondary-dim": "#3e556e",
+                        "on-error-container": "#752121",
+                        "tertiary-fixed": "#f4f3f3",
+                        "on-secondary": "#f7f9ff",
+                        "surface-container-high": "#ddeaf3",
+                        "outline-variant": "#a4b4be",
+                        "inverse-primary": "#4a8eff",
+                        "on-secondary-fixed": "#2a4159",
+                        "on-background": "#26343d",
+                        "surface-container-highest": "#d5e5ef",
+                        "tertiary": "#5e5f5f",
+                        "surface-tint": "#005bc0",
+                        "on-primary-fixed": "#003d85",
+                        "primary": "#005bc0",
+                        "surface-bright": "#f6fafe",
+                        "on-secondary-fixed-variant": "#465d76",
+                        "on-tertiary-fixed-variant": "#656666",
+                        "outline": "#6e7d86",
+                        "tertiary-fixed-dim": "#e5e5e5",
+                        "inverse-on-surface": "#999da1",
+                        "secondary-fixed": "#cfe4ff",
+                        "on-primary-fixed-variant": "#0058ba"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .no-scrollbar::-webkit-scrollbar { 
+            display: none; 
+        }
+        .no-scrollbar { 
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F5F7FA; 
+        }
+        h1, h2, h3, .font-headline { 
+            font-family: 'Manrope', sans-serif; 
+        }
+        .heroicon {
+            vertical-align: middle;
+            width: 1.25em;
+            height: 1.25em;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-[#cbd0dd] fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <!-- Logo & Brand -->
+            <div class="flex items-center gap-3">
+                <img class="w-10 h-10 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo"/>
+                <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="relative hidden md:block">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z"></path>
+                </svg>
+                <input class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all" 
+                       style="background-color: #f5f7fa; width: 364px;" 
+                       type="text" 
+                       placeholder="Scan barcode"/>
+            </div>
+        </div>
+        
+        <!-- Right Actions -->
+        <div class="flex items-center gap-4 h-full">
+            <button class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center" title="Language">
+                <i class="fi fi-rr-globe text-[20px] leading-none"></i>
+            </button>
+            <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center bg-[#e3e7ed]">
+                    <i class="fi fi-sr-user text-[20px]"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Layout -->
+    <div class="flex pt-16">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="bg-white border-r border-[#cbd0dd] fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40 transition-all duration-300">
+            <nav class="py-4 flex-grow space-y-1">
+                <!-- Dashboard - Active -->
+                <a class="flex items-center px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary" href="./dashboard.html">
+                    <i class="fi fi-rr-dashboard w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                    <span class="text-[13px]">Dashboard</span>
+                </a>
+                
+                <!-- 工单管理 Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-ticket w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">工单管理</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1 bg-slate-50/50">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./ticket_list.html">列表</a>
+                    </div>
+                </div>
+                
+                <!-- 产品管理 Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-box w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">产品管理</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./product_list.html">列表</a>
+                    </div>
+                </div>
+                
+                <!-- 库存 Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-package w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">库存</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_request_list.html">申请列表</a>
+                    </div>
+                </div>
+                
+                <!-- 配件 Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-settings w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">配件</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_list.html">列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_request_list.html">申请列表</a>
+                    </div>
+                </div>
+                
+                <!-- 服务 Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-headset w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">服务</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_survey.html">问卷</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_consultation.html">咨询</a>
+                    </div>
+                </div>
+                
+                <!-- 用户权限 Menu Group -->
+                <div class="menu-group">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                        <div class="flex items-center">
+                            <i class="fi fi-rr-users-alt w-[14px] h-[14px] mr-3 flex items-center justify-center"></i>
+                            <span class="text-[13px]">用户权限</span>
+                        </div>
+                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                    </button>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">用户列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_list.html">角色列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./permission_list.html">权限列表</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Collapse Button -->
+            <div class="border-t border-slate-100 p-4">
+                <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors" onclick="toggleSidebar()">
+                    <i class="fi fi-rr-angle-left w-5 h-5 mr-3"></i>
+                    <span class="text-xs font-semibold uppercase">Collapse</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="ml-64 flex-1 min-h-screen bg-[#F5F7FA] p-8">
+            <!-- Page Header -->
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h1 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">After-sales Overview</h1>
+                    <p class="text-slate-500 text-sm mt-1">Real-time monitoring of service operations and agent performance.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors flex items-center gap-2">
+                        <svg class="heroicon w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                        Last 30 Days
+                    </button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm shadow-primary/20">
+                        <svg class="heroicon w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                        New Ticket
+                    </button>
+                </div>
+            </div>
+            
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Pending Tasks -->
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-orange-50 rounded-lg text-orange-500">
+                            <svg class="heroicon w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <span class="text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+12%</span>
+                    </div>
+                    <p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">Pending Tasks</p>
+                    <h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">128</h3>
+                </div>
+                
+                <!-- In Progress -->
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-blue-50 rounded-lg text-blue-500">
+                            <svg class="heroicon w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-full">Steady</span>
+                    </div>
+                    <p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">In Progress</p>
+                    <h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">45</h3>
+                </div>
+                
+                <!-- Avg. Response -->
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-purple-50 rounded-lg text-purple-500">
+                            <i class="bi bi-hourglass-split text-xl"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">-0.4h</span>
+                    </div>
+                    <p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">Avg. Response</p>
+                    <h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">2.4h</h3>
+                </div>
+                
+                <!-- Completed Today -->
+                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-emerald-50 rounded-lg text-emerald-500">
+                            <i class="bi bi-check-circle text-xl"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+24</span>
+                    </div>
+                    <p class="text-slate-500 font-medium uppercase tracking-wider text-[12px]">Completed Today</p>
+                    <h3 class="text-3xl font-bold mt-1 text-on-surface font-headline">89</h3>
+                </div>
+            </div>
+            
+            <!-- Analytics Section -->
+            <div class="grid grid-cols-12 gap-6">
+                <!-- Left Column - Charts & Table -->
+                <div class="col-span-12 lg:col-span-8 space-y-6">
+                    <!-- Service Volume Trends Chart -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="font-bold font-headline text-on-surface text-[12px]">Service Volume Trends</h2>
+                            <div class="flex items-center gap-2">
+                                <span class="flex items-center gap-1 text-[10px] text-slate-500">
+                                    <span class="w-2 h-2 rounded-full bg-primary"></span> Volume
+                                </span>
+                            </div>
+                        </div>
+                        <div class="h-64 w-full flex items-end justify-between gap-4 px-4 relative">
+                            <!-- Grid lines -->
+                            <div class="absolute inset-x-4 top-0 border-t border-slate-100 w-full h-0"></div>
+                            <div class="absolute inset-x-4 top-1/4 border-t border-slate-100 w-full h-0"></div>
+                            <div class="absolute inset-x-4 top-2/4 border-t border-slate-100 w-full h-0"></div>
+                            <div class="absolute inset-x-4 top-3/4 border-t border-slate-100 w-full h-0"></div>
+                            
+                            <!-- Bars -->
+                            <div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+                                <div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 42%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">42</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-2 font-medium">Mon</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+                                <div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 65%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">65</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-2 font-medium">Tue</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+                                <div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 52%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">52</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-2 font-medium">Wed</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+                                <div class="relative w-full max-w-[40px] bg-primary rounded-t-lg transition-all cursor-pointer duration-300 shadow-lg shadow-primary/20" style="height: 88%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">88</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-2 font-medium">Thu</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+                                <div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 72%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">72</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-2 font-medium">Fri</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+                                <div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 40%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">40</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-2 font-medium">Sat</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1 group h-full justify-end z-10">
+                                <div class="relative w-full max-w-[40px] bg-blue-100 hover:bg-primary rounded-t-lg transition-all cursor-pointer duration-300" style="height: 35%;">
+                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">35</div>
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-2 font-medium">Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Service Requests Table -->
+                    <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+                        <div class="p-6 border-b border-slate-50 flex justify-between items-center">
+                            <h2 class="font-bold font-headline text-on-surface text-[12px]">Recent Service Requests</h2>
+                            <button class="text-xs text-primary font-bold hover:underline">View All</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-slate-50/50 text-slate-500 text-[10px] uppercase font-bold tracking-wider">
+                                    <tr>
+                                        <th class="px-6 py-4">ID</th>
+                                        <th class="px-6 py-4">Customer</th>
+                                        <th class="px-6 py-4">Status</th>
+                                        <th class="px-6 py-4">Priority</th>
+                                        <th class="px-6 py-4">Assigned To</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-50">
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 text-xs font-bold text-primary">#SR-2041</td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-6 h-6 rounded-full bg-slate-200"></div>
+                                                <span class="text-xs font-medium">David Chen</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">In Progress</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1 text-xs text-red-500 font-semibold">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> High
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-600">Sarah Jenkins</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 text-xs font-bold text-primary">#SR-2040</td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-6 h-6 rounded-full bg-slate-200"></div>
+                                                <span class="text-xs font-medium">Maria Garcia</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-orange-100 text-orange-700">Pending</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1 text-xs text-orange-500 font-semibold">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span> Medium
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-600">Robert Fox</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 text-xs font-bold text-primary">#SR-2039</td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-6 h-6 rounded-full bg-slate-200"></div>
+                                                <span class="text-xs font-medium">James Wilson</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Completed</span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="flex items-center gap-1 text-xs text-slate-400 font-semibold">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Low
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-xs text-slate-600">Sarah Jenkins</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Activity Stream -->
+                <div class="col-span-12 lg:col-span-4">
+                    <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm h-full">
+                        <h2 class="font-bold font-headline text-on-surface mb-6 text-[12px]">Activity Stream</h2>
+                        <div class="space-y-6">
+                            <div class="relative pl-6 border-l-2 border-slate-100">
+                                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white"></div>
+                                <p class="text-xs font-bold text-on-surface">Ticket #SR-2041 Updated</p>
+                                <p class="text-[11px] text-slate-500 mt-1">Status changed to 'In Progress' by Sarah Jenkins.</p>
+                                <p class="text-[10px] text-slate-400 mt-2 font-medium">2 minutes ago</p>
+                            </div>
+                            <div class="relative pl-6 border-l-2 border-slate-100">
+                                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-4 border-white"></div>
+                                <p class="text-xs font-bold text-on-surface">New Customer Registered</p>
+                                <p class="text-[11px] text-slate-500 mt-1">Acme Corp signed up via the self-service portal.</p>
+                                <p class="text-[10px] text-slate-400 mt-2 font-medium">1 hour ago</p>
+                            </div>
+                            <div class="relative pl-6 border-l-2 border-slate-100">
+                                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-orange-500 border-4 border-white"></div>
+                                <p class="text-xs font-bold text-on-surface">Priority Escalation</p>
+                                <p class="text-[11px] text-slate-500 mt-1">Ticket #SR-1988 marked as 'Critical' by system monitor.</p>
+                                <p class="text-[10px] text-slate-400 mt-2 font-medium">3 hours ago</p>
+                            </div>
+                            <div class="relative pl-6 border-l-2 border-slate-100">
+                                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-200 border-4 border-white"></div>
+                                <p class="text-xs font-bold text-on-surface">Weekly Report Generated</p>
+                                <p class="text-[11px] text-slate-500 mt-1">The system has automated the performance summary.</p>
+                                <p class="text-[10px] text-slate-400 mt-2 font-medium">Yesterday</p>
+                            </div>
+                            <div class="relative pl-6 border-l-2 border-slate-100">
+                                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white"></div>
+                                <p class="text-xs font-bold text-on-surface">Agent Login</p>
+                                <p class="text-[11px] text-slate-500 mt-1">Robert Fox started their shift.</p>
+                                <p class="text-[10px] text-slate-400 mt-2 font-medium">Yesterday</p>
+                            </div>
+                        </div>
+                        <button class="w-full mt-8 py-2 border border-slate-200 rounded-lg text-xs font-bold text-slate-500 hover:bg-slate-50 transition-colors">
+                            Load more activities
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Toggle menu expand/collapse - only one menu can be open at a time
+        function toggleMenu(btn) {
+            const content = btn.nextElementSibling;
+            const allMenus = document.querySelectorAll('.menu-content');
+            
+            // Close all other menus
+            allMenus.forEach(menu => {
+                if (menu !== content) {
+                    menu.classList.add('hidden');
+                }
+            });
+            
+            // Toggle current menu
+            content.classList.toggle('hidden');
+        }
+        
+        // Toggle sidebar collapse
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('w-64');
+            sidebar.classList.toggle('w-20');
+        }
+        
+        // Toggle user dropdown
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const userDropdown = document.getElementById('userDropdown');
+            const trigger = event.target.closest('[onclick="toggleUserDropdown()"]');
+            
+            if (userDropdown && !trigger && !userDropdown.contains(event.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
