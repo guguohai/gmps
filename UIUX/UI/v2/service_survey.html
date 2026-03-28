@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List - PRODUCT SERVICE</title>
+    <title>Service Survey - PRODUCT SERVICE</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -146,36 +146,18 @@
                 <input class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all" 
                        style="background-color: #f5f7fa; width: 440px;" 
                        type="text" 
-                       placeholder="扫描条形码"/>
+                       placeholder="Scan barcode"/>
             </div>
         </div>
         
         <!-- Right Actions -->
         <div class="flex items-center gap-4 h-full">
-            <!-- Language Dropdown -->
-            <div class="relative">
-                <button class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center" title="Language" onclick="toggleDropdown('language-dropdown')">
-                    <i class="fi fi-rr-globe text-[20px] leading-none"></i>
-                </button>
-                <!-- Language Dropdown Menu -->
-                <div id="language-dropdown" class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">中文</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">한국어</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">English</a>
-                </div>
-            </div>
-            
-            <!-- User Dropdown -->
-            <div class="relative">
-                <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8 cursor-pointer" onclick="toggleDropdown('user-dropdown')">
-                    <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px;">
-                        <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20"><path d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0" p-id="1651"></path></svg>
-                    </div>
-                </div>
-                <!-- User Dropdown Menu -->
-                <div id="user-dropdown" class="hidden absolute right-0 top-full mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">个人信息</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">退出</a>
+            <button class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center" title="Language">
+                <i class="fi fi-rr-globe text-[20px] leading-none"></i>
+            </button>
+            <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8">
+                <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px;">
+                                            <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20"><path d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0" p-id="1651"></path></svg>
                 </div>
             </div>
         </div>
@@ -231,7 +213,7 @@
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
@@ -257,9 +239,9 @@
                     </div>
                 </div>
                 
-                <!-- 服务 Menu Group -->
+                <!-- 服务 Menu Group - Active -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group" onclick="toggleMenu(this)">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">服务</span>
@@ -268,15 +250,15 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_survey.html">问卷</a>
+                    <div class="menu-content py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./service_survey.html">问卷</a>
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_consultation.html">咨询</a>
                     </div>
                 </div>
                 
-                <!-- 用户权限 Menu Group - Active -->
+                <!-- 用户权限 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group" onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">用户权限</span>
@@ -285,8 +267,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div class="menu-content py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./user_list.html">用户列表</a>
+                    <div class="menu-content hidden py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">用户列表</a>
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_list.html">角色列表</a>
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./permission_list.html">权限列表</a>
                     </div>
@@ -296,9 +278,7 @@
             <!-- Collapse Button -->
             <div class="border-t border-slate-100 bg-white p-4">
                 <button class="w-full flex items-center px-6 py-4 text-slate-400 hover:text-primary transition-colors group" onclick="toggleSidebar()">
-                    <svg class="w-[16px] h-[16px] mr-3" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                    </svg>
+                    <i class="fi fi-rr-chevron-left w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                     <span class="text-xs font-semibold">Collapse</span>
                 </button>
             </div>
@@ -311,9 +291,9 @@
                 <div class="flex justify-between items-center mb-5">
                     <div>
                         <h1 class="font-bold text-on-surface font-headline tracking-tight text-[14px]">
-                            <span class="font-medium text-[#177ee5]">用户管理</span>
+                            <span class="font-medium text-[#177ee5]">服务</span>
                             <span class="mx-2 text-slate-300">/</span>
-                            <span class="text-[#6e7891]">用户列表</span>
+                            <span class="text-[#6e7891]">服务问卷</span>
                         </h1>
                     </div>
                     <div class="flex gap-2">
@@ -336,35 +316,18 @@
                         <!-- Form Fields -->
                         <div class="flex-1 flex gap-4">
                             <div class="flex-1">
-                                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">用户 ID</label>
+                                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">Ticket No.</label>
                                 <input class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all" 
                                        type="text" 
-                                       placeholder="请输入用户 ID"/>
+                                       placeholder="TKT-2024..."/>
                             </div>
                             <div class="flex-1">
-                                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">用户名</label>
-                                <input class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all" 
-                                       type="text" 
-                                       placeholder="请输入用户名"/>
-                            </div>
-                            <div class="flex-1">
-                                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">部门</label>
+                                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">Survey Status</label>
                                 <select class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                                    <option>全部部门</option>
-                                    <option>销售部</option>
-                                    <option>技术部</option>
-                                    <option>客服部</option>
-                                    <option>管理层</option>
-                                </select>
-                            </div>
-                            <div class="flex-1">
-                                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">角色</label>
-                                <select class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                                    <option>全部角色</option>
-                                    <option>管理员</option>
-                                    <option>经理</option>
-                                    <option>工程师</option>
-                                    <option>操作员</option>
+                                    <option>全部状态</option>
+                                    <option>待处理</option>
+                                    <option>Completed</option>
+                                    <option>Overdue</option>
                                 </select>
                             </div>
                         </div>
@@ -382,84 +345,66 @@
                 </div>
                 
                 <!-- Table Container -->
-                <div class="mt-5 bg-white rounded-xl border border-slate-100 shadow-sm min-w-0">
-                    <div class="w-full overflow-x-auto">
-                        <table cellpadding="0" cellspacing="0" style="min-width: 100%; font-size: 13px;" class="text-left">
-                            <thead class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100">
+          <div
+            class="mt-5 bg-white rounded-xl border border-slate-100 shadow-sm min-w-0"
+          >
+            <div class="w-full overflow-x-auto">
+                    <table class="w-full text-left" style="min-width: max-content;font-size: 13px;">
+                            <thead class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px]">
                                 <tr>
-                                    <th class="px-6 py-4">用户 ID</th>
-                                    <th class="px-6 py-4">用户名</th>
-                                    <th class="px-6 py-4">职位</th>
-                                    <th class="px-6 py-4">部门</th>
-                                    <th class="px-6 py-4">角色</th>
-                                    <th class="px-6 py-4">编号</th>
+                                    <th class="px-6 py-4">工单编号</th>
+                                    <th class="px-6 py-4">问卷截止日期</th>
+                                    <th class="px-6 py-4">问卷标题</th>
+                                    <th class="px-6 py-4">维修内容</th>
+                                    <th class="px-6 py-4">回访状态</th>
+                                    <th class="px-6 py-4">内容摘要</th>
                                     <th class="px-6 py-4">操作</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-50">
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 font-bold text-primary">#USR-20240115-01</td>
-                                    <td class="px-6 py-4 font-medium">David Chen</td>
-                                    <td class="px-6 py-4 text-slate-600">高级工程师</td>
-                                    <td class="px-6 py-4 text-slate-600">技术部</td>
+                                <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.location.href='./service_survey_detail.html?id=SVY-2024-001'">
+                                    <td class="px-6 py-4 font-bold text-primary">#SVY-2024-001</td>
+                                    <td class="px-6 py-4 text-slate-600">2024-02-15</td>
+                                    <td class="px-6 py-4 font-medium">After-Service Satisfaction Survey</td>
+                                    <td class="px-6 py-4 text-slate-600">Regular Maintenance</td>
                                     <td class="px-6 py-4">
-                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">管理员</span>
+                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Completed</span>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-600">EMP-8821</td>
+                                    <td class="px-6 py-4 text-slate-600">Very satisfied with service</td>
                                     <td class="px-6 py-4">
-                                        <a href="./user_detail.html?id=USR-20240115-01" class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 font-bold text-primary">#USR-20240114-88</td>
-                                    <td class="px-6 py-4 font-medium">Maria Garcia</td>
-                                    <td class="px-6 py-4 text-slate-600">客服代表</td>
-                                    <td class="px-6 py-4 text-slate-600">客服部</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">操作员</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-slate-600">EMP-8822</td>
-                                    <td class="px-6 py-4">
-                                        <a href="./user_detail.html?id=USR-20240115-01" class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                                        <button class="p-1 hover:bg-slate-100 rounded transition-colors" title="More actions">
+                                            <i class="fi fi-rr-dots-horizontal text-[16px] text-slate-400"></i>
+                                        </button>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 font-bold text-primary">#USR-20240114-42</td>
-                                    <td class="px-6 py-4 font-medium">James Wilson</td>
-                                    <td class="px-6 py-4 text-slate-600">技术经理</td>
-                                    <td class="px-6 py-4 text-slate-600">技术部</td>
+                                <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.location.href='./service_survey_detail.html?id=SVY-2024-002'">
+                                    <td class="px-6 py-4 font-bold text-primary">#SVY-2024-002</td>
+                                    <td class="px-6 py-4 text-slate-600">2024-02-20</td>
+                                    <td class="px-6 py-4 font-medium">Repair Service Feedback</td>
+                                    <td class="px-6 py-4 text-slate-600">Engine Repair</td>
                                     <td class="px-6 py-4">
-                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">经理</span>
+                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-700">Pending</span>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-600">EMP-8823</td>
-                                    <td class="px-6 py-4 ">
-                                        <a href="./user_detail.html?id=USR-20240115-01" class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 font-bold text-primary">#USR-20240113-22</td>
-                                    <td class="px-6 py-4 font-medium">Li Na</td>
-                                    <td class="px-6 py-4 text-slate-600">销售代表</td>
-                                    <td class="px-6 py-4 text-slate-600">销售部</td>
+                                    <td class="px-6 py-4 text-slate-600">Waiting for customer response</td>
                                     <td class="px-6 py-4">
-                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-orange-100 text-orange-700">操作员</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-slate-600">EMP-8824</td>
-                                    <td class="px-6 py-4">
-                                        <a href="./user_detail.html?id=USR-20240115-01" class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                                        <button class="p-1 hover:bg-slate-100 rounded transition-colors" title="More actions">
+                                            <i class="fi fi-rr-dots-horizontal text-[16px] text-slate-400"></i>
+                                        </button>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 font-bold text-primary">#USR-20240113-05</td>
-                                    <td class="px-6 py-4 font-medium">Wang Feng</td>
-                                    <td class="px-6 py-4 text-slate-600">系统管理员</td>
-                                    <td class="px-6 py-4 text-slate-600">管理层</td>
+                                <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.location.href='./service_survey_detail.html?id=SVY-2024-003'">
+                                    <td class="px-6 py-4 font-bold text-primary">#SVY-2024-003</td>
+                                    <td class="px-6 py-4 text-red-600">2024-01-25</td>
+                                    <td class="px-6 py-4 font-medium">Parts Replacement Survey</td>
+                                    <td class="px-6 py-4 text-slate-600">Brake Pad Replacement</td>
                                     <td class="px-6 py-4">
-                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">管理员</span>
+                                        <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-700">Overdue</span>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-600">EMP-8825</td>
+                                    <td class="px-6 py-4 text-slate-600">No response received</td>
                                     <td class="px-6 py-4">
-                                        <a href="./user_detail.html?id=USR-20240115-01" class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                                        <button class="p-1 hover:bg-slate-100 rounded transition-colors" title="More actions">
+                                            <i class="fi fi-rr-dots-horizontal text-[16px] text-slate-400"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -468,7 +413,7 @@
                     
                     <!-- Pagination -->
                     <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
-                        <p class="text-[10px] font-bold text-slate-500 uppercase">Showing 1-10 of 128 results</p>
+                        <p class="text-[10px] font-bold text-slate-500 uppercase">Showing 1-3 of 18 results</p>
                         <div class="flex items-center gap-2">
                             <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400 disabled:opacity-50" disabled>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -485,6 +430,7 @@
                                 </svg>
                             </button>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -531,35 +477,6 @@
             sidebar.classList.toggle('w-64');
             sidebar.classList.toggle('w-20');
         }
-        
-        // Toggle dropdown (for language and user)
-        function toggleDropdown(dropdownId) {
-            // Close all other dropdowns first
-            const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
-            allDropdowns.forEach(dropdown => {
-                if (dropdown.id !== dropdownId) {
-                    dropdown.classList.add('hidden');
-                }
-            });
-            
-            // Toggle current dropdown
-            const dropdown = document.getElementById(dropdownId);
-            if (dropdown) {
-                dropdown.classList.toggle('hidden');
-            }
-        }
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
-            
-            allDropdowns.forEach(dropdown => {
-                const trigger = event.target.closest('[onclick*="' + dropdown.id + '"]');
-                if (dropdown && !trigger && !dropdown.contains(event.target)) {
-                    dropdown.classList.add('hidden');
-                }
-            });
-        });
     </script>
 </body>
 </html>

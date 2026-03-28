@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工单详情 | Ticket Details - PRODUCT SERVICE</title>
+    <title>工单详情 - 产品管理系统</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -302,13 +302,11 @@
                     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
                         <div class="space-y-1">
                             <div class="flex items-center gap-3">
-                                <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">Ticket
-                                    #TK-20231027-01</h2>
+                                <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">工单详情</h2>
                                 <span
                                     class="px-2 py-0.5 bg-blue-100 text-primary text-[10px] font-bold rounded uppercase">维修中</span>
                             </div>
-                            <p class="text-xs text-on-surface-variant">Created on Oct 27, 2023 10:45 AM • Last updated 2
-                                hours ago</p>
+                            <p class="text-xs text-on-surface-variant">创建于 2023 年 10 月 27 日 10:45 • 最后更新 2 小时前</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <button
@@ -337,77 +335,83 @@
 
                     <!-- Info Cards Grid -->
                     <div class="grid grid-cols-12 gap-6 w-full">
-                        <!-- Basic Info Card -->
+                        <!-- （1）基本信息 -->
                         <div
-                            class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            class="col-span-12 lg:col-span-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
                             <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
                                     <i class="bi bi-info-circle text-primary text-lg"></i>
-                                    基础信息
+                                    基本信息
                                 </h3>
                             </div>
-                            <div class="p-6 space-y-6">
-                                <div class="grid grid-cols-2 gap-6">
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">工单编号</label>
-                                        <p class="text-sm font-medium">TK-20231027-01</p>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">SAP
-                                            SO No</label>
-                                        <p class="text-sm font-medium text-primary">SO-8829011</p>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
-                                        <p class="text-sm font-medium">维修中</p>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">原工单编号</label>
-                                        <p class="text-sm font-medium text-slate-300">—</p>
-                                    </div>
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">工单编号</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="TK-20231027-01" readonly/>
                                 </div>
-
-                                <!-- Email & SMS Notifications -->
-                                <div class="space-y-4">
-                                    <div class="space-y-1">
-                                        <div class="flex items-center mb-1">
-                                            <label
-                                                class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">电子邮件</label>
-                                            <i class="bi bi-clock-history text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors ml-[15px]"
-                                                style="line-height: 1;"></i>
-                                        </div>
-                                        <div class="flex gap-[10px]">
-                                            <select
-                                                class="flex-1 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                                <option>Repair Completion Notification</option>
-                                                <option>Delay Notice Template</option>
-                                                <option>Quotation Approval</option>
-                                            </select>
-                                            <button
-                                                class="w-[60px] min-w-[60px] flex-shrink-0 bg-[#f5f7fa] text-[12px] font-bold rounded-lg hover:bg-slate-200 transition-all h-[38px] border-none whitespace-nowrap text-[#666666] flex items-center justify-center">发送</button>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <div class="flex items-center mb-1">
-                                            <label
-                                                class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">短信通知</label>
-                                            <i class="bi bi-clock-history text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors ml-[15px]"
-                                                style="line-height: 1;"></i>
-                                        </div>
-                                        <div class="flex gap-[10px]">
-                                            <select
-                                                class="flex-1 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                                <option>Repair Status Update SMS</option>
-                                                <option>Pickup Confirmation SMS</option>
-                                                <option>Payment Received SMS</option>
-                                            </select>
-                                            <button
-                                                class="w-[60px] min-w-[60px] flex-shrink-0 bg-[#f5f7fa] text-[12px] font-bold rounded-lg hover:bg-slate-200 transition-all h-[38px] border-none whitespace-nowrap text-[#666666] flex items-center justify-center">发送</button>
-                                        </div>
-                                    </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">SO 文件编号</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="SO-8829011" readonly/>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>待处理</option>
+                                        <option selected>维修中</option>
+                                        <option>已完成</option>
+                                        <option>已关闭</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">原工单编号</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="—" readonly/>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">消息通知模板</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>维修完成通知</option>
+                                        <option>延迟通知</option>
+                                        <option>报价确认</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">电子邮件模板</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>Repair Completion Notification</option>
+                                        <option>Delay Notice Template</option>
+                                        <option>Quotation Approval</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">历史记录入口</label>
+                                    <button
+                                        class="w-full bg-[#f5f7fa] text-primary text-sm font-medium rounded-lg py-2 px-3 hover:bg-slate-100 transition-colors text-left flex items-center gap-2">
+                                        <i class="bi bi-clock-history"></i>
+                                        查看历史记录
+                                    </button>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">判定负责人</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="张经理" readonly/>
                                 </div>
                             </div>
                         </div>

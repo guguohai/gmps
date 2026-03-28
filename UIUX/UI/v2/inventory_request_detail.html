@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用户详情 | User Details - PRODUCT SERVICE</title>
+    <title>库存申请详情 - 库存管理系统</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -164,17 +164,19 @@
                     </div>
                 </div>
                 
-                <!-- 库存 Menu Group -->
+                <!-- 库存 Menu Group - Active -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
                     </button>
-                    <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_request_list.html">申请列表</a>
+                    <div class="menu-content py-1">
+                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./inventory_request_list.html">申请列表</a>
                     </div>
                 </div>
                 
@@ -208,20 +210,21 @@
                     </div>
                 </div>
                 
-                <!-- 用户权限 Menu Group - Active -->
+                <!-- 用户权限 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
+                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">用户权限</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
                     </button>
-                    <div class="menu-content py-1">
+                    <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">用户列表</a>
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_list.html">角色列表</a>
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./permission_list.html">权限列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./user_detail.html">角色权限</a>
                     </div>
                 </div>
             </nav>
@@ -239,11 +242,11 @@
         <main class="ml-64 flex-1 p-5 overflow-y-auto w-full">
             <!-- Breadcrumb -->
             <nav class="mb-5 text-sm font-medium flex items-center">
-                <a href="./user_list.html" class="text-primary hover:underline">用户管理</a>
+                <a href="./inventory_request_list.html" class="text-primary hover:underline">库存管理</a>
                 <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                <a href="./user_list.html" class="text-primary hover:underline">用户列表</a>
+                <a href="./inventory_request_list.html" class="text-primary hover:underline">申请列表</a>
                 <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
-                <span class="text-slate-500">用户详情</span>
+                <span class="text-slate-500">申请详情</span>
             </nav>
             
             <div class="space-y-8 w-full">
@@ -251,10 +254,10 @@
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
                     <div class="space-y-1">
                         <div class="flex items-center gap-3">
-                            <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">用户详情</h2>
-                            <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">活跃</span>
+                            <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">库存申请详情</h2>
+                            <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[10px] font-bold rounded uppercase">待处理</span>
                         </div>
-                        <p class="text-xs text-on-surface-variant">Created on Jan 15, 2024 • Last updated 2 hours ago</p>
+                        <p class="text-xs text-on-surface-variant">创建于 2024 年 1 月 15 日 • 最后更新 2 小时前</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 transition-all inline-flex items-center gap-1.5">
@@ -264,119 +267,113 @@
                     </div>
                 </div>
                 
-                <!-- User Detail Form -->
+                <!-- Inventory Request Detail Form -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
                     <div class="px-8 py-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- User ID -->
+                            <!-- 申请单编号 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">User ID</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="USR-20240115"/>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请单编号</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="REQ-2024-001" readonly/>
                             </div>
                             
-                            <!-- Status -->
+                            <!-- 申请日期 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">Status</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                    <option value="active" selected>活跃</option>
-                                    <option value="inactive">未激活</option>
-                                    <option value="suspended">已暂停</option>
-                                    <option value="pending">待审核</option>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请日期</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="date" value="2024-01-15" readonly/>
+                            </div>
+                            
+                            <!-- 申请负责人 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请负责人</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="张伟" readonly/>
+                            </div>
+                            
+                            <!-- 申请日期时间 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请日期时间</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2024-01-15T10:30" readonly/>
+                            </div>
+                            
+                            <!-- 分类 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">分类</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option>办公用品</option>
+                                    <option selected>IT 设备</option>
+                                    <option>生产物料</option>
+                                    <option>其他</option>
                                 </select>
                             </div>
                             
-                            <!-- Full Name -->
+                            <!-- 产品名称 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">姓名</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="Sarah Chen"/>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="MacBook Pro 16 寸" readonly/>
                             </div>
                             
-                            <!-- Effective Date -->
+                            <!-- 申请数量 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">生效日期</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="date" value="2024-01-15"/>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请数量</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="number" value="5" readonly/>
                             </div>
                             
-                            <!-- Expiry Date -->
+                            <!-- 请求原因（大类） -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">到期日期</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="date" value="2025-01-14"/>
-                            </div>
-                            
-                            <!-- Department -->
-                            <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">部门</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                    <option>IT Department</option>
-                                    <option>Human Resources</option>
-                                    <option>Finance</option>
-                                    <option>Operations</option>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求原因（大类）</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option>新员工入职</option>
+                                    <option selected>设备更换</option>
+                                    <option>项目需求</option>
+                                    <option>其他</option>
                                 </select>
                             </div>
                             
-                            <!-- Position -->
+                            <!-- 请求原因（中类） -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">职务</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="Senior Software Engineer"/>
-                            </div>
-                            
-                            <!-- Role -->
-                            <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">角色</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                    <option>Developer</option>
-                                    <option>Manager</option>
-                                    <option>Admin</option>
-                                    <option>Viewer</option>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求原因（中类）</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option>性能不足</option>
+                                    <option selected>设备老化</option>
+                                    <option>损坏维修</option>
+                                    <option>其他</option>
                                 </select>
                             </div>
                             
-                            <!-- Phone Number -->
-                            <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">联系电话</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="tel" value="+86 138-8822-1922"/>
+                            <!-- 特殊事项 -->
+                            <div class="space-y-1 md:col-span-2">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">特殊事项</label>
+                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="3" readonly>需要高性能配置用于视频编辑工作，建议配备 32GB 内存和 1TB SSD。</textarea>
                             </div>
                             
-                            <!-- Email -->
-                            <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">邮箱</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="email" value="sarah.chen@example.com"/>
+                            <!-- 备注 -->
+                            <div class="space-y-1 md:col-span-2">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">备注</label>
+                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2" readonly>优先审批，该项目急需人手。</textarea>
                             </div>
                             
-                            <!-- Country -->
+                            <!-- 状态 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">国家</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                    <option>China</option>
-                                    <option>United States</option>
-                                    <option>Japan</option>
-                                    <option>Singapore</option>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option>草稿</option>
+                                    <option selected>待处理</option>
+                                    <option>已批准</option>
+                                    <option>已拒绝</option>
+                                    <option>已完成</option>
                                 </select>
                             </div>
                             
-                            <!-- Internal Address -->
+                            <!-- 处理日期 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">内部地址</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="上海市静安区南京西路 1266 号恒隆广场一座 45 楼"/>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理日期</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="date" value="" placeholder="待填写"/>
                             </div>
                             
-                            <!-- IP Matching Method -->
+                            <!-- 处理人 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">IP 匹配方式</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                    <option>Exact Match</option>
-                                    <option>CIDR Range</option>
-                                    <option>Wildcard</option>
-                                    <option>Subnet Mask</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Allowed IP -->
-                            <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">允许 IP</label>
-                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-mono" placeholder="Enter IP addresses (one per line)..." rows="3">192.168.1.100
-192.168.1.101
-10.0.0.50</textarea>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理人</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="" placeholder="待填写"/>
                             </div>
                         </div>
                     </div>
