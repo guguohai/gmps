@@ -20,7 +20,8 @@
     <link href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'
         rel='stylesheet'>
 
-    <!-- Uicons Custom CSS for fi-sr -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         @font-face {
             font-family: 'uicons-solid';
@@ -302,10 +303,10 @@
                     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
                         <div class="space-y-1">
                             <div class="flex items-center gap-3">
-                                <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">Ticket
-                                    #TK-20231027-01</h2>
+                                <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">
+                                    TK-20231027-01</h2>
                                 <span
-                                    class="px-2 py-0.5 bg-blue-100 text-primary text-[10px] font-bold rounded uppercase">维修中</span>
+                                    class="px-2 py-0.5 bg-blue-100 text-primary text-[12px] font-bold rounded uppercase">维修中</span>
                             </div>
                             <p class="text-xs text-on-surface-variant">Created on Oct 27, 2023 10:45 AM • Last updated 2
                                 hours ago</p>
@@ -336,378 +337,973 @@
                     </div>
 
                     <!-- Info Cards Grid -->
-                    <div class="grid grid-cols-12 gap-6 w-full">
-                        <!-- Basic Info Card -->
+                    <div class="columns-1 lg:columns-2 gap-6 w-full">
+                        <!-- （1）基本信息 -->
                         <div
-                            class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
                                     <i class="bi bi-info-circle text-primary text-lg"></i>
-                                    基础信息
+                                    基本信息
                                 </h3>
                             </div>
-                            <div class="p-6 space-y-6">
-                                <div class="grid grid-cols-2 gap-6">
-                                    <div class="space-y-1">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">SO
+                                        文件编号</label>
+                                    <span class="block w-full rounded-lg text-sm py-2 text-on-surface">SO-8829011</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>待处理</option>
+                                        <option selected>维修中</option>
+                                        <option>已完成</option>
+                                        <option>已关闭</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1 hidden">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">原工单编号</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="—" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center justify-between">
                                         <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">工单编号</label>
-                                        <p class="text-sm font-medium">TK-20231027-01</p>
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">消息通知</label>
+                                        <button class="text-primary hover:text-primary/70 transition-colors"
+                                            title="查看发送历史">
+                                            <i class="fi fi-rr-time-past text-sm"></i>
+                                        </button>
                                     </div>
-                                    <div class="space-y-1">
-                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">SAP
-                                            SO No</label>
-                                        <p class="text-sm font-medium text-primary">SO-8829011</p>
-                                    </div>
-                                    <div class="space-y-1">
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>维修完成通知</option>
+                                        <option>延迟通知</option>
+                                        <option>报价确认</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex items-center justify-between">
                                         <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
-                                        <p class="text-sm font-medium">维修中</p>
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">电子邮件</label>
+                                        <button class="text-primary hover:text-primary/70 transition-colors"
+                                            title="查看发送历史">
+                                            <i class="fi fi-rr-time-past text-sm"></i>
+                                        </button>
                                     </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">原工单编号</label>
-                                        <p class="text-sm font-medium text-slate-300">—</p>
-                                    </div>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>Repair Completion Notification</option>
+                                        <option>Delay Notice Template</option>
+                                        <option>Quotation Approval</option>
+                                    </select>
                                 </div>
 
-                                <!-- Email & SMS Notifications -->
-                                <div class="space-y-4">
-                                    <div class="space-y-1">
-                                        <div class="flex items-center mb-1">
-                                            <label
-                                                class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">电子邮件</label>
-                                            <i class="bi bi-clock-history text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors ml-[15px]"
-                                                style="line-height: 1;"></i>
-                                        </div>
-                                        <div class="flex gap-[10px]">
-                                            <select
-                                                class="flex-1 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                                <option>Repair Completion Notification</option>
-                                                <option>Delay Notice Template</option>
-                                                <option>Quotation Approval</option>
-                                            </select>
-                                            <button
-                                                class="w-[60px] min-w-[60px] flex-shrink-0 bg-[#f5f7fa] text-[12px] font-bold rounded-lg hover:bg-slate-200 transition-all h-[38px] border-none whitespace-nowrap text-[#666666] flex items-center justify-center">发送</button>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <div class="flex items-center mb-1">
-                                            <label
-                                                class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">短信通知</label>
-                                            <i class="bi bi-clock-history text-slate-400 text-sm cursor-pointer hover:text-primary transition-colors ml-[15px]"
-                                                style="line-height: 1;"></i>
-                                        </div>
-                                        <div class="flex gap-[10px]">
-                                            <select
-                                                class="flex-1 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none h-[38px]">
-                                                <option>Repair Status Update SMS</option>
-                                                <option>Pickup Confirmation SMS</option>
-                                                <option>Payment Received SMS</option>
-                                            </select>
-                                            <button
-                                                class="w-[60px] min-w-[60px] flex-shrink-0 bg-[#f5f7fa] text-[12px] font-bold rounded-lg hover:bg-slate-200 transition-all h-[38px] border-none whitespace-nowrap text-[#666666] flex items-center justify-center">发送</button>
-                                        </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">判定负责人</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option selected>张经理</option>
+                                        <option>李经理</option>
+                                        <option>王经理</option>
+                                        <option>赵经理</option>
+                                    </select>
+                                </div>
+
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">历史记录</label>
+                                    <div class="flex items-center gap-2 text-sm py-2">
+                                        <span class="text-on-surface" style="color: #94a3b8;">当前记录2条，</span>
+                                        <a href="javascript:void(0)"
+                                            class="text-primary font-medium hover:underline cursor-pointer">点击查看</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Customer Info Card -->
+                        <!-- （2）客户信息 -->
                         <div
-                            class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
                                     <i class="bi bi-person text-secondary text-lg"></i>
                                     客户信息
                                 </h3>
                             </div>
-                            <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-8">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">客户姓名</label>
-                                    <p class="text-sm font-medium">Jameson Vance</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户姓名</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="Jameson Vance" readonly />
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">电话号码</label>
-                                    <p class="text-sm font-medium">+86 138-8822-1922</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">电话号码</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="tel" value="+86 138-8822-1922" readonly />
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">邮箱</label>
-                                    <p class="text-sm font-medium">vance.design@example.com</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">国家</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option>中国 (China)</option>
+                                        <option>美国 (United States)</option>
+                                        <option>日本 (Japan)</option>
+                                    </select>
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">国家</label>
-                                    <p class="text-sm font-medium">中国 (China)</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">邮箱</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="email" value="vance.design@example.com" readonly />
                                 </div>
                                 <div class="space-y-1">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">收货类型</label>
-                                    <div>
-                                        <span
-                                            class="inline-flex items-center px-2 py-0.5 bg-blue-50 text-primary text-[10px] font-bold rounded uppercase">快递</span>
+                                    <div class="flex gap-6">
+                                        <div class="flex-1 space-y-1">
+                                            <label
+                                                class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">营销同意</label>
+                                            <div class="flex items-center gap-3 py-2">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div
+                                                        class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                                    </div>
+                                                </label>
+                                                <span class="text-sm text-on-surface">已同意</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 space-y-1">
+                                            <label
+                                                class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">隐私同意</label>
+                                            <div class="flex items-center gap-3 py-2">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div
+                                                        class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                                    </div>
+                                                </label>
+                                                <span class="text-sm text-on-surface">已同意</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-span-1 md:col-span-3 space-y-1">
+                                <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">收货地址</label>
-                                    <p class="text-sm font-medium">上海市静安区南京西路 1266 号恒隆广场一座 45 楼</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">收货类型</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>快递</option>
+                                        <option>自提</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1 md:col-span-2">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">收货地址</label>
+                                    <textarea
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        rows="2" readonly>上海市静安区南京西路 1266 号恒隆广场一座 45 楼</textarea>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Receipt Info Card -->
+                        <!-- （3）受理信息 -->
                         <div
-                            class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
                                     <i class="bi bi-receipt text-slate-500 text-lg"></i>
                                     受理信息
                                 </h3>
                             </div>
-                            <div class="p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">接收日期</label>
-                                    <p class="text-sm font-medium">2023-10-27</p>
-                                </div>
-                                <div class="space-y-1">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">受理渠道类型</label>
-                                    <p class="text-sm font-medium">邮寄 (Official Website)</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">接收日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="2023-10-27" readonly />
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">受理渠道</label>
-                                    <p class="text-sm font-medium">Online Support</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">受理渠道类型</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>邮寄 (Official Website)</option>
+                                        <option>门店送修</option>
+                                        <option>上门取件</option>
+                                    </select>
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">是否再维修</label>
-                                    <p class="text-sm font-medium">否</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">受理渠道</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="Online Support" readonly />
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">是否紧急维修</label>
-                                    <p class="text-sm font-medium">是</p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">受理门店</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="上海旗舰店" readonly />
                                 </div>
                                 <div class="space-y-1">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">购买日期</label>
-                                    <p class="text-sm font-medium">2023-05-12</p>
+                                    <div class="flex gap-6">
+                                        <div class="flex-1 space-y-1">
+                                            <label
+                                                class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否再维修</label>
+                                            <div class="flex items-center gap-3 py-2">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" class="sr-only peer">
+                                                    <div
+                                                        class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                                    </div>
+                                                </label>
+                                                <span class="text-sm text-on-surface">否</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 space-y-1">
+                                            <label
+                                                class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否紧急维修</label>
+                                            <div class="flex items-center gap-3 py-2">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div
+                                                        class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                                    </div>
+                                                </label>
+                                                <span class="text-sm text-on-surface">是</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-span-2 space-y-1">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">客户请求分类</label>
-                                    <p class="text-sm font-medium">镜架损坏 / 漆面剥落</p>
-                                </div>
-                                <div class="col-span-4 p-4 bg-[#f5f7fa] rounded-lg">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">客户反馈内容</label>
-                                    <p class="text-sm leading-relaxed text-on-surface">The temple of the frame is
-                                        showing signs of paint peeling after 5 months of normal usage. Requesting a full
-                                        restoration or replacement of the left temple arm.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product Info Card -->
-                        <div
-                            class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div
-                                class="px-6 py-4 border-b border-slate-50 bg-slate-50/50 flex justify-between items-center">
-                                <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
-                                    <i class="bi bi-eyeglasses text-slate-500 text-lg"></i>
-                                    产品信息
-                                </h3>
-                                <button
-                                    class="flex items-center gap-1 text-[12px] font-bold text-primary hover:bg-blue-50 px-2 py-1 rounded transition-colors uppercase">
-                                    <i class="bi bi-pencil text-[12px]"></i>
-                                    定价
-                                </button>
-                            </div>
-                            <div class="p-6 space-y-5">
-                                <div class="space-y-1 border-b border-slate-50 pb-3">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
-                                    <p class="text-sm font-bold text-on-surface">V8 Turbo Max</p>
-                                </div>
-                                <div class="space-y-1 border-b border-slate-50 pb-3">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">产品
-                                        ID</label>
-                                    <p class="text-sm font-mono text-primary font-bold">PRD-88219</p>
-                                </div>
-                                <div class="space-y-1 border-b border-slate-50 pb-3">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">类别</label>
-                                    <p class="text-sm font-medium">Titanium Frame</p>
-                                </div>
-                                <div class="space-y-1 border-b border-slate-50 pb-3">
-                                    <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">库存状态</label>
-                                    <div class="flex items-center gap-2">
-                                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                        <p class="text-sm font-bold text-green-600">IN STOCK</p>
+                                <div class="space-y-1">
+                                    <div class="flex gap-6">
+                                        <div class="flex-1 space-y-1">
+                                            <label
+                                                class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否有购买凭证</label>
+                                            <div class="flex items-center gap-3 py-2">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div
+                                                        class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                                    </div>
+                                                </label>
+                                                <span class="text-sm text-on-surface">有</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 space-y-1">
+                                            <label
+                                                class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否附保修卡</label>
+                                            <div class="flex items-center gap-3 py-2">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" checked class="sr-only peer">
+                                                    <div
+                                                        class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                                    </div>
+                                                </label>
+                                                <span class="text-sm text-on-surface">有</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修可行性</label>
-                                    <p class="text-sm text-green-600 font-bold flex items-center gap-1">
-                                        <i class="bi bi-check-circle text-sm"></i>
-                                        高 (High)
-                                    </p>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">购买日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="2023-05-12" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">购买渠道</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="官方旗舰店" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户请求分类</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>镜架损坏 / 漆面剥落</option>
+                                        <option>镜片划伤</option>
+                                        <option>螺丝松动</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1 md:col-span-2">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户反馈内容</label>
+                                    <textarea
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        rows="3"
+                                        readonly>The temple of the frame is showing signs of paint peeling after 5 months of normal usage. Requesting a full restoration or replacement of the left temple arm.</textarea>
+                                </div>
+
+                                <!-- 附件信息表格 -->
+                                <div class="col-span-2 mt-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h4
+                                            class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                            <i class="bi bi-paperclip text-slate-500 text-lg"></i>
+                                            附件信息
+                                        </h4>
+                                        <button
+                                            class="flex items-center gap-1 text-[12px] font-bold text-primary hover:bg-blue-50 px-3 py-1.5 rounded transition-colors">
+                                            <i class="bi bi-plus-circle"></i>
+                                            添加附件
+                                        </button>
+                                    </div>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-sm">
+                                            <thead class="bg-slate-50">
+                                                <tr>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        文件名称</th>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        标题</th>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        文件类型</th>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        文件大小</th>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        上传时间</th>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        上传人</th>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        修改时间</th>
+                                                    <th
+                                                        class="text-left py-2 px-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                                        修改人</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="border-t border-slate-100">
+                                                    <td class="py-2 px-3 text-sm">purchase_receipt.pdf</td>
+                                                    <td class="py-2 px-3 text-sm">购买凭证</td>
+                                                    <td class="py-2 px-3 text-sm">PDF</td>
+                                                    <td class="py-2 px-3 text-sm">2.5 MB</td>
+                                                    <td class="py-2 px-3 text-sm">2023-10-27 10:45</td>
+                                                    <td class="py-2 px-3 text-sm">Jameson Vance</td>
+                                                    <td class="py-2 px-3 text-sm">—</td>
+                                                    <td class="py-2 px-3 text-sm">—</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Repair Info Card -->
+
+                        <!-- （5）咨询与客户确认 -->
                         <div
-                            class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 border-b border-slate-100 bg-slate-50/50">
+                                <div class="flex items-center gap-0 -mb-px">
+                                    <button id="tab-consult"
+                                        class="px-4 py-4 text-[12px] font-bold text-primary border-b-2 border-primary transition-all duration-200"
+                                        onclick="switchTab('consult')">
+                                        咨询信息
+                                    </button>
+                                    <button id="tab-confirm"
+                                        class="px-4 py-4 text-[12px] font-bold text-slate-400 border-b-2 border-transparent hover:bg-slate-100 transition-all duration-200"
+                                        onclick="switchTab('confirm')">
+                                        客户确认
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <!-- 咨询信息 Tab -->
+                                <div id="consult-tab" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否需要咨询</label>
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                            disabled>
+                                            <option selected>是</option>
+                                            <option>否</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询单号</label>
+                                        <input
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            type="text" value="CON-2023-089" readonly />
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">外呼类型</label>
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                            disabled>
+                                            <option>技术支持</option>
+                                            <option selected>售后服务</option>
+                                            <option>客户关怀</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询负责人</label>
+                                        <input
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            type="text" value="赵敏" readonly />
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询状态</label>
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                            disabled>
+                                            <option>待处理</option>
+                                            <option selected>处理中</option>
+                                            <option>已完成</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询日期</label>
+                                        <input
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            type="date" value="2023-10-28" readonly />
+                                    </div>
+                                    <div class="space-y-1 md:col-span-2">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">异常分类</label>
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                            disabled>
+                                            <option selected>产品质量问题</option>
+                                            <option>物流损坏</option>
+                                            <option>客户使用不当</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 客户确认信息 Tab -->
+                                <div id="confirm-tab" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">确认类型</label>
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                            <option>电话确认</option>
+                                            <option selected>邮件确认</option>
+                                            <option>短信确认</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品状态确认图片</label>
+                                        <button
+                                            class="w-full bg-[#f5f7fa] text-primary text-sm font-medium rounded-lg py-2 px-3 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
+                                            <i class="bi bi-image"></i>
+                                            上传图片
+                                        </button>
+                                    </div>
+                                    <div class="space-y-1 md:col-span-2">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品状态确认说明</label>
+                                        <textarea
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            rows="2" placeholder="说明确认情况..."></textarea>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步状态</label>
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                            disabled>
+                                            <option selected>已同步</option>
+                                            <option>未同步</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户确认状态</label>
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                            disabled>
+                                            <option>待确认</option>
+                                            <option selected>已确认</option>
+                                            <option>拒绝</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户确认时间</label>
+                                        <input
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            type="datetime-local" value="2023-10-30T14:30" readonly />
+                                    </div>
+                                    <div class="space-y-1 md:col-span-2">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户反馈内容</label>
+                                        <textarea
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            rows="2" readonly>确认维修方案，同意进行维修。</textarea>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">发送时间</label>
+                                        <input
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            type="datetime-local" value="2023-10-30T10:00" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- （4）产品信息 -->
+                        <div
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
+                                <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                    <i class="bi bi-eyeglasses text-slate-500 text-lg"></i>
+                                    产品信息
+                                </h3>
+                            </div>
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="V8 Turbo Max" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品
+                                        ID</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="PRD-88219" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">类别</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="Titanium Frame" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">库存状态</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>IN STOCK</option>
+                                        <option>OUT OF STOCK</option>
+                                        <option>PRE-ORDER</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">上市日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="2023-03-15" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">生产工厂</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="上海工厂" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">电镀 /
+                                        焊接维修是否可行</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>可行</option>
+                                        <option>不可行</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件名称</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="左镜腿" readonly />
+                                </div>
+                                <div class="space-y-1 md:col-span-2">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件存放位置</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="A 区 -3 架 -2 层" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- （6）维修信息 -->
+                        <div
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
                                     <i class="bi bi-tools text-slate-500 text-lg"></i>
                                     维修信息
                                 </h3>
                             </div>
-                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div class="space-y-5">
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">预计出库日期</label>
-                                        <input
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            type="date" value="2023-11-05" />
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">问题现象</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                            <option>Surface Paint Peeling (漆面剥落)</option>
-                                            <option>Hinge Loose</option>
-                                            <option>Lens Scratch</option>
-                                        </select>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">问题描述</label>
-                                        <textarea
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            placeholder="Enter detailed technical description..." rows="3"></textarea>
-                                    </div>
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">总部入库日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="2023-10-29" readonly />
                                 </div>
-                                <div class="space-y-5">
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修工程师</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                            <option>Linus Zhao (Senior Eng.)</option>
-                                            <option>Sarah Chen (Junior Eng.)</option>
-                                        </select>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修内容</label>
-                                        <div
-                                            class="p-3 bg-blue-50/50 border border-blue-100 rounded-lg text-sm font-medium text-primary">
-                                            Temple Arm Replacement & Full Surface Polish
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <div class="space-y-1">
-                                            <label
-                                                class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">费用类型</label>
-                                            <p class="text-sm font-medium">无偿 (Warranty)</p>
-                                        </div>
-                                        <div class="space-y-1">
-                                            <label
-                                                class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">维修费用</label>
-                                            <p class="text-xl font-extrabold text-on-surface font-headline">¥ 0.00</p>
-                                        </div>
-                                    </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">预计出库日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="2023-11-05" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">现象</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="镜腿漆面剥落" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">问题现象</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option selected>漆面剥落</option>
+                                        <option>镜片划伤</option>
+                                        <option>螺丝松动</option>
+                                        <option>镜架变形</option>
+                                        <option>鼻托损坏</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户请求</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="修复镜腿漆面" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">镜片类型</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option selected>标准镜片</option>
+                                        <option>偏光镜片</option>
+                                        <option>变色镜片</option>
+                                        <option>防蓝光镜片</option>
+                                        <option>渐进多焦镜片</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修处</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option selected>总部维修中心</option>
+                                        <option>合作方维修中心</option>
+                                        <option>门店维修</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">服务工程师</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="张师傅" />
+                                </div>
+                                <div class="space-y-1 md:col-span-2">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修内容</label>
+                                    <textarea
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        rows="2" placeholder="填写维修内容详情..."></textarea>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修进度日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="2023-10-30" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">合作方出库日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">合作方入库日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">再维修原因</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="" placeholder="如适用，请填写再维修原因" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否产品问题</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>是</option>
+                                        <option selected>否</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修费用判定</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option selected>免费维修</option>
+                                        <option>收费维修</option>
+                                        <option>保修期内</option>
+                                        <option>待判定</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修费用</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="¥0.00" />
+                                </div>
+                                <div class="space-y-1 md:col-span-2">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修参考事项</label>
+                                    <textarea
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        rows="2" placeholder="填写维修参考事项..."></textarea>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Logistics Info Card -->
+                        <!-- （7）支付信息 -->
                         <div
-                            class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/50">
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
-                                    <i class="bi bi-postcard text-slate-500 text-lg"></i>
+                                    <i class="bi bi-credit-card text-slate-500 text-lg"></i>
+                                    支付信息
+                                </h3>
+                            </div>
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付状态</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>无需支付</option>
+                                        <option>待支付</option>
+                                        <option>已支付</option>
+                                        <option>退款中</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付方式</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option>线下支付</option>
+                                        <option selected>支付宝</option>
+                                        <option>微信</option>
+                                        <option>银联</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付金额</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="¥0.00" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">实付金额</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="¥0.00" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付时间</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="datetime-local" value="" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付流水号</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- （8）物流信息 -->
+                        <div
+                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
+                                <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
+                                    <i class="bi bi-truck text-slate-500 text-lg"></i>
                                     物流信息
                                 </h3>
                             </div>
-                            <div class="p-6 space-y-6">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-slate-500 font-medium">是否出库完成</span>
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-5 bg-slate-100 rounded-full relative">
-                                            <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full"></div>
-                                        </div>
-                                        <span class="text-xs font-bold text-slate-400">Pending</span>
-                                    </div>
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否出库完成</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>否</option>
+                                        <option>是</option>
+                                    </select>
                                 </div>
-                                <div class="space-y-5">
-                                    <div class="flex justify-between items-center">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">配送方式</label>
-                                        <p class="text-sm font-medium">SF Express (Standard)</p>
-                                    </div>
-                                    <div class="space-y-2">
-                                        <label
-                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">物流单号</label>
-                                        <div class="flex items-center justify-between p-3 bg-[#f5f7fa] rounded-lg">
-                                            <span class="text-sm font-mono font-bold">SF12345678</span>
-                                            <button class="text-primary hover:scale-110 transition-transform"
-                                                title="Copy">
-                                                <i class="bi bi-clipboard text-lg"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库完成日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="" readonly />
                                 </div>
-                                <div class="p-4 bg-blue-50/50 rounded-xl border border-blue-100 flex items-start gap-3">
-                                    <i class="bi bi-compass text-primary text-xl"></i>
-                                    <div class="space-y-1">
-                                        <p class="text-[10px] font-bold text-primary uppercase">Tracking Update</p>
-                                        <p class="text-xs text-slate-600 leading-tight">Package waiting for repair
-                                            completion at Shanghai PDC Center.</p>
-                                    </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配送方式</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>顺丰快递</option>
+                                        <option>EMS</option>
+                                        <option>京东物流</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配送完成情况</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option>待配送</option>
+                                        <option>配送中</option>
+                                        <option>已签收</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配送日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">物流单号</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">门店提货状态</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
+                                        disabled>
+                                        <option selected>待提货</option>
+                                        <option>已提货</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">门店提货日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="date" value="" readonly />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-        </main>
+            </div>
+    </div>
+    </div>
+    </main>
     </div>
 
-    <!-- Scripts -->
     <script>
-        // Toggle menu expand/collapse - only one menu can be open at a time
         function toggleMenu(btn) {
             const content = btn.nextElementSibling;
             const allMenus = document.querySelectorAll('.menu-content');
-
-            // Close all other menus
             allMenus.forEach(menu => {
                 if (menu !== content) {
                     menu.classList.add('hidden');
                 }
             });
-
-            // Toggle current menu
             content.classList.toggle('hidden');
         }
-
-        // Toggle sidebar collapse
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('w-64');
             sidebar.classList.toggle('w-20');
+        }
+        function switchTab(tabName) {
+            const consultTab = document.getElementById('consult-tab');
+            const confirmTab = document.getElementById('confirm-tab');
+            const tabConsult = document.getElementById('tab-consult');
+            const tabConfirm = document.getElementById('tab-confirm');
+
+            if (tabName === 'consult') {
+                consultTab.classList.remove('hidden');
+                confirmTab.classList.add('hidden');
+                tabConsult.classList.add('text-primary', 'border-primary');
+                tabConsult.classList.remove('text-slate-400', 'border-transparent');
+                tabConfirm.classList.remove('text-primary', 'border-primary');
+                tabConfirm.classList.add('text-slate-400', 'border-transparent');
+            } else {
+                consultTab.classList.add('hidden');
+                confirmTab.classList.remove('hidden');
+                tabConfirm.classList.add('text-primary', 'border-primary');
+                tabConfirm.classList.remove('text-slate-400', 'border-transparent');
+                tabConsult.classList.remove('text-primary', 'border-primary');
+                tabConsult.classList.add('text-slate-400', 'border-transparent');
+            }
         }
     </script>
 </body>

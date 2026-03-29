@@ -1,525 +1,605 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>权限列表 - PRODUCT SERVICE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>权限列表 - PRODUCT SERVICE</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
-    <!-- Uicons Icons -->
-    <link
-      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
-      rel="stylesheet"
-    />
+  <!-- Uicons Icons -->
+  <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet" />
+  <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet" />
+  <link href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    rel="stylesheet" />
 
-    <!-- Uicons Custom CSS for fi-sr -->
-    <style>
-      @font-face {
-        font-family: "uicons-solid";
-        src:
-          url("https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff2")
-            format("woff2"),
-          url("https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff")
-            format("woff");
-        font-weight: normal;
-        font-style: normal;
-      }
-      [class^="fi-sr-"] {
-        font-family: "uicons-solid" !important;
-        speak: none;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-    </style>
+  <!-- Uicons Custom CSS for fi-sr -->
+  <style>
+    @font-face {
+      font-family: "uicons-solid";
+      src:
+        url("https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff2") format("woff2"),
+        url("https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
 
-    <!-- Tailwind Config -->
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "surface-variant": "#d5e5ef",
-              "on-primary": "#f7f7ff",
-              "surface-container-low": "#eef4fa",
-              "secondary-fixed-dim": "#bfd7f4",
-              "on-surface-variant": "#52616a",
-              background: "#F5F7FA",
-              "on-primary-container": "#004fa8",
-              "surface-container": "#e5eff7",
-              "on-tertiary-fixed": "#484a4a",
-              "primary-dim": "#004fa9",
-              secondary: "#4a617a",
-              "inverse-surface": "#0a0f12",
-              "secondary-container": "#cfe4ff",
-              "on-surface": "#26343d",
-              "primary-fixed": "#d8e2ff",
-              "on-tertiary-container": "#5a5c5c",
-              surface: "#F5F7FA",
-              "tertiary-container": "#f4f3f3",
-              "surface-dim": "#cadde9",
-              "on-error": "#fff7f6",
-              "error-container": "#fe8983",
-              error: "#9f403d",
-              "tertiary-dim": "#525354",
-              "primary-container": "#d8e2ff",
-              "on-tertiary": "#f9f9f9",
-              "on-secondary-container": "#3d546c",
-              "primary-fixed-dim": "#c2d4ff",
-              "secondary-dim": "#3e556e",
-              "on-error-container": "#752121",
-              "tertiary-fixed": "#f4f3f3",
-              "on-secondary": "#f7f9ff",
-              "surface-container-high": "#ddeaf3",
-              "outline-variant": "#a4b4be",
-              "inverse-primary": "#4a8eff",
-              "on-secondary-fixed": "#2a4159",
-              "on-background": "#26343d",
-              "surface-container-highest": "#d5e5ef",
-              tertiary: "#5e5f5f",
-              "surface-tint": "#177ee5",
-              "on-primary-fixed": "#003d85",
-              primary: "#177ee5",
-              "surface-bright": "#f6fafe",
-              "on-secondary-fixed-variant": "#465d76",
-              "on-tertiary-fixed-variant": "#656666",
-              outline: "#6e7d86",
-              "tertiary-fixed-dim": "#e5e5e5",
-              "inverse-on-surface": "#999da1",
-              "secondary-fixed": "#cfe4ff",
-              "on-primary-fixed-variant": "#0058ba",
-            },
-            fontFamily: {
-              headline: ["Manrope"],
-              body: ["Inter"],
-              label: ["Inter"],
-            },
-            borderRadius: {
-              DEFAULT: "0.125rem",
-              lg: "0.25rem",
-              xl: "0.5rem",
-              full: "0.75rem",
-            },
+    [class^="fi-sr-"] {
+      font-family: "uicons-solid" !important;
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+
+  <!-- Tailwind Config -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-variant": "#d5e5ef",
+            "on-primary": "#f7f7ff",
+            "surface-container-low": "#eef4fa",
+            "secondary-fixed-dim": "#bfd7f4",
+            "on-surface-variant": "#52616a",
+            background: "#F5F7FA",
+            "on-primary-container": "#004fa8",
+            "surface-container": "#e5eff7",
+            "on-tertiary-fixed": "#484a4a",
+            "primary-dim": "#004fa9",
+            secondary: "#4a617a",
+            "inverse-surface": "#0a0f12",
+            "secondary-container": "#cfe4ff",
+            "on-surface": "#26343d",
+            "primary-fixed": "#d8e2ff",
+            "on-tertiary-container": "#5a5c5c",
+            surface: "#F5F7FA",
+            "tertiary-container": "#f4f3f3",
+            "surface-dim": "#cadde9",
+            "on-error": "#fff7f6",
+            "error-container": "#fe8983",
+            error: "#9f403d",
+            "tertiary-dim": "#525354",
+            "primary-container": "#d8e2ff",
+            "on-tertiary": "#f9f9f9",
+            "on-secondary-container": "#3d546c",
+            "primary-fixed-dim": "#c2d4ff",
+            "secondary-dim": "#3e556e",
+            "on-error-container": "#752121",
+            "tertiary-fixed": "#f4f3f3",
+            "on-secondary": "#f7f9ff",
+            "surface-container-high": "#ddeaf3",
+            "outline-variant": "#a4b4be",
+            "inverse-primary": "#4a8eff",
+            "on-secondary-fixed": "#2a4159",
+            "on-background": "#26343d",
+            "surface-container-highest": "#d5e5ef",
+            tertiary: "#5e5f5f",
+            "surface-tint": "#177ee5",
+            "on-primary-fixed": "#003d85",
+            primary: "#177ee5",
+            "surface-bright": "#f6fafe",
+            "on-secondary-fixed-variant": "#465d76",
+            "on-tertiary-fixed-variant": "#656666",
+            outline: "#6e7d86",
+            "tertiary-fixed-dim": "#e5e5e5",
+            "inverse-on-surface": "#999da1",
+            "secondary-fixed": "#cfe4ff",
+            "on-primary-fixed-variant": "#0058ba",
+          },
+          fontFamily: {
+            headline: ["Manrope"],
+            body: ["Inter"],
+            label: ["Inter"],
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem",
+            full: "0.75rem",
           },
         },
-      };
-    </script>
+      },
+    };
+  </script>
 
-    <style>
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f5f7fa;
-      }
-      h1,
-      h2,
-      h3,
-      .font-headline {
-        font-family: "Manrope", sans-serif;
-      }
-      .heroicon {
-        vertical-align: middle;
-      }
-    </style>
-  </head>
+  <style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    h1,
+    h2,
+    h3,
+    .font-headline {
+      font-family: "Manrope", sans-serif;
+    }
+
+    .heroicon {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
 <body class="text-on-surface">
-    <!-- Top Navigation Bar -->
-    <header class="bg-white border-b border-[#cbd0dd] fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
-        <div class="flex items-center gap-8">
-            <!-- Logo & Brand -->
-            <div class="flex items-center gap-3">
-                <img class="w-10 h-10 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo"/>
-                <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
-            </div>
-            
-            <!-- Search Bar -->
-            <div class="relative hidden md:block">
-                <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z"></path>
-                </svg>
-                <input class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all" 
-                       style="background-color: #f5f7fa; width: 440px;" 
-                       type="text" 
-                       placeholder="扫描条形码"/>
-            </div>
-        </div>
-        
-        <!-- Right Actions -->
-        <div class="flex items-center gap-4 h-full">
-            <!-- Language Dropdown -->
-            <div class="relative">
-                <button class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center" title="Language" onclick="toggleDropdown('language-dropdown')">
-                    <i class="fi fi-rr-globe text-[20px] leading-none"></i>
-                </button>
-                <!-- Language Dropdown Menu -->
-                <div id="language-dropdown" class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">中文</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">한국어</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">English</a>
-                </div>
-            </div>
-            
-            <!-- User Dropdown -->
-            <div class="relative">
-                <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8 cursor-pointer" onclick="toggleDropdown('user-dropdown')">
-                    <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px;">
-                                                <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20"><path d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0" p-id="1651"></path></svg>
-                    </div>
-                </div>
-                <!-- User Dropdown Menu -->
-                <div id="user-dropdown" class="hidden absolute right-0 top-full mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">个人信息</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">退出</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Main Layout -->
-    <div class="flex pt-16 h-screen">
-        <!-- Sidebar Navigation -->
-        <aside id="sidebar" class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40 border-r border-[#cbd0dd]">
-            <nav class="py-4 flex-grow space-y-1">
-                <!-- Dashboard -->
-                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all" href="./dashboard.html">
-                    <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                    <span class="text-[13px]">Dashboard</span>
-                </a>
-                
-                <!-- Ticket Management -->
-                <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group" onclick="toggleMenu(this)">
-                        <div class="flex items-center"><i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span class="text-[13px]">工单管理</span></div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1"><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./ticket_list.html">列表</a></div>
-                </div>
-                
-                <!-- Product Management -->
-                <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group" onclick="toggleMenu(this)">
-                        <div class="flex items-center"><i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span class="text-[13px]">产品管理</span></div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1"><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./product_list.html">列表</a></div>
-                </div>
-                
-                <!-- Inventory -->
-                <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group" onclick="toggleMenu(this)">
-                        <div class="flex items-center"><i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span class="text-[13px]">库存</span></div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1"><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./inventory_request_list.html">申请列表</a></div>
-                </div>
-                
-                <!-- Parts -->
-                <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group" onclick="toggleMenu(this)">
-                        <div class="flex items-center"><i class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span class="text-[13px]">配件</span></div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1"><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./parts_list.html">列表</a><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./parts_request_list.html">申请列表</a></div>
-                </div>
-                
-                <!-- Service -->
-                <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group" onclick="toggleMenu(this)">
-                        <div class="flex items-center"><i class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span class="text-[13px]">服务</span></div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1"><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./service_survey.html">问卷</a><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./service_consultation.html">咨询</a></div>
-                </div>
-                
-                <!-- User Permission -->
-                <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
-                        <div class="flex items-center"><i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span class="text-[13px]">用户权限</span></div>
-                        <i class="fi fi-rr-chevron-down w-[10px] h-[10px] text-slate-500"></i>
-                    </button>
-                    <div class="menu-content py-1 bg-slate-50/50"><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./user_list.html">用户列表</a><a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors" href="./role_list.html">角色列表</a><a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./permission_list.html">权限列表</a></div>
-                </div>
-            </nav>
-        </aside>
+  <!-- Top Navigation Bar -->
+  <header
+    class="bg-white border-b border-[#cbd0dd] fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
+    <div class="flex items-center gap-8">
+      <!-- Logo & Brand -->
+      <div class="flex items-center gap-3">
+        <img class="w-10 h-10 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
+        <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
+      </div>
 
-        <!-- Main Content Area -->
-        <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA]">
-            <div class="w-full max-w-full px-[30px] py-5">
-                <!-- Page Header -->
-                <div class="flex justify-between items-center mb-5">
-                    <div>
-                        <h1 class="font-bold text-on-surface font-headline tracking-tight text-[14px]">
-                            <span class="font-medium text-[#177ee5]">用户管理</span>
-                            <span class="mx-2 text-slate-300">/</span>
-                            <span class="text-[#6e7891]">权限列表</span>
-                        </h1>
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm" title="Download">
-                            <i class="fi fi-rr-download text-[12px]"></i>
-                        </button>
-                        <button class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm" title="Refresh">
-                            <i class="fi fi-rr-refresh text-[12px]"></i>
-                        </button>
-                        <button class="h-8 px-3 bg-primary text-white rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
-                            <i class="fi fi-rr-plus text-[12px]"></i>
-                            新增
-                        </button>
-                    </div>
-                </div>
-
-          <!-- Filters Card -->
-          <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
-            <div class="flex items-end gap-5">
-              <!-- Form Fields -->
-              <div class="flex-1 flex gap-4">
-                <div class="flex-1">
-                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">权限名称</label>
-                  <input class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all" 
-                         type="text" 
-                         placeholder="请输入权限名称..."/>
-                </div>
-                <div class="flex-1">
-                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">权限类型</label>
-                  <select class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                    <option>全部类型</option>
-                    <option>菜单权限</option>
-                    <option>操作权限</option>
-                    <option>数据权限</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Action Buttons -->
-              <div class="flex justify-end gap-2 w-auto pb-[3px]">
-                <button class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20" title="Search">
-                  <i class="fi fi-rr-search text-[12px]"></i>
-                </button>
-                <button class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm" title="Expand">
-                  <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Table Card -->
-          <div
-            class="mt-5 bg-white rounded-xl border border-slate-100 shadow-sm min-w-0"
-          >
-            <div class="w-full overflow-x-auto">
-              <table cellpadding="0" cellspacing="0" style="min-width: 100%; font-size: 13px;" class="text-left">
-                <thead
-                  class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px]"
-                >
-                  <tr>
-                    <th class="px-6 py-4 whitespace-nowrap">权限 ID</th>
-                    <th class="px-6 py-4 whitespace-nowrap">权限名称</th>
-                    <th class="px-6 py-4 whitespace-nowrap">权限编码</th>
-                    <th class="px-6 py-4 whitespace-nowrap">权限类型</th>
-                    <th class="px-6 py-4 whitespace-nowrap">所属模块</th>
-                    <th class="px-6 py-4 whitespace-nowrap">描述</th>
-                    <th class="px-6 py-4">操作</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-50">
-                  <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.location.href='./permission_detail.html?id=PERM-001'">
-                    <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-001</td>
-                    <td class="px-6 py-4 font-medium whitespace-nowrap">查看工单列表</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">ticket:list:view</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">菜单权限</span>
-                    </td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">工单管理</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以查看所有工单列表</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <button
-                        class="p-1 hover:bg-slate-100 rounded transition-colors"
-                        title="更多操作"
-                        onclick="event.stopPropagation()"
-                      >
-                        <i class="bi bi-three-dots-vertical text-slate-400"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.location.href='./permission_detail.html?id=PERM-002'">
-                    <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-002</td>
-                    <td class="px-6 py-4 font-medium whitespace-nowrap">编辑工单</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">ticket:edit</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">操作权限</span>
-                    </td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">工单管理</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以编辑和更新工单信息</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <button
-                        class="p-1 hover:bg-slate-100 rounded transition-colors"
-                        title="更多操作"
-                        onclick="event.stopPropagation()"
-                      >
-                        <i class="bi bi-three-dots-vertical text-slate-400"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.location.href='./permission_detail.html?id=PERM-003'">
-                    <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-003</td>
-                    <td class="px-6 py-4 font-medium whitespace-nowrap">管理产品</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">product:manage</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">操作权限</span>
-                    </td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">产品管理</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以添加、编辑、删除产品</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <a href="#" class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="window.location.href='./permission_detail.html?id=PERM-004'">
-                    <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-004</td>
-                    <td class="px-6 py-4 font-medium whitespace-nowrap">库存审批</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">inventory:approve</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">操作权限</span>
-                    </td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">库存管理</td>
-                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以审批库存申请</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <a href="#" class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
-              <p class="text-[10px] font-bold text-slate-500 uppercase">Showing 1-4 of 32 results</p>
-              <div class="flex items-center gap-2">
-                <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400 disabled:opacity-50" disabled>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                  </svg>
-                </button>
-                <button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">1</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">2</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">3</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+      <!-- Search Bar -->
+      <div class="relative hidden md:block">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg"
+          width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z">
+          </path>
+        </svg>
+        <input
+          class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+          style="background-color: #f5f7fa; width: 440px;" type="text" placeholder="Scan barcode" />
+      </div>
     </div>
-    <script>
-        // Toggle menu expand/collapse - only one menu can be open at a time
-        function toggleMenu(btn) {
-            const content = btn.nextElementSibling;
-            const allMenus = document.querySelectorAll('.menu-content');
-            
-            // Close all other menus
-            allMenus.forEach(menu => {
-                if (menu !== content) {
-                    menu.classList.add('hidden');
-                    // Reset arrow rotation
-                    const closeBtn = menu.previousElementSibling;
-                    const arrow = closeBtn.querySelector('svg');
-                    if (arrow) {
-                        arrow.style.transform = 'rotate(0deg)';
-                    }
-                }
-            });
-            
-            // Toggle current menu
-            content.classList.toggle('hidden');
-            
-            // Rotate arrow
-            const arrow = btn.querySelector('svg');
-            if (arrow) {
-                if (content.classList.contains('hidden')) {
-                    arrow.style.transform = 'rotate(0deg)';
-                } else {
-                    arrow.style.transform = 'rotate(180deg)';
-                }
-            }
+
+    <!-- Right Actions -->
+    <div class="flex items-center gap-4 h-full">
+      <!-- Language Dropdown -->
+      <div class="relative">
+        <button
+          class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center"
+          title="Language" onclick="toggleDropdown('language-dropdown')">
+          <i class="fi fi-rr-globe text-[20px] leading-none"></i>
+        </button>
+        <!-- Language Dropdown Menu -->
+        <div id="language-dropdown"
+          class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">中文</a>
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">한국어</a>
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">English</a>
+        </div>
+      </div>
+
+      <!-- User Dropdown -->
+      <div class="relative">
+        <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8 cursor-pointer"
+          onclick="toggleDropdown('user-dropdown')">
+          <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px;">
+            <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1"
+              xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20">
+              <path
+                d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0"
+                p-id="1651"></path>
+            </svg>
+          </div>
+        </div>
+        <!-- User Dropdown Menu -->
+        <div id="user-dropdown"
+          class="hidden absolute right-0 top-full mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">个人信息</a>
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">退出</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="flex pt-16 h-screen">
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar"
+      class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40 border-r border-[#cbd0dd]">
+      <nav class="py-4 flex-grow space-y-1">
+        <!-- Dashboard -->
+        <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all"
+          href="./dashboard.html">
+          <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+          <span class="text-[13px]">Dashboard</span>
+        </a>
+
+        <!-- Ticket Management -->
+        <div class="menu-group">
+          <button
+            class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group"
+            onclick="toggleMenu(this)">
+            <div class="flex items-center"><i
+                class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span
+                class="text-[13px]">工单管理</span></div>
+            <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+              style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="menu-content hidden py-1"><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./ticket_list.html">列表</a></div>
+        </div>
+
+        <!-- Product Management -->
+        <div class="menu-group">
+          <button
+            class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group"
+            onclick="toggleMenu(this)">
+            <div class="flex items-center"><i
+                class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span
+                class="text-[13px]">产品管理</span></div>
+            <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+              style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="menu-content hidden py-1"><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./product_list.html">列表</a></div>
+        </div>
+
+        <!-- Inventory -->
+        <div class="menu-group">
+          <button
+            class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group"
+            onclick="toggleMenu(this)">
+            <div class="flex items-center"><i
+                class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span
+                class="text-[13px]">库存</span></div>
+            <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+              style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="menu-content hidden py-1"><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./inventory_request_list.html">申请列表</a></div>
+        </div>
+
+        <!-- Parts -->
+        <div class="menu-group">
+          <button
+            class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group"
+            onclick="toggleMenu(this)">
+            <div class="flex items-center"><i
+                class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span
+                class="text-[13px]">配件</span></div>
+            <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+              style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="menu-content hidden py-1"><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./parts_list.html">列表</a><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./parts_request_list.html">申请列表</a></div>
+        </div>
+
+        <!-- Service -->
+        <div class="menu-group">
+          <button
+            class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-[#177ee5] transition-all group"
+            onclick="toggleMenu(this)">
+            <div class="flex items-center"><i
+                class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span
+                class="text-[13px]">服务</span></div>
+            <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+              style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="menu-content hidden py-1"><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./service_survey.html">问卷</a><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./service_consultation.html">咨询</a></div>
+        </div>
+
+        <!-- User Permission -->
+        <div class="menu-group">
+          <button
+            class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group"
+            onclick="toggleMenu(this)">
+            <div class="flex items-center"><i
+                class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i><span
+                class="text-[13px]">用户权限</span></div>
+            <i class="fi fi-rr-chevron-down w-[10px] h-[10px] text-slate-500"></i>
+          </button>
+          <div class="menu-content py-1 bg-slate-50/50"><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./user_list.html">用户列表</a><a
+              class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-[#177ee5] transition-colors"
+              href="./role_list.html">角色列表</a><a
+              class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
+              href="./permission_list.html">权限列表</a></div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA]">
+      <div class="w-full max-w-full px-[30px] py-5">
+        <!-- Page Header -->
+        <div class="flex justify-between items-center mb-5">
+          <div>
+            <h1 class="font-bold text-on-surface font-headline tracking-tight text-[14px]">
+              <span class="font-medium text-[#177ee5]">用户管理</span>
+              <span class="mx-2 text-slate-300">/</span>
+              <span class="text-[#6e7891]">权限列表</span>
+            </h1>
+          </div>
+          <div class="flex gap-2">
+            <button
+              class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm"
+              title="Download">
+              <i class="fi fi-rr-download text-[12px]"></i>
+            </button>
+            <button
+              class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm"
+              title="Refresh">
+              <i class="fi fi-rr-refresh text-[12px]"></i>
+            </button>
+            <button
+              class="h-8 px-3 bg-primary text-white rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
+              <i class="fi fi-rr-plus text-[12px]"></i>
+              新增
+            </button>
+          </div>
+        </div>
+
+        <!-- Filters Card -->
+        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
+          <div class="flex items-end gap-5">
+            <!-- Form Fields -->
+            <div class="flex-1 flex gap-4">
+              <div class="flex-1">
+                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">权限名称</label>
+                <input
+                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                  type="text" placeholder="请输入权限名称..." />
+              </div>
+              <div class="flex-1">
+                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">权限类型</label>
+                <select
+                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                  <option>全部类型</option>
+                  <option>菜单权限</option>
+                  <option>操作权限</option>
+                  <option>数据权限</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-end gap-2 w-auto pb-[3px]">
+              <button
+                class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20"
+                title="Search">
+                <i class="fi fi-rr-search text-[12px]"></i>
+              </button>
+              <button
+                class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm"
+                title="Expand">
+                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="mt-5 bg-white rounded-xl border border-slate-100 shadow-sm min-w-0">
+          <div class="w-full overflow-x-auto">
+            <table cellpadding="0" cellspacing="0" style="min-width: 100%; font-size: 13px;" class="text-left">
+              <thead
+                class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px]">
+                <tr>
+                  <th class="px-6 py-4 whitespace-nowrap">权限 ID</th>
+                  <th class="px-6 py-4 whitespace-nowrap">权限名称</th>
+                  <th class="px-6 py-4 whitespace-nowrap">权限编码</th>
+                  <th class="px-6 py-4 whitespace-nowrap">权限类型</th>
+                  <th class="px-6 py-4 whitespace-nowrap">所属模块</th>
+                  <th class="px-6 py-4 whitespace-nowrap">描述</th>
+                  <th class="px-6 py-4">操作</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-50">
+                <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./permission_detail.html?id=PERM-001'">
+                  <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-001</td>
+                  <td class="px-6 py-4 font-medium whitespace-nowrap">查看工单列表</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">ticket:list:view</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">菜单权限</span>
+                  </td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">工单管理</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以查看所有工单列表</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <button class="p-1 hover:bg-slate-100 rounded transition-colors" title="更多操作"
+                      onclick="event.stopPropagation()">
+                      <i class="bi bi-three-dots-vertical text-slate-400"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./permission_detail.html?id=PERM-002'">
+                  <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-002</td>
+                  <td class="px-6 py-4 font-medium whitespace-nowrap">编辑工单</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">ticket:edit</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">操作权限</span>
+                  </td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">工单管理</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以编辑和更新工单信息</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <button class="p-1 hover:bg-slate-100 rounded transition-colors" title="更多操作"
+                      onclick="event.stopPropagation()">
+                      <i class="bi bi-three-dots-vertical text-slate-400"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./permission_detail.html?id=PERM-003'">
+                  <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-003</td>
+                  <td class="px-6 py-4 font-medium whitespace-nowrap">管理产品</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">product:manage</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">操作权限</span>
+                  </td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">产品管理</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以添加、编辑、删除产品</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <a href="#"
+                      class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./permission_detail.html?id=PERM-004'">
+                  <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">PERM-004</td>
+                  <td class="px-6 py-4 font-medium whitespace-nowrap">库存审批</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap font-mono">inventory:approve</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 py-1 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">操作权限</span>
+                  </td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">库存管理</td>
+                  <td class="px-6 py-4 text-slate-600 whitespace-nowrap">可以审批库存申请</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <a href="#"
+                      class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
+            <p class="text-[10px] font-bold text-slate-500 uppercase">Showing 1-4 of 32 results</p>
+            <div class="flex items-center gap-2">
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400 disabled:opacity-50"
+                disabled>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">1</button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">2</button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">3</button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    // Toggle menu expand/collapse - only one menu can be open at a time
+    function toggleMenu(btn) {
+      const content = btn.nextElementSibling;
+      const allMenus = document.querySelectorAll('.menu-content');
+
+      // Close all other menus
+      allMenus.forEach(menu => {
+        if (menu !== content) {
+          menu.classList.add('hidden');
+          // Reset arrow rotation
+          const closeBtn = menu.previousElementSibling;
+          const arrow = closeBtn.querySelector('svg');
+          if (arrow) {
+            arrow.style.transform = 'rotate(0deg)';
+          }
         }
-        
-        // Toggle sidebar collapse
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('w-64');
-            sidebar.classList.toggle('w-20');
+      });
+
+      // Toggle current menu
+      content.classList.toggle('hidden');
+
+      // Rotate arrow
+      const arrow = btn.querySelector('svg');
+      if (arrow) {
+        if (content.classList.contains('hidden')) {
+          arrow.style.transform = 'rotate(0deg)';
+        } else {
+          arrow.style.transform = 'rotate(180deg)';
         }
-        
-        // Toggle dropdown (for language and user)
-        function toggleDropdown(dropdownId) {
-            // Close all other dropdowns first
-            const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
-            allDropdowns.forEach(dropdown => {
-                if (dropdown.id !== dropdownId) {
-                    dropdown.classList.add('hidden');
-                }
-            });
-            
-            // Toggle current dropdown
-            const dropdown = document.getElementById(dropdownId);
-            if (dropdown) {
-                dropdown.classList.toggle('hidden');
-            }
+      }
+    }
+
+    // Toggle sidebar collapse
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('w-64');
+      sidebar.classList.toggle('w-20');
+    }
+
+    // Toggle dropdown (for language and user)
+    function toggleDropdown(dropdownId) {
+      // Close all other dropdowns first
+      const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
+      allDropdowns.forEach(dropdown => {
+        if (dropdown.id !== dropdownId) {
+          dropdown.classList.add('hidden');
         }
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
-            
-            allDropdowns.forEach(dropdown => {
-                const trigger = event.target.closest('[onclick*="' + dropdown.id + '"]');
-                if (dropdown && !trigger && !dropdown.contains(event.target)) {
-                    dropdown.classList.add('hidden');
-                }
-            });
-        });
-    </script>
+      });
+
+      // Toggle current dropdown
+      const dropdown = document.getElementById(dropdownId);
+      if (dropdown) {
+        dropdown.classList.toggle('hidden');
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+      const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
+
+      allDropdowns.forEach(dropdown => {
+        const trigger = event.target.closest('[onclick*="' + dropdown.id + '"]');
+        if (dropdown && !trigger && !dropdown.contains(event.target)) {
+          dropdown.classList.add('hidden');
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
