@@ -304,7 +304,7 @@
                         <div class="space-y-1">
                             <div class="flex items-center gap-3">
                                 <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">
-                                    TK-20231027-01</h2>
+                                    115001</h2>
                                 <span
                                     class="px-2 py-0.5 bg-blue-100 text-primary text-[12px] font-bold rounded uppercase">维修中</span>
                             </div>
@@ -318,7 +318,7 @@
                                 <span>条码打印</span>
                             </button>
 
-                            <button
+                            <button onclick="openInventoryModal()"
                                 class="h-9 px-5 bg-white rounded-lg text-[13px] hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm">
                                 库存申请
                             </button>
@@ -358,10 +358,21 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
                                     <select
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>待处理</option>
-                                        <option selected>维修中</option>
-                                        <option>已完成</option>
-                                        <option>已关闭</option>
+                                        <option value="1">1-已收到受理</option>
+                                        <option value="Z4">Z4-待维修判定</option>
+                                        <option value="Z5">Z5-产品已收到并检查</option>
+                                        <option value="Y3">Y3-付款请求</option>
+                                        <option value="Y4">Y4-付款完成</option>
+                                        <option value="Z7">Z7-已发送给合作商</option>
+                                        <option value="Z8">Z8-合作商已收到并正在检查</option>
+                                        <option value="Z6" selected="selected">Z6-维修进行中</option>
+                                        <option value="Z9">Z9-维修已完成</option>
+                                        <option value="Y5">Y5-待发货</option>
+                                        <option value="D1">D1-正在配送（送货到家）</option>
+                                        <option value="D2">D2-已送达（送货到家）</option>
+                                        <option value="F">F-服务已完成</option>
+                                        <option value="Z2">Z2-已取消</option>
+                                        <option value="Y7">Y7-待领取</option>
                                     </select>
                                 </div>
                                 <div class="space-y-1 hidden">
@@ -371,37 +382,377 @@
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
                                         type="text" value="—" readonly />
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="message-notify">
                                     <div class="flex items-center justify-between">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">消息通知</label>
-                                        <button class="text-primary hover:text-primary/70 transition-colors"
-                                            title="查看发送历史">
+                                        <button onclick="openMsgHistoryModal()"
+                                            class="text-primary hover:text-primary/70 transition-colors"
+                                            title="查看消息通知发送历史">
                                             <i class="fi fi-rr-time-past text-sm"></i>
                                         </button>
                                     </div>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>维修完成通知</option>
-                                        <option>延迟通知</option>
-                                        <option>报价确认</option>
-                                    </select>
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'message-notify')">
+                                        <input type="text" id="message-notify-display" readonly value="-"
+                                            placeholder="请选择"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="message-notify-arrow" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="message-notify-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="message-notify-search" placeholder="搜索..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('message-notify')" />
+                                            </div>
+                                        </div>
+                                        <ul id="message-notify-list" class="max-h-60 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '-')">-</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[受理] 门店受理完成')">[受理]
+                                                门店受理完成
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[受理] 快递受理完成_圣水')">[受理]
+                                                快递受理完成_圣水</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 配件退回')">[通知] 配件退回
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 产品更换')">[判定] 产品更换
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 产品更换_眼镜店')">[判定]
+                                                产品更换_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 有偿_总公司(20日)')">[判定]
+                                                有偿_总公司(20日)</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 有偿_总公司_眼镜店(20日)')">
+                                                [判定] 有偿_总公司_眼镜店(20日)</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无偿')">[判定] 无偿</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无偿_眼镜店')">[判定]
+                                                无偿_眼镜店
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 有偿_3PL')">[判定]
+                                                有偿_3PL
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 有偿_眼镜店_3PL')">[判定]
+                                                有偿_眼镜店_3PL</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无偿/抛光')">[判定] 无偿/抛光
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无偿/抛光_眼镜店')">[判定]
+                                                无偿/抛光_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 合作企业/无偿')">[判定]
+                                                合作企业/无偿</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 合作企业/有偿')">[判定]
+                                                合作企业/有偿</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 合作企业/有偿_眼镜店')">[判定]
+                                                合作企业/有偿_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 合作企业/无偿_眼镜店')">[判定]
+                                                合作企业/无偿_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 合作企业维修延迟通知')">[咨询]
+                                                合作企业维修延迟通知</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 合作企业维修延迟通知_眼镜店')">
+                                                [咨询]
+                                                合作企业维修延迟通知_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无法维修')">[判定] 无法维修
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无法维修_眼镜店')">[判定]
+                                                无法维修_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无法维修/假货')">[判定]
+                                                无法维修/假货</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 无法维修/假货_眼镜店')">[判定]
+                                                无法维修/假货_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 维修取消')">[通知] 维修取消
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 维修取消_眼镜店')">[通知]
+                                                维修取消_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/有偿')">[咨询]
+                                                更换其他产品/有偿</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/有偿_眼镜店')">
+                                                [咨询]
+                                                更换其他产品/有偿_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/无偿')">[咨询]
+                                                更换其他产品/无偿</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/无偿_眼镜店')">
+                                                [咨询]
+                                                更换其他产品/无偿_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/有偿')">[判定]
+                                                更换其他产品/有偿</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/有偿_眼镜店')">
+                                                [判定]
+                                                更换其他产品/有偿_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/无偿')">[判定]
+                                                更换其他产品/无偿</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/无偿_眼镜店')">
+                                                [判定]
+                                                更换其他产品/无偿_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 镜片补偿')">[咨询] 镜片补偿
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次(通用)')">[付款]
+                                                未入账_第1次(通用)</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次(通用)')">[付款]
+                                                未入账_第2次(通用)</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 未入账 最终(退回)')">[通知]
+                                                未入账
+                                                最终(退回)</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次_合作企业')">[付款]
+                                                未入账_第1次_合作企业</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次_合作企业')">[付款]
+                                                未入账_第2次_合作企业</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次(通用)_眼镜店')">
+                                                [付款] 未入账_第1次(通用)_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次(通用)_眼镜店')">
+                                                [付款] 未入账_第2次(通用)_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 未入账 最终(退回)_眼镜店')">
+                                                [通知]
+                                                未入账 最终(退回)_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次_合作企业_眼镜店')">
+                                                [付款] 未入账_第1次_合作企业_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次_合作企业_眼镜店')">
+                                                [付款] 未入账_第2次_合作企业_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 付款完成')">[付款] 付款完成
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[付款] 付款完成_眼镜店')">[付款]
+                                                付款完成_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 维修进行中_总公司')">[判定]
+                                                维修进行中_总公司</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[判定] 维修进行中_合作企业')">[判定]
+                                                维修进行中_合作企业</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[请求] 确认保证书')">[请求] 确认保证书
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[请求] 确认保证书_眼镜店')">[请求]
+                                                确认保证书_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 未接通（不在位）')">[咨询]
+                                                未接通（不在位）</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[咨询] 未接通_眼镜店')">[咨询]
+                                                未接通_眼镜店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[出库] 门店移动中_总公司')">[出库]
+                                                门店移动中_总公司</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[出库] 快递 (配送查询)')">[出库] 快递
+                                                (配送查询)</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[出库] 住宅_3PL')">[出库]
+                                                住宅_3PL
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[出库] 维修取消_快递')">[出库]
+                                                维修取消_快递</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[出库] 无法维修_快递')">[出库]
+                                                无法维修_快递</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[出库] 维修取消_门店')">[出库]
+                                                维修取消_门店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[出库] 无法维修_门店')">[出库]
+                                                无法维修_门店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 到达门店及领取')">[通知]
+                                                到达门店及领取</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 门店领取完成')">[通知]
+                                                门店领取完成
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[请求] 问卷调查')">[请求] 问卷调查
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('message-notify', '[通知] 门店信息指南')">[通知]
+                                                门店信息指南
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="email-notify">
                                     <div class="flex items-center justify-between">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">电子邮件</label>
-                                        <button class="text-primary hover:text-primary/70 transition-colors"
-                                            title="查看发送历史">
+                                        <button onclick="openEmailHistoryModal()"
+                                            class="text-primary hover:text-primary/70 transition-colors"
+                                            title="查看电子邮件发送历史">
                                             <i class="fi fi-rr-time-past text-sm"></i>
                                         </button>
                                     </div>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>Repair Completion Notification</option>
-                                        <option>Delay Notice Template</option>
-                                        <option>Quotation Approval</option>
-                                    </select>
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'email-notify')">
+                                        <input type="text" id="email-notify-display" readonly value="-"
+                                            placeholder="请选择"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="email-notify-arrow" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="email-notify-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="email-notify-search" placeholder="搜索..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('email-notify')" />
+                                            </div>
+                                        </div>
+                                        <ul id="email-notify-list" class="max-h-60 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '-')">-</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[受理]门店已收到受理')">[受理]门店已收到受理
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[受理]已收到配送服务受理')">
+                                                [受理]已收到配送服务受理</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[通知]未付款返送')">[通知]未付款返送</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]已付款')">[检查]已付款</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]产品更换')">[检查]产品更换</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]免费/抛光')">[检查]免费/抛光</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]免费')">[检查]免费</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]合作商 - 已付款')">[检查]合作商 -
+                                                已付款</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]合作商 - 免费')">[检查]合作商 -
+                                                免费</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[咨询]合作伙伴修理延迟通知')">
+                                                [咨询]合作伙伴修理延迟通知</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查] 无法修复')">[检查] 无法修复</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查] 无法修复/假冒产品')">[检查]
+                                                无法修复/假冒产品</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]维修已取消')">[检查]维修已取消</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 已付款')">
+                                                [咨询]换取其他产品 - 已付款</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 免费')">
+                                                [咨询]换取其他产品 - 免费</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]换取其他产品 - 已付款')">
+                                                [检查]换取其他产品 - 已付款</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]换取其他产品 - 免费')">
+                                                [检查]换取其他产品 - 免费</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[付款]未结清金额 - 第1、2次（通用）')">
+                                                [付款]未结清金额 - 第1、2次（通用）</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[付款]未结清金额 - 最终')">[付款]未结清金额
+                                                - 最终</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[付款] 完了')">[付款] 完了</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]修理进行中 - 总部')">[检查]修理进行中
+                                                - 总部</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[检查]修理进行中 - 合作伙伴')">
+                                                [检查]修理进行中 - 合作伙伴</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[咨询]质保检查')">[咨询]质保检查</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[发货]转送至门店')">[发货]转送至门店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[发货]快递配送（跟踪查询）')">
+                                                [发货]快递配送（跟踪查询）</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[发货]修理取消 - 快递配送')">[发货]修理取消
+                                                - 快递配送</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[发货]修理取消 - 门店')">[发货]修理取消 -
+                                                门店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[发货]无法修复 - 快递配送')">[发货]无法修复
+                                                - 快递配送</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[发货]无法修复 - 门店')">[发货]无法修复 -
+                                                门店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[通知] 已抵达门店并接收')">[通知]
+                                                已抵达门店并接收</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[通知]门店取货完成')">[通知]门店取货完成
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('email-notify', '[请求]调查问卷')">[请求]调查问卷</li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                                 <div class="space-y-1">
@@ -421,7 +772,7 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">历史记录</label>
                                     <div class="flex items-center gap-2 text-sm py-2">
                                         <span class="text-on-surface" style="color: #94a3b8;">当前记录2条，</span>
-                                        <a href="javascript:void(0)"
+                                        <a href="javascript:void(0)" onclick="openStatusHistoryModal()"
                                             class="text-primary font-medium hover:underline cursor-pointer">点击查看</a>
                                     </div>
                                 </div>
@@ -441,9 +792,21 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户姓名</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="Jameson Vance" readonly />
+                                    <div class="flex items-center gap-2">
+                                        <div class="flex gap-2 flex-1 min-w-0">
+                                            <input
+                                                class="w-1/3 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary min-w-[60px]"
+                                                type="text" value="Vance" readonly placeholder="姓" />
+                                            <input
+                                                class="w-2/3 bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary min-w-0"
+                                                type="text" value="Jameson" readonly placeholder="名" />
+                                        </div>
+                                        <button onclick="openCustomerModal()"
+                                            class="w-9 h-9 bg-[#f5f7fa] flex-shrink-0 flex items-center rounded-lg justify-center text-primary hover:bg-primary/10 transition-colors"
+                                            title="客户详情">
+                                            <i class="fi fi-rr-address-book"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -535,32 +898,129 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">接收日期</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="date" value="2023-10-27" readonly />
+                                        type="date" value="2023-10-27" />
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">受理渠道类型</label>
                                     <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>邮寄 (Official Website)</option>
-                                        <option>门店送修</option>
-                                        <option>上门取件</option>
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>-</option>
+                                        <option value="100">Flagship Store</option>
+                                        <option value="110">百货商店</option>
+                                        <option value="120">Mall</option>
+                                        <option value="130">免税店</option>
+                                        <option value="140">配镜师</option>
+                                        <option value="150">编辑店</option>
+                                        <option value="160">网上公司商城</option>
+                                        <option value="170">线上第三方商城</option>
+                                        <option value="180" selected="selected">海外法人(子公司)</option>
+                                        <option value="190">海外法人(合资)</option>
+                                        <option value="200">Distributor</option>
+                                        <option value="210">Wholesale</option>
+                                        <option value="220">PS</option>
+                                        <option value="990">Etc</option>
                                     </select>
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="channel">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">受理渠道</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="Online Support" readonly />
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'channel')">
+                                        <input type="text" id="channel-display" readonly value="Online Support"
+                                            placeholder="请选择受理渠道"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="channel-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="channel-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="channel-search" placeholder="搜索渠道..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('channel')" />
+                                            </div>
+                                        </div>
+                                        <ul id="channel-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Online Support')">Online Support
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Shanghai Flagship')">Shanghai
+                                                Flagship</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Beijing Boutique')">Beijing
+                                                Boutique</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Authorized Retailer - Century')">
+                                                Authorized Retailer - Century</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Duty Free')">Duty Free</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Call Center')">Call Center</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Seoul Subsidiary')">Seoul
+                                                Subsidiary</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('channel', 'Tokyo Flagship')">Tokyo Flagship
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="store">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">受理门店</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="上海旗舰店" readonly />
+                                    <div class="relative cursor-pointer" onclick="toggleCustomDropdown(event, 'store')">
+                                        <input type="text" id="store-display" readonly value="上海旗舰店" placeholder="请选择门店"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="store-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="store-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="store-search" placeholder="搜索门店..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('store')" />
+                                            </div>
+                                        </div>
+                                        <ul id="store-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('store', '上海旗舰店')">上海旗舰店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('store', '北京王府井店')">北京王府井店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('store', '广州天河店')">广州天河店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('store', '深圳万象城店')">深圳万象城店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('store', '成都太古里店')">成都太古里店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('store', '杭州大厦店')">杭州大厦店</li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <div class="flex gap-6">
@@ -627,37 +1087,76 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">购买日期</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="date" value="2023-05-12" readonly />
+                                        type="date" value="2023-05-12" />
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="purchase_channel">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">购买渠道</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="官方旗舰店" readonly />
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'purchase_channel')">
+                                        <input type="text" id="purchase_channel-display" readonly value="官方旗舰店"
+                                            placeholder="请选择购买渠道"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="purchase_channel-arrow" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="purchase_channel-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="purchase_channel-search" placeholder="搜索购买渠道..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('purchase_channel')" />
+                                            </div>
+                                        </div>
+                                        <ul id="purchase_channel-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('purchase_channel', '官方旗舰店')">官方旗舰店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('purchase_channel', '百货专柜')">百货专柜</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('purchase_channel', '独立精品店')">独立精品店</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('purchase_channel', '线上官方商城')">线上官方商城</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('purchase_channel', '授权零售商')">授权零售商</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('purchase_channel', '免税店')">免税店</li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户请求分类</label>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户要求事项分类</label>
                                     <select
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
                                         disabled>
-                                        <option selected>镜架损坏 / 漆面剥落</option>
+                                        <option selected>镜框损坏</option>
+                                        <option>镜架损坏 / 漆面剥落</option>
                                         <option>镜片划伤</option>
                                         <option>螺丝松动</option>
                                     </select>
                                 </div>
                                 <div class="space-y-1 md:col-span-2">
                                     <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户反馈内容</label>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户要求事项内容</label>
                                     <textarea
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        rows="3"
-                                        readonly>The temple of the frame is showing signs of paint peeling after 5 months of normal usage. Requesting a full restoration or replacement of the left temple arm.</textarea>
+                                        rows="3">右眼下部分的镜框有缺失，且有裂纹。请帮忙维修该部分。</textarea>
                                 </div>
 
                                 <!-- 附件信息表格 -->
-                                <div class="col-span-2 mt-6">
+                                <div class="col-span-2">
                                     <div class="flex items-center justify-between mb-4">
                                         <h4
                                             class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
@@ -742,47 +1241,94 @@
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否需要咨询</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option selected>是</option>
-                                            <option>否</option>
-                                        </select>
+                                        <div class="flex items-center gap-3 py-[6px]">
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" checked class="sr-only peer">
+                                                <div
+                                                    class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                                </div>
+                                            </label>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询单号</label>
-                                        <input
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            type="text" value="CON-2023-089" readonly />
+                                        <div class="py-[8px]">
+                                            <a href="./service_consultation_detail.html?id=87654321"
+                                                class="text-sm font-bold text-primary hover:underline transition-colors flex items-center gap-1 group">
+                                                87654321
+                                                <i
+                                                    class="fi fi-rr-arrow-up-right text-[10px] opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">外呼类型</label>
                                         <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option>技术支持</option>
-                                            <option selected>售后服务</option>
-                                            <option>客户关怀</option>
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                            <option>请选择外呼类型</option>
+                                            <option>电话</option>
+                                            <option>邮件</option>
+                                            <option>短信</option>
+                                            <option>微信</option>
                                         </select>
                                     </div>
-                                    <div class="space-y-1">
+                                    <div class="space-y-1 relative custom-select-wrapper" data-prefix="consult-PIC">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询负责人</label>
-                                        <input
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            type="text" value="赵敏" readonly />
+                                        <div class="relative cursor-pointer"
+                                            onclick="toggleCustomDropdown(event, 'consult-PIC')">
+                                            <input type="text" id="consult-PIC-display" readonly value="赵敏"
+                                                placeholder="请选择咨询负责人"
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                                autocomplete="off" />
+                                            <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                                id="consult-PIC-arrow" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </div>
+
+                                        <!-- Dropdown Box -->
+                                        <div id="consult-PIC-dropdown"
+                                            class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                            <div class="p-2 border-b border-slate-50">
+                                                <div class="relative">
+                                                    <i
+                                                        class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                    <input type="text" id="consult-PIC-search" placeholder="搜索负责人..."
+                                                        autocomplete="off"
+                                                        class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                        onkeyup="filterCustomOptions('consult-PIC')" />
+                                                </div>
+                                            </div>
+                                            <ul id="consult-PIC-list" class="max-h-48 overflow-y-auto py-1">
+                                                <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                    onclick="selectCustomOption('consult-PIC', '赵敏')">赵敏
+                                                </li>
+                                                <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                    onclick="selectCustomOption('consult-PIC', '张师傅')">张师傅</li>
+                                                <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                    onclick="selectCustomOption('consult-PIC', '刘晓晨')">刘晓晨</li>
+                                                <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                    onclick="selectCustomOption('consult-PIC', '李雷')">李雷</li>
+                                                <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                    onclick="selectCustomOption('consult-PIC', '韩梅梅')">韩梅梅</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询状态</label>
                                         <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option>待处理</option>
-                                            <option selected>处理中</option>
-                                            <option>已完成</option>
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                            <option>等待中</option>
+                                            <option>未回复</option>
+                                            <option>等待回复</option>
+                                            <option>需要回复</option>
+                                            <option>咨询完成</option>
                                         </select>
                                     </div>
                                     <div class="space-y-1">
@@ -790,17 +1336,21 @@
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询日期</label>
                                         <input
                                             class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            type="date" value="2023-10-28" readonly />
+                                            type="date" value="2023-10-28" />
                                     </div>
-                                    <div class="space-y-1 md:col-span-2">
+                                    <div class="space-y-1">
                                         <label
-                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">异常分类</label>
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">例外处理分类</label>
                                         <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option selected>产品质量问题</option>
-                                            <option>物流损坏</option>
-                                            <option>客户使用不当</option>
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                            <option>维修费用</option>
+                                            <option>配送周期</option>
+                                            <option>同款产品更换</option>
+                                            <option>更换其他产品</option>
+                                            <option>镜片补偿</option>
+                                            <option>折旧</option>
+                                            <option>产品退款</option>
+                                            <option>其他</option>
                                         </select>
                                     </div>
                                 </div>
@@ -812,26 +1362,11 @@
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">确认类型</label>
                                         <select
                                             class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                            <option>微信小程序</option>
                                             <option>电话确认</option>
-                                            <option selected>邮件确认</option>
+                                            <option>邮件确认</option>
                                             <option>短信确认</option>
                                         </select>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品状态确认图片</label>
-                                        <button
-                                            class="w-full bg-[#f5f7fa] text-primary text-sm font-medium rounded-lg py-2 px-3 hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
-                                            <i class="bi bi-image"></i>
-                                            上传图片
-                                        </button>
-                                    </div>
-                                    <div class="space-y-1 md:col-span-2">
-                                        <label
-                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品状态确认说明</label>
-                                        <textarea
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            rows="2" placeholder="说明确认情况..."></textarea>
                                     </div>
                                     <div class="space-y-1">
                                         <label
@@ -843,6 +1378,88 @@
                                             <option>未同步</option>
                                         </select>
                                     </div>
+                                    <div class="space-y-1">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">发送时间</label>
+                                        <input
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            type="datetime-local" value="2023-10-30T10:00" />
+                                    </div>
+                                    <div class="space-y-1 md:col-span-2">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品状态确认图片</label>
+                                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mt-2">
+                                            <!-- Image 1 -->
+                                            <div
+                                                class="aspect-square rounded-lg border border-slate-200 overflow-hidden relative group bg-white shadow-sm hover:shadow-md transition-shadow">
+                                                <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=200&q=80"
+                                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    alt="产品正面">
+                                                <div
+                                                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                                    <button
+                                                        class="w-8 h-8 rounded-full bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 hover:text-primary transition-colors shadow-sm"
+                                                        title="预览"><i class="fi fi-rr-eye text-sm mt-0.5"></i></button>
+                                                    <button
+                                                        class="w-8 h-8 rounded-full bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 hover:text-red-500 transition-colors shadow-sm"
+                                                        title="删除"><i
+                                                            class="fi fi-rr-trash text-sm mt-0.5"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- Image 2 -->
+                                            <div
+                                                class="aspect-square rounded-lg border border-slate-200 overflow-hidden relative group bg-white shadow-sm hover:shadow-md transition-shadow">
+                                                <img src="https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=200&q=80"
+                                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    alt="产品侧面">
+                                                <div
+                                                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                                    <button
+                                                        class="w-8 h-8 rounded-full bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 hover:text-primary transition-colors shadow-sm"><i
+                                                            class="fi fi-rr-eye text-sm mt-0.5"></i></button>
+                                                    <button
+                                                        class="w-8 h-8 rounded-full bg-white text-slate-700 flex items-center justify-center hover:bg-slate-100 hover:text-red-500 transition-colors shadow-sm"><i
+                                                            class="fi fi-rr-trash text-sm mt-0.5"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- Image 3 (Empty) -->
+                                            <div
+                                                class="aspect-square bg-[#f5f7fa] rounded-lg border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:text-primary hover:border-primary hover:bg-slate-50 transition-colors cursor-pointer relative group overflow-hidden">
+                                                <i
+                                                    class="fi fi-rr-picture text-xl mb-1 group-hover:-translate-y-1 transition-transform"></i>
+                                                <span class="text-[10px] font-medium">破损细节</span>
+                                            </div>
+                                            <!-- Image 4 (Empty) -->
+                                            <div
+                                                class="aspect-square bg-[#f5f7fa] rounded-lg border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:text-primary hover:border-primary hover:bg-slate-50 transition-colors cursor-pointer relative group overflow-hidden">
+                                                <i
+                                                    class="fi fi-rr-picture text-xl mb-1 group-hover:-translate-y-1 transition-transform"></i>
+                                                <span class="text-[10px] font-medium">包装</span>
+                                            </div>
+                                            <!-- Image 5 (Empty) -->
+                                            <div
+                                                class="aspect-square bg-[#f5f7fa] rounded-lg border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:text-primary hover:border-primary hover:bg-slate-50 transition-colors cursor-pointer relative group overflow-hidden">
+                                                <i
+                                                    class="fi fi-rr-picture text-xl mb-1 group-hover:-translate-y-1 transition-transform"></i>
+                                                <span class="text-[10px] font-medium">保修卡</span>
+                                            </div>
+                                            <!-- Add New -->
+                                            <div
+                                                class="aspect-square bg-[#f5f7fa] rounded-lg border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:text-primary hover:border-primary hover:bg-slate-50 transition-colors cursor-pointer relative group overflow-hidden">
+                                                <i
+                                                    class="fi fi-rr-plus text-xl mb-1 group-hover:scale-110 transition-transform"></i>
+                                                <span class="text-[10px] font-medium">继续选择</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1 md:col-span-2">
+                                        <label
+                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品状态确认说明</label>
+                                        <textarea
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                            rows="2" placeholder="说明确认情况..."></textarea>
+                                    </div>
+
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户确认状态</label>
@@ -859,7 +1476,7 @@
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户确认时间</label>
                                         <input
                                             class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            type="datetime-local" value="2023-10-30T14:30" readonly />
+                                            type="datetime-local" value="2023-10-30T14:30" />
                                     </div>
                                     <div class="space-y-1 md:col-span-2">
                                         <label
@@ -868,13 +1485,7 @@
                                             class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
                                             rows="2" readonly>确认维修方案，同意进行维修。</textarea>
                                     </div>
-                                    <div class="space-y-1">
-                                        <label
-                                            class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">发送时间</label>
-                                        <input
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                            type="datetime-local" value="2023-10-30T10:00" readonly />
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -889,61 +1500,79 @@
                                 </h3>
                             </div>
                             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="product-name">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="V8 Turbo Max" readonly />
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'product-name')">
+                                        <input type="text" id="product-name-display" readonly value="JUDE-01"
+                                            placeholder="请选择产品名称"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="product-name-arrow" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="product-name-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="product-name-search" placeholder="搜索产品..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('product-name')" />
+                                            </div>
+                                        </div>
+                                        <ul id="product-name-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('product-name', 'GISELE')">GISELE
+                                                Max</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('product-name', 'BREEZEBE')">BREEZEBE
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品
                                         ID</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="PRD-88219" readonly />
+                                    <span class="block w-full rounded-lg text-sm py-2 text-on-surface">325662</span>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">类别</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="Titanium Frame" readonly />
+                                    <span class="block w-full rounded-lg text-sm py-2 text-on-surface">SUNGLASS</span>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">库存状态</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>IN STOCK</option>
-                                        <option>OUT OF STOCK</option>
-                                        <option>PRE-ORDER</option>
-                                    </select>
+                                    <span class="block w-full rounded-lg text-sm py-2 text-on-surface">Y</span>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">上市日期</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="date" value="2023-03-15" readonly />
+                                    <span class="block w-full rounded-lg text-sm py-2 text-on-surface">2025-01-10</span>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">生产工厂</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="上海工厂" readonly />
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option selected>第一工厂</option>
+                                        <option>第二工厂</option>
+                                    </select>
                                 </div>
                                 <div class="space-y-1">
                                     <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">电镀 /
                                         焊接维修是否可行</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>可行</option>
-                                        <option>不可行</option>
-                                    </select>
+                                    <span class="block w-full rounded-lg text-sm py-2 text-on-surface">Y</span>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -955,9 +1584,8 @@
                                 <div class="space-y-1 md:col-span-2">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件存放位置</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="A 区 -3 架 -2 层" readonly />
+                                    <span class="block w-full rounded-lg text-sm py-2 text-on-surface">A 区 -3 架 -2
+                                        层</span>
                                 </div>
                             </div>
                         </div>
@@ -977,7 +1605,7 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">总部入库日期</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="date" value="2023-10-29" readonly />
+                                        type="date" value="2023-10-29" />
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -986,24 +1614,87 @@
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
                                         type="date" value="2023-11-05" />
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="phenomenon">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">现象</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="镜腿漆面剥落" readonly />
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'phenomenon')">
+                                        <input type="text" id="phenomenon-display" readonly value="镜腿漆面剥落"
+                                            placeholder="请选择现象"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="phenomenon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="phenomenon-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="phenomenon-search" placeholder="搜索..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('phenomenon')" />
+                                            </div>
+                                        </div>
+                                        <ul id="phenomenon-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('phenomenon', '镜腿漆面剥落')">镜腿漆面剥落</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('phenomenon', '镜框变形')">镜框变形</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="problem-phenomenon">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">问题现象</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>漆面剥落</option>
-                                        <option>镜片划伤</option>
-                                        <option>螺丝松动</option>
-                                        <option>镜架变形</option>
-                                        <option>鼻托损坏</option>
-                                    </select>
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'problem-phenomenon')">
+                                        <input type="text" id="problem-phenomenon-display" readonly value="漆面剥落"
+                                            placeholder="请选择问题现象"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="problem-phenomenon-arrow" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="problem-phenomenon-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="problem-phenomenon-search" placeholder="搜索..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('problem-phenomenon')" />
+                                            </div>
+                                        </div>
+                                        <ul id="problem-phenomenon-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('problem-phenomenon', '漆面剥落')">漆面剥落</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('problem-phenomenon', '镜片划伤')">镜片划伤</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('problem-phenomenon', '螺丝松动')">螺丝松动</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('problem-phenomenon', '镜架变形')">镜架变形</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('problem-phenomenon', '鼻托损坏')">鼻托损坏</li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -1017,11 +1708,11 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">镜片类型</label>
                                     <select
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>标准镜片</option>
-                                        <option>偏光镜片</option>
-                                        <option>变色镜片</option>
-                                        <option>防蓝光镜片</option>
-                                        <option>渐进多焦镜片</option>
+                                        <option value="">-</option>
+                                        <option value="lens1" selected="selected">未安装</option>
+                                        <option value="lens5">定制镜片</option>
+                                        <option value="lens6">产品的原装镜片</option>
+
                                     </select>
                                 </div>
                                 <div class="space-y-1">
@@ -1029,31 +1720,105 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修处</label>
                                     <select
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>总部维修中心</option>
-                                        <option>合作方维修中心</option>
-                                        <option>门店维修</option>
+                                        <option value="">-</option>
+                                        <option value="1">总部</option>
+                                        <option value="4">合作公司</option>
+                                        <option value="5">US Office</option>
+                                        <option value="6">JP Office</option>
+                                        <option value="7">3PL</option>
                                     </select>
                                 </div>
-                                <div class="space-y-1">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="service-engineer">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">服务工程师</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="张师傅" />
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'service-engineer')">
+                                        <input type="text" id="service-engineer-display" readonly value="张师傅"
+                                            placeholder="请选择服务工程师"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="service-engineer-arrow" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="service-engineer-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="service-engineer-search" placeholder="搜索..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('service-engineer')" />
+                                            </div>
+                                        </div>
+                                        <ul id="service-engineer-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('service-engineer', '张师傅')">张师傅</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('service-engineer', '李师傅')">李师傅</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('service-engineer', '王工程师')">王工程师</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="space-y-1 md:col-span-2">
+                                <div class="space-y-1 relative custom-select-wrapper" data-prefix="repair-content">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修内容</label>
-                                    <textarea
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        rows="2" placeholder="填写维修内容详情..."></textarea>
+                                    <div class="relative cursor-pointer"
+                                        onclick="toggleCustomDropdown(event, 'repair-content')">
+                                        <input type="text" id="repair-content-display" readonly value=""
+                                            placeholder="请选择维修内容"
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
+                                            autocomplete="off" />
+                                        <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                            id="repair-content-arrow" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Dropdown Box -->
+                                    <div id="repair-content-dropdown"
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        <div class="p-2 border-b border-slate-50">
+                                            <div class="relative">
+                                                <i
+                                                    class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 text-[12px]"></i>
+                                                <input type="text" id="repair-content-search" placeholder="搜索..."
+                                                    autocomplete="off"
+                                                    class="w-full bg-[#f5f7fa] border-none rounded-md text-xs py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
+                                                    onkeyup="filterCustomOptions('repair-content')" />
+                                            </div>
+                                        </div>
+                                        <ul id="repair-content-list" class="max-h-48 overflow-y-auto py-1">
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('repair-content', '更换镜腿和螺丝')">更换镜腿和螺丝</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('repair-content', '抛光翻新')">抛光翻新</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('repair-content', '更换鼻托及调整镜架')">更换鼻托及调整镜架
+                                            </li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('repair-content', '重新电镀')">重新电镀</li>
+                                            <li class="px-3 py-2 text-sm text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                                onclick="selectCustomOption('repair-content', '焊接断裂处')">焊接断裂处</li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修进度日期</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="date" value="2023-10-30" />
+                                        type="date" value="2025-10-30" />
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -1071,80 +1836,24 @@
                                 </div>
                                 <div class="space-y-1">
                                     <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">再维修原因</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="" placeholder="如适用，请填写再维修原因" />
-                                </div>
-                                <div class="space-y-1">
-                                    <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否产品问题</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>是</option>
-                                        <option selected>否</option>
-                                    </select>
-                                </div>
-                                <div class="space-y-1">
-                                    <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修费用判定</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>免费维修</option>
-                                        <option>收费维修</option>
-                                        <option>保修期内</option>
-                                        <option>待判定</option>
-                                    </select>
-                                </div>
-                                <div class="space-y-1">
-                                    <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修费用</label>
-                                    <input
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="text" value="¥0.00" />
-                                </div>
-                                <div class="space-y-1 md:col-span-2">
-                                    <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修参考事项</label>
-                                    <textarea
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        rows="2" placeholder="填写维修参考事项..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- （7）支付信息 -->
-                        <div
-                            class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
-                                <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
-                                    <i class="bi bi-credit-card text-slate-500 text-lg"></i>
-                                    支付信息
-                                </h3>
-                            </div>
-                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-1">
-                                    <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付状态</label>
                                     <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>无需支付</option>
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                         <option>待支付</option>
                                         <option>已支付</option>
                                         <option>退款中</option>
+                                        <option>已退款</option>
                                     </select>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付方式</label>
                                     <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                         <option>线下支付</option>
-                                        <option selected>支付宝</option>
-                                        <option>微信</option>
-                                        <option>银联</option>
+                                        <option selected>微信</option>
+                                        <option>支付宝</option>
+                                        <option>POS机</option>
                                     </select>
                                 </div>
                                 <div class="space-y-1">
@@ -1166,7 +1875,7 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">支付时间</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="datetime-local" value="" readonly />
+                                        type="datetime-local" value="" />
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -1178,13 +1887,13 @@
                             </div>
                         </div>
 
-                        <!-- （8）物流信息 -->
+                        <!-- （8）出库信息 -->
                         <div
                             class="break-inside-avoid mb-6 bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
                             <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline text-[12px]">
                                     <i class="bi bi-truck text-slate-500 text-lg"></i>
-                                    物流信息
+                                    出库信息
                                 </h3>
                             </div>
                             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1203,7 +1912,7 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库完成日期</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="date" value="" readonly />
+                                        type="date" value="" />
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -1255,16 +1964,485 @@
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">门店提货日期</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                        type="date" value="" readonly />
+                                        type="date" value="" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </main>
     </div>
+
+    <!-- Status Change History Modal -->
+    <div id="status-history-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeStatusHistoryModal()"></div>
+        <div
+            class="absolute left-1/2 top-[10%] -translate-x-1/2 w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in slide-in-from-top-8 duration-300">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0">
+                <h3 class="font-bold text-on-surface font-headline text-lg">工单115001历史记录</h3>
+                <button onclick="closeStatusHistoryModal()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-50 text-slate-400 transition-colors">
+                    <i class="fi fi-rr-cross-small text-xl leading-none"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[70vh] overflow-y-auto no-scrollbar">
+                <div class="overflow-hidden border border-slate-100 rounded-xl">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/80">
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-default">
+                                    编号</th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-default">
+                                    日期</th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-default">
+                                    变更前状态</th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-default">
+                                    变更后状态</th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-default">
+                                    负责人</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-4 py-3 font-medium text-primary">001</td>
+                                <td class="px-4 py-3 text-slate-500">2023-10-27 10:30:15</td>
+                                <td class="px-4 py-3">
+                                    <span
+                                        class="px-2 py-0.5 bg-slate-100 text-slate-500 text-[10px] font-bold rounded">待处理</span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span
+                                        class="px-2 py-0.5 bg-blue-100 text-primary text-[10px] font-bold rounded">修理中</span>
+                                </td>
+                                <td class="px-4 py-3 font-medium text-on-surface">张经理</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-4 py-3 font-medium text-primary">002</td>
+                                <td class="px-4 py-3 text-slate-500">2023-10-31 14:20:44</td>
+                                <td class="px-4 py-3">
+                                    <span
+                                        class="px-2 py-0.5 bg-blue-100 text-primary text-[10px] font-bold rounded">修理中</span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span
+                                        class="px-2 py-0.5 bg-green-100 text-green-600 text-[10px] font-bold rounded">已完成</span>
+                                </td>
+                                <td class="px-4 py-3 font-medium text-on-surface">李经理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-end">
+                <button onclick="closeStatusHistoryModal()"
+                    class="px-6 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">关闭</button>
+            </div>
+        </div>
     </div>
-    </main>
+
+    <!-- Customer Info Modal -->
+    <div id="customer-info-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeCustomerModal()"></div>
+        <div
+            class="absolute left-1/2 top-[10%] -translate-x-1/2 w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in slide-in-from-top-8 duration-300">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0">
+                <h3 class="font-bold text-on-surface font-headline text-lg">客户资料</h3>
+                <button onclick="closeCustomerModal()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-50 text-slate-400 transition-colors">
+                    <i class="fi fi-rr-cross-small text-xl leading-none"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[80vh] overflow-y-auto no-scrollbar">
+                <!-- Basic Contact Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="space-y-1 p-4">
+                        <label
+                            class="text-[11px] font-bold text-slate-400 uppercase tracking-widest transition-colors">电话号码</label>
+                        <p class="text-sm font-semibold text-on-surface">+86 138-8822-1922</p>
+                    </div>
+                    <div class="space-y-1 p-4">
+                        <label
+                            class="text-[11px] font-bold text-slate-400 uppercase tracking-widest transition-colors">电子邮件</label>
+                        <p class="text-sm font-semibold text-on-surface">vance.design@example.com</p>
+                    </div>
+                    <div class="space-y-1 p-4">
+                        <label
+                            class="text-[11px] font-bold text-slate-400 uppercase tracking-widest transition-colors">地址</label>
+                        <p class="text-sm font-semibold text-on-surface">上海市静安区南京西路 1266 号恒隆广场一座 45 楼</p>
+                    </div>
+                </div>
+
+                <!-- Acceptance Records Table -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-on-surface text-sm flex items-center gap-2">
+                        受理历史记录
+                    </h4>
+                    <div class="overflow-hidden border border-slate-100 rounded-xl">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/80">
+                                    <th class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                        工单编号</th>
+                                    <th class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                        受理日期</th>
+                                    <th class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                        工单状态</th>
+                                    <th class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider">
+                                        故障分类</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-sm">
+                                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer group">
+                                    <td class="px-4 py-3 font-bold text-primary">115001</td>
+                                    <td class="px-4 py-3 text-slate-500">2023-10-27</td>
+                                    <td class="px-4 py-3"><span
+                                            class="px-2 py-0.5 bg-blue-100 text-primary text-[10px] font-bold rounded uppercase">维修进行中</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-on-surface-variant group-hover:text-on-surface">镜框损坏</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer group">
+                                    <td class="px-4 py-3 font-bold text-primary">114982</td>
+                                    <td class="px-4 py-3 text-slate-500">2023-08-15</td>
+                                    <td class="px-4 py-3"><span
+                                            class="px-2 py-0.5 bg-green-100 text-green-600 text-[10px] font-bold rounded uppercase">已完成</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-on-surface-variant group-hover:text-on-surface">螺丝松动</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer group">
+                                    <td class="px-4 py-3 font-bold text-primary">113205</td>
+                                    <td class="px-4 py-3 text-slate-500">2023-03-02</td>
+                                    <td class="px-4 py-3"><span
+                                            class="px-2 py-0.5 bg-green-100 text-green-600 text-[10px] font-bold rounded uppercase">已完成</span>
+                                    </td>
+                                    <td class="px-4 py-3 text-on-surface-variant group-hover:text-on-surface">抛光服务</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-end">
+                <button onclick="closeCustomerModal()"
+                    class="px-6 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Notification History Modal -->
+    <div id="msg-history-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeMsgHistoryModal()"></div>
+        <div
+            class="absolute left-1/2 top-[10%] -translate-x-1/2 w-full max-w-6xl bg-white rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in slide-in-from-top-8 duration-300">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0">
+                <h3 class="font-bold text-on-surface font-headline text-lg">消息通知发送历史</h3>
+                <button onclick="closeMsgHistoryModal()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-50 text-slate-400 transition-colors">
+                    <i class="fi fi-rr-cross-small text-xl leading-none"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[80vh] overflow-y-auto no-scrollbar">
+                <div class="overflow-x-auto border border-slate-100 rounded-xl">
+                    <table class="w-full text-left border-collapse min-w-[1000px]">
+                        <thead>
+                            <tr class="bg-slate-50/80">
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        Ticket Id
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        模板名称
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        姓名
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        手机
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        发送时间
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        发送类型
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        成功状态
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-4 py-3 font-medium text-primary">115001</td>
+                                <td class="px-4 py-3 text-on-surface">[受理] 门店受理完成</td>
+                                <td class="px-4 py-3">Jameson Vance</td>
+                                <td class="px-4 py-3 text-slate-500">138-****-1922</td>
+                                <td class="px-4 py-3 text-slate-500">2023-10-27 10:45:12</td>
+                                <td class="px-4 py-3">
+                                    <span
+                                        class="px-2 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-bold rounded">SMS</span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span class="flex items-center gap-1.5 text-green-600 font-bold text-xs">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        发送成功
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-4 py-3 font-medium text-primary">115001</td>
+                                <td class="px-4 py-3 text-on-surface">[通知] 维修开始</td>
+                                <td class="px-4 py-3">Jameson Vance</td>
+                                <td class="px-4 py-3 text-slate-500">138-****-1922</td>
+                                <td class="px-4 py-3 text-slate-500">2023-10-27 14:20:33</td>
+                                <td class="px-4 py-3">
+                                    <span
+                                        class="px-2 py-0.5 bg-green-50 text-green-600 text-[10px] font-bold rounded">微信小程序</span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span class="flex items-center gap-1.5 text-green-600 font-bold text-xs">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        发送成功
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-end">
+                <button onclick="closeMsgHistoryModal()"
+                    class="px-6 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Sending History Modal -->
+    <div id="email-history-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeEmailHistoryModal()"></div>
+        <div
+            class="absolute left-1/2 top-[10%] -translate-x-1/2 w-full max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in slide-in-from-top-8 duration-300">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0">
+                <h3 class="font-bold text-on-surface font-headline text-lg">电子邮件发送历史</h3>
+                <button onclick="closeEmailHistoryModal()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-50 text-slate-400 transition-colors">
+                    <i class="fi fi-rr-cross-small text-xl leading-none"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[80vh] overflow-y-auto no-scrollbar">
+                <div class="overflow-hidden border border-slate-100 rounded-xl">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/80">
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        Ticket Id
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        模板名称
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        发送时间
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        发送类型
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-[12px] font-bold text-slate-400 uppercase tracking-wider cursor-pointer group">
+                                    <div class="flex items-center gap-1.5">
+                                        成功状态
+                                        <div
+                                            class="flex flex-col -space-y-1 opacity-20 group-hover:opacity-50 transition-opacity">
+                                            <i class="bi bi-caret-up-fill text-[8px]"></i>
+                                            <i class="bi bi-caret-down-fill text-[8px]"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-4 py-3 font-medium text-primary">115001</td>
+                                <td class="px-4 py-3 text-on-surface">[检查] 产品更换</td>
+                                <td class="px-4 py-3 text-slate-500">2023-10-27 15:30:04</td>
+                                <td class="px-4 py-3 text-slate-500">自动发送</td>
+                                <td class="px-4 py-3">
+                                    <span class="flex items-center gap-1.5 text-green-600 font-bold text-xs">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        发送成功
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-end">
+                <button onclick="closeEmailHistoryModal()"
+                    class="px-6 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Request Modal -->
+
+    <!-- Inventory Request Modal -->
+    <div id="inventory-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeInventoryModal()"></div>
+        <div
+            class="absolute left-1/2 top-[10%] -translate-x-1/2 w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in slide-in-from-top-8 duration-300">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0">
+                <h3 class="font-bold text-on-surface font-headline text-lg">库存申请</h3>
+                <button onclick="closeInventoryModal()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-50 text-slate-400 transition-colors">
+                    <i class="fi fi-rr-cross-small text-xl leading-none"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[70vh] overflow-y-auto no-scrollbar">
+                <form id="inventory-request-form" class="grid grid-cols-2 gap-x-6 gap-y-4">
+                    <div class="space-y-1">
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请负责人</label>
+                        <span class="block w-full rounded-lg text-sm py-2 text-on-surface">Vance</span>
+                    </div>
+                    <div class="space-y-1 relative custom-select-wrapper" data-prefix="inv-product">
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
+                        <span class="block w-full rounded-lg text-sm py-2 text-on-surface">JUDE-01</span>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请数量</label>
+                        <input type="number" value="1" min="1"
+                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" />
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请原因（大类）</label>
+                        <div class="relative">
+                            <select
+                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                <option value="">请选择大类</option>
+                                <option value="维修使用">维修使用</option>
+                                <option value="库存补充">库存补充</option>
+                                <option value="不良置换">不良置换</option>
+                                <option value="其他">其他</option>
+                            </select>
+                            <i
+                                class="bi bi-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请原因（中类）</label>
+                        <div class="relative">
+                            <select
+                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                <option value="">请选择中类</option>
+                                <option value="零件损坏">零件损坏</option>
+                                <option value="消耗品补充">消耗品补充</option>
+                                <option value="客户要求">客户要求</option>
+                                <option value="定期补货">定期补货</option>
+                            </select>
+                            <i
+                                class="bi bi-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div
+                class="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-end gap-3 sticky bottom-0">
+                <button onclick="closeInventoryModal()"
+                    class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">取消</button>
+                <button
+                    class="px-6 py-2 text-sm font-semibold text-white bg-primary hover:opacity-90 rounded-lg shadow-sm shadow-primary/20 transition-opacity">确认申请</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1278,11 +2456,13 @@
             });
             content.classList.toggle('hidden');
         }
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('w-64');
             sidebar.classList.toggle('w-20');
         }
+
         function switchTab(tabName) {
             const consultTab = document.getElementById('consult-tab');
             const confirmTab = document.getElementById('confirm-tab');
@@ -1305,6 +2485,139 @@
                 tabConsult.classList.add('text-slate-400', 'border-transparent');
             }
         }
+
+        function openInventoryModal() {
+            document.getElementById('inventory-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeInventoryModal() {
+            document.getElementById('inventory-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openStatusHistoryModal() {
+            document.getElementById('status-history-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeStatusHistoryModal() {
+            document.getElementById('status-history-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openCustomerModal() {
+            document.getElementById('customer-info-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCustomerModal() {
+            document.getElementById('customer-info-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openMsgHistoryModal() {
+            document.getElementById('msg-history-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMsgHistoryModal() {
+            document.getElementById('msg-history-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openEmailHistoryModal() {
+            document.getElementById('email-history-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEmailHistoryModal() {
+            document.getElementById('email-history-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Generic Custom Searchable Dropdown
+        function toggleCustomDropdown(e, prefix) {
+            e.stopPropagation();
+            const dropdown = document.getElementById(prefix + '-dropdown');
+            const arrow = document.getElementById(prefix + '-arrow');
+            const search = document.getElementById(prefix + '-search');
+            const trigger = e.currentTarget;
+
+            // Hide all other dropdowns
+            document.querySelectorAll('.custom-dropdown-panel').forEach(panel => {
+                if (panel.id !== prefix + '-dropdown' && !panel.classList.contains('hidden')) {
+                    panel.classList.add('hidden');
+                    const otherPrefix = panel.id.replace('-dropdown', '');
+                    const otherArrow = document.getElementById(otherPrefix + '-arrow');
+                    if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (dropdown.classList.contains('hidden')) {
+                // Position using fixed coords based on trigger rect
+                const rect = trigger.getBoundingClientRect();
+                dropdown.style.position = 'fixed';
+                dropdown.style.top = (rect.bottom + 4) + 'px';
+                dropdown.style.left = rect.left + 'px';
+                dropdown.style.width = rect.width + 'px';
+                dropdown.style.zIndex = '9999';
+                dropdown.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+                setTimeout(() => search.focus(), 50);
+            } else {
+                dropdown.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function selectCustomOption(prefix, value) {
+            document.getElementById(prefix + '-display').value = value;
+            document.getElementById(prefix + '-dropdown').classList.add('hidden');
+            const arrow = document.getElementById(prefix + '-arrow');
+            if (arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+
+        function filterCustomOptions(prefix) {
+            const query = document.getElementById(prefix + '-search').value.toLowerCase();
+            const list = document.getElementById(prefix + '-list').getElementsByTagName('li');
+            for (let li of list) {
+                if (li.innerText.toLowerCase().includes(query)) {
+                    li.style.display = '';
+                } else {
+                    li.style.display = 'none';
+                }
+            }
+        }
+
+        // Reposition open dropdowns on scroll/resize
+        document.addEventListener('scroll', function () {
+            document.querySelectorAll('.custom-dropdown-panel:not(.hidden)').forEach(panel => {
+                const prefix = panel.id.replace('-dropdown', '');
+                const wrapper = document.querySelector('[data-prefix="' + prefix + '"]');
+                if (wrapper) {
+                    const trigger = wrapper.querySelector('[onclick]');
+                    if (trigger) {
+                        const rect = trigger.getBoundingClientRect();
+                        panel.style.top = (rect.bottom + 4) + 'px';
+                        panel.style.left = rect.left + 'px';
+                        panel.style.width = rect.width + 'px';
+                    }
+                }
+            });
+        }, true);
+
+        document.addEventListener('click', function (e) {
+            document.querySelectorAll('.custom-select-wrapper').forEach(container => {
+                const prefix = container.getAttribute('data-prefix');
+                const dropdown = document.getElementById(prefix + '-dropdown');
+                if (dropdown && !dropdown.classList.contains('hidden') && !container.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                    const arrow = document.getElementById(prefix + '-arrow');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
     </script>
 </body>
 

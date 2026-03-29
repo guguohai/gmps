@@ -400,63 +400,185 @@
         </div>
 
         <!-- Filters Card -->
-        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
-          <div class="flex items-end gap-5">
-            <!-- Form Fields -->
-            <div class="flex-1 flex gap-4">
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">工单编号</label>
-                <input
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                  type="text" placeholder="TK-2024..." />
-              </div>
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">日期范围</label>
-                <div class="relative">
+        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative transition-all duration-300">
+          <div class="flex gap-4">
+            <div class="flex-1">
+              <div class="grid grid-cols-4 gap-4" id="filterGrid">
+                <!-- 1: 工单编号 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">工单编号</label>
                   <input
                     class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                    type="text" placeholder="选择日期范围" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
-                  <i
-                    class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                    type="text" placeholder="请输入工单编号" />
                 </div>
-              </div>
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">状态</label>
-                <select
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                  <option>全部状态</option>
-                  <option>待处理</option>
-                  <option>处理中</option>
-                  <option>已完成</option>
-                </select>
-              </div>
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">服务顾问</label>
-                <select
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                  <option>全部顾问</option>
-                  <option>David Chen</option>
-                  <option>Sarah Jenkins</option>
-                  <option>Robert Fox</option>
-                </select>
+                <!-- 2: 接收日期 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">接收日期</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                      type="text" placeholder="选择接收日期" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                  </div>
+                </div>
+                <!-- 3: 状态 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">状态</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                    <option>全部状态</option>
+                    <option>待处理</option>
+                    <option>处理中</option>
+                    <option>已完成</option>
+                  </select>
+                </div>
+                <!-- 4: 本社入库日期 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">本社入库日期</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                      type="text" placeholder="选择入库日期" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                  </div>
+                </div>
+
+                <!-- 5: 预计出库日期 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">预计出库日期</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                      type="text" placeholder="选择出库日期" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                  </div>
+                </div>
+                <!-- 6: 受理渠道 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">受理渠道</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                    <option>全部渠道</option>
+                    <option>线上商城</option>
+                    <option>实体店</option>
+                    <option>客服热线</option>
+                  </select>
+                </div>
+                <!-- 7: 客户 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">客户</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="输入客户姓名" />
+                </div>
+                <!-- 8: 电话号码 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">电话号码</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="输入电话号码" />
+                </div>
+                <!-- 9: 邮箱 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">邮箱</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="email" placeholder="输入邮箱地址" />
+                </div>
+                <!-- 10: 产品名称 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">产品名称</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="输入产品名称/型号" />
+                </div>
+                <!-- 11: 维修执行方 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">维修执行方</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                    <option>全部执行方</option>
+                    <option>本社维修中心</option>
+                    <option>授权服务商</option>
+                  </select>
+                </div>
+                <!-- 12: 维修内容 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">维修内容</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="输入维修内容" />
+                </div>
+                <!-- 13: 挂号编号 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">挂号编号</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="REG..." />
+                </div>
+                <!-- 14: 付款日期 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">付款日期</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                      type="text" placeholder="选择付款日期" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                  </div>
+                </div>
+                <!-- 15: 出库方式 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">出库方式</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                    <option>全部方式</option>
+                    <option>快递配送</option>
+                    <option>自提</option>
+                  </select>
+                </div>
+                <!-- 16: 出库完成日期 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">出库完成日期</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                      type="text" placeholder="选择完成日期" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                  </div>
+                </div>
+                <!-- 17: SO文件编号 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">SO文件编号</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="SO-..." />
+                </div>
               </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex justify-end gap-2 w-auto pb-[3px]">
-              <button
-                class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20"
-                title="Search">
-                <i class="fi fi-rr-search text-[12px]"></i>
-              </button>
-              <button
-                class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm"
-                title="Expand">
-                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                  stroke-width="2" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
-              </button>
+            <div class="w-[72px] flex items-start pt-[27px]">
+              <div class="flex justify-end gap-2 w-full">
+                <button
+                  class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20 shrink-0"
+                  title="Search">
+                  <i class="fi fi-rr-search text-[12px]"></i>
+                </button>
+                <button
+                  class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm shrink-0"
+                  title="Expand" onclick="toggleFilters()">
+                  <svg id="expand-icon" class="w-3.5 h-3.5 transition-transform duration-300"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -492,7 +614,7 @@
                 <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
                   onclick="window.location.href = './ticket_details.html'">
                   <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">
-                    TK-20240115-01
+                    115001
                   </td>
                   <td class="px-6 py-4 text-slate-600 whitespace-nowrap">
                     2024-01-15 09:30
@@ -551,7 +673,7 @@
                 <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
                   onclick="window.location.href = './ticket_details.html'">
                   <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">
-                    TK-20240114-88
+                    114088
                   </td>
                   <td class="px-6 py-4 text-slate-600 whitespace-nowrap">
                     2024-01-14 14:20
@@ -610,7 +732,7 @@
                 <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
                   onclick="window.location.href = './ticket_details.html'">
                   <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">
-                    TK-20240114-42
+                    114042
                   </td>
                   <td class="px-6 py-4 text-slate-600 whitespace-nowrap">
                     2024-01-14 11:05
@@ -669,7 +791,7 @@
                 <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
                   onclick="window.location.href = './ticket_details.html'">
                   <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">
-                    TK-20240113-22
+                    113022
                   </td>
                   <td class="px-6 py-4 text-slate-600 whitespace-nowrap">
                     2024-01-13 16:45
@@ -728,7 +850,7 @@
                 <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
                   onclick="window.location.href = './ticket_details.html'">
                   <td class="px-6 py-4 font-bold text-primary whitespace-nowrap">
-                    TK-20240113-05
+                    113005
                   </td>
                   <td class="px-6 py-4 text-slate-600 whitespace-nowrap">
                     2024-01-13 10:30
@@ -862,6 +984,25 @@
         } else {
           arrow.style.transform = 'rotate(180deg)';
         }
+      }
+    }
+
+    // Toggle advanced filters
+    function toggleFilters() {
+      const advancedFilters = document.querySelectorAll('.advanced-filter');
+      const expandIcon = document.getElementById('expand-icon');
+
+      let isHidden = true;
+      if (advancedFilters.length > 0) {
+        isHidden = advancedFilters[0].classList.contains('hidden');
+      }
+
+      if (isHidden) {
+        advancedFilters.forEach(el => el.classList.remove('hidden'));
+        expandIcon.style.transform = 'rotate(180deg)';
+      } else {
+        advancedFilters.forEach(el => el.classList.add('hidden'));
+        expandIcon.style.transform = 'rotate(0deg)';
       }
     }
 
