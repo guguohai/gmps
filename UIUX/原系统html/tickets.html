@@ -1,0 +1,2668 @@
+<html lang="ko">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><!--- bot 차단 --->
+<meta name="googlebot" content="noindex">
+
+<!-- ===============================================-->
+<!-- Document Title-->
+<!-- ===============================================-->
+<title>ProductService</title>
+<!-- ===============================================-->
+<!-- Favicons-->
+<!-- ===============================================-->
+<!-- <link rel="apple-touch-icon" sizes="180x180" href="./files/apple-touch-icon.png">-->
+<link rel="icon" type="image/png" sizes="32x32" href="./files/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./files/favicon-16x16.png">
+<!-- <meta name="msapplication-TileImage" content="./files/mstile-150x150.png">-->
+<meta name="theme-color" content="#ffffff">
+<script src="./files/imagesloaded.pkgd.min.js"></script>
+<script src="./files/simplebar.min.js"></script>
+<script src="./files/config.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+<script src="./files/jquery-3.2.1.min.js"></script>
+<script src="./files/choices.min.js"></script>
+<!-- <script src="./files/flatpickr.js"></script>-->
+
+
+<!-- ===============================================-->
+<!-- Stylesheets-->
+<!-- ===============================================-->
+<link href="./files/choices.min.css" rel="stylesheet" />
+<link href="./files/flatpickr.min.css" rel="stylesheet">
+<link href="./files/prism-okaidia.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900" rel="stylesheet">
+<link href="./files/simplebar.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./files/line.css">
+<link href="./files/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+<link href="./files/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+<link href="./files/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+<link href="./files/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+
+<script>
+var phoenixIsRTL = window.config.config.phoenixIsRTL;
+if (phoenixIsRTL) {
+var linkDefault = document.getElementById('style-default');
+var userLinkDefault = document.getElementById('user-style-default');
+linkDefault.setAttribute('disabled', true);
+userLinkDefault.setAttribute('disabled', true);
+document.querySelector('html').setAttribute('dir', 'rtl');
+} else {
+var linkRTL = document.getElementById('style-rtl');
+var userLinkRTL = document.getElementById('user-style-rtl');
+linkRTL.setAttribute('disabled', true);
+userLinkRTL.setAttribute('disabled', true);
+}
+</script>
+<link href="./files/custom.css" type="text/css" rel="stylesheet">
+</head>
+<style>
+.sticky-position-ticket {
+position: sticky;
+background: #fff !important;
+left: 0;
+}
+.sticky-header-title {
+position: sticky;
+top: 0;
+background: #fff;
+z-index: 9;
+}
+.chosen-container .chosen-single {
+height: 33px !important;
+background: #fff !important;
+border: 1px solid #cbd0dd !important;
+box-shadow: none !important;
+padding-top:3px !important;
+}
+/* Additional styles for Chosen in dropdown */
+.dropdown-menu .chosen-container {
+min-width: 200px;
+width: 100% !important;
+}
+.dropdown-menu .chosen-container-single .chosen-drop {
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+z-index: 9999;
+}
+.dropdown-menu .chosen-container-active .chosen-drop {
+z-index: 9999;
+}
+/* Ensure the chosen dropdown is visible and not cut off */
+.dropdown-menu {
+overflow: visible !important;
+}
+/* Fix for chosen dropdown positioning */
+.chosen-container .chosen-drop {
+left: 0;
+width: 100%;
+}
+/* Ensure the chosen dropdown is visible */
+.chosen-container-active.chosen-with-drop .chosen-drop {
+display: block !important;
+}
+</style>
+<!--content 기본 시작--->
+<div class="main" id="top">
+<div class="container-fluid px-0">
+<html lang="ko">
+
+<nav class="navbar navbar-vertical navbar-expand-lg">
+<script>
+var navbarStyle = window.config.config.phoenixNavbarStyle;
+if (navbarStyle && navbarStyle !== 'transparent') {
+document.querySelector('body').classList.add(`navbar-${navbarStyle}`);
+}
+</script>
+<div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+<!-- scrollbar removed-->
+<div class="navbar-vertical-content">
+<ul class="navbar-nav flex-column" id="navbarVerticalNav">
+<!-- <li th:each="menu : ${menuList}" class="nav-item" >-->
+<!-- <div class="nav-item-wrapper">-->
+<!-- <a class="nav-link dropdown-indicator label-1" th:href="'#'+${menu.AT_NAME}" role="button" data-bs-toggle="collapse" aria-expanded="false" th:aria-controls="${menu.AT_NAME}">-->
+<!-- <div class="d-flex align-items-center">-->
+<!-- <div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>-->
+<!-- <span class="nav-link-icon"><span th:data-feather="${menu.ICON}"></span></span>-->
+<!-- <span class="nav-link-text" th:text="#{${menu.AUTH_NAME}}"></span>-->
+<!-- </div>-->
+<!-- </a>-->
+<!-- </div>-->
+<!-- <div>-->
+<!-- <div class="parent-wrapper label-1" th:if="${menu.AUTH_NAME}">-->
+<!-- <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" th:id="${menu.AT_NAME}">-->
+<!-- <li class="collapsed-nav-item-title d-none" th:text="${menu.AUTH_NAME}" >-->
+<!-- </li>-->
+
+<!-- <li class="nav-item" th:block th:if="${menu['SUB_MENU']}" th:each="sub_item : ${menu['SUB_MENU']}">-->
+<!-- <a class="nav-link" th:href="${sub_item.PAGE}" data-bs-toggle="" aria-expanded="false">-->
+<!-- <div class="d-flex align-items-center"><span class="nav-link-text" th:text="#{${sub_item.AUTH_NAME}}"></span>-->
+<!-- </div>-->
+<!-- </a>-->
+<!-- &lt;!&ndash; more inner pages&ndash;&gt;-->
+<!-- </li>-->
+
+<!-- </ul>-->
+<!-- </div>-->
+<!-- </div>-->
+<!-- </li>-->
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="member_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="users"></span></span>
+<span class="nav-link-text">Users</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="member_menu">
+<li class="collapsed-nav-item-title d-none">사용자</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/member/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">User List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/member/role/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Permission Management</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="product_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="inbox"></span></span>
+<span class="nav-link-text">Product</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="product_menu">
+<li class="collapsed-nav-item-title d-none">제품</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/product/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Product List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="subsidiary_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="package"></span></span>
+<span class="nav-link-text">Part Master</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="subsidiary_menu">
+<li class="collapsed-nav-item-title d-none">부속품마스터</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/part/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Part Master List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/part/process" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Part Request/Process Status</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="stock_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="edit"></span></span>
+<span class="nav-link-text">Stock Request</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="stock_menu">
+<li class="collapsed-nav-item-title d-none">재고요청</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/stock/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="customer_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="users"></span></span>
+<span class="nav-link-text">Customer</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="customer_menu">
+<li class="collapsed-nav-item-title d-none">고객</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/customer/b2b/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Store/B2B</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/customer/b2c/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Individual Customer/B2C</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/survey/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">survey</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="service_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="edit"></span></span>
+<span class="nav-link-text">Service</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="service_menu">
+<li class="collapsed-nav-item-title d-none">서비스</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/service/tickets" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">产品服务受理</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/kr" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Domestic Store Receipt</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/cn" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_CHINA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/us" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_USA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/sg" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_SINGAPORE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/uk" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_UK</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/puyi" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_PUYI</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/jp" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_JAPAN</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ae" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_UAE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/th" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_THAILAND</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ph" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_PHILIPPINES</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/au" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_AUSTRALIA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/my" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_MALAYSIA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/hk" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_HONGKONG</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/tw" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_TAIWAN</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/fr" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_FRANCE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ca" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_CANADA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+
+
+
+</ul>
+</div>
+</div>
+<div class="navbar-vertical-footer">
+<button class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-0"></span><span class="uil uil-arrow-from-right fs-0"></span><span class="navbar-vertical-footer-text ms-2">Collapsed View</span></button>
+</div>
+</nav>
+<!---- 상단 가로 영역 로고,사람 아이콘 있는 위치---->
+<nav class="navbar navbar-top navbar-expand" id="navbarDefault">
+<div class="collapse navbar-collapse justify-content-between">
+<div class="navbar-logo">
+
+<button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+<a class="navbar-brand me-1 me-sm-3" href="/">
+<div class="d-flex align-items-center">
+<div class="d-flex align-items-center"><img src="./files/ms-iic-icon.png" alt="iic" width="27" />
+<p class="logo-text ms-2 d-none d-sm-block">PRODUCT SERVICE</p>
+</div>
+</div>
+</a>
+</div>
+<ul class="navbar-nav navbar-nav-icons flex-row">
+<li class="nav-item dropdown">
+<a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+<div class="avatar avatar-l ">
+<img class="rounded-circle " src="./files/avatar-rounded.webp" alt="" />
+
+</div>
+</a>
+<div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300" aria-labelledby="navbarDropdownUser">
+<div class="card position-relative border-0">
+<div class="card-body p-0">
+<div class="text-center pt-4 pb-3">
+<h6 class="mt-2 text-black">monstercn256</h6>
+</div>
+</div>
+
+<div class="card-footer p-0 border-top">
+<div class="p-2">
+<select class="form-select" id="selLanguage" onchange="changeLanguage(this)">
+<option value="ko">한국어</option>
+<option value="en">English</option>
+<option value="zh">中文 (简体)</option>
+<option value="zh-tw">中文 (繁體)</option>
+<option value="ja">日本語</option>
+</select>
+</div>
+<hr />
+<div class="px-3 m-2">
+<a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/logout">
+<span class="me-2" data-feather="log-out"> </span>
+Sign out</a>
+</div>
+
+</div>
+</div>
+</div>
+</li>
+
+</ul>
+</div>
+
+</nav>
+<!----상단 영역 ---->
+<script>
+let menu_arr = new Array();
+menu_arr.push("member_list_menu");
+menu_arr.push("member_auth_menu");
+menu_arr.push("product_list_menu");
+menu_arr.push("service_cn_ps_menu");
+menu_arr.push("service_us_ps_menu");
+menu_arr.push("service_sg_ps_menu");
+menu_arr.push("service_uk_ps_menu");
+menu_arr.push("service_puyi_ps_menu");
+menu_arr.push("service_jp_ps_menu");
+menu_arr.push("service_ae_ps_menu");
+menu_arr.push("service_th_jv_ps_menu");
+menu_arr.push("service_ph_ps_menu");
+menu_arr.push("service_au_ps_menu");
+menu_arr.push("service_my_ps_menu");
+menu_arr.push("service_hk_ps_menu");
+menu_arr.push("service_tw_ps_menu");
+menu_arr.push("service_fr_ps_menu");
+menu_arr.push("service_ca_ps_menu");
+</script>
+<script>
+function changeLanguage (obj) {
+location.href = "/?lang="+$(obj).val();
+}
+
+let cookieArr = document.cookie.split(';')
+for (let i=0 ; i < cookieArr.length ; i++) {
+let detailArr = cookieArr[i].split('=');
+if (detailArr[0].replace(/ /g,'') == "lang") {
+$('#selLanguage').val(detailArr[1]);
+}
+}
+</script>
+</html>
+
+<!----------- 메뉴 끝 ------------>
+<div class="content">
+<!---- 화면 콘텐츠 시작 ---->
+<nav class="mb-2" aria-label="breadcrumb">
+<ol class="breadcrumb mb-0">
+<li class="breadcrumb-item active">服务</li>
+</ol>
+</nav>
+<div class="mb-9"><!--page: 한페이지에 몇개 나올건지--->
+<div id="projectDiv">
+<div class="row mb-4 gx-6 gy-3 align-items-center">
+<div class="col-auto">
+<h4 class="mb-0">产品服务受理<span class="fw-normal text-700 ms-3"></span></h4>
+</div>
+</div>
+<div class="row mb-1">
+<div class="col-8 col-sm-8">
+<div class="d-flex">
+<div class="d-flex" style="margin-right:10px;">
+<div class="form-floating">
+<select class="form-select search-input d-inline" id="dateType">
+<option value="reception">受理日期</option>
+<option value="receiving">总部收货日期</option>
+<option value="forwarding">预计发出日期</option>
+</select>
+<label for="dateType">日期类型</label>
+</div>
+<div class="form-floating ms-2">
+<input type="date" class="form-control search-input d-inline" id="startDate" value="2026-02-15" min="1990-10-01" max="2099-12-31" onfocusout="validateDate(this)"/>
+<label for="startDate">开始日期</label>
+</div>
+<span class="mx-2 pt-2">~</span>
+<div class="form-floating">
+<input type="date" class="form-control search-input d-inline" id="endDate" value="2026-03-17" min="1990-10-01" max="2099-12-31" onfocusout="validateDate(this)"/>
+<label for="endDate">结束日期</label>
+</div>
+</div>
+<!-- <input class="form-control search-input search ms-2" type="search" placeholder="Search tasks" name="keyword" aria-label="Search" />-->
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+<div class="col-4 text-end col-sm-4">
+<div class="search-box d-inline-block">
+<form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+<input class="form-control search-input search" type="text" placeholder="Scan barcode" aria-label="Search" id="barcodeForLocation"
+oninput="this.value = this.value.replace(/[^0-9]/g,'')" />
+<span class="fas fa-barcode search-box-icon"></span>
+</form>
+</div>
+</div>
+</div>
+<div class="row g-3 mt-1">
+<div class="col-6">
+<div>
+
+<button class="btn btn-sm btn-outline-secondary" onclick="window.open(&#39;/service/cjDeliveryInvoice/list&#39;, &#39;_blank&#39;,&#39;width=800,height=800&#39;);"><i class="fas fa-print"></i> CJ</button>
+<!-- <button class="btn btn-sm btn-outline-secondary" th:attr="onclick=|window.open('/service/tickets/dhl/invoice/list', '_blank','width=800,height=500');|"><i class="far fa-file-pdf"></i> DHL</button>-->
+</div>
+</div>
+<div class="col-6">
+<div class="float-end">
+<!-- <button type="button" class="btn btn-secondary p-2 service_ps_menu">수정</button>-->
+<a class="btn btn-secondary p-2 service_ps_menu" href="/service/ticket/create" style="height: 33.34px;"><span class="fas fa-plus fs-md--1"></span></a>
+<button class="btn btn-secondary p-2" onclick="javascript:location.reload()"><span data-feather="rotate-ccw"></span></button>
+<button type="button" class="btn btn-secondary p-2 service_ps_menu" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+<button type="button" class="btn btn-secondary p-2" data-bs-toggle="modal" data-bs-target="#excelModal">Export</button>
+<button type="button" class="btn btn-secondary p-2 btn-danger service_ps_menu" id="delTicket" onclick="delTicket()"><span class="fas fa-trash"></span></button>
+</div>
+</div>
+
+</div>
+
+<div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1 mt-2" >
+<!-- <div style="background: #000;opacity: 0.1"></div>-->
+<div class="table-responsive scrollbar" style="min-height:450px;max-height:450px;overflow-y: scroll;">
+<table class="table fs--1 mb-0 border-200 mt-1">
+<input type="text" class="d-none" id="userEmail"/><!---자동완성 때문에 숨겨둔 항목을 추가..-->
+<thead>
+<tr class="text-center sticky-header-title">
+<th class="sort align-middle ps-0" scope="col" >
+<input type="checkbox" class="form-check" name="allChk[]" id="allChk" onclick="allChk(this)">
+</th>
+<th class="sort align-middle th-title sticky-position-ticket " scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >服务单号
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222;width:200px;">
+<div class="dropdown-item" onclick="setOrderBy('ticketId','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('ticketId','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="ticketId" id="ticketId" value="" autocomplete="new-password" oninput="this.value = this.value.replace(/[^0-9]/g,'')"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" ><span>受理日期</span>
+<!-- <th:block th:if="${condition.orderByKey==''}">-->
+<!-- <th:block th:if="${condition.orderBy=='asc'}">-->
+<i class="fas fa-arrow-up d-none"></i>
+<!-- </th:block>-->
+<!-- <th:block th:unless="${condition.orderBy=='asc'}">-->
+<i class="fas fa-arrow-down d-none"></i>
+<!-- </th:block>-->
+<!-- </th:block>-->
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('createdAt','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('createdAt','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="createdAt" id="createdAt" value=""/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >状态
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('processStatus','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('processStatus','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<select class="form-select" name="processStatus" id="processStatus">
+<option value="">-</option>
+<option value="1">已收到受理</option>
+<option value="Y7">待领取</option>
+<option value="Z4">待维修判定</option>
+<option value="Z5">产品已收到并检查</option>
+<option value="Y3">付款请求</option>
+<option value="Y4">付款完成</option>
+<option value="Z7">已发送给合作商</option>
+<option value="Z8">合作商已收到并正在检查</option>
+<option value="Z6">维修进行中</option>
+<option value="Z9">维修已完成</option>
+<option value="Y5">待发货</option>
+<option value="D1">正在配送（送货到家）</option>
+<option value="D2">已送达（送货到家）</option>
+<option value="Z2">已取消</option>
+<option value="F">服务已完成</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle " scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >总部收货日期
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('receivingDate','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('receivingDate','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input type="date" class="form-control" name="receivingDate" id="receivingDate" min="1990-10-01" max="2099-12-31" onfocusout="validateDate(this)"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >预计发出日期
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('forwardingExpectedDate','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('forwardingExpectedDate','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="date" name="forwardingExpectedDate" id="forwardingExpectedDate" value="" min="1990-10-01" max="2099-12-31" onfocusout="validateDate(this)"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >受理办公室
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('receptionAccountName','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('receptionAccountName','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="receptionAccountName" id="receptionAccountName" value="" autocomplete="false"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >客户
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('customerName','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('customerName','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="customerName" id="customerName" value=""/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<!-- <th class="sort align-middle ps-3" scope="col" >접수 종류</th>-->
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >真实客户姓名
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('customerRealName','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('customerRealName','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="customerRealName" id="customerRealName" value=""/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >电话号码
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('customerPhone','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('customerPhone','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="customerPhone" id="customerPhone" value=""/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >电子邮件
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('customerEmail','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('customerEmail','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="customerEmail" id="customerEmail" value=""/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title " type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >产品名称
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="productName" id="productName" value=""/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >维修办公室
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+
+<div class="dropdown-item" onclick="setOrderBy('repairDepartment','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('repairDepartment','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<select class="form-select" name="repairDepartment" id="repairDepartment">
+<option value="">-</option>
+<option value="1">总部</option>
+<option value="4">合作商</option>
+<option value="5">美国办公室</option>
+<option value="6">日本办公室</option>
+<option value="7">3PL</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th class="sort align-middle cursor-pointer th-title " scope="col" style="position: relative">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >维修详情
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+
+<div class="dropdown-item" onclick="setOrderBy('repairDetail1','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('repairDetail1','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<select class="form-select repair-chosen-select" id="repairDetail1" name="repairDetail1">
+<option value="">-</option>
+<option value="parts_replacement">零配件更换</option>
+<option value="gentle_care">Gentle Care</option>
+<option value="3">电镀维修</option>
+<option value="15">焊接维修</option>
+<option value="product_exchange">产品更换</option>
+<option value="product_exchange_coupon">产品兑换券</option>
+<option value="emergency_repair_coupon">紧急维修券</option>
+<option value="7">无法修复</option>
+<option value="8">维修已取消</option>
+<option value="other_product_exchange">其他产品更换</option>
+<option value="free_repair_coupon">免费维修券</option>
+<option value="refund">退款</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >登记号码
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('registrationNumber','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('registrationNumber','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="registrationNumber" id="registrationNumber" value=""/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th class="sort align-middle th-title" scope="col" ><!---payment status-->
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title " type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >付款完成状态
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<select class="form-select me-1" name="paymentStatus" id="paymentStatus">
+<option value="">전체</option>
+<option value="N">미입금</option>
+<option value="Y">입금완료</option>
+<option value="C">취소</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th class="sort align-middle th-title" scope="col" ><!---ticket pg approve date-->
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title " type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >付款日期
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<!-- <div class="dropdown-item" th:text="#{asc}" onclick="setOrderBy('pgApproveDate','asc',this)">오름차순</div>-->
+<!-- <div class="dropdown-item" th:text="#{desc}" onclick="setOrderBy('pgApproveDate','desc',this)">내림차순</div>-->
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input type="date" class="form-control" name="pgApproveDate" id="pgApproveDate" min="1990-10-01" max="2099-12-31" onfocusout="validateDate(this)"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >再出口条件（是/否）
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+
+<div class="dropdown-item" onclick="setOrderBy('isReexport','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('isReexport','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<select class="form-select" name="repairDepartment" id="isReexport">
+<option value="">-</option>
+<option value="1">Y</option>
+<option value="0">N</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >运输方式
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('shipmentType','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('shipmentType','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<select class="form-select" id="shipmentType" name="shipmentType">
+<option value="">-</option>
+<option value="p">快递（总部）</option>
+<option value="b">邮件袋（总部）</option>
+<option value="d">国际配送（总部）</option>
+<option value="h">配送服务（3PL）</option>
+<option value="g">海外配送（3PL）</option>
+<option value="s">亲自取件</option>
+<option value="q">特快快递服务</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" ><!---ticket Shipment-->
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title " type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >发货完成日期
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('forwardingCompleteDate','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('forwardingCompleteDate','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input type="date" class="form-control" name="forwardingCompleteDate" id="forwardingCompleteDate"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title " scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title " type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >SO文件号码
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('sapSoNo','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('sapSoNo','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input type="text" class="form-control" name="sapSoNo" id="sapSoNo"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+
+</tr>
+</thead>
+<tbody class="list" id="projectSummary"><!-- th:if="${roleList != null}" --->
+<tr id="loadingSpinner" class="d-none">
+<td colspan="40" class="align-center; align-middle">
+<div class="spinner-grow text-primary" role="status" style="float:right;">
+<span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status" style="float:right;">
+<span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+<span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-info" role="status">
+<span class="visually-hidden">Loading...</span>
+</div>
+
+</td>
+</tr>
+<input type="hidden" id="startPage" value=""/>
+<input type="hidden" id="endPage" value=""/>
+<input type="hidden" id="nowPage" value=""/>
+<input type="hidden" id="totalPage" value=""/>
+<!-- <input type="hidden" name="rows" id="rows" th:value="${condition.size()}"/>-->
+</tbody>
+</table>
+</div>
+<div class="d-flex flex-wrap align-items-center justify-content-between py-3 pe-0 fs--1 border-200">
+<div class="d-flex">
+<select class="form-select" name="selRows" onchange="searching(0)" style="width: 60%">
+<option value="10" selected>10</option>
+<option value="30">30</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>
+<div style="width:40%; margin: auto;padding-left: 4px;">
+<span id="chkTotalCnt">0</span>已选择
+</div>
+</div>
+<div class="d-flex paging-btn-area">
+
+</div>
+</div>
+
+</div>
+<input type="text" class="d-none" name="order_by_key" id="order_by_key" >
+<input type="text" class="d-none" name="order_by" id="order_by"/>
+</div>
+</div>
+<!---- 화면 콘텐츠 끝 ---->
+
+<!------ footer start----->
+<html>
+<!--- 세션 연장 --->
+<div class="modal fade" id="sessionExtendModal" tabindex="-1" aria-labelledby="sessionExtendModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header border-bottom-0">
+<h5 class="modal-title" id="sessionExtendModalLabel"></h5>
+<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close" onclick="noExtendSession()"><span class="fas fa-times fs--1"></span></button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-md-12">
+<span>距登录到期还有不到 5 分钟的时间。你想延长你的时间吗</span>
+
+</div>
+</div>
+</div>
+
+<div class="modal-footer border-top-0">
+<button class="btn btn-primary" type="button" onclick="extendSessionTime()">查看</button>
+</div>
+</div>
+</div>
+</div>
+
+<footer class="footer position-absolute" >
+<div class="row g-0 justify-content-between align-items-center h-100">
+<div class="col-12 col-sm-auto text-center">
+<p class="mb-0 mt-2 mt-sm-0 text-900">주)아이아이컴바인드<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />사업자번호: 119-86-38589</p>
+</div>
+<div class="col-12 col-sm-auto text-center">
+<p class="mb-0 text-600">v1.9.0</p>
+</div>
+</div>
+</footer>
+
+<script src="./files/popper.min.js"></script>
+<script src="./files/bootstrap.min.js"></script>
+<script src="./files/anchor.min.js"></script>
+<script src="./files/is.min.js"></script>
+<script src="./files/all.min.js"></script>
+<script src="./files/lodash/lodash.min.js"></script>
+<!--<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>-->
+<script src="./files/list.min.js"></script>
+<script src="./files/feather.min.js"></script>
+<script src="./files/dayjs/dayjs.min.js"></script>
+<script src="./files/prism.js"></script>
+<script src="./files/phoenix.js"></script>
+<script src="./files/common.js"></script>
+<script>
+menu_arr.forEach(function(data,index) {
+$('.'+data).remove();
+})
+if (location.pathname != "/" && !location.pathname.startsWith("/notice")) { //글자 수정하기
+if(1 <= 0) {
+$('.content').append("<div style='background: #fff;width: 100%;position: absolute;height: 100%;left: 0;top: 0;'>" +
+"<div style='color: #000;position: absolute;top: 50%;left:50%;text-align: center;margin: auto;'>No permission"+
+"</div>" +
+"</div>");
+// 권한 체크 불편하면 주석.
+setTimeout(function(){
+alert("You are not authorized to access this page.");
+},100)
+
+location.href = "/";
+}
+}
+resetActiveTime();
+function resetActiveTime() {
+let currentTime = Date.now();
+localStorage.setItem("sessionCreateTime",currentTime);
+}
+function noExtendSession() {
+localStorage.setItem("sessionNoExtend","true");
+}
+function extendSessionTime() {
+$.ajax({
+url: "/session/extend",
+type: "POST",
+dataType:"json",
+success: function (data) {
+if (data.result) {
+let json = JSON.parse(data.stringData);
+localStorage.setItem("sessionCreateTime", json.sessionCreateTime);
+let sessionDuration = 60 * 60 * 1000; //60m
+if (data.sessionTime == '4') {
+sessionDuration = 240 * 60 * 1000; //240
+}
+localStorage.setItem("sessionDuration", sessionDuration);
+
+} else {
+alert(data.message);
+}
+localStorage.setItem("sessionNoExtend",""); // 연장안한다고 하면 얼럿 안뜨게 설정
+$('#sessionExtendModal').modal('hide');
+},
+error: function (request, status, error) {
+location.reload();
+}
+});
+}
+
+let intervalId = setInterval(checkSessionTime, 10000);
+function checkSessionTime() {
+localStorage.setItem("sessionNoExtend","")
+console.log("session time check", new Date());
+let sessionCreateTime = localStorage.getItem("sessionCreateTime");
+let sessionDuration = localStorage.getItem("sessionDuration");
+let sessionExpiryTime = parseInt(sessionCreateTime)+parseInt(sessionDuration);
+let currentTime = Date.now();
+
+let timeRemaining = sessionExpiryTime - currentTime ;
+
+let timeRemainingInMinutes = timeRemaining / (1000 * 60);
+let sessionNoExtendFlag = localStorage.getItem("sessionNoExtend");
+console.info("로그아웃 까지 ",timeRemainingInMinutes,"분 남았습니다.");
+// localStorage.setItem("sessionCreateTime",currentTime);
+localStorage.setItem("sessionNoExtend","");
+if (timeRemainingInMinutes <= 5 ) {
+if (sessionNoExtendFlag != "true") {
+$('#sessionExtendModal').modal('show');
+}
+
+} else {
+if (sessionNoExtendFlag === undefined || sessionNoExtendFlag == null) {
+localStorage.setItem("sessionNoExtend","true");
+}
+
+}
+}
+</script>
+
+</html>
+<!------- footer end ----->
+</div>
+</div>
+</div>
+<!---modal --->
+<div class="modal modal-xl fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="editModalLabel"></h5>
+<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs--1"></span></button>
+</div>
+<div class="modal-body">
+<div class="row mb-2">
+<div class="col-md-4">
+<label for="bulkTicketId">Ticket Id</label>
+<div class="input-group">
+<input type="text" class="form-control" id="bulkTicketId" placeholder="ticket id and enter"
+onkeypress="if(event.keyCode==13) {addTicketToList(); return false;}" oninput="this.value = this.value.replace(/[^0-9]/g,'')">
+<button class="btn btn-outline-secondary" type="button" onclick="addTicketToList()" >add</button>
+</div>
+</div>
+<div class="col-md-4">
+<label for="selProcessStatus">Status</label>
+<select class="form-select w-75" name="selProcessStatus" id="selProcessStatus">
+<option value="" selected>-</option>
+<option value="1">已收到受理</option>
+<option value="Z4">待维修判定</option>
+<option value="Z5">产品已收到并检查</option>
+<option value="Y3">付款请求</option>
+<option value="Y4">付款完成</option>
+<option value="Z7">已发送给合作商</option>
+<option value="Z8">合作商已收到并正在检查</option>
+<option value="Z6">维修进行中</option>
+<option value="Z9">维修已完成</option>
+<option value="Y5">待发货</option>
+<option value="D1">正在配送（送货到家）</option>
+<option value="D2">已送达（送货到家）</option>
+<option value="F">服务已完成</option>
+<option value="Z2">已取消</option>
+<option value="Y7">待领取</option>
+</select>
+</div>
+<div class="col-md-4"><!-- 수리상세-엔지니어--->
+<label for="sel_manager">服务技术员</label>
+<select class="form-select chosen-select" id="sel_manager">
+<option value="">-</option>
+<option value="정서윤" data-manager-id="2" >정서윤 (monster878)</option>
+<option value="한정원" data-manager-id="3" >한정원 (monster516)</option>
+<option value="한혜지" data-manager-id="6" >한혜지 (monster563)</option>
+<option value="윤다나" data-manager-id="9" >윤다나 (monster809)</option>
+<option value="한성민" data-manager-id="13" >한성민 (monster216)</option>
+<option value="이상혁" data-manager-id="14" >이상혁 (monster798)</option>
+<option value="김주영" data-manager-id="15" >김주영 (monster799)</option>
+<option value="이수빈" data-manager-id="17" >이수빈 (monster1061)</option>
+<option value="정서윤" data-manager-id="23" >정서윤 (wol03021)</option>
+<option value="박선희" data-manager-id="24" >박선희 (monster81)</option>
+<option value="김영대" data-manager-id="25" >김영대 (monster115)</option>
+<option value="한인선" data-manager-id="26" >한인선 (monster118)</option>
+<option value="조재운" data-manager-id="27" >조재운 (monster122)</option>
+<option value="이보름" data-manager-id="28" >이보름 (monster143)</option>
+<option value="하미진" data-manager-id="29" >하미진 (monster155)</option>
+<option value="이권민" data-manager-id="30" >이권민 (monster158)</option>
+<option value="왕정원" data-manager-id="31" >왕정원 (monster161)</option>
+<option value="송정관" data-manager-id="32" >송정관 (monster173)</option>
+<option value="남상혁" data-manager-id="33" >남상혁 (monster179)</option>
+<option value="박진우" data-manager-id="34" >박진우 (monster190)</option>
+<option value="김성은" data-manager-id="35" >김성은 (monster196)</option>
+<option value="정유담" data-manager-id="36" >정유담 (monster215)</option>
+<option value="윤혜인" data-manager-id="37" >윤혜인 (monster212)</option>
+<option value="김도연" data-manager-id="38" >김도연 (monster204)</option>
+<option value="이영채" data-manager-id="39" >이영채 (monster217)</option>
+<option value="이유진" data-manager-id="40" >이유진 (monster207)</option>
+<option value="박민지" data-manager-id="42" >박민지 (monster205)</option>
+<option value="조주영" data-manager-id="44" >조주영 (monster221)</option>
+<option value="김이슬" data-manager-id="45" >김이슬 (monster223)</option>
+<option value="임수연" data-manager-id="46" >임수연 (monster224)</option>
+<option value="김철환" data-manager-id="47" >김철환 (monster234)</option>
+<option value="장성원" data-manager-id="48" >장성원 (monster244)</option>
+<option value="위소원" data-manager-id="49" >위소원 (monster253)</option>
+<option value="박소연" data-manager-id="50" >박소연 (monster272)</option>
+<option value="김창훈" data-manager-id="51" >김창훈 (monster274)</option>
+<option value="조재현" data-manager-id="52" >조재현 (monster279)</option>
+<option value="김세현" data-manager-id="53" >김세현 (monster280)</option>
+<option value="박영준" data-manager-id="54" >박영준 (monster281)</option>
+<option value="윤진석" data-manager-id="56" >윤진석 (monster292)</option>
+<option value="김가영" data-manager-id="57" >김가영 (monster298)</option>
+<option value="신지윤" data-manager-id="60" >신지윤 (monster310)</option>
+<option value="이지영" data-manager-id="61" >이지영 (monster313)</option>
+<option value="최성미" data-manager-id="62" >최성미 (monster319)</option>
+<option value="윤소해" data-manager-id="63" >윤소해 (monster315)</option>
+<option value="최진기" data-manager-id="64" >최진기 (monster330)</option>
+<option value="임채운" data-manager-id="66" >임채운 (monster335)</option>
+<option value="이진" data-manager-id="67" >이진 (monster336)</option>
+<option value="이희연" data-manager-id="68" >이희연 (monster337)</option>
+<option value="박채연" data-manager-id="69" >박채연 (monster338)</option>
+<option value="이슬비" data-manager-id="70" >이슬비 (monster341)</option>
+<option value="김소연" data-manager-id="71" >김소연 (monster343)</option>
+<option value="이예진" data-manager-id="73" >이예진 (monster355)</option>
+<option value="문푸름" data-manager-id="74" >문푸름 (monster363)</option>
+<option value="엄세준" data-manager-id="76" >엄세준 (monster370)</option>
+<option value="이승아" data-manager-id="77" >이승아 (monster371)</option>
+<option value="김준영" data-manager-id="78" >김준영 (monster372)</option>
+<option value="윤다솜" data-manager-id="79" >윤다솜 (monster373)</option>
+<option value="김수임" data-manager-id="80" >김수임 (monster378)</option>
+<option value="이영관" data-manager-id="81" >이영관 (monster380)</option>
+<option value="장혜미" data-manager-id="83" >장혜미 (monster385)</option>
+<option value="강민지" data-manager-id="85" >강민지 (monster388)</option>
+<option value="변강인" data-manager-id="88" >변강인 (monster399)</option>
+<option value="조영재" data-manager-id="89" >조영재 (monster401)</option>
+<option value="최우성" data-manager-id="90" >최우성 (monster406)</option>
+<option value="박명선" data-manager-id="91" >박명선 (monster402)</option>
+<option value="조연지" data-manager-id="92" >조연지 (monster405)</option>
+<option value="손가희" data-manager-id="93" >손가희 (monster404)</option>
+<option value="양일규" data-manager-id="94" >양일규 (monster415)</option>
+<option value="하윤수" data-manager-id="95" >하윤수 (monster416)</option>
+<option value="김민경" data-manager-id="96" >김민경 (monster417)</option>
+<option value="이석원" data-manager-id="97" >이석원 (monster418)</option>
+<option value="최봄이" data-manager-id="98" >최봄이 (monster419)</option>
+<option value="김지용" data-manager-id="100" >김지용 (monster421)</option>
+<option value="김시은" data-manager-id="101" >김시은 (monster422)</option>
+<option value="박정혁" data-manager-id="102" >박정혁 (monster423)</option>
+<option value="이종원" data-manager-id="103" >이종원 (monster430)</option>
+<option value="서은송" data-manager-id="104" >서은송 (monster434)</option>
+<option value="김민현" data-manager-id="105" >김민현 (monster435)</option>
+<option value="노윤정" data-manager-id="106" >노윤정 (monster443)</option>
+<option value="오자민" data-manager-id="107" >오자민 (monster442)</option>
+<option value="장현우" data-manager-id="108" >장현우 (monster445)</option>
+<option value="조수정" data-manager-id="110" >조수정 (monster451)</option>
+<option value="김예슬" data-manager-id="111" >김예슬 (monster453)</option>
+<option value="김민주" data-manager-id="112" >김민주 (monster452)</option>
+<option value="김준기" data-manager-id="114" >김준기 (monster455)</option>
+<option value="박지원" data-manager-id="116" >박지원 (monster461)</option>
+<option value="김훈" data-manager-id="117" >김훈 (monster459)</option>
+<option value="박지민" data-manager-id="118" >박지민 (monster460)</option>
+<option value="김동언" data-manager-id="120" >김동언 (monster486)</option>
+<option value="박기남" data-manager-id="121" >박기남 (monster487)</option>
+<option value="김충겸" data-manager-id="122" >김충겸 (monster488)</option>
+<option value="문찬웅" data-manager-id="123" >문찬웅 (monster492)</option>
+<option value="이영은" data-manager-id="124" >이영은 (monster495)</option>
+<option value="이지은" data-manager-id="125" >이지은 (monster498)</option>
+<option value="임재윤" data-manager-id="126" >임재윤 (monster504)</option>
+<option value="윤예린" data-manager-id="127" >윤예린 (monster505)</option>
+<option value="서황빈" data-manager-id="129" >서황빈 (monster507)</option>
+<option value="김상성" data-manager-id="130" >김상성 (monster511)</option>
+<option value="홍현준" data-manager-id="131" >홍현준 (monster515)</option>
+<option value="황병욱" data-manager-id="132" >황병욱 (monster512)</option>
+<option value="이의성" data-manager-id="133" >이의성 (monster519)</option>
+<option value="이채은" data-manager-id="134" >이채은 (monster521)</option>
+<option value="오원식" data-manager-id="135" >오원식 (monster522)</option>
+<option value="김지현" data-manager-id="137" >김지현 (monster536)</option>
+<option value="박규빈" data-manager-id="138" >박규빈 (monster537)</option>
+<option value="송강석" data-manager-id="139" >송강석 (monster538)</option>
+<option value="가원현" data-manager-id="140" >가원현 (monster541)</option>
+<option value="박세현" data-manager-id="141" >박세현 (monster544)</option>
+<option value="신혜진" data-manager-id="142" >신혜진 (monster545)</option>
+<option value="박성민" data-manager-id="143" >박성민 (monster557)</option>
+<option value="김지은" data-manager-id="144" >김지은 (monster569)</option>
+<option value="강현정" data-manager-id="145" >강현정 (monster581)</option>
+<option value="석지수" data-manager-id="146" >석지수 (monster582)</option>
+<option value="김민주" data-manager-id="147" >김민주 (monster618)</option>
+<option value="정주언" data-manager-id="183" >정주언 (monster789)</option>
+<option value="강미성" data-manager-id="191" >강미성 (monster823)</option>
+<option value="박희연" data-manager-id="202" >박희연 (monster874)</option>
+<option value="김지윤" data-manager-id="204" >김지윤 (monster870)</option>
+<option value="이수빈" data-manager-id="205" >이수빈 (monster889)</option>
+<option value="김소연" data-manager-id="206" >김소연 (monster875)</option>
+<option value="김서연" data-manager-id="207" >김서연 (monster891)</option>
+<option value="유한나" data-manager-id="208" >유한나 (monster882)</option>
+<option value="김선희" data-manager-id="209" >김선희 (monster883)</option>
+<option value="송주원" data-manager-id="211" >송주원 (monster890)</option>
+<option value="차윤정" data-manager-id="213" >차윤정 (monster899)</option>
+<option value="하수진" data-manager-id="214" >하수진 (monster900)</option>
+<option value="박예린" data-manager-id="216" >박예린 (monster913)</option>
+<option value="전소영" data-manager-id="217" >전소영 (monster920)</option>
+<option value="임보민" data-manager-id="218" >임보민 (monster921)</option>
+<option value="신지민" data-manager-id="221" >신지민 (monster927)</option>
+<option value="정인혁" data-manager-id="222" >정인혁 (monster925)</option>
+<option value="이수빈" data-manager-id="223" >이수빈 (monster926)</option>
+<option value="박우철" data-manager-id="224" >박우철 (monster931)</option>
+<option value="안은채" data-manager-id="225" >안은채 (monster932)</option>
+<option value="이준섭" data-manager-id="226" >이준섭 (monster933)</option>
+<option value="최현정" data-manager-id="228" >최현정 (monster940)</option>
+<option value="안용남" data-manager-id="229" >안용남 (monster939)</option>
+<option value="오승재" data-manager-id="230" >오승재 (monster944)</option>
+<option value="남혜진" data-manager-id="231" >남혜진 (monster945)</option>
+<option value="김이다" data-manager-id="234" >김이다 (monster954)</option>
+<option value="송국일" data-manager-id="235" >송국일 (monster955)</option>
+<option value="김미연" data-manager-id="236" >김미연 (monster956)</option>
+<option value="어유정" data-manager-id="244" >어유정 (monster959)</option>
+<option value="김다민" data-manager-id="247" >김다민 (monster979)</option>
+<option value="고려진" data-manager-id="248" >고려진 (monster978)</option>
+<option value="이채영" data-manager-id="250" >이채영 (monster980)</option>
+<option value="권희주" data-manager-id="252" >권희주 (monster991)</option>
+<option value="김찬호" data-manager-id="259" >김찬호 (monster999)</option>
+<option value="위현우" data-manager-id="260" >위현우 (monster998)</option>
+<option value="이재훈" data-manager-id="261" >이재훈 (monster1018)</option>
+<option value="석민재" data-manager-id="262" >석민재 (monster1017)</option>
+<option value="한재희" data-manager-id="267" >한재희 (monster1024)</option>
+<option value="이원주" data-manager-id="269" >이원주 (monster1048)</option>
+<option value="박서현" data-manager-id="270" >박서현 (monster1047)</option>
+<option value="양서영" data-manager-id="274" >양서영 (monster1037)</option>
+<option value="정은성" data-manager-id="275" >정은성 (monster1038)</option>
+<option value="백지우" data-manager-id="276" >백지우 (monster1039)</option>
+<option value="임태민" data-manager-id="277" >임태민 (monster1043)</option>
+<option value="이채경" data-manager-id="278" >이채경 (monster1042)</option>
+<option value="조영욱" data-manager-id="284" >조영욱 (monster1069)</option>
+<option value="주재민" data-manager-id="285" >주재민 (monster1058)</option>
+<option value="한석" data-manager-id="290" >한석 (monster1059)</option>
+<option value="방소윤" data-manager-id="292" >방소윤 (so0523y)</option>
+<option value="위수빈" data-manager-id="295" >위수빈 (monster1087)</option>
+<option value="현경란" data-manager-id="298" >현경란 (monster1073)</option>
+<option value="김하은" data-manager-id="299" >김하은 (monster1072)</option>
+<option value="정혜원" data-manager-id="304" >정혜원 (monster1074)</option>
+<option value="송지현" data-manager-id="305" >송지현 (monster1075)</option>
+<option value="한고은" data-manager-id="308" >한고은 (monster1105)</option>
+<option value="김남헌" data-manager-id="311" >김남헌 (monster1088)</option>
+<option value="이정용" data-manager-id="312" >이정용 (monster1089)</option>
+<option value="임태균" data-manager-id="313" >임태균 (monster1090)</option>
+<option value="김민영" data-manager-id="314" >김민영 (monster1091)</option>
+<option value="송은정" data-manager-id="316" >송은정 (monster1103)</option>
+<option value="이민후" data-manager-id="317" >이민후 (monster1104)</option>
+<option value="황가은" data-manager-id="321" >황가은 (monster1107)</option>
+<option value="성지영" data-manager-id="322" >성지영 (monster1106)</option>
+<option value="서민지" data-manager-id="324" >서민지 (monster1113)</option>
+<option value="김예슬" data-manager-id="325" >김예슬 (monster1112)</option>
+<option value="신영수" data-manager-id="326" >신영수 (guyboybo)</option>
+<option value="윤초하" data-manager-id="328" >윤초하 (monster1117)</option>
+<option value="오다빈" data-manager-id="329" >오다빈 (d01228)</option>
+<option value="서하나" data-manager-id="330" >서하나 (monster1123)</option>
+<option value="전선우" data-manager-id="331" >전선우 (bbsw0819)</option>
+<option value="박수정" data-manager-id="332" >박수정 (psj1029sadf)</option>
+<option value="함지윤" data-manager-id="333" >함지윤 (mjkuhy)</option>
+<option value="박태웅" data-manager-id="334" >박태웅 (ptw0949)</option>
+<option value="권익환" data-manager-id="335" >권익환 (upboxer)</option>
+<option value="김현우" data-manager-id="336" >김현우 (wiseuni)</option>
+<option value="박연수" data-manager-id="337" >박연수 (yunsu623)</option>
+<option value="조효영" data-manager-id="339" >조효영 (monster1133)</option>
+<option value="박연수" data-manager-id="340" >박연수 (dustn7127)</option>
+<option value="박지영" data-manager-id="345" >박지영 (monster1120)</option>
+<option value="김성록" data-manager-id="348" >김성록 (monster301)</option>
+<option value="Jonathan" data-manager-id="351" >Jonathan (monster2.uk)</option>
+<option value="Doris Wan" data-manager-id="352" >Doris Wan (monster4.uk)</option>
+<option value="Ray Park(박용남)" data-manager-id="353" >Ray Park(박용남) (monster3.uk)</option>
+<option value="Lim Ying xiu" data-manager-id="358" >Lim Ying xiu (Xiu1025)</option>
+<option value="Tsai Chlonis " data-manager-id="359" >Tsai Chlonis (chlonis22)</option>
+<option value="Dex Yong" data-manager-id="360" >Dex Yong (chiachoon888)</option>
+<option value="Yeo Zac" data-manager-id="362" >Yeo Zac (zacyks)</option>
+<option value="Chiang Angelina" data-manager-id="363" >Chiang Angelina (angelina89chiang)</option>
+<option value="Teo Yvette" data-manager-id="364" >Teo Yvette (yvetteteo29)</option>
+<option value="Hamzah Aziana" data-manager-id="365" >Hamzah Aziana (aziana.sg)</option>
+<option value="Wong Evelyn" data-manager-id="366" >Wong Evelyn (weiyaenwong)</option>
+<option value="Ng Xin Yi" data-manager-id="368" >Ng Xin Yi (Ngxinyi6h)</option>
+<option value="Koh Stephy " data-manager-id="372" >Koh Stephy (Stephykoh521)</option>
+<option value="ANDREW HONG" data-manager-id="373" >ANDREW HONG (andrewkhong94)</option>
+<option value="Kenny Zyf " data-manager-id="375" >Kenny Zyf (Kennyytok)</option>
+<option value="Xiang Xiang" data-manager-id="376" >Xiang Xiang (ventus990915)</option>
+<option value="chua roxanne" data-manager-id="377" >chua roxanne (roxannechuar)</option>
+<option value="Anjab Ahmed" data-manager-id="380" >Anjab Ahmed (anjab.ahmed)</option>
+<option value="Francisco Fernandez" data-manager-id="381" >Francisco Fernandez (francisco.fernandez)</option>
+<option value="Jili Liu" data-manager-id="382" >Jili Liu (jili.liu)</option>
+<option value="Albert Chang" data-manager-id="383" >Albert Chang (albertchang)</option>
+<option value="VIcky Su" data-manager-id="384" >VIcky Su (vickysu)</option>
+<option value="Jeff Liu" data-manager-id="385" >Jeff Liu (a29237179)</option>
+<option value="Arica Huang" data-manager-id="386" >Arica Huang (alice8411abc)</option>
+<option value="Teddy Hsieh" data-manager-id="387" >Teddy Hsieh (teddyinmb)</option>
+<option value="Niss Chang" data-manager-id="388" >Niss Chang (perqin321)</option>
+<option value="Pan Pen" data-manager-id="390" >Pan Pen (okadaokada3838)</option>
+<option value="Natalie Lam" data-manager-id="395" >Natalie Lam (natalielam)</option>
+<option value="Jirapa Sanguthai" data-manager-id="414" >Jirapa Sanguthai (sm@gentlemonsterbkk.com)</option>
+<option value="이슬비" data-manager-id="415" >이슬비 (monster318)</option>
+<option value="Jerry Jin" data-manager-id="416" >Jerry Jin (jerryjin)</option>
+<option value="김도윤" data-manager-id="419" >김도윤 (kimdoyun9292)</option>
+<option value="MOEKA" data-manager-id="420" >MOEKA (moekaaoyama)</option>
+<option value="Maddie" data-manager-id="435" >Maddie (monster201.cn )</option>
+<option value="Zoe" data-manager-id="438" >Zoe (monster53.cn )</option>
+<option value="Jackson Lee" data-manager-id="439" >Jackson Lee (jackson)</option>
+<option value="Richard Park " data-manager-id="440" >Richard Park (richard)</option>
+<option value="Jackie F." data-manager-id="441" >Jackie F. (jacqueline)</option>
+<option value="Chuck Liao" data-manager-id="446" >Chuck Liao (a506133130)</option>
+<option value="Nicole Kennedy" data-manager-id="447" >Nicole Kennedy (nicole)</option>
+<option value="Tan Weng Kian Lucas" data-manager-id="448" >Tan Weng Kian Lucas (lucastan426)</option>
+<option value="Abdallah Montaser" data-manager-id="450" >Abdallah Montaser (abdallah.nasr)</option>
+<option value="Sarah Mae Ildefonso" data-manager-id="453" >Sarah Mae Ildefonso (sarah.ildefonso)</option>
+<option value="Nazira Omorova" data-manager-id="454" >Nazira Omorova (nazira.omorova)</option>
+<option value="Enoch Bosompem" data-manager-id="455" >Enoch Bosompem (enoch.bosompem)</option>
+<option value="Ibrahim Kashash" data-manager-id="457" >Ibrahim Kashash (ibrahim.kachach)</option>
+<option value="Azhar Mirova" data-manager-id="458" >Azhar Mirova (azhar.mirova)</option>
+<option value="Alaa Sedik" data-manager-id="459" >Alaa Sedik (alaa.sedik)</option>
+<option value="Mukhammadamin Mukhidinov" data-manager-id="460" >Mukhammadamin Mukhidinov (Mukhammadamin.mukhidinov)</option>
+<option value="Reena Tamang" data-manager-id="461" >Reena Tamang (reena.tamang)</option>
+<option value="Jay De Guzman" data-manager-id="462" >Jay De Guzman (jay.deguzman)</option>
+<option value="REO" data-manager-id="463" >REO (rhy0912)</option>
+<option value="PETCH" data-manager-id="464" >PETCH (petchnara)</option>
+<option value="DEAR" data-manager-id="465" >DEAR (Kamonwan.dz19)</option>
+<option value="PLOEM" data-manager-id="466" >PLOEM (theerawatthong50)</option>
+<option value="OHM" data-manager-id="468" >OHM (Blueredohm)</option>
+<option value="NOON" data-manager-id="470" >NOON (chawaporn1829)</option>
+<option value="PRAEWA" data-manager-id="471" >PRAEWA (praewapraewa)</option>
+<option value="박재훈" data-manager-id="475" >박재훈 (monster1141)</option>
+<option value="황지영" data-manager-id="478" >황지영 (monster1149)</option>
+<option value="이지수" data-manager-id="480" >이지수 (monster1140)</option>
+<option value="Lili Zee" data-manager-id="481" >Lili Zee (lilizee)</option>
+<option value="Summer Dao" data-manager-id="482" >Summer Dao (sdao)</option>
+<option value="Richard Nguyen" data-manager-id="484" >Richard Nguyen (richard.nguyen2001)</option>
+<option value="Jessica Lam" data-manager-id="486" >Jessica Lam (lamjessica737)</option>
+<option value="Archie MacKirdy" data-manager-id="488" >Archie MacKirdy (archbrks)</option>
+<option value="Lia Men" data-manager-id="489" >Lia Men (liamen1001)</option>
+<option value="Jennifer Seo" data-manager-id="491" >Jennifer Seo (jennyseo2002)</option>
+<option value="Grace Do" data-manager-id="493" >Grace Do (dtt.27072002)</option>
+<option value="박상민" data-manager-id="494" >박상민 (monster1131)</option>
+<option value="류세영" data-manager-id="495" >류세영 (monster1155)</option>
+<option value="송수진" data-manager-id="500" >송수진 (s_su0416)</option>
+<option value="박지호" data-manager-id="501" >박지호 (pjh980317)</option>
+<option value="김미소" data-manager-id="502" >김미소 (monster1203)</option>
+<option value="임진옥" data-manager-id="503" >임진옥 (monster1216)</option>
+<option value="조하윤" data-manager-id="504" >조하윤 (monster1210)</option>
+<option value="임하영" data-manager-id="505" >임하영 (l8667303)</option>
+<option value="이수현" data-manager-id="506" >이수현 (suheyon24)</option>
+<option value="길남정" data-manager-id="507" >길남정 (monster1196)</option>
+<option value="정석훈" data-manager-id="508" >정석훈 (wjdtjrgns422)</option>
+<option value="노이은" data-manager-id="509" >노이은 (monster1194)</option>
+<option value="이종빈" data-manager-id="510" >이종빈 (aax92)</option>
+<option value="윤은송" data-manager-id="511" >윤은송 (fashionluvvv)</option>
+<option value="안재혁" data-manager-id="512" >안재혁 (monster1198)</option>
+<option value="박하빈" data-manager-id="513" >박하빈 (monster1187)</option>
+<option value="김종현" data-manager-id="514" >김종현 (cocoza1995)</option>
+<option value="임상호" data-manager-id="515" >임상호 (kofr202)</option>
+<option value="김진영" data-manager-id="516" >김진영 (monster1164)</option>
+<option value="박민규" data-manager-id="517" >박민규 (monster1188)</option>
+<option value="여주훈" data-manager-id="519" >여주훈 (monster1176)</option>
+<option value="박예림" data-manager-id="520" >박예림 (monster1177)</option>
+<option value="황라예" data-manager-id="522" >황라예 (monster1162)</option>
+<option value="윤태현" data-manager-id="523" >윤태현 (monster1136)</option>
+<option value="우태영" data-manager-id="524" >우태영 (monster1134)</option>
+<option value="김효빈" data-manager-id="525" >김효빈 (monster1135)</option>
+<option value="함지현" data-manager-id="526" >함지현 (monster1137)</option>
+<option value="우소영" data-manager-id="527" >우소영 (monster1158)</option>
+<option value="박명운" data-manager-id="528" >박명운 (monster1139)</option>
+<option value="서보민" data-manager-id="529" >서보민 (monster1138)</option>
+<option value="김영하" data-manager-id="530" >김영하 (monster1154)</option>
+<option value="정연홍" data-manager-id="531" >정연홍 (monster1130)</option>
+<option value="이홍준" data-manager-id="532" >이홍준 (monster1129)</option>
+<option value="Judy Buhay" data-manager-id="534" >Judy Buhay (m7jb)</option>
+<option value="Modecris Fernandez" data-manager-id="538" >Modecris Fernandez (modecris.fernandez04)</option>
+<option value="Kherstine May Baylon" data-manager-id="547" >Kherstine May Baylon (kherstinemay)</option>
+<option value="So Ka Wing" data-manager-id="549" >So Ka Wing (wingso)</option>
+<option value="서수정" data-manager-id="550" >서수정 (monster1206)</option>
+<option value="최동원" data-manager-id="551" >최동원 (ehddnjs2742)</option>
+<option value="채민주" data-manager-id="554" >채민주 (atgc01148)</option>
+<option value="강부성" data-manager-id="555" >강부성 (qntjd24)</option>
+<option value=" Niss Chang" data-manager-id="556" > Niss Chang (nisschang)</option>
+<option value=" Agyness Lin" data-manager-id="558" > Agyness Lin (agynesslin)</option>
+<option value="Tommy Ng" data-manager-id="559" >Tommy Ng (tommyng)</option>
+<option value="Khai Yen, Chung" data-manager-id="561" >Khai Yen, Chung (peterkaiyen)</option>
+<option value="Seng Chun, Tong" data-manager-id="562" >Seng Chun, Tong (stong479)</option>
+<option value="Sook Lin, Tan" data-manager-id="564" >Sook Lin, Tan (venustan0717)</option>
+<option value="Xue Mei,Kong" data-manager-id="567" >Xue Mei,Kong (kxuemei00)</option>
+<option value="Siew Wei,Kong" data-manager-id="569" >Siew Wei,Kong (siewweik)</option>
+<option value="Kc Lyn lloren" data-manager-id="574" >Kc Lyn lloren (Kassie2713)</option>
+<option value="Arvin dela Cruz" data-manager-id="575" >Arvin dela Cruz (arvindelacruz269)</option>
+<option value="Mercedes Asiong" data-manager-id="576" >Mercedes Asiong (mercedesasiong)</option>
+<option value="Pang Su Zanne" data-manager-id="583" >Pang Su Zanne (zanne_zanne92)</option>
+<option value="조영준" data-manager-id="584" >조영준 (dudwnsz367)</option>
+<option value="Shukhratjon Khamidov" data-manager-id="585" >Shukhratjon Khamidov (shukhratjon.khamidov)</option>
+<option value="Lili Cui" data-manager-id="586" >Lili Cui (lili.cui)</option>
+<option value="MANA" data-manager-id="587" >MANA (manaito)</option>
+<option value="박은정" data-manager-id="588" >박은정 (monster1220)</option>
+<option value="황은지" data-manager-id="589" >황은지 (monster1224)</option>
+<option value="이태병" data-manager-id="590" >이태병 (monster1221)</option>
+<option value="허지선" data-manager-id="591" >허지선 (monster1222)</option>
+<option value="Pakkaradon Pengdee" data-manager-id="594" >Pakkaradon Pengdee (Pakkaradon.p)</option>
+<option value="Puntipa Sriloy" data-manager-id="595" >Puntipa Sriloy (ffzg2d)</option>
+<option value="Ratchaneekorn Moonsrikaew" data-manager-id="596" >Ratchaneekorn Moonsrikaew (Kikmnz)</option>
+<option value="Mananchaya Preedanorawut" data-manager-id="597" >Mananchaya Preedanorawut (Mancysher)</option>
+<option value="허유진" data-manager-id="598" >허유진 (yoojinheo)</option>
+<option value="일본법인" data-manager-id="599" >일본법인 (gm_aoyama)</option>
+<option value="이서연" data-manager-id="600" >이서연 (monster1271)</option>
+<option value="김태연" data-manager-id="602" >김태연 (monster1242)</option>
+<option value="장민석" data-manager-id="603" >장민석 (monster1248)</option>
+<option value="김유진" data-manager-id="604" >김유진 (monster1289)</option>
+<option value="Joey Lee" data-manager-id="605" >Joey Lee (leeyeejoey)</option>
+<option value="Beny Kim" data-manager-id="606" >Beny Kim (beny-kim)</option>
+<option value="서의수" data-manager-id="609" >서의수 (monster1231)</option>
+<option value="김양욱" data-manager-id="610" >김양욱 (monster1238)</option>
+<option value="김현수" data-manager-id="611" >김현수 (monster1239)</option>
+<option value="엄수연" data-manager-id="612" >엄수연 (monster1240)</option>
+<option value="문보은" data-manager-id="613" >문보은 (monster1241)</option>
+<option value="장제희" data-manager-id="614" >장제희 (monster1265)</option>
+<option value="김가연" data-manager-id="615" >김가연 (monster1264)</option>
+<option value="강부성" data-manager-id="616" >강부성 (monster1263)</option>
+<option value="이솔아" data-manager-id="617" >이솔아 (monster1251)</option>
+<option value="이동주" data-manager-id="618" >이동주 (monster1250)</option>
+<option value="정재훈" data-manager-id="619" >정재훈 (monster1249)</option>
+<option value="박지호" data-manager-id="620" >박지호 (monster1247)</option>
+<option value="김찬호" data-manager-id="621" >김찬호 (monster1246)</option>
+<option value="Linh" data-manager-id="623" >Linh (asnhlinh111)</option>
+<option value="Eden Low" data-manager-id="624" >Eden Low (eden.k.low)</option>
+<option value="Khai Sing" data-manager-id="625" >Khai Sing (khaising)</option>
+<option value="Nicole" data-manager-id="627" >Nicole (nicoledenden)</option>
+<option value="Jyn" data-manager-id="628" >Jyn (jingpeiyap)</option>
+<option value="Jun" data-manager-id="629" >Jun (pungrenjun23)</option>
+<option value="Yotsaphon Srinak" data-manager-id="630" >Yotsaphon Srinak (Yotsaphon1503)</option>
+<option value="Kenelm" data-manager-id="632" >Kenelm (kenelmtee)</option>
+<option value="Christy" data-manager-id="633" >Christy (clwscristy)</option>
+<option value="Alice" data-manager-id="636" >Alice (alicepeng.g)</option>
+<option value="Neha Parween" data-manager-id="637" >Neha Parween (neha.parween)</option>
+<option value="이가영" data-manager-id="639" >이가영 (monster1243)</option>
+<option value="김수아" data-manager-id="640" >김수아 (monster1442)</option>
+<option value="Candice Wong" data-manager-id="641" >Candice Wong (candicewong)</option>
+<option value="Mina Tang" data-manager-id="642" >Mina Tang (minatang)</option>
+<option value="김하나" data-manager-id="643" >김하나 (monster1269)</option>
+<option value="서안드레" data-manager-id="644" >서안드레 (monster818)</option>
+<option value="Xiayao Xiong" data-manager-id="646" >Xiayao Xiong (xiayao.xiong)</option>
+<option value="이재민" data-manager-id="647" >이재민 (dlwoals5396)</option>
+<option value="Jeff Li" data-manager-id="649" >Jeff Li (jeffliu)</option>
+<option value="이서영" data-manager-id="650" >이서영 (monster1277)</option>
+<option value="유혜원" data-manager-id="651" >유혜원 (monster1288)</option>
+<option value="고지혜" data-manager-id="654" >고지혜 (monster1307)</option>
+<option value="문유라" data-manager-id="655" >문유라 (monster1310)</option>
+<option value="안진희" data-manager-id="657" >안진희 (monster1317)</option>
+<option value="박승원" data-manager-id="658" >박승원 (monster1308)</option>
+<option value="최병준" data-manager-id="659" >최병준 (monster1318)</option>
+<option value="김주형" data-manager-id="660" >김주형 (kimjuh6022)</option>
+<option value="권나연" data-manager-id="661" >권나연 (mignon0626)</option>
+<option value="권은정" data-manager-id="662" >권은정 (monster1330)</option>
+<option value="김현지" data-manager-id="663" >김현지 (monster1331)</option>
+<option value="정민철" data-manager-id="667" >정민철 (monster1342)</option>
+<option value="박소민" data-manager-id="668" >박소민 (monster1341)</option>
+<option value="황인걸" data-manager-id="669" >황인걸 (monster1361)</option>
+<option value="Kenny Zyf " data-manager-id="670" >Kenny Zyf (kzyf23)</option>
+<option value="이선희" data-manager-id="672" >이선희 (monster1370)</option>
+<option value="조솔상" data-manager-id="673" >조솔상 (pichappic)</option>
+<option value="이현지" data-manager-id="674" >이현지 (skdel12)</option>
+<option value="정성도" data-manager-id="675" >정성도 (monster1348)</option>
+<option value="노영서" data-manager-id="676" >노영서 (monster1349)</option>
+<option value="김환희" data-manager-id="677" >김환희 (monster1350)</option>
+<option value="Doreen" data-manager-id="679" >Doreen (doreen-work)</option>
+<option value="Isaac" data-manager-id="680" >Isaac (isaac)</option>
+<option value="Neil" data-manager-id="681" >Neil (neil)</option>
+<option value="Charlea" data-manager-id="682" >Charlea (charlea)</option>
+<option value="Susana" data-manager-id="683" >Susana (susana)</option>
+<option value="Allan" data-manager-id="684" >Allan (allan)</option>
+<option value="Patrick" data-manager-id="685" >Patrick (patrick)</option>
+<option value="Evon" data-manager-id="686" >Evon (evon)</option>
+<option value="Glenda" data-manager-id="688" >Glenda (glendaclarisng)</option>
+<option value="Yi Jou" data-manager-id="689" >Yi Jou (yijou0716)</option>
+<option value="최지예" data-manager-id="690" >최지예 (jikjik903)</option>
+<option value="Chloe" data-manager-id="694" >Chloe (chloechooenyi)</option>
+<option value="Hanna" data-manager-id="695" >Hanna (hanna.redzuan)</option>
+<option value="Mia" data-manager-id="696" >Mia (ismahanidamia03)</option>
+<option value="jungmin Yu" data-manager-id="697" >jungmin Yu (jungmin.yu98)</option>
+<option value="류호윤" data-manager-id="698" >류호윤 (monster1368)</option>
+<option value="양규진" data-manager-id="700" >양규진 (ykj2642)</option>
+<option value="김수민" data-manager-id="704" >김수민 (monster1369)</option>
+<option value="Jacob" data-manager-id="706" >Jacob (Jacob)</option>
+<option value="Susan Graham" data-manager-id="707" >Susan Graham (hydra86)</option>
+<option value="김한나" data-manager-id="710" >김한나 (rlagkssk702)</option>
+<option value="편세은" data-manager-id="712" >편세은 (vustpdms9696)</option>
+<option value="김남영" data-manager-id="716" >김남영 (monster178)</option>
+<option value="박선영" data-manager-id="717" >박선영 (monster345)</option>
+<option value="최익용" data-manager-id="718" >최익용 (monster120)</option>
+<option value="Swan" data-manager-id="719" >Swan (skyawzaw)</option>
+<option value="이예리" data-manager-id="720" >이예리 (monster917)</option>
+<option value="허규" data-manager-id="721" >허규 (monster1180)</option>
+<option value="ANDREW JEAN CHARLES" data-manager-id="722" >ANDREW JEAN CHARLES (andrew)</option>
+<option value="JOSHUA WEST" data-manager-id="723" >JOSHUA WEST (joshua)</option>
+<option value="NAOMI OLIVO" data-manager-id="724" >NAOMI OLIVO (naomi)</option>
+<option value="SHIN THANT" data-manager-id="725" >SHIN THANT (shin)</option>
+<option value="KAMERON WILLIAMS " data-manager-id="726" >KAMERON WILLIAMS (kameron)</option>
+<option value="EMMANUEL" data-manager-id="727" >EMMANUEL (mannycastrox)</option>
+<option value="KATIE BETTNER" data-manager-id="728" >KATIE BETTNER (katie)</option>
+<option value="BRANDON BARBERO" data-manager-id="729" >BRANDON BARBERO (brandon)</option>
+<option value="JUSTIN KIM" data-manager-id="730" >JUSTIN KIM (justin)</option>
+<option value="DANIEL LOYOLA " data-manager-id="731" >DANIEL LOYOLA (daniel.l)</option>
+<option value="TARA KHALEGHI" data-manager-id="732" >TARA KHALEGHI (Tara)</option>
+<option value="DANIEL CHO" data-manager-id="733" >DANIEL CHO (danielcho5565)</option>
+<option value="JUSTIN SANTOS" data-manager-id="734" >JUSTIN SANTOS (jhsantos)</option>
+<option value="ALEJANDRO ACEVES" data-manager-id="735" >ALEJANDRO ACEVES (alejandroaceves15)</option>
+<option value="ADDHALYN DECASTILLO" data-manager-id="736" >ADDHALYN DECASTILLO (addhalyndc05)</option>
+<option value="BIJAN OKULEYE" data-manager-id="737" >BIJAN OKULEYE (bijanokuleye)</option>
+<option value="CHI DUONG" data-manager-id="738" >CHI DUONG (cduong31415)</option>
+<option value="DYLAN PASCO" data-manager-id="739" >DYLAN PASCO (pascod)</option>
+<option value="LEYNA TRUONG" data-manager-id="740" >LEYNA TRUONG (leynatruong28)</option>
+<option value="RIDGY REYES" data-manager-id="741" >RIDGY REYES (ridgy.reyes)</option>
+<option value="TAI SMITH" data-manager-id="742" >TAI SMITH (raetailah221)</option>
+<option value="TIFFANY WAITMAN-LUYEN" data-manager-id="743" >TIFFANY WAITMAN-LUYEN (tiffany44luyen)</option>
+<option value="MICHELLE BEGG" data-manager-id="744" >MICHELLE BEGG (michelle)</option>
+<option value="ZOE PAN" data-manager-id="745" >ZOE PAN (zoe)</option>
+<option value="NATE MARTINEZ" data-manager-id="746" >NATE MARTINEZ (nate)</option>
+<option value="AXEL CORDERO" data-manager-id="747" >AXEL CORDERO (axel)</option>
+<option value="FRANCE COLINARES" data-manager-id="748" >FRANCE COLINARES (colinaresfrance13)</option>
+<option value="SUSAN LIM" data-manager-id="749" >SUSAN LIM (susan03lim)</option>
+<option value="MONIQUE CAVAZOS" data-manager-id="750" >MONIQUE CAVAZOS (monique.cavazos01)</option>
+<option value="THEA GARRIDO " data-manager-id="751" >THEA GARRIDO (thea)</option>
+<option value="JENIFFER NAVARRO " data-manager-id="752" >JENIFFER NAVARRO (jeniffer)</option>
+<option value="ANNIE QUAN " data-manager-id="753" >ANNIE QUAN (annie)</option>
+<option value="AUSTIN CHANG " data-manager-id="754" >AUSTIN CHANG (austin)</option>
+<option value="KENNETH LEE" data-manager-id="755" >KENNETH LEE (kenneth)</option>
+<option value="JOSHUA MENDEZ " data-manager-id="756" >JOSHUA MENDEZ (joshua.m)</option>
+<option value="ANDY DANG" data-manager-id="757" >ANDY DANG (andy_dang1225)</option>
+<option value="JUSTIN NERONA" data-manager-id="758" >JUSTIN NERONA (justinnerona8500)</option>
+<option value="ALYSSA NICOLAY " data-manager-id="759" >ALYSSA NICOLAY (alyssa.nicolay)</option>
+<option value="BRET DONATHAN" data-manager-id="760" >BRET DONATHAN (bret)</option>
+<option value="ALEJANDRO GONZALEZ " data-manager-id="761" >ALEJANDRO GONZALEZ (alejandro)</option>
+<option value="CINQUE FOSTER" data-manager-id="762" >CINQUE FOSTER (cinque)</option>
+<option value="VIOLET MACIAS" data-manager-id="763" >VIOLET MACIAS (dovimacias)</option>
+<option value="Sandy Ngo" data-manager-id="765" >Sandy Ngo (sngo)</option>
+<option value="Vy Tran" data-manager-id="766" >Vy Tran (vytran)</option>
+<option value="Daniel Carbungco" data-manager-id="767" >Daniel Carbungco (danz.carbungco88)</option>
+<option value="Kristy Yeung" data-manager-id="768" >Kristy Yeung (kryeung)</option>
+<option value="Jackie Le" data-manager-id="769" >Jackie Le (jackievkayoma)</option>
+<option value="Kristy Law" data-manager-id="770" >Kristy Law (kristyl1205)</option>
+<option value="Annie-Daa Hang" data-manager-id="771" >Annie-Daa Hang (hang.annie8)</option>
+<option value="Christopher Truong" data-manager-id="772" >Christopher Truong (christophertruong89)</option>
+<option value="Daryl Chin" data-manager-id="773" >Daryl Chin (darylchin28)</option>
+<option value="Emma Swan" data-manager-id="774" >Emma Swan (emmylswan)</option>
+<option value="Joanne Chong" data-manager-id="775" >Joanne Chong (joannexrl)</option>
+<option value="Julia Ho" data-manager-id="776" >Julia Ho (juliaho1003)</option>
+<option value="Justin Truong" data-manager-id="777" >Justin Truong (justin.truong12)</option>
+<option value="Seraphina Teo" data-manager-id="778" >Seraphina Teo (seraphinat22)</option>
+<option value="Shae Antonio" data-manager-id="779" >Shae Antonio (xienan.antonio)</option>
+<option value="Dhruv Gullia" data-manager-id="781" >Dhruv Gullia (dhruv.gullia)</option>
+<option value="Huang Yong" data-manager-id="782" >Huang Yong (huangyong0509)</option>
+<option value="krisanne" data-manager-id="783" >krisanne (krisanne)</option>
+<option value="이호진" data-manager-id="784" >이호진 (monster1396)</option>
+<option value="송나현" data-manager-id="786" >송나현 (monster1394)</option>
+<option value="심효림" data-manager-id="788" >심효림 (monster1395)</option>
+<option value="박하율" data-manager-id="790" >박하율 (monster1401)</option>
+<option value="최솔" data-manager-id="792" >최솔 (monster1400)</option>
+<option value="gina" data-manager-id="794" >gina (gina)</option>
+<option value="Alex martsolf" data-manager-id="795" >Alex martsolf (alex)</option>
+<option value="Destiny alvarez" data-manager-id="796" >Destiny alvarez (destiny)</option>
+<option value="김해솔" data-manager-id="797" >김해솔 (monster1427)</option>
+<option value="김남진" data-manager-id="799" >김남진 (monster1426)</option>
+<option value="정승아" data-manager-id="801" >정승아 (monster1418)</option>
+<option value="ashley" data-manager-id="805" >ashley (ashley)</option>
+<option value="윤지윤" data-manager-id="807" >윤지윤 (monster1028)</option>
+<option value="Trecia feagin" data-manager-id="809" >Trecia feagin (trecia)</option>
+<option value="김혜수" data-manager-id="810" >김혜수 (monster1439)</option>
+<option value="이해정" data-manager-id="814" >이해정 (monster1440)</option>
+<option value="송시온" data-manager-id="816" >송시온 (monster1428)</option>
+<option value="김태우" data-manager-id="818" >김태우 (0103428)</option>
+<option value="christine" data-manager-id="820" >christine (christine)</option>
+<option value="laura gomez" data-manager-id="821" >laura gomez (laura)</option>
+<option value="darven acevedo" data-manager-id="822" >darven acevedo (darven)</option>
+<option value="백성현" data-manager-id="823" >백성현 (monster1416)</option>
+<option value="김현호" data-manager-id="824" >김현호 (khh)</option>
+<option value="이호준" data-manager-id="825" >이호준 (gentlemonster.adm)</option>
+<option value="전현수" data-manager-id="826" >전현수 (hsj5575)</option>
+<option value="김재현" data-manager-id="828" >김재현 (jaehyeon0124)</option>
+<option value="박세희" data-manager-id="830" >박세희 (monster1447)</option>
+<option value="이다설" data-manager-id="832" >이다설 (yyi07049)</option>
+<option value="조주현" data-manager-id="834" >조주현 (monster1435)</option>
+<option value="오소원" data-manager-id="836" >오소원 (monster1434)</option>
+<option value="김민경" data-manager-id="838" >김민경 (monster1432)</option>
+<option value="유민주" data-manager-id="840" >유민주 (monster1451)</option>
+<option value="박도준" data-manager-id="842" >박도준 (monster1433)</option>
+<option value="Brad" data-manager-id="845" >Brad (chan1jen)</option>
+<option value="James" data-manager-id="846" >James (niu26288318)</option>
+<option value="Tamara Williams" data-manager-id="847" >Tamara Williams (tamara)</option>
+<option value="Justin Nerona" data-manager-id="848" >Justin Nerona (Justin.nerona)</option>
+<option value="Thuy Nguyen" data-manager-id="849" >Thuy Nguyen (thuy)</option>
+<option value="Bryan Toe" data-manager-id="850" >Bryan Toe (Bryan)</option>
+<option value="한지희" data-manager-id="851" >한지희 (monster1465)</option>
+<option value="박근우" data-manager-id="853" >박근우 (k1847k)</option>
+<option value="김희제" data-manager-id="855" >김희제 (gmlwp1357)</option>
+<option value="홍일랑" data-manager-id="857" >홍일랑 (rosua4221)</option>
+<option value="오경현" data-manager-id="859" >오경현 (sakaha52)</option>
+<option value="Kittiya rakthinlamnaoprai" data-manager-id="862" >Kittiya rakthinlamnaoprai (kittiya00936)</option>
+<option value="Thapanee Phengnoo" data-manager-id="863" >Thapanee Phengnoo (tpnpnfirst)</option>
+<option value="Jirapa Sanguthai" data-manager-id="864" >Jirapa Sanguthai (smemq.th)</option>
+<option value="Claire tu" data-manager-id="865" >Claire tu (clairetu)</option>
+<option value="김은경" data-manager-id="867" >김은경 (monster1455)</option>
+<option value="박세연" data-manager-id="869" >박세연 (monster1456)</option>
+<option value="정해준" data-manager-id="871" >정해준 (as095)</option>
+<option value="이다슬" data-manager-id="875" >이다슬 (monster1470)</option>
+<option value="조은빈" data-manager-id="877" >조은빈 (monster1446)</option>
+<option value="선재윤" data-manager-id="878" >선재윤 (monster1478)</option>
+<option value="홍성주" data-manager-id="880" >홍성주 (monster1479)</option>
+<option value="김지원" data-manager-id="882" >김지원 (monster1477)</option>
+<option value="RAYAN ALANE" data-manager-id="884" >RAYAN ALANE (rayanalane03)</option>
+<option value="RAVEN MYLES" data-manager-id="885" >RAVEN MYLES (ravengalon)</option>
+<option value="Rahif Dahbar" data-manager-id="886" >Rahif Dahbar (rahif.dahbar)</option>
+<option value="Kim JIN" data-manager-id="887" >Kim JIN (kimjin5xue)</option>
+<option value="Betty CHAN" data-manager-id="888" >Betty CHAN (bettychenjy)</option>
+<option value="Anh HUYNH" data-manager-id="889" >Anh HUYNH (huynhohat0115)</option>
+<option value="Angel VIOLA" data-manager-id="890" >Angel VIOLA (angelviolaaa)</option>
+<option value="이하은" data-manager-id="892" >이하은 (gkdms7898)</option>
+<option value="박수진" data-manager-id="894" >박수진 (monster1474)</option>
+<option value="서재은" data-manager-id="896" >서재은 (sjw3531)</option>
+<option value="최지원" data-manager-id="898" >최지원 (monster1488)</option>
+<option value="이우주" data-manager-id="900" >이우주 (monster1437)</option>
+<option value="Justin Santos" data-manager-id="901" >Justin Santos (justinsantos)</option>
+<option value="Javier Vielma" data-manager-id="902" >Javier Vielma (javier)</option>
+<option value="Hui Lin" data-manager-id="903" >Hui Lin (huilin1994)</option>
+<option value="Esther" data-manager-id="904" >Esther (esther_esutaa)</option>
+<option value="Yi Lu" data-manager-id="906" >Yi Lu (yilu000816)</option>
+<option value="Juliana" data-manager-id="908" >Juliana (yiyinteo06)</option>
+<option value="JUNGCHUL" data-manager-id="909" >JUNGCHUL (monstercn17)</option>
+<option value="Young Sin" data-manager-id="910" >Young Sin (yongxinkoh05)</option>
+<option value="정다감" data-manager-id="911" >정다감 (monster1484)</option>
+<option value="김태유" data-manager-id="913" >김태유 (monster1505)</option>
+<option value="박지현" data-manager-id="915" >박지현 (monster1483)</option>
+<option value="부지영" data-manager-id="917" >부지영 (wldud9579)</option>
+<option value="현의정" data-manager-id="919" >현의정 (monster1506)</option>
+<option value="Violet Macias" data-manager-id="921" >Violet Macias (violet)</option>
+<option value="우주현" data-manager-id="922" >우주현 (woojoo63)</option>
+<option value="안소연" data-manager-id="926" >안소연 (monster1487)</option>
+<option value="하유빈" data-manager-id="928" >하유빈 (monster1509)</option>
+<option value="한승훈" data-manager-id="930" >한승훈 (monster1510)</option>
+<option value="Ruksina Somtud" data-manager-id="932" >Ruksina Somtud (ruksina.somtud)</option>
+<option value="이세현" data-manager-id="933" >이세현 (gmtest02)</option>
+<option value="Rachel Oh" data-manager-id="934" >Rachel Oh (rachel)</option>
+<option value="Daisy Hackett" data-manager-id="935" >Daisy Hackett (daisy)</option>
+<option value="Jeremiah Mallari" data-manager-id="936" >Jeremiah Mallari (jeremiah)</option>
+<option value="Melissa Gomez" data-manager-id="937" >Melissa Gomez (melissa)</option>
+<option value="김가영" data-manager-id="939" >김가영 (monster1528)</option>
+<option value="김섬훤" data-manager-id="941" >김섬훤 (ekftoa417)</option>
+<option value="성수인" data-manager-id="943" >성수인 (monster1504)</option>
+<option value="이유진" data-manager-id="945" >이유진 (djajsldmlquf)</option>
+<option value="Sherilyn Salvacion" data-manager-id="949" >Sherilyn Salvacion (sherilyn)</option>
+<option value="김지현" data-manager-id="950" >김지현 (clod2456)</option>
+<option value="박현재" data-manager-id="952" >박현재 (monster1536)</option>
+<option value="서소정" data-manager-id="954" >서소정 (laura010831)</option>
+<option value="오정민" data-manager-id="956" >오정민 (wjdals0070)</option>
+<option value="최민지" data-manager-id="958" >최민지 (mizkushi)</option>
+<option value="김지인" data-manager-id="960" >김지인 (monster1514)</option>
+<option value="김도유" data-manager-id="962" >김도유 (monster1525)</option>
+<option value="안산훈" data-manager-id="964" >안산훈 (monster1526)</option>
+<option value="이지민" data-manager-id="966" >이지민 (dnglgl555)</option>
+<option value="Aaron Ter" data-manager-id="968" >Aaron Ter (aaronter7)</option>
+<option value="Felix Yu" data-manager-id="969" >Felix Yu (felixyu130)</option>
+<option value="Natalie Khoo" data-manager-id="971" >Natalie Khoo (nxkhoo)</option>
+<option value="Lily Sun" data-manager-id="972" >Lily Sun (xlilyyyy.s)</option>
+<option value="Abdel Rahman" data-manager-id="973" >Abdel Rahman (abdelrahman.abdelaal)</option>
+<option value="이신래" data-manager-id="974" >이신래 (monster1540)</option>
+<option value="김율" data-manager-id="975" >김율 (wkddka203)</option>
+<option value="류건희" data-manager-id="977" >류건희 (monster1555)</option>
+<option value="김동근" data-manager-id="979" >김동근 (dg924)</option>
+<option value="남기준" data-manager-id="981" >남기준 (rlwns3613)</option>
+<option value="Thong Thong" data-manager-id="985" >Thong Thong (ythongthong25)</option>
+<option value="Amanda" data-manager-id="986" >Amanda (amandashenyb)</option>
+<option value="Keiron" data-manager-id="987" >Keiron (keironchewkm)</option>
+<option value="Quinn" data-manager-id="988" >Quinn (Lingqiu08)</option>
+<option value="Alexandria Hazlett" data-manager-id="989" >Alexandria Hazlett (alexandria)</option>
+<option value="AnnMarie Nguyen" data-manager-id="990" >AnnMarie Nguyen (annmarie)</option>
+<option value="Shahrul" data-manager-id="991" >Shahrul (donaldtrumpshahrul)</option>
+<option value="문승범" data-manager-id="992" >문승범 (moonseungbeom)</option>
+<option value="이중완" data-manager-id="996" >이중완 (monster1546)</option>
+<option value="이가은" data-manager-id="998" >이가은 (reeun74)</option>
+<option value="서하영" data-manager-id="1000" >서하영 (monster1552)</option>
+<option value="최우영" data-manager-id="1002" >최우영 (fkdls4)</option>
+<option value="정유준" data-manager-id="1004" >정유준 (dbwns0317)</option>
+<option value="박지현" data-manager-id="1009" >박지현 (jhgu0411)</option>
+<option value="최준혁" data-manager-id="1010" >최준혁 (monster1556)</option>
+<option value="추민" data-manager-id="1012" >추민 (miiiiinchuu)</option>
+<option value="허다솜" data-manager-id="1014" >허다솜 (monster1558)</option>
+<option value="이영현" data-manager-id="1015" >이영현 (sj95239)</option>
+<option value="이윤혁" data-manager-id="1017" >이윤혁 (monster1569)</option>
+<option value="조인영" data-manager-id="1019" >조인영 (dls5038)</option>
+<option value="김다혁" data-manager-id="1023" >김다혁 (monster1585)</option>
+<option value="Shai" data-manager-id="1025" >Shai (shahiersomchai)</option>
+<option value="Cheong Shi Qi Trixie" data-manager-id="1026" >Cheong Shi Qi Trixie (trixc744)</option>
+<option value="Chai Khoh Soon Zach" data-manager-id="1028" >Chai Khoh Soon Zach (Khohsoonchai13)</option>
+<option value="Valencia Leong Xin Yun" data-manager-id="1029" >Valencia Leong Xin Yun (valencialeongxy)</option>
+<option value="Mao Lixin Valentina" data-manager-id="1030" >Mao Lixin Valentina (lixinmao2004)</option>
+<option value="Leah Ding" data-manager-id="1031" >Leah Ding (leahdyt68)</option>
+<option value="이동환" data-manager-id="1032" >이동환 (monster1593)</option>
+<option value="박정은" data-manager-id="1034" >박정은 (monster1592)</option>
+<option value="한수민" data-manager-id="1036" >한수민 (hana_030q)</option>
+<option value="일본법인_긴자" data-manager-id="1038" >일본법인_긴자 (gm_ginza)</option>
+<option value="Irfan Syafiq Bin Izadi" data-manager-id="1039" >Irfan Syafiq Bin Izadi (workwithkens)</option>
+<option value="Muhammad Haikal Hafizi Bin Mohd Nasir" data-manager-id="1040" >Muhammad Haikal Hafizi Bin Mohd Nasir (haikalhafizi0099)</option>
+<option value="Gerald DeVera" data-manager-id="1043" >Gerald DeVera (gerald)</option>
+<option value="Jaime Cabrera" data-manager-id="1044" >Jaime Cabrera (Jaime)</option>
+<option value="Jhoanna Fernandez" data-manager-id="1045" >Jhoanna Fernandez (jhoanna)</option>
+<option value="박연우" data-manager-id="1046" >박연우 (latishapark)</option>
+<option value="김수현" data-manager-id="1048" >김수현 (monster1580)</option>
+<option value="조수연" data-manager-id="1050" >조수연 (s22898)</option>
+<option value="JEAN" data-manager-id="1052" >JEAN (pattaranit.jpi)</option>
+<option value="PLOY" data-manager-id="1053" >PLOY (Ssirimongkolkasem)</option>
+<option value="MIX" data-manager-id="1054" >MIX (R.wachirut)</option>
+<option value="KEANE" data-manager-id="1055" >KEANE (tanakit.rchr)</option>
+<option value="PLOY" data-manager-id="1056" >PLOY (kaewta8117)</option>
+<option value="GIFT" data-manager-id="1057" >GIFT (gift030840)</option>
+<option value="POR" data-manager-id="1058" >POR (chutiwat.pr)</option>
+<option value="PINKY" data-manager-id="1059" >PINKY (Ariya_pinky)</option>
+<option value="PINOH " data-manager-id="1060" >PINOH (Chayapol.kas)</option>
+<option value="Andrew Banda" data-manager-id="1061" >Andrew Banda (andrew.banda0)</option>
+<option value="Yuna Jung" data-manager-id="1062" >Yuna Jung (mijohaing8)</option>
+<option value="남연서" data-manager-id="1063" >남연서 (monster1590)</option>
+<option value="나인호" data-manager-id="1065" >나인호 (monster1589)</option>
+<option value="조균희" data-manager-id="1067" >조균희 (monster1591)</option>
+<option value="이세빈" data-manager-id="1069" >이세빈 (dltpqls810)</option>
+<option value="Abby Chung" data-manager-id="1071" >Abby Chung (huichu159cm)</option>
+<option value="조현정" data-manager-id="1072" >조현정 (monster1600)</option>
+<option value="윤재영" data-manager-id="1074" >윤재영 (monster1599)</option>
+<option value="이기성" data-manager-id="1076" >이기성 (kileekid)</option>
+<option value="박은주" data-manager-id="1078" >박은주 (qdw863367)</option>
+<option value="안혜빈" data-manager-id="1080" >안혜빈 (dksgpqlswkd)</option>
+<option value="정은빈" data-manager-id="1082" >정은빈 (monster1604)</option>
+<option value="김이룸" data-manager-id="1084" >김이룸 (monster1602)</option>
+<option value="김동연" data-manager-id="1086" >김동연 (monster1631)</option>
+<option value="전유빈" data-manager-id="1088" >전유빈 (monster1603)</option>
+<option value="isischow" data-manager-id="1090" >isischow (isischow)</option>
+<option value="김예진" data-manager-id="1091" >김예진 (kkj2199)</option>
+<option value="김현진" data-manager-id="1093" >김현진 (exomi2)</option>
+<option value="김하정" data-manager-id="1095" >김하정 (roha127)</option>
+<option value="조수아" data-manager-id="1097" >조수아 (monster1617)</option>
+<option value="Isaac Ntjam" data-manager-id="1099" >Isaac Ntjam (isaac.fr)</option>
+<option value="Boyoung Choi" data-manager-id="1100" >Boyoung Choi (laurastar789)</option>
+<option value="Adroguer Iris" data-manager-id="1101" >Adroguer Iris (iris.adrg)</option>
+<option value="Kasri Titouan" data-manager-id="1102" >Kasri Titouan (titouan.kasri)</option>
+<option value="Tom Langevin" data-manager-id="1103" >Tom Langevin (tomlangevin83)</option>
+<option value="Moniroit Sok" data-manager-id="1104" >Moniroit Sok (moniroit.sok)</option>
+<option value="Kennice Wong" data-manager-id="1105" >Kennice Wong (kennicew129)</option>
+<option value="Nikki PARK" data-manager-id="1106" >Nikki PARK (nnikkiparkk)</option>
+<option value="이수빈" data-manager-id="1107" >이수빈 (monster1496)</option>
+<option value="김윤욱" data-manager-id="1108" >김윤욱 (monster1512)</option>
+<option value="전윤지" data-manager-id="1109" >전윤지 (monster1644)</option>
+<option value="강민수" data-manager-id="1111" >강민수 (su9839)</option>
+<option value="현보현" data-manager-id="1113" >현보현 (qhgusjane)</option>
+<option value="홍태근" data-manager-id="1115" >홍태근 (htg3872)</option>
+<option value="김효림" data-manager-id="1116" >김효림 (monster1636)</option>
+<option value="박주연" data-manager-id="1118" >박주연 (monster1635)</option>
+<option value="이상엽" data-manager-id="1120" >이상엽 (monster1611)</option>
+<option value="강하나" data-manager-id="1122" >강하나 (ohyeskhn)</option>
+<option value="윤단아" data-manager-id="1124" >윤단아 (nanami0411)</option>
+<option value="Schillingford Lauryn" data-manager-id="1126" >Schillingford Lauryn (laurynschlgd)</option>
+<option value="Lhowatsang Tenzin Yanzee" data-manager-id="1127" >Lhowatsang Tenzin Yanzee (lhowatsangtenzin)</option>
+<option value="Olivia le bihan" data-manager-id="1128" >Olivia le bihan (admin.fr)</option>
+<option value="Priscillia nop" data-manager-id="1129" >Priscillia nop (nop.priscillia)</option>
+<option value="Mathilde biou" data-manager-id="1130" >Mathilde biou (bioumathilde)</option>
+<option value="Wachira rueangjuy" data-manager-id="1131" >Wachira rueangjuy (wachira.5651)</option>
+<option value="Ittipong chatte" data-manager-id="1132" >Ittipong chatte (ittipongchattee)</option>
+<option value="Patipat chaemchoy" data-manager-id="1133" >Patipat chaemchoy (patipat.chae)</option>
+<option value="Khemaphat bunduwaraporn" data-manager-id="1134" >Khemaphat bunduwaraporn (khemaphat.donut)</option>
+<option value="Thanjira ploychang" data-manager-id="1135" >Thanjira ploychang (mindpark123)</option>
+<option value="Phanita pradapkaew" data-manager-id="1136" >Phanita pradapkaew (phanita.5739)</option>
+<option value="Thanaporn phunphiphatkij" data-manager-id="1137" >Thanaporn phunphiphatkij (thanaporn.paree)</option>
+<option value="Piriya pangpanya" data-manager-id="1138" >Piriya pangpanya (peacexplace)</option>
+<option value="Pichamon suphakwat" data-manager-id="1139" >Pichamon suphakwat (pichamon.spkw)</option>
+<option value="Ruangruedee siriboon" data-manager-id="1140" >Ruangruedee siriboon (ruangruedee.s2399)</option>
+<option value="Karnpitcha somjai" data-manager-id="1141" >Karnpitcha somjai (bowandt250)</option>
+<option value="tanaporn teeranavanich" data-manager-id="1142" >tanaporn teeranavanich (yuiicupcake)</option>
+<option value="Vithita sathienpakiranakon" data-manager-id="1143" >Vithita sathienpakiranakon (vithita.sa)</option>
+<option value="Sittiporn tummachai" data-manager-id="1144" >Sittiporn tummachai (feam2541mickey)</option>
+<option value="Nick wong zhi tian" data-manager-id="1145" >Nick wong zhi tian (zhitian1999)</option>
+<option value="Rodney jara" data-manager-id="1149" >Rodney jara (rsjara3)</option>
+<option value="Soyun Yun" data-manager-id="1150" >Soyun Yun (claireyoon98)</option>
+<option value="Eric ni" data-manager-id="1151" >Eric ni (monstercn256)</option>
+<option value="장다혜" data-manager-id="1152" >장다혜 ()</option>
+<option value="이단비" data-manager-id="1154" >이단비 (monster1232)</option>
+<option value="김대영" data-manager-id="1155" >김대영 (monster1399)</option>
+<option value="Emily ting" data-manager-id="1156" >Emily ting (hoyen0120)</option>
+<option value="Dylan DAlessandro" data-manager-id="1157" >Dylan DAlessandro (dylan)</option>
+<option value="Nina Moon" data-manager-id="1158" >Nina Moon (nina)</option>
+<option value="Kenton Yeung" data-manager-id="1159" >Kenton Yeung (kenton)</option>
+<option value="Alexander Connors" data-manager-id="1160" >Alexander Connors (alexsander)</option>
+<option value="Elise" data-manager-id="1161" >Elise (ehamtiaux)</option>
+<option value="Paul" data-manager-id="1162" >Paul (paulgapusan538)</option>
+<option value="Alexa Abayon" data-manager-id="1163" >Alexa Abayon (abayonalexa)</option>
+<option value="Fozia Sahal" data-manager-id="1164" >Fozia Sahal (sahalfozia)</option>
+<option value="Won so" data-manager-id="1165" >Won so (sowonaaliyah77)</option>
+<option value="Stephanie Chen" data-manager-id="1166" >Stephanie Chen (stephanie.chenzw)</option>
+<option value="Todi Oluyemi" data-manager-id="1167" >Todi Oluyemi (todioluyemi)</option>
+<option value="Rose Hou" data-manager-id="1169" >Rose Hou (bliss51383)</option>
+<option value="Alistair Chan" data-manager-id="1170" >Alistair Chan (alistairc1306)</option>
+<option value="Alessandra alimin" data-manager-id="1171" >Alessandra alimin (alessandraalimin)</option>
+<option value="Justin Hu" data-manager-id="1172" >Justin Hu (hujustin88)</option>
+<option value="조성훈" data-manager-id="1173" >조성훈 (monster1660)</option>
+<option value="Elise Hamtiaux" data-manager-id="1174" >Elise Hamtiaux (elise)</option>
+<option value="심정은" data-manager-id="1175" >심정은 (shimjungeun)</option>
+<option value="Min Fen Zhang" data-manager-id="1177" >Min Fen Zhang (min)</option>
+<option value="Antony Portillo" data-manager-id="1178" >Antony Portillo (antony)</option>
+<option value="Adrian Abellar" data-manager-id="1179" >Adrian Abellar (adrian)</option>
+<option value="Marvin Garcia" data-manager-id="1180" >Marvin Garcia (marvin)</option>
+<option value="Jonathan Lee" data-manager-id="1181" >Jonathan Lee (jonathan.lee)</option>
+<option value="Sharlyn" data-manager-id="1183" >Sharlyn (sharlynn2929)</option>
+<option value="Jolin Tian Ting Yu" data-manager-id="1184" >Jolin Tian Ting Yu (yjorin)</option>
+<option value="Giselle Lim Yue Xuan" data-manager-id="1185" >Giselle Lim Yue Xuan (giselle.lyx12)</option>
+<option value="Millen Lee Min" data-manager-id="1186" >Millen Lee Min (millenleemin0503)</option>
+<option value="Chin Zhi Xuan Natalie" data-manager-id="1187" >Chin Zhi Xuan Natalie (nataliechinzhix)</option>
+<option value="Jeff Choy Chee Fai" data-manager-id="1188" >Jeff Choy Chee Fai (jchoycheefai)</option>
+<option value="문대협" data-manager-id="1189" >문대협 (eoguq0114)</option>
+<option value="Andy Kim" data-manager-id="1190" >Andy Kim (andykimjun)</option>
+<option value="성영관" data-manager-id="1191" >성영관 (ykseong)</option>
+<option value="임선윤" data-manager-id="1192" >임선윤 (monster1666)</option>
+<option value="정은우" data-manager-id="1194" >정은우 (monster1667)</option>
+<option value="최송이" data-manager-id="1196" >최송이 (monster1672)</option>
+
+</select>
+</div>
+</div>
+<div class="row">
+<div class="col-md-8">
+<div class="card" style="height: 300px; overflow-y: auto;">
+<div class="card-body p-0">
+<ul class="list-group list-group-flush" id="bulkTicketList">
+<!-- 티켓 목록이 여기에 동적으로 추가됨 -->
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card" style="height: 300px;">
+<div class="card-body">
+<div class="d-flex flex-column align-items-center justify-content-center h-100">
+<span class="mb-2 fw-bold">Total Qty</span>
+<span class="badge bg-primary fs-2" id="totalTicketQty" style="font-size: 2rem !important;">0</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+<button class="btn btn-primary" type="button" onclick="handleStatusChange(event)">Complete</button>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="excelModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="excelModalLabel"></h5>
+<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs--1"></span></button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-md-12">
+<input type="text" class="form-control" id="excelDownloadReason" placeholder="Please enter the reason for downloading the Excel file."/>
+</div>
+</div>
+<div class="row mt-1">
+<div class="col-md-12">
+<input type="password" class="form-control" id="excelPassword" placeholder="Please enter the password for the Excel file."/>
+</div>
+</div>
+</div>
+
+<div class="modal-footer">
+<button class="btn btn-primary" type="button" onclick="downloadExcel()">Excel导出</button>
+<button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">取消</button>
+</div>
+</div>
+</div>
+</div>
+<!---modal end--->
+<!--content 기본 끝--->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
+<script>
+document.addEventListener('keydown',function(e){
+const isInsideModal = e.target.closest('#editModal');
+if (e.keyCode===13 && !isInsideModal) { //모달에서 엔터시 검색 방지
+searching(0);
+}
+},true);
+
+function downloadExcel() {
+//다운로드 항목만들어서 전송.
+let reason = encodeURI($('#excelDownloadReason').val());
+let password = $('#excelPassword').val();
+
+if (password.length <= 4) {
+alert("please enter a password with more than 5 characters.");
+return;
+}
+if (reason.length < 10) {
+alert("please enter a reason with more than 10 characters.");
+return;
+}
+let sDate = $('#startDate').val(); //조회시작일
+let eDate = $('#endDate').val(); //조회종료일
+let dateType = $('#dateType').val(); //조회기간
+let addString = "";
+let receptionPeriod = "";
+
+if (sDate== "" && eDate == "") {
+alert("Please enter a start date and end date.");
+return;
+}
+if (sDate !== "" && eDate != "") {
+// 날짜 범위 검증: 최대 180일 (6개월)
+const startDate = new Date(sDate);
+const endDate = new Date(eDate);
+const daysDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+if (daysDifference > 180) {
+alert("엑셀 다운로드는 최대 180일 범위까지만 가능합니다.");
+return;
+}
+receptionPeriod = "&startDate=" +sDate+ "&endDate=" +eDate+ "&dateType="+dateType;
+}
+
+
+let text = [];
+if (chk_arr.length == 0) { //필터로 다운로드.
+$('.th-title').closest('th').find('input,select').each(function(){
+const key = $(this).attr('id') || $(this).attr('name');
+const val = $(this).val();
+if (key == 'receivingDate') {
+text.push("receiveDate=" + encodeURIComponent(val));
+} else {
+if (key && val !== '') {
+text.push(encodeURIComponent(key) + "=" + encodeURIComponent(val));
+}
+}
+});
+if (text.length > 0) {
+addString += "&"+text.join("&");
+}
+} else { //체크한거만 다운로드
+addString += "&ticketIdList="+chk_arr.join(",");
+}
+
+console.log("/service/tickets/excel/download?reason="+reason+addString);
+location.href = "/service/tickets/excel/download?password="+password+"&reason="+reason+addString+receptionPeriod;
+$('#excelModal').modal('hide');
+$('#excelDownloadReason,#excelPassword').val('');
+}
+
+function showDetail(obj,status) {
+if((status == 0) || (status == null)){
+location.href = '/service/ticket/create/'+ $(obj).attr("id");
+} else {
+location.href = '/service/ticket/'+ $(obj).attr("id")+'/detail';
+}
+}
+
+let page = 0;
+$(document).ready(function () {
+// 날짜 초기값은 백엔드(TicketQueryController)에서 설정된 값을 사용합니다 (최근 30일)
+// JavaScript에서 날짜를 재설정하지 않도록 주석 처리
+
+// var today = new Date();
+// var sevenMonthsAgo = new Date();
+// sevenMonthsAgo.setMonth(today.getMonth() - 7);
+//
+// var formatDate = function(date) {
+// var yyyy = date.getFullYear();
+// var mm = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+// var dd = String(date.getDate()).padStart(2, '0');
+// return `${yyyy}-${mm}-${dd}`;
+// };
+//
+// var todayFormatted = formatDate(today);
+// var sevenMonthsAgoFormatted = formatDate(sevenMonthsAgo);
+//
+// // Set the date values
+// $('#startDate').val(sevenMonthsAgoFormatted);
+// $('#endDate').val(todayFormatted);
+
+setTimeout(function () {
+searching(0);
+}, 100);
+$('#barcodeForLocation').focus();
+
+// Handle date type change
+$('#dateType').on('change', function() {
+// You can add logic here if needed when date type changes
+});
+});
+let chosenInitial = false;
+$('#editModal').on('show.bs.modal', function (event) {
+if (!chosenInitial) {
+setTimeout(function () {
+$('#editModal').find('.chosen-select').chosen({
+search_contains: true
+});
+chosenInitial = true;
+}, 600);
+}
+
+// Clear existing tickets in the modal
+ticketSet.clear();
+$('#bulkTicketList').empty();
+updateTicketCount();
+
+// Add checked tickets to the modal
+if (chk_arr.length > 0) {
+chk_arr.forEach(function(ticketId) {
+addTicketToListById(ticketId);
+});
+}
+});
+
+// Helper function to add a ticket to the list by ID
+function addTicketToListById(ticketId) {
+if (!ticketId) return;
+
+if (!ticketSet.has(ticketId)) {
+ticketSet.add(ticketId);
+
+// Create new ticket item
+const li = document.createElement('li');
+li.className = 'list-group-item d-flex justify-content-between align-items-center';
+li.innerHTML = `
+${ticketId}
+<button class="btn btn-sm btn-danger" onclick="removeTicket('${ticketId}')">
+<i class="fas fa-times"></i>
+</button>
+`;
+
+document.getElementById('bulkTicketList').appendChild(li);
+updateTicketCount();
+}
+}
+
+$('#barcodeForLocation').on('keypress', function (e) {
+if (e.key === 'Enter') {
+let ticketId = e.target.value;
+e.preventDefault();
+e.stopPropagation(); // 이벤트 전파 중지
+ticketId = ticketId.replace(/[^0-9]/g, '');
+e.target.value = ''; // 입력 필드 비우기
+location.href = '/service/ticket/'+ticketId+'/detail';
+}
+});
+function validateDate(input) {
+const date = new Date(input.value);
+const year = date.getFullYear();
+
+if (year < 1900 || year > 2099) {
+alert('Dates can only be between 1900 and 2099.');
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작해서 +1
+const dd = String(today.getDate()).padStart(2, '0');
+
+input.value = `${yyyy}-${mm}-${dd}`;
+}
+}
+function searching(flag) {
+let size = $('select[name="selRows"]').val();
+if (size == '') {
+size = 10;
+}
+// let size = $('select[name="rows"]').val();
+if (flag != "") {
+page = flag;
+}
+
+// 날짜 범위 검증
+const sDate = $('#startDate').val();
+const eDate = $('#endDate').val();
+if (sDate && eDate) {
+const validation = validateDateRange(sDate, eDate);
+if (!validation.valid) {
+alert(validation.message);
+return;
+}
+}
+
+$('#loadingSpinner').removeClass('d-none');
+let startPage = 0;
+let endPage = 0;
+let nowPage = 0;
+let totalPage = 0;
+let appendHtml = "";
+$.ajax({
+type: "POST",
+url: "/service/tickets/filter",
+contentType: 'application/json',
+data: JSON.stringify({
+page: flag,
+size : size,
+ticketId: $('#ticketId').val(),
+
+processStatus: $('#processStatus').val(),
+receiveDate: $('#receivingDate').val(), //본사 입고일
+forwardingExpectedDate: $('#forwardingExpectedDate').val(), //출고 '예정'일
+receptionAccountName: $('#receptionAccountName').val(), //접수처
+customerName : $('#customerName').val(), //고객명
+customerRealName : $('#customerRealName').val(), //고객실명
+customerPhone: $('#customerPhone').val(), //고객전화번호
+email: $('#customerEmail').val(), //이메일
+productName : $('#productName').val(), //제품명
+repairDepartment: $('#repairDepartment').val(),//수리 진행처
+repairDetail1: $('#repairDetail1').val(), //수리내용
+registrationNumber: $('#registrationNumber').val(), //등기번호
+paymentStatus: $('#paymentStatus').val(), //결제 완료 여부
+pgApproveDate: $('#pgApproveDate').val(),
+isReexport: $('#isReexport').val() === '1' ? true
+: $('#isReexport').val() === '0' ? false
+: null, //재수출 이행조건
+sapSoNo: $('#sapSoNo').val(), //sap so no
+shipmentType: $('#shipmentType').val(), //수리 출고방식
+forwardingCompleteDate: $('#forwardingCompleteDate').val(), //출고완료일
+orderByKey: $('#order_by_key').val(),
+orderBy: $('#order_by').val(),
+
+startDate: $('#startDate').val(), //시작일
+endDate: $('#endDate').val(), //종료일
+dateType: $('#dateType').val() //날짜 유형
+// searchKeyword: $('input[id="searchKeyword"]').val()
+})
+}).done(function (data) {
+$('#loadingSpinner').addClass('d-none');
+$('#projectSummary').replaceWith(data);
+$('.th-title').find('.fa-filter').remove();
+startPage = $('#startPage').val();
+endPage = $('#endPage').val();
+nowPage = $('#nowPage').val();//0부터 시작
+totalPage = $('#totalPage').val();
+let disabled = "disabled";
+if (Number(nowPage-1) > -1) { //이전 페이지가 있으면
+disabled = "";
+}
+appendHtml += '<button class="page-link '+disabled+'" data-list-pagination="prev" '+disabled+' onclick="paging('+Number(Number(nowPage)-1)+')"><span class="fas fa-chevron-left"></span></button>';
+appendHtml += '<ul class="mb-0 pagination">';
+for (let i = startPage; i <= endPage && i < totalPage ; i++) { //페이지0부터 시작이라 보여주는 페이지는+1
+if (nowPage == i) {
+appendHtml += '<li class="active"><button type="button" class="page" onclick="paging('+i+')" disabled>'+Number(Number(i)+Number(1))+'</button></li>';
+} else {
+appendHtml += '<li class=""><button type="button" class="page bg-white" onclick="paging('+i+')">'+Number(Number(i)+Number(1))+'</button></li>';
+}
+}
+
+disabled = "disabled";
+if (Number(Number(nowPage)+Number(1)) < totalPage) {
+disabled = "";
+}
+appendHtml += '</ul>';
+appendHtml += '<button class="page-link '+disabled+'" data-list-pagination="next"'+disabled+' onclick="paging('+Number(Number(nowPage)+Number(1))+')"><span class="fas fa-chevron-right"></span></button>';
+$('.paging-btn-area').empty();
+$('.paging-btn-area').append(appendHtml);
+
+$('input[name="s_idx[]"]').each(function () { //선택한 체크박스 인경우 체크한다.
+if (chk_arr.indexOf($(this).val()) > -1) {
+$(this).prop('checked', true);
+}
+});
+//검색한 항목 옆에 필터그림추가.
+$('.th-title').closest('th').find('input,select').each(function(index,target) {
+if ($(this).val() != "") {
+$(target).closest('th').find('.th-title').append('<i class="fas fa-filter"></i>');
+}
+});
+//오름차순 내림차순 세팅
+if ($('#order_by_key').val() != "") {
+$('.th-title').find('.fa-arrow-up').addClass('d-none');
+$('.th-title').find('.fa-arrow-down').addClass('d-none');
+if ($('#order_by').val() == "asc") {
+$('input[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-up').removeClass('d-none');
+$('input[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-down').addClass('d-none');
+
+$('select[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-up').removeClass('d-none');
+$('select[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-down').addClass('d-none');
+} else {
+$('input[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-up').addClass('d-none');
+$('input[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-down').removeClass('d-none');
+$('select[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-up').addClass('d-none');
+$('select[name="'+$('#order_by_key').val()+'"]').closest('.th-title').find('.fa-arrow-down').removeClass('d-none');
+}
+
+}
+}).fail(function (jqXHR, textStatus, errorThrown) {
+$('#loadingSpinner').addClass('d-none');
+if (jqXHR.status === 400 && jqXHR.responseJSON && jqXHR.responseJSON.message) {
+alert(jqXHR.responseJSON.message);
+} else {
+alert('조회 중 오류가 발생했습니다.');
+}
+});
+
+}
+function paging(flag) {
+$('#allChk').prop('checked', false);
+page = flag;
+searching(flag);
+}
+
+function setOrderBy(order_by_key,order_by,obj) {
+console.log('order by'+order_by_key+" "+order_by);
+// $('.th-title').find('.fa-arrow-up').addClass('d-none');
+// $('.th-title').find('.fa-arrow-down').addClass('d-none');
+// if (order_by == "asc") {
+// $(obj).closest('th').find('.th-title').find('.fa-arrow-up').removeClass('d-none');
+// $(obj).closest('th').find('.th-title').find('.fa-arrow-down').addClass('d-none');
+// } else {
+// $(obj).closest('th').find('.th-title').find('.fa-arrow-up').addClass('d-none');
+// $(obj).closest('th').find('.th-title').find('.fa-arrow-down').removeClass('d-none');
+// }
+$('#order_by_key').val(order_by_key);
+$('#order_by').val(order_by);
+searching(0);
+
+}
+
+let chk_arr = [];
+function addCheck(obj) { //페이지 넘겨도 선택되게.
+let index = 0;
+if ($(obj).prop('checked')) {
+chk_arr.push($(obj).val());
+
+} else {
+index = chk_arr.indexOf($(obj).val());
+chk_arr.splice(index, 1);//해당 키 삭제.
+
+}
+$('#chkTotalCnt').text(chk_arr.length);
+}
+function allChk(obj) {
+let index = "";
+if ($(obj).is(':checked')) {
+$('input[name="s_idx[]"]').each(function (i,target) {
+$(target).prop('checked', true);
+chk_arr.push($(target).val());
+});
+} else {
+$('input[name="s_idx[]"]').each(function (index,target) {
+let index2 = chk_arr.indexOf($(target).val());
+chk_arr.splice(index2, 1);//해당 키 삭제.
+$(target).prop('checked', false);
+});
+}
+chk_arr = [...new Set(chk_arr)];//중복제거
+console.log(chk_arr);
+$('#chkTotalCnt').text(chk_arr.length);
+}
+
+// var body = document.querySelector("body");
+// body.addEventListener('click', clickBodyEvent);
+// function clickBodyEvent(event) {
+// var target = event.target;
+// let obj = target;
+// if(target == event.currentTarget.querySelector(".th-title") ){
+// $(obj).find('.th-title-bottom').removeClass('d-none');
+// } else {
+// $('.th-title').find('.th-title-bottom').addClass('d-none');
+// }
+//
+// }
+$('.deleteNextValue').on('click',function(event) {
+$(this).next('select,input').val('');
+$(this).next('select,input').val('').trigger('chosen:updated');
+event.stopPropagation(); //엑스 눌러도 안닫히게
+});
+
+//수리내용 셀렉트 박스
+$('.dropdown-toggle').on('shown.bs.dropdown', function() {
+// Only initialize if it's the repair details dropdown
+if($(this).closest('th').find('.repair-chosen-select').length > 0) {
+// Destroy any existing chosen instances to prevent duplicates
+if ($(this).closest('th').find('.repair-chosen-select').data('chosen')) {
+$(this).closest('th').find('.repair-chosen-select').chosen('destroy');
+}
+
+// Initialize chosen with search and width options
+$(this).closest('th').find('.repair-chosen-select').chosen({
+search_contains: true,
+width: '100%',
+disable_search_threshold: 5 // Show search box only when there are more than 5 options
+});
+
+// Adjust z-index to ensure dropdown appears above other elements
+setTimeout(function() {
+$('.chosen-container').css('z-index', 9999);
+}, 100);
+
+// Make sure the dropdown doesn't close when clicking on the chosen container
+$(this).closest('th').find('.chosen-container').on('click.bs.dropdown', function(e) {
+e.stopPropagation();
+return false;
+});
+}
+});
+
+// Prevent dropdown from closing when clicking on the select or chosen dropdown
+// Using direct event binding for better performance and to ensure it works with dynamically created elements
+$(document).on('click', '.repair-chosen-select, .chosen-container, .chosen-drop, .chosen-results, .chosen-search, .chosen-search-input', function(e) {
+e.stopPropagation(); // Stop propagation to prevent the dropdown from closing
+});
+
+// Add a specific handler for the select element to trigger the Chosen dropdown
+$(document).on('click', '.repair-chosen-select', function(e) {
+// Ensure the Chosen dropdown is shown when the select is clicked
+$(this).trigger('chosen:open');
+});
+
+// Add a specific handler for the dropdown menu to prevent it from closing
+$(document).on('click.bs.dropdown.data-api', '.dropdown-menu', function(e) {
+// Only prevent closing if the click is inside a chosen-related element
+if($(e.target).closest('.chosen-container, .repair-chosen-select').length) {
+e.stopPropagation();
+}
+});
+
+// Add a handler for when the dropdown is hidden to clean up any chosen instances
+$('.dropdown-toggle').on('hidden.bs.dropdown', function() {
+// Only handle if it's the repair details dropdown
+if($(this).closest('th').find('.repair-chosen-select').length > 0) {
+// Don't destroy chosen here as it might be needed when reopening the dropdown
+// Just hide any visible chosen dropdowns
+$('.chosen-container-active').removeClass('chosen-with-drop chosen-container-active');
+}
+});
+
+function delTicket() {//티켓 삭제
+if (chk_arr.length < 0) {
+alert("선택된 티켓이 없습니다.");
+return;
+}
+if (confirm("티켓 삭제후 복구가 되지 않습니다. "+chk_arr.length+"개를 삭제하시겠습니까?")) {
+$.ajax({
+type: "POST",
+url: "/service/ticket/delete",
+dataType: "json",
+data: {"ticketId" : chk_arr},
+}).done(function( data ) {
+if (data.result) {
+alert("삭제되었습니다");
+searching(0);
+chk_arr = [];
+} else {
+alert(data.message);
+}
+})
+}
+}
+
+
+let ticketSet = new Set();
+
+function addTicketToList(event) {
+if(event) {
+event.preventDefault();
+event.stopPropagation();
+}
+const ticketInput = document.getElementById('bulkTicketId');
+const ticketId = ticketInput.value.trim();
+
+if (!ticketId) return;
+
+if (!ticketSet.has(ticketId)) {
+ticketSet.add(ticketId);
+
+// 새로운 티켓 항목 생성
+const li = document.createElement('li');
+li.className = 'list-group-item d-flex justify-content-between align-items-center';
+li.innerHTML = `
+${ticketId}
+<button class="btn btn-sm btn-danger" onclick="removeTicket('${ticketId}')">
+<i class="fas fa-times"></i>
+</button>
+`;
+
+document.getElementById('bulkTicketList').appendChild(li);
+updateTicketCount();
+}
+
+ticketInput.value = '';
+ticketInput.focus();
+}
+function removeTicket(ticketId) {
+ticketSet.delete(ticketId);
+updateTicketCount();
+// 화면에서 해당 항목 제거
+const items = document.getElementById('bulkTicketList').getElementsByTagName('li');
+for (let item of items) {
+if (item.textContent.trim().startsWith(ticketId)) {
+item.remove();
+break;
+}
+}
+}
+
+//변경하고자 하는 티켓 몇 개인지
+function updateTicketCount() {
+document.getElementById('totalTicketQty').textContent = ticketSet.size;
+}
+
+async function handleStatusChange(event) {
+const button = event.currentTarget;
+button.disabled = true; // 중복 클릭 방지
+
+try {
+// 선택된 티켓 ID들 수집
+const ticketIds = Array.from(ticketSet);
+if (ticketIds.length === 0) {
+alert("Ticket List is empty.");
+return;
+}
+
+// 상태값과 기술자 정보 가져오기
+const processStatus = document.getElementById('selProcessStatus').value;
+const engineer = document.getElementById('sel_manager');
+const engineerName = engineer.value;
+const engineerId = engineer.options[engineer.selectedIndex]?.dataset?.managerId;
+
+if (!processStatus && !engineerName) {
+alert("Please select a status or engineer.");
+return;
+}
+
+// API 호출
+const response = await fetch('/service/tickets/status/bulk-update', {
+method: 'PUT',
+headers: {
+'Content-Type': 'application/json',
+},
+body: JSON.stringify({
+ticketId: ticketIds,
+processStatus: processStatus,
+engineerName: engineerName,
+engineerId: engineerId
+})
+});
+console.log(response);
+
+const data = await response.json();
+console.log(data);
+
+if (response.status === 200) {
+if (data.message!=null && data.message != "") {
+alert(data.message + "\n"
++ "Other tickets have been processed.");
+} else {
+$('#editModal').modal('hide');
+}
+
+searching(0);
+
+ticketSet.clear(); // 선택된 티켓 초기화
+$('#bulkTicketList').empty();
+updateTicketCount();
+} else {
+alert(data.message);
+}
+
+} catch (error) {
+console.error('Error:', error);
+alert("An error occurred while editing.");
+} finally {
+button.disabled = false; // 버튼 다시 활성화
+}
+}
+</script>
+
+</html>

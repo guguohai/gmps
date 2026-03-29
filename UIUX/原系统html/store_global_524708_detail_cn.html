@@ -1,0 +1,3502 @@
+<html lang="ko">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><!--- bot 차단 --->
+<meta name="googlebot" content="noindex">
+
+<!-- ===============================================-->
+<!-- Document Title-->
+<!-- ===============================================-->
+<title>ProductService</title>
+<!-- ===============================================-->
+<!-- Favicons-->
+<!-- ===============================================-->
+<!-- <link rel="apple-touch-icon" sizes="180x180" href="./files/apple-touch-icon.png">-->
+<link rel="icon" type="image/png" sizes="32x32" href="./files/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./files/favicon-16x16.png">
+<!-- <meta name="msapplication-TileImage" content="./files/mstile-150x150.png">-->
+<meta name="theme-color" content="#ffffff">
+<script src="./files/imagesloaded.pkgd.min.js"></script>
+<script src="./files/simplebar.min.js"></script>
+<script src="./files/config.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+<script src="./files/jquery-3.2.1.min.js"></script>
+<script src="./files/choices.min.js"></script>
+<!-- <script src="./files/flatpickr.js"></script>-->
+
+
+<!-- ===============================================-->
+<!-- Stylesheets-->
+<!-- ===============================================-->
+<link href="./files/choices.min.css" rel="stylesheet" />
+<link href="./files/flatpickr.min.css" rel="stylesheet">
+<link href="./files/prism-okaidia.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900" rel="stylesheet">
+<link href="./files/simplebar.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./files/line.css">
+<link href="./files/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+<link href="./files/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+<link href="./files/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+<link href="./files/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+
+<script>
+var phoenixIsRTL = window.config.config.phoenixIsRTL;
+if (phoenixIsRTL) {
+var linkDefault = document.getElementById('style-default');
+var userLinkDefault = document.getElementById('user-style-default');
+linkDefault.setAttribute('disabled', true);
+userLinkDefault.setAttribute('disabled', true);
+document.querySelector('html').setAttribute('dir', 'rtl');
+} else {
+var linkRTL = document.getElementById('style-rtl');
+var userLinkRTL = document.getElementById('user-style-rtl');
+linkRTL.setAttribute('disabled', true);
+userLinkRTL.setAttribute('disabled', true);
+}
+</script>
+<link href="./files/custom.css" type="text/css" rel="stylesheet">
+</head>
+<!--content 기본 시작--->
+<div class="main" id="top">
+<div class="container-fluid px-0">
+<html lang="ko">
+
+<nav class="navbar navbar-vertical navbar-expand-lg">
+<script>
+var navbarStyle = window.config.config.phoenixNavbarStyle;
+if (navbarStyle && navbarStyle !== 'transparent') {
+document.querySelector('body').classList.add(`navbar-${navbarStyle}`);
+}
+</script>
+<div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+<!-- scrollbar removed-->
+<div class="navbar-vertical-content">
+<ul class="navbar-nav flex-column" id="navbarVerticalNav">
+<!-- <li th:each="menu : ${menuList}" class="nav-item" >-->
+<!-- <div class="nav-item-wrapper">-->
+<!-- <a class="nav-link dropdown-indicator label-1" th:href="'#'+${menu.AT_NAME}" role="button" data-bs-toggle="collapse" aria-expanded="false" th:aria-controls="${menu.AT_NAME}">-->
+<!-- <div class="d-flex align-items-center">-->
+<!-- <div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>-->
+<!-- <span class="nav-link-icon"><span th:data-feather="${menu.ICON}"></span></span>-->
+<!-- <span class="nav-link-text" th:text="#{${menu.AUTH_NAME}}"></span>-->
+<!-- </div>-->
+<!-- </a>-->
+<!-- </div>-->
+<!-- <div>-->
+<!-- <div class="parent-wrapper label-1" th:if="${menu.AUTH_NAME}">-->
+<!-- <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" th:id="${menu.AT_NAME}">-->
+<!-- <li class="collapsed-nav-item-title d-none" th:text="${menu.AUTH_NAME}" >-->
+<!-- </li>-->
+
+<!-- <li class="nav-item" th:block th:if="${menu['SUB_MENU']}" th:each="sub_item : ${menu['SUB_MENU']}">-->
+<!-- <a class="nav-link" th:href="${sub_item.PAGE}" data-bs-toggle="" aria-expanded="false">-->
+<!-- <div class="d-flex align-items-center"><span class="nav-link-text" th:text="#{${sub_item.AUTH_NAME}}"></span>-->
+<!-- </div>-->
+<!-- </a>-->
+<!-- &lt;!&ndash; more inner pages&ndash;&gt;-->
+<!-- </li>-->
+
+<!-- </ul>-->
+<!-- </div>-->
+<!-- </div>-->
+<!-- </li>-->
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="member_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="users"></span></span>
+<span class="nav-link-text">Users</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="member_menu">
+<li class="collapsed-nav-item-title d-none">사용자</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/member/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">User List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/member/role/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Permission Management</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="product_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="inbox"></span></span>
+<span class="nav-link-text">Product</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="product_menu">
+<li class="collapsed-nav-item-title d-none">제품</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/product/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Product List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="subsidiary_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="package"></span></span>
+<span class="nav-link-text">Part Master</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="subsidiary_menu">
+<li class="collapsed-nav-item-title d-none">부속품마스터</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/part/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Part Master List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/part/process" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Part Request/Process Status</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="stock_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="edit"></span></span>
+<span class="nav-link-text">Stock Request</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="stock_menu">
+<li class="collapsed-nav-item-title d-none">재고요청</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/stock/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="customer_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="users"></span></span>
+<span class="nav-link-text">Customer</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="customer_menu">
+<li class="collapsed-nav-item-title d-none">고객</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/customer/b2b/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Store/B2B</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/customer/b2c/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Individual Customer/B2C</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/survey/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">survey</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="service_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="edit"></span></span>
+<span class="nav-link-text">Service</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="service_menu">
+<li class="collapsed-nav-item-title d-none">서비스</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/service/tickets" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">产品服务受理</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/kr" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Domestic Store Receipt</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/cn" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_CHINA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/us" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_USA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/sg" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_SINGAPORE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/uk" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_UK</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/puyi" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_PUYI</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/jp" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_JAPAN</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ae" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_UAE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/th" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_THAILAND</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ph" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_PHILIPPINES</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/au" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_AUSTRALIA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/my" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_MALAYSIA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/hk" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_HONGKONG</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/tw" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_TAIWAN</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/fr" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_FRANCE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ca" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_CANADA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+
+
+
+</ul>
+</div>
+</div>
+<div class="navbar-vertical-footer">
+<button class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-0"></span><span class="uil uil-arrow-from-right fs-0"></span><span class="navbar-vertical-footer-text ms-2">Collapsed View</span></button>
+</div>
+</nav>
+<!---- 상단 가로 영역 로고,사람 아이콘 있는 위치---->
+<nav class="navbar navbar-top navbar-expand" id="navbarDefault">
+<div class="collapse navbar-collapse justify-content-between">
+<div class="navbar-logo">
+
+<button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+<a class="navbar-brand me-1 me-sm-3" href="/">
+<div class="d-flex align-items-center">
+<div class="d-flex align-items-center"><img src="./files/ms-iic-icon.png" alt="iic" width="27" />
+<p class="logo-text ms-2 d-none d-sm-block">PRODUCT SERVICE</p>
+</div>
+</div>
+</a>
+</div>
+<ul class="navbar-nav navbar-nav-icons flex-row">
+<li class="nav-item dropdown">
+<a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+<div class="avatar avatar-l ">
+<img class="rounded-circle " src="./files/avatar-rounded.webp" alt="" />
+
+</div>
+</a>
+<div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300" aria-labelledby="navbarDropdownUser">
+<div class="card position-relative border-0">
+<div class="card-body p-0">
+<div class="text-center pt-4 pb-3">
+<h6 class="mt-2 text-black">monstercn256</h6>
+</div>
+</div>
+
+<div class="card-footer p-0 border-top">
+<div class="p-2">
+<select class="form-select" id="selLanguage" onchange="changeLanguage(this)">
+<option value="ko">한국어</option>
+<option value="en">English</option>
+<option value="zh">中文 (简体)</option>
+<option value="zh-tw">中文 (繁體)</option>
+<option value="ja">日本語</option>
+</select>
+</div>
+<hr />
+<div class="px-3 m-2">
+<a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/logout">
+<span class="me-2" data-feather="log-out"> </span>
+Sign out</a>
+</div>
+
+</div>
+</div>
+</div>
+</li>
+
+</ul>
+</div>
+
+</nav>
+<!----상단 영역 ---->
+<script>
+let menu_arr = new Array();
+menu_arr.push("member_list_menu");
+menu_arr.push("member_auth_menu");
+menu_arr.push("product_list_menu");
+menu_arr.push("service_cn_ps_menu");
+menu_arr.push("service_us_ps_menu");
+menu_arr.push("service_sg_ps_menu");
+menu_arr.push("service_uk_ps_menu");
+menu_arr.push("service_puyi_ps_menu");
+menu_arr.push("service_jp_ps_menu");
+menu_arr.push("service_ae_ps_menu");
+menu_arr.push("service_th_jv_ps_menu");
+menu_arr.push("service_ph_ps_menu");
+menu_arr.push("service_au_ps_menu");
+menu_arr.push("service_my_ps_menu");
+menu_arr.push("service_hk_ps_menu");
+menu_arr.push("service_tw_ps_menu");
+menu_arr.push("service_fr_ps_menu");
+menu_arr.push("service_ca_ps_menu");
+</script>
+<script>
+function changeLanguage (obj) {
+location.href = "/?lang="+$(obj).val();
+}
+
+let cookieArr = document.cookie.split(';')
+for (let i=0 ; i < cookieArr.length ; i++) {
+let detailArr = cookieArr[i].split('=');
+if (detailArr[0].replace(/ /g,'') == "lang") {
+$('#selLanguage').val(detailArr[1]);
+}
+}
+</script>
+</html>
+
+<!----------- 메뉴 끝 ------------>
+<style>
+td {
+border-width: 1px;
+padding-left: 5px !important;
+vertical-align: middle !important;
+}
+.chosen-container .chosen-single {
+height: 33px !important;
+background: #fff !important;
+border: 1px solid #cbd0dd !important;
+box-shadow: none !important;
+padding-top:3px !important;
+}
+</style>
+
+<div class="content" id="contentDiv">
+<!---- 화면 콘텐츠 시작 ---->
+<nav class="mb-2" aria-label="breadcrumb">
+<ol class="breadcrumb mb-0">
+<li class="breadcrumb-item active">PRODUCT SERVICE</li>
+</ol>
+</nav>
+<div class="mb-9"><!--page: 한페이지에 몇개 나올건지--->
+<div >
+<div class="row mb-4 gx-6 gy-3 align-items-center">
+<div class="col-auto">
+<h4 class="mb-0">Detail</h4>
+</div>
+</div>
+<div class="card">
+<input type="hidden" id="ticketId" value="524708"/>
+<div> <small class="float-end p-1">*if account list is empty click, this button</small></div>
+<div class="p-1"><button class="btn btn-sm btn-secondary float-end p-2" onclick="apiReCall()"><span data-feather="rotate-ccw"></span></button></div>
+<div class="card-body">
+<ul class="nav nav-underline" id="myTab" role="tablist">
+<li class="nav-item" role="presentation">
+<a class="nav-link active" id="outline-tab" data-bs-toggle="tab" href="#tab-outline" role="tab" aria-controls="tab-outline" aria-selected="true">Detail</a>
+</li>
+<li class="nav-item" role="presentation">
+<a class="nav-link" id="address-mail" data-bs-toggle="tab" href="#tab-mail" role="tab" aria-controls="tab-mail" aria-selected="false" tabindex="-1">Email history</a>
+</li>
+</ul>
+<div class="tab-content mt-3" id="myTabContent">
+<div class="tab-pane fade active show" id="tab-outline" role="tabpanel" aria-labelledby="outline-tab">
+<div class="row">
+<div class="col-6">
+<div>顾客信息</div>
+<table class="table fs--1 border">
+
+<tbody>
+<tr>
+<td>受理日期</td>
+<td><span>2026-02-20</span></td>
+</tr>
+<tr>
+<td>姓名</td>
+<td>
+<input type="hidden" class="form-control" id="customerName" value="서안드레"/>
+<input type="text" class="form-control mb-1" id="firstName" value="안드레" placeholder="first name"/>
+<input type="text" class="form-control" id="lastName" value="서" placeholder="last name"/>
+</td>
+</tr>
+<tr>
+<td>国家/地区</td>
+<td>
+<select class="chosen-select" id="CountryCode" name="CountryCode" style="width: 100%;">
+<option value="AF" >Afghanistan</option>
+<option value="AL" >Albania</option>
+<option value="DZ" >Algeria</option>
+<option value="AS" >American Samoa</option>
+<option value="AD" >Andorra</option>
+<option value="AO" >Angola</option>
+<option value="AI" >Anguilla</option>
+<option value="AQ" >Antarctica</option>
+<option value="AG" >Antigua And Barbuda</option>
+<option value="AR" >Argentina</option>
+<option value="AM" >Armenia</option>
+<option value="AW" >Aruba</option>
+<option value="AU" >Australia</option>
+<option value="AT" >Austria</option>
+<option value="AZ" >Azerbaijan</option>
+<option value="BS" >Bahamas</option>
+<option value="BH" >Bahrain</option>
+<option value="BD" >Bangladesh</option>
+<option value="BB" >Barbados</option>
+<option value="BE" >Belgium</option>
+<option value="BZ" >Belize</option>
+<option value="BJ" >Benin</option>
+<option value="BM" >Bermuda</option>
+<option value="BT" >Bhutan</option>
+<option value="BO" >Bolivia</option>
+<option value="BA" >Bosnia Hercegovina</option>
+<option value="BW" >Botswana</option>
+<option value="BV" >Bouvet Island</option>
+<option value="BR" >Brazil</option>
+<option value="IO" >British Indian Ocean Territory</option>
+<option value="BN" >Brunei Darussalam</option>
+<option value="BG" >Bulgaria</option>
+<option value="BF" >Burkina Faso</option>
+<option value="BI" >Burundi</option>
+<option value="BY" >Belarus</option>
+<option value="KH" >Cambodia</option>
+<option value="CM" >Cameroon</option>
+<option value="CA" >Canada</option>
+<option value="CV" >Cape Verde</option>
+<option value="KY" >Cayman Islands</option>
+<option value="CF" >Central African Republic</option>
+<option value="TD" >Chad</option>
+<option value="CL" >Chile</option>
+<option value="CN" >China</option>
+<option value="CX" >Christmas Island</option>
+<option value="CC" >Cocos Keeling Islands</option>
+<option value="CO" >Colombia</option>
+<option value="KM" >Comoros</option>
+<option value="CG" >Congo</option>
+<option value="CK" >Cook Islands</option>
+<option value="CR" >Costa Rica</option>
+<option value="HR" >Croatia</option>
+<option value="CU" >Cuba</option>
+<option value="CY" >Cyprus</option>
+<option value="CZ" >Czech Republic</option>
+<option value="CS" >Czechoslovakia</option>
+<option value="DK" >Denmark</option>
+<option value="DJ" >Djibouti</option>
+<option value="DM" >Dominica</option>
+<option value="DO" >Dominican Republic</option>
+<option value="TP" >East Timor</option>
+<option value="EC" >Ecuador</option>
+<option value="EG" >Egypt</option>
+<option value="SV" >El Salvador</option>
+<option value="GQ" >Equatorial Guinea</option>
+<option value="EE" >Estonia</option>
+<option value="ET" >Ethiopia</option>
+<option value="FK" >Falkland Islands </option>
+<option value="FO" >Faroe Islands</option>
+<option value="FJ" >Fiji</option>
+<option value="FI" >Finland</option>
+<option value="FR" >France</option>
+<option value="GF" >French Guiana</option>
+<option value="PF" >French Polynesia</option>
+<option value="TF" >French Southern Territories</option>
+<option value="GA" >Gabon</option>
+<option value="GM" >Gambia</option>
+<option value="GE" >Georgia</option>
+<option value="DE" >Germany</option>
+<option value="GH" >Ghana</option>
+<option value="GI" >Gibraltar</option>
+<option value="GR" >Greece</option>
+<option value="GL" >Greenland</option>
+<option value="GD" >Grenada</option>
+<option value="GP" >Guadeloupe</option>
+<option value="GU" >Guam</option>
+<option value="GT" >Guatemala</option>
+<option value="GN" >Guinea</option>
+<option value="GW" >Guinea-Bissau</option>
+<option value="GY" >Guyana</option>
+<option value="HT" >Haiti</option>
+<option value="HM" >Heard And McDonald Islands</option>
+<option value="HN" >Honduras</option>
+<option value="HK" >Hong Kong SAR</option>
+<option value="HU" >Hungary</option>
+<option value="IS" >Iceland</option>
+<option value="IN" >India</option>
+<option value="ID" >Indonesia</option>
+<option value="IR" >Iran, Islamic Republic Of</option>
+<option value="IQ" >Iraq</option>
+<option value="IE" >Ireland</option>
+<option value="IL" >Israel</option>
+<option value="IT" >Italy</option>
+<option value="JM" >Jamaica</option>
+<option value="JP" >Japan</option>
+<option value="JO" >Jordan</option>
+<option value="KZ" >Kazakhstan</option>
+<option value="KE" >Kenya</option>
+<option value="KI" >Kiribati</option>
+<option value="KR"
+selected="selected" >Korea, Republic Of</option>
+<option value="KW" >Kuwait</option>
+<option value="KG" >Kyrgyzstan</option>
+<option value="LV" >Latvia</option>
+<option value="LB" >Lebanon</option>
+<option value="LS" >Lesotho</option>
+<option value="LR" >Liberia</option>
+<option value="LY" >Libyan Arab Jamahiriya</option>
+<option value="LI" >Liechtenstein</option>
+<option value="LT" >Lithuania</option>
+<option value="LU" >Luxembourg</option>
+<option value="MO" >Macau</option>
+<option value="MG" >Madagascar</option>
+<option value="MW" >Malawi</option>
+<option value="MY" >Malaysia</option>
+<option value="MV" >Maldives</option>
+<option value="ML" >Mali</option>
+<option value="MT" >Malta</option>
+<option value="MH" >Marshall Islands</option>
+<option value="MQ" >Martinique</option>
+<option value="MR" >Mauritania</option>
+<option value="MU" >Mauritius</option>
+<option value="MX" >Mexico</option>
+<option value="FM" >Micronesia</option>
+<option value="MD" >Moldova, Republic Of</option>
+<option value="MC" >Monaco</option>
+<option value="MN" >Mongolia</option>
+<option value="MS" >Montserrat</option>
+<option value="MA" >Morocco</option>
+<option value="MZ" >Mozambique</option>
+<option value="MM" >Myanmar</option>
+<option value="NA" >Namibia</option>
+<option value="NR" >Nauru</option>
+<option value="NP" >Nepal</option>
+<option value="NL" >Netherlands</option>
+<option value="AN" >Netherlands Antilles</option>
+<option value="NT" >Neutral Zone</option>
+<option value="NC" >New Caledonia</option>
+<option value="NZ" >New Zealand</option>
+<option value="NI" >Nicaragua</option>
+<option value="NE" >Niger</option>
+<option value="NG" >Nigeria</option>
+<option value="NU" >Niue</option>
+<option value="NF" >Norfolk Island</option>
+<option value="MP" >Northern Mariana Islands</option>
+<option value="NO" >Norway</option>
+<option value="OM" >Oman</option>
+<option value="PK" >Pakistan</option>
+<option value="PW" >Palau</option>
+<option value="PA" >Panama</option>
+<option value="PG" >Papua New Guinea</option>
+<option value="PY" >Paraguay</option>
+<option value="PE" >Peru</option>
+<option value="PH" >Philippines</option>
+<option value="PN" >Pitcairn</option>
+<option value="PL" >Poland</option>
+<option value="PT" >Portugal</option>
+<option value="PR" >Puerto Rico</option>
+<option value="QA" >Qatar</option>
+<option value="RE" >Reunion</option>
+<option value="RO" >Romania</option>
+<option value="RU" >Russian Federation</option>
+<option value="RW" >Rwanda</option>
+<option value="SH" >St. Helena</option>
+<option value="KN" >Saint Kitts And Nevis</option>
+<option value="LC" >Saint Lucia</option>
+<option value="PM" >St. Pierre And Miquelon</option>
+<option value="VC" >Saint Vincent And The Grenadines</option>
+<option value="WS" >Samoa</option>
+<option value="SM" >San Marino</option>
+<option value="ST" >Sao Tome And Principe</option>
+<option value="SA" >Saudi Arabia</option>
+<option value="SN" >Senegal</option>
+<option value="SC" >Seychelles</option>
+<option value="SL" >Sierra Leone</option>
+<option value="SG" >Singapore</option>
+<option value="SK" >Slovakia</option>
+<option value="SI" >Slovenia</option>
+<option value="SB" >Solomon Islands</option>
+<option value="SO" >Somalia</option>
+<option value="ZA" >South Africa</option>
+<option value="ES" >Spain</option>
+<option value="LK" >Sri Lanka</option>
+<option value="SD" >Sudan</option>
+<option value="SR" >Suriname</option>
+<option value="SJ" >Svalbard And Jan Mayen Islands</option>
+<option value="SZ" >Swaziland</option>
+<option value="SE" >Sweden</option>
+<option value="CH" >Switzerland</option>
+<option value="SY" >Syrian Arab Republic</option>
+<option value="TW" >Taiwan area, China</option>
+<option value="TJ" >Tajikistan</option>
+<option value="TZ" >Tanzania, United Republic Of</option>
+<option value="TH" >Thailand</option>
+<option value="TG" >Togo</option>
+<option value="TK" >Tokelau</option>
+<option value="TO" >Tonga</option>
+<option value="TT" >Trinidad And Tobago</option>
+<option value="TN" >Tunisia</option>
+<option value="TR" >Turkey</option>
+<option value="TM" >Turkmenistan</option>
+<option value="TC" >Turks And Caicos Islands</option>
+<option value="TV" >Tuvalu</option>
+<option value="UG" >Uganda</option>
+<option value="UA" >Ukraine</option>
+<option value="AE" >United Arab Emirates</option>
+<option value="GB" >United Kingdom</option>
+<option value="US" >United States</option>
+<option value="UM" >United States Minor Outlying Isl</option>
+<option value="UY" >Uruguay</option>
+<option value="SU" >Ussr</option>
+<option value="UZ" >Uzbekistan</option>
+<option value="VU" >Vanuatu</option>
+<option value="VA" >Vatican City State, Holy See</option>
+<option value="VE" >Venezuela</option>
+<option value="VN" >Viet Nam</option>
+<option value="VG" >Virgin Islands, British</option>
+<option value="VI" >Virgin Islands, U.S.</option>
+<option value="WF" >Wallis And Futuna Islands</option>
+<option value="EH" >Western Sahara</option>
+<option value="YE" >Yemen, Republic Of</option>
+<option value="YU" >Yugoslavia</option>
+<option value="ZR" >Zaire</option>
+<option value="ZM" >Zambia</option>
+<option value="ZW" >Zimbabwe</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>手机号</td>
+<td>
+<input type="text" class="form-control" id="customerPhone" value="+82 10-2770-1517"/>
+</td>
+</tr>
+<tr>
+<td>电子邮件</td>
+<td>
+<input type="text" class="form-control" id="customerEmail" value="monster818@gentlemonster.com"/>
+</td>
+</tr>
+<tr>
+<td>服务指南事项同意与否</td>
+<td><span>Y</span></td>
+</tr>
+<tr class="">
+
+
+</tr>
+<tr>
+<td>个人信息收集同意与否</td>
+<td><span>Y</span></td>
+</tr>
+
+
+<tr>
+<td><span>个人信息公开及共享同意与否</span></td>
+<td><span>N</span></td>
+</tr>
+<tr>
+<td>营销目的个人信息收集及使用同意与否</td>
+<td>
+<select class="form-select w-50" id="marketingAgreeYn">
+<option value="N">N</option>
+<option value="Y" selected="selected">Y</option>
+</select>
+</td>
+</tr>
+
+
+
+</tbody>
+</table>
+</div>
+<div class="col-6">
+<div>受理信息</div>
+<table class="table fs--1 border">
+<tbody>
+<tr>
+<td>受理法人</td> <!----접수처에 법인이 들어가므로 이게맞음 --->
+<td>
+<span>GM_OS_유노우아이어블(거래종료)</span>
+
+</td>
+</tr>
+<tr>
+<td>受理门店</td><!---접수 법인의 접수매장 --->
+<td>
+<input type="hidden" name="actualReceptionAccountName" id="actualReceptionAccountName" value="GM_OS_유노우아이어블(거래종료)"/>
+<div class="account-api-re-call-area actual-reception-account-code">
+<select class="chosen-select" id="actualReceptionAccountCode" name="actualReceptionAccountCode" style="width:100%">
+<option value="">Search in English and select..</option>
+<option value="AE1001" data-account-name="GM_Dubai_MALL_TDM" data-group-code="190">GM_Dubai_MALL_TDM </option>
+
+<option value="CN1001" data-account-name="GM_Guangzhou_MALL_Taikoohui" data-group-code="180">GM_Guangzhou_MALL_Taikoohui </option>
+
+<option value="CN1002" data-account-name="GM_MALL_Beijing Taikoo" data-group-code="180">GM_MALL_Beijing Taikoo </option>
+
+<option value="CN1003" data-account-name="GM_Beijing_MALL_SKP-S" data-group-code="180">GM_Beijing_MALL_SKP-S </option>
+
+<option value="CN1005" data-account-name="GM_Shanghai_MALL_IFC" data-group-code="180">GM_Shanghai_MALL_IFC </option>
+
+<option value="CN1006" data-account-name="GM_Xian_DS_SKP" data-group-code="180">GM_Xian_DS_SKP </option>
+
+<option value="CN1007" data-account-name="GM_Chengdu_MALL_Taikooli" data-group-code="180">GM_Chengdu_MALL_Taikooli </option>
+
+<option value="CN1008" data-account-name="GM_Hangzhou_MALL_Tower" data-group-code="180">GM_Hangzhou_MALL_Tower </option>
+
+<option value="CN1009" data-account-name="GM_Shenyang_MALL_MixC" data-group-code="180">GM_Shenyang_MALL_MixC </option>
+
+<option value="CN1010" data-account-name="GM_MALL_Shenzhen_MIXC World" data-group-code="180">GM_MALL_Shenzhen_MIXC World </option>
+
+<option value="CN1011" data-account-name="GM_Nanjing_MALL_Deji" data-group-code="180">GM_Nanjing_MALL_Deji </option>
+
+<option value="CN1012" data-account-name="GM_Ningbo_DS_Hankyu" data-group-code="180">GM_Ningbo_DS_Hankyu </option>
+
+<option value="CN1013" data-account-name="GM_Wuhan_MALL_K11" data-group-code="180">GM_Wuhan_MALL_K11 </option>
+
+<option value="CN1014" data-account-name="GM_ONLINE_China_Official" data-group-code="180">GM_ONLINE_China_Official </option>
+
+<option value="CN1015" data-account-name="GM_ONLINE_China_Tmall" data-group-code="180">GM_ONLINE_China_Tmall </option>
+
+<option value="CN1016" data-account-name="GM_ONLINE_China_WeChat" data-group-code="180">GM_ONLINE_China_WeChat </option>
+
+<option value="GB1001" data-account-name="GM_London_DS_Selfridges" data-group-code="180">GM_London_DS_Selfridges </option>
+
+<option value="GB1002" data-account-name="GM_ONLINE_UK_Selfridges" data-group-code="180">GM_ONLINE_UK_Selfridges </option>
+
+<option value="HK1001" data-account-name="GM_HongKong_MALL_LG" data-group-code="190">GM_HongKong_MALL_LG </option>
+
+<option value="HK1002" data-account-name="GM_MALL_K11 HONG KONG" data-group-code="180">GM_MALL_K11 HONG KONG </option>
+
+<option value="SG1001" data-account-name="GM_Singapore_MALL_ION" data-group-code="180">GM_Singapore_MALL_ION </option>
+
+<option value="SG1002" data-account-name="GM_Singapore_MALL_MBS" data-group-code="180">GM_Singapore_MALL_MBS </option>
+
+<option value="TW1001" data-account-name="GM_Taipei_MALL_Breeze_NanShan" data-group-code="190">GM_Taipei_MALL_Breeze_NanShan </option>
+
+<option value="US1001" data-account-name="GM_LosAngeles_FS_Downtown" data-group-code="180">GM_LosAngeles_FS_Downtown </option>
+
+<option value="US1002" data-account-name="GM_NewYork_FS_Soho" data-group-code="180">GM_NewYork_FS_Soho </option>
+
+<option value="US1003" data-account-name="GM_SanJose_MALL_Westfield_VF" data-group-code="180">GM_SanJose_MALL_Westfield_VF </option>
+
+<option value="US1004" data-account-name="GM_ONLINE_USA_Official" data-group-code="180">GM_ONLINE_USA_Official </option>
+
+<option value="US1005" data-account-name="GM_ONLINE_Canada_Official" data-group-code="180">GM_ONLINE_Canada_Official </option>
+
+<option value="CN1017" data-account-name="GM_WS_PUYI CN" data-group-code="200">GM_WS_PUYI CN </option>
+
+<option value="CN1018" data-account-name="GM_PU_Shanghai" data-group-code="180">GM_PU_Shanghai </option>
+
+<option value="HK1003" data-account-name="GM_WS_PUYI HK" data-group-code="200">GM_WS_PUYI HK </option>
+
+<option value="2010" data-account-name="HAUS DOSAN" data-group-code="100">GM_서울_하우스 노웨어_도산 HAUS DOSAN </option>
+
+<option value="2020" data-account-name="SINSA" data-group-code="100">GM_서울_FS_신사 SINSA </option>
+
+<option value="2100" data-account-name="LOTTE JAMSIL WOLD TOWER MALL" data-group-code="120">GM_서울_MALL_롯데_월드몰 LOTTE JAMSIL WOLD TOWER MALL </option>
+
+<option value="2110" data-account-name="SHINSEGAE STARFIELD HANAM" data-group-code="120">GM_경기_MALL_신세계스타필드_하남 SHINSEGAE STARFIELD HANAM </option>
+
+<option value="2300" data-account-name="GALLERIA APGUJEONG" data-group-code="110">GM_서울_DS_갤러리아_압구정 GALLERIA APGUJEONG </option>
+
+<option value="2310" data-account-name="GALLERIA GWANGGYO" data-group-code="110">GM_경기_DS_갤러리아_광교 GALLERIA GWANGGYO </option>
+
+<option value="2320" data-account-name="GALLERIA DAEJEON" data-group-code="110">GM_대전_DS_갤러리아_대전 GALLERIA DAEJEON </option>
+
+<option value="2330" data-account-name="LOTTE MYEONGDONG" data-group-code="110">GM_서울_DS_롯데_명동 LOTTE MYEONGDONG </option>
+
+<option value="2340" data-account-name="LOTTE JAMSIL" data-group-code="110">GM_서울_DS_롯데_잠실 LOTTE JAMSIL </option>
+
+<option value="2350" data-account-name="LOTTE SEOMYUN" data-group-code="110">GM_부산_DS_롯데_서면 LOTTE SEOMYUN </option>
+
+<option value="2360" data-account-name="LOTTE CHUNGRYANGLI" data-group-code="110">GM_DS_롯데(청량리) LOTTE CHUNGRYANGLI </option>
+
+<option value="2370" data-account-name="SHINSEGAE MYEONG DONG" data-group-code="110">GM_서울_DS_신세계_명동 SHINSEGAE MYEONG DONG </option>
+
+<option value="2380" data-account-name="SHINSEGAE CENTUM" data-group-code="110">GM_부산_DS_신세계_센텀 SHINSEGAE CENTUM </option>
+
+<option value="2390" data-account-name="SHINESEGAE DEAGU" data-group-code="110">GM_대구_DS_신세계_대구 SHINESEGAE DEAGU </option>
+
+<option value="2400" data-account-name="SHINESEGAE EUJEONGBU" data-group-code="110">GM_경기_DS_신세계_의정부 SHINESEGAE EUJEONGBU </option>
+
+<option value="2410" data-account-name="SHINSEGAE KYEONGI" data-group-code="110">GM_경기_DS_신세계_사우스시티 SHINSEGAE KYEONGI </option>
+
+<option value="2420" data-account-name="HYUNDAI YEOUIDO" data-group-code="110">GM_서울_DS_현대_여의도 HYUNDAI YEOUIDO </option>
+
+<option value="2430" data-account-name="HYUNDAI PANGYO" data-group-code="110">GM_경기_DS_현대_판교 HYUNDAI PANGYO </option>
+
+<option value="2440" data-account-name="HYUNDAI TRADE CENTER" data-group-code="110">GM_서울_DS_현대_무역 HYUNDAI TRADE CENTER </option>
+
+<option value="2450" data-account-name="HYUNDAI APGUJEONG" data-group-code="110">GM_서울_DS_현대_압구정 HYUNDAI APGUJEONG </option>
+
+<option value="2460" data-account-name="HYUNDAI MOKDONG" data-group-code="110">GM_서울_DS_현대_목동 HYUNDAI MOKDONG </option>
+
+<option value="2470" data-account-name="HYUNDAI DAEGU" data-group-code="110">GM_대구_DS_현대_대구 HYUNDAI DAEGU </option>
+
+<option value="2600" data-account-name="LOTTE SOGONG" data-group-code="130">GM_서울_DFS_롯데_명동 LOTTE SOGONG </option>
+
+<option value="2610" data-account-name="LOTTE WORLD TOWER MALL" data-group-code="130">GM_서울_DFS_롯데_월드몰 LOTTE WORLD TOWER MALL </option>
+
+<option value="2620" data-account-name="LOTTE JEJU" data-group-code="130">GM_제주_DFS_롯데_제주 LOTTE JEJU </option>
+
+<option value="2630" data-account-name="SHILLA SEOUL" data-group-code="130">GM_서울_DFS_신라_서울 SHILLA SEOUL </option>
+
+<option value="2640" data-account-name="SHILLA JEJU" data-group-code="130">GM_제주_DFS_신라_제주 SHILLA JEJU </option>
+
+<option value="2650" data-account-name="SHINSEGAE MYEONGDONG" data-group-code="130">GM_서울_DFS_신세계_명동 SHINSEGAE MYEONGDONG </option>
+
+<option value="2660" data-account-name="SHINSEGAE INCHEON T2 EAST" data-group-code="130">GM_인천_DFS_신세계_인천공항T2_E SHINSEGAE INCHEON T2 EAST </option>
+
+<option value="2670" data-account-name="SHINSEGAE INCHEON T2 WEST" data-group-code="130">GM_인천_DFS_신세계_인천공항T2_W SHINSEGAE INCHEON T2 WEST </option>
+
+<option value="2680" data-account-name="HYUNDAI INCHEON T1" data-group-code="130">GM_인천_DFS_현대_인천공항T1 HYUNDAI INCHEON T1 </option>
+
+<option value="10000050" data-account-name="GM_WS_GR8" data-group-code="200">GM_WS_GR8 </option>
+
+<option value="10000062" data-account-name="GM_WS_INCU" data-group-code="200">GM_WS_INCU </option>
+
+<option value="10000068" data-account-name="GM_WS_RODEN GRAY" data-group-code="200">GM_WS_RODEN GRAY </option>
+
+<option value="10000060" data-account-name="GM_WS_FEATURE" data-group-code="200">GM_WS_FEATURE </option>
+
+<option value="CN1004" data-account-name="GM_Shanghai_HAUS NOWHERE" data-group-code="180">GM_Shanghai_HAUS NOWHERE </option>
+
+<option value="10000073" data-account-name="GM_WS_TOM GREYHOUND" data-group-code="200">GM_WS_TOM GREYHOUND </option>
+
+<option value="10000059" data-account-name="(X)GM_WS_EYESTAR" data-group-code="200">(X)GM_WS_EYESTAR </option>
+
+<option value="10000054" data-account-name="GM_WS_ATOLYE GOZLUK" data-group-code="200">GM_WS_ATOLYE GOZLUK </option>
+
+<option value="10000066" data-account-name="GM_WS_MARC LE BIHAN" data-group-code="200">GM_WS_MARC LE BIHAN </option>
+
+<option value="10000058" data-account-name="(X)" data-group-code="200">(거래중지)GM_WS_DK FRAMES (X) </option>
+
+<option value="10000070" data-account-name="GM_WS_C2 EYEWEAR" data-group-code="200">GM_WS_C2 EYEWEAR </option>
+
+<option value="10000051" data-account-name="GM_WS_ANDRE OPTICAS" data-group-code="200">GM_WS_ANDRE OPTICAS </option>
+
+<option value="10000057" data-account-name="GM_WS_BROWNS" data-group-code="200">GM_WS_BROWNS </option>
+
+<option value="E1002" data-account-name="GM_ONLINE_Korea_Kakao" data-group-code="170">GM_ONLINE_Korea_Kakao </option>
+
+<option value="E1003" data-account-name="GM_ONLINE_Korea_Lotte" data-group-code="170">GM_ONLINE_Korea_Lotte </option>
+
+<option value="E1004" data-account-name="GM_ONLINE_Korea_SSG" data-group-code="170">GM_ONLINE_Korea_SSG </option>
+
+<option value="E1005" data-account-name="GM_ONLINE_Korea_Farfetch" data-group-code="170">GM_ONLINE_Korea_Farfetch </option>
+
+<option value="E1001" data-account-name="GM_ONLINE_Korea_Official_국내" data-group-code="160">GM_ONLINE_Korea_Official_국내 </option>
+
+<option value="E1001" data-account-name="GM_ONLINE_Korea_Official_해외" data-group-code="160">GM_ONLINE_Korea_Official_해외 </option>
+
+<option value="10000074" data-account-name="PUYI(CN)" data-group-code="200">GM_WS_PUYI(CN) PUYI(CN) </option>
+
+<option value="C1001" data-account-name="IICOMBINED CHINA" data-group-code="180">GM_중국법인 IICOMBINED CHINA </option>
+
+<option value="C1002" data-account-name="IICOMBINED U.S.A. INC" data-group-code="180">GM_미국법인 IICOMBINED U.S.A. INC </option>
+
+<option value="C1003" data-account-name="IICOMBINED UK LIMITED" data-group-code="180">GM_영국법인 IICOMBINED UK LIMITED </option>
+
+<option value="C1004" data-account-name="IICOMBINED SINGAPORE PTE.LTD" data-group-code="180">GM_싱가폴법인 IICOMBINED SINGAPORE PTE.LTD </option>
+
+<option value="C1005" data-account-name="IICOMBINED Middle East General Trad" data-group-code="190">GM_두바이법인(JV) IICOMBINED Middle East General Trad </option>
+
+<option value="C1006" data-account-name="HONG KONG IICOMBINED LIMITED" data-group-code="190">GM_홍콩법인(JV) HONG KONG IICOMBINED LIMITED </option>
+
+<option value="C1007" data-account-name="HONG KONG IICOMBINED LIMITED TAIWAN" data-group-code="190">GM_대만법인(JV) HONG KONG IICOMBINED LIMITED TAIWAN </option>
+
+<option value="CN1019" data-account-name="GM_WH_China" data-group-code="180">GM_WH_China </option>
+
+<option value="CN1021" data-account-name="북경 POPUP" data-group-code="180">북경 POPUP </option>
+
+<option value="2331" data-account-name="LOTTE DONGTAN" data-group-code="110">GM_경기_DS_롯데_동탄 LOTTE DONGTAN </option>
+
+<option value="10000064" data-account-name="GM_WS_LEISURE CENTER" data-group-code="200">GM_WS_LEISURE CENTER </option>
+
+<option value="E1007" data-account-name="GM_복지몰" data-group-code="230">GM_복지몰 </option>
+
+<option value="E1008" data-account-name="GM_PS_국내" data-group-code="220">GM_PS_국내 </option>
+
+<option value="E1009" data-account-name="GM_PS_해외" data-group-code="220">GM_PS_해외 </option>
+
+<option value="E1010" data-account-name="GM_PS_PSC" data-group-code="220">GM_PS_PSC </option>
+
+<option value="US1006" data-account-name="GM_WH_USA" data-group-code="180">GM_WH_USA </option>
+
+<option value="10000053" data-account-name="GM_WS_ATELIER NEW YORK" data-group-code="200">GM_WS_ATELIER NEW YORK </option>
+
+<option value="10000072" data-account-name="GM_WS_SMETS" data-group-code="200">GM_WS_SMETS </option>
+
+<option value="10000075" data-account-name="PUYI(HK)" data-group-code="200">GM_WS_PUYI(HK) PUYI(HK) </option>
+
+<option value="CN1020" data-account-name="GM_PU_Beijing_Etype" data-group-code="180">GM_PU_Beijing_Etype </option>
+
+<option value="CN1022" data-account-name="GM_MALL_Chongqing_Starlight 68" data-group-code="180">GM_MALL_Chongqing_Starlight 68 </option>
+
+<option value="2030" data-account-name="HONGDAE" data-group-code="100">GM_서울_FS_홍대 HONGDAE </option>
+
+<option value="2371" data-account-name="SHINSEGAE GANGNAM" data-group-code="110">GM_서울_DS_신세계_강남 SHINSEGAE GANGNAM </option>
+
+<option value="2411" data-account-name="SHINSEGAE DAEJEON" data-group-code="110">GM_대전_DS_신세계_대전 SHINSEGAE DAEJEON </option>
+
+<option value="3199" data-account-name="10 Corso Como  Seoul" data-group-code="150">GM_서울_SS_10CC 10 Corso Como  Seoul </option>
+
+<option value="AE1002" data-account-name="GM_Dubai_MALL_MOE" data-group-code="190">GM_Dubai_MALL_MOE </option>
+
+<option value="AE1003" data-account-name="GM_ONLINE_UAE_Ounass" data-group-code="190">GM_ONLINE_UAE_Ounass </option>
+
+<option value="CN1023" data-account-name="GM_ONLINE_China_JD" data-group-code="180">GM_ONLINE_China_JD </option>
+
+<option value="CN1024" data-account-name="GM_Shanghai_MALL_Taikooli" data-group-code="180">GM_Shanghai_MALL_Taikooli </option>
+
+<option value="10000056" data-account-name="GM_WS_BODEGA" data-group-code="200">GM_WS_BODEGA </option>
+
+<option value="10000061" data-account-name="GM_WS_HBX" data-group-code="200">GM_WS_HBX </option>
+
+<option value="10000067" data-account-name="(X)GM_WS_TSUM" data-group-code="200">(X)GM_WS_TSUM </option>
+
+<option value="10000055" data-account-name="(X)GM_WS_ZEISS VISION CENTRE B" data-group-code="200">(X)GM_WS_ZEISS VISION CENTRE B </option>
+
+<option value="10000071" data-account-name="GM_WS_SLAM JAM" data-group-code="200">GM_WS_SLAM JAM </option>
+
+<option value="10000065" data-account-name="GM_WS_LN-CC" data-group-code="200">GM_WS_LN-CC </option>
+
+<option value="10000063" data-account-name="(X)GM_WS_KM20" data-group-code="200">(X)GM_WS_KM20 </option>
+
+<option value="10000052" data-account-name="GM_WS_END." data-group-code="200">GM_WS_END. </option>
+
+<option value="10000069" data-account-name="(X)GM_WS_LABELS" data-group-code="200">(X)GM_WS_LABELS </option>
+
+<option value="C1008" data-account-name="IICOMBINED Malaysia SDN. BHD." data-group-code="180">GM_말레이시아법인 IICOMBINED Malaysia SDN. BHD. </option>
+
+<option value="MY1001" data-account-name="GM_KualaLumpur_MALL_TRX" data-group-code="180">GM_KualaLumpur_MALL_TRX </option>
+
+<option value="CN1025" data-account-name="GM_MALL_Chengdu Yintai" data-group-code="180">GM_MALL_Chengdu Yintai </option>
+
+<option value="AU1001" data-account-name="GM_Sydney_DFS_AirportT1" data-group-code="190">GM_Sydney_DFS_AirportT1 </option>
+
+<option value="CN1026" data-account-name="GM_MALL_Changsha Hisense" data-group-code="180">GM_MALL_Changsha Hisense </option>
+
+<option value="US1007" data-account-name="GM_CostaMesa_MALL_SCP" data-group-code="180">GM_CostaMesa_MALL_SCP </option>
+
+<option value="US1008" data-account-name="GM_NewJersey_MALL_AD" data-group-code="180">GM_NewJersey_MALL_AD </option>
+
+<option value="10000383" data-account-name="GM_WS_THE WEBSTER" data-group-code="200">GM_WS_THE WEBSTER </option>
+
+<option value="CN1027" data-account-name="GM_Beijing_MALL_Taikooli" data-group-code="180">GM_Beijing_MALL_Taikooli </option>
+
+<option value="CN1028" data-account-name="GM_Qingdao_MALL_Hisense" data-group-code="180">GM_Qingdao_MALL_Hisense </option>
+
+<option value="CN1029" data-account-name="GM_Chengdu_MALL_SKP" data-group-code="180">GM_Chengdu_MALL_SKP </option>
+
+<option value="CN1030" data-account-name="GM_Guangzhou_MALL_PC" data-group-code="180">GM_Guangzhou_MALL_PC </option>
+
+<option value="CN1031" data-account-name="GM_Xiamen_MALL_MixC" data-group-code="180">GM_Xiamen_MALL_MixC </option>
+
+<option value="US1009" data-account-name="GM_Houston_MALL_Galleria" data-group-code="180">GM_Houston_MALL_Galleria </option>
+
+<option value="10000419" data-account-name="GM_WS_TOMORROW_MILANO" data-group-code="200">GM_WS_TOMORROW_MILANO </option>
+
+<option value="E1006" data-account-name="GM_ONLINE_Korea_SSF" data-group-code="170">GM_ONLINE_Korea_SSF </option>
+
+<option value="10000450" data-account-name="GM_WS_HBA" data-group-code="200">GM_WS_HBA </option>
+
+<option value="10000449" data-account-name="GM_WS_MONCLER" data-group-code="200">GM_WS_MONCLER </option>
+
+<option value="SG1003" data-account-name="GM_ONLINE_Singapore_Official" data-group-code="180">GM_ONLINE_Singapore_Official </option>
+
+<option value="AE1004" data-account-name="GM_ONLINE_UAE_Official" data-group-code="190">GM_ONLINE_UAE_Official </option>
+
+<option value="2018132195" data-account-name="(주)신세계" data-group-code="200">(주)신세계 </option>
+
+<option value="10000392" data-account-name="Bluebell Australasia Pty Ltd" data-group-code="200">Bluebell Australasia Pty Ltd </option>
+
+<option value="C1009" data-account-name="IICOMBINED JAPAN Inc." data-group-code="180">GM_일본법인 IICOMBINED JAPAN Inc. </option>
+
+<option value="1048652503" data-account-name="(주)신세계프라퍼티" data-group-code="200">(주)신세계프라퍼티 </option>
+
+<option value="2690" data-account-name="GM_DFS_LOTTE DUTYFREE ONLINE" data-group-code="130">GM_ONLINE_Korea_DFS_롯데 GM_DFS_LOTTE DUTYFREE ONLINE </option>
+
+<option value="10000551" data-account-name="GM_WS_CNTRBND" data-group-code="200">GM_WS_CNTRBND </option>
+
+<option value="10000553" data-account-name="GM_WS_I VISIONARI" data-group-code="200">GM_WS_I VISIONARI </option>
+
+<option value="10000556" data-account-name="GM_WS_ONE POINT SEVEN FOUR" data-group-code="200">GM_WS_ONE POINT SEVEN FOUR </option>
+
+<option value="10000560" data-account-name="(X)GM_WS_FRAMED EWE OPTICAL" data-group-code="200">(X)GM_WS_FRAMED EWE OPTICAL </option>
+
+<option value="10000561" data-account-name="GM_WS_INDICE" data-group-code="200">GM_WS_INDICE </option>
+
+<option value="10000563" data-account-name="GM_WS_MIA BURTON" data-group-code="200">GM_WS_MIA BURTON </option>
+
+<option value="2800" data-account-name="GM_서울_PU_볼드컬렉션" data-group-code="240">GM_서울_PU_볼드컬렉션 </option>
+
+<option value="2480" data-account-name="GM_DS_SHINSEGAE CHEONAN ASAN" data-group-code="110">GM_천안_DS_신세계_천안아산 GM_DS_SHINSEGAE CHEONAN ASAN </option>
+
+<option value="10000584" data-account-name="GM_WS_MARGIELA S.A.S. ITALIAN" data-group-code="200">GM_WS_MARGIELA S.A.S. ITALIAN </option>
+
+<option value="10000585" data-account-name="GM_WS_MARGIELA S.A.S.U." data-group-code="200">GM_WS_MARGIELA S.A.S.U. </option>
+
+<option value="10000586" data-account-name="GM_WS_MARGIELA S.A.S. MUNICH B" data-group-code="200">GM_WS_MARGIELA S.A.S. MUNICH B </option>
+
+<option value="10000587" data-account-name="GM_WS_MARGIELA S.A.S. LONDON B" data-group-code="200">GM_WS_MARGIELA S.A.S. LONDON B </option>
+
+<option value="10000588" data-account-name="GM_WS_MARGIELA USA INC." data-group-code="200">GM_WS_MARGIELA USA INC. </option>
+
+<option value="10000589" data-account-name="GM_WS_MARGIELA JAPAN CO., LTD" data-group-code="200">GM_WS_MARGIELA JAPAN CO., LTD </option>
+
+<option value="10000590" data-account-name="GM_WS_MARGIELA (SHANGHAI) TRAD" data-group-code="200">GM_WS_MARGIELA (SHANGHAI) TRAD </option>
+
+<option value="10000591" data-account-name="GM_WS_MARGIELA ASIA LIMITED" data-group-code="200">GM_WS_MARGIELA ASIA LIMITED </option>
+
+<option value="8748602266" data-account-name="오티비코리아 유한회사" data-group-code="200">오티비코리아 유한회사 </option>
+
+<option value="10000592" data-account-name="GM_WS_OTB Macao Limited" data-group-code="200">GM_WS_OTB Macao Limited </option>
+
+<option value="10000594" data-account-name="GM_WS_MM MONO STORE DUBAI" data-group-code="200">GM_WS_MM MONO STORE DUBAI </option>
+
+<option value="10000595" data-account-name="GM_WS_ANTONIA" data-group-code="200">GM_WS_ANTONIA </option>
+
+<option value="10000596" data-account-name="GM_WS_VOO STORE" data-group-code="200">GM_WS_VOO STORE </option>
+
+<option value="10000597" data-account-name="GM_WS_MACHINE-A" data-group-code="200">GM_WS_MACHINE-A </option>
+
+<option value="10000598" data-account-name="GM_WS_DOVER STREET MARKET SG" data-group-code="200">GM_WS_DOVER STREET MARKET SG </option>
+
+<option value="10000599" data-account-name="GM_WS_MARAIS" data-group-code="200">GM_WS_MARAIS </option>
+
+<option value="10000600" data-account-name="GM_WS_MM MONO STORE KUWAIT" data-group-code="200">GM_WS_MM MONO STORE KUWAIT </option>
+
+<option value="10000601" data-account-name="GM_WS_VITKAC DEPARTMENT STORE" data-group-code="200">GM_WS_VITKAC DEPARTMENT STORE </option>
+
+<option value="10000602" data-account-name="GM_WS_SVRN" data-group-code="200">GM_WS_SVRN </option>
+
+<option value="10000603" data-account-name="GM_WS_LECLAIREUR" data-group-code="200">GM_WS_LECLAIREUR </option>
+
+<option value="10000604" data-account-name="GM_WS_THE BROKEN ARM" data-group-code="200">GM_WS_THE BROKEN ARM </option>
+
+<option value="10000606" data-account-name="GM_WS_DOVER STREET MARKET GINZ" data-group-code="200">GM_WS_DOVER STREET MARKET GINZ </option>
+
+<option value="10000608" data-account-name="(X)GM_WS_NOTRE" data-group-code="200">(X)GM_WS_NOTRE </option>
+
+<option value="2700" data-account-name="GM_DFS_SHINSEGAE DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_신세계_인천공항T2 GM_DFS_SHINSEGAE DUTY FREE(ICN T2) </option>
+
+<option value="JP1001" data-account-name="GM_Osaka_DS_Hankyu" data-group-code="180">GM_Osaka_DS_Hankyu </option>
+
+<option value="C1010" data-account-name="IICOMBINED Philippines" data-group-code="190">GM_필리핀법인(JV) IICOMBINED Philippines </option>
+
+<option value="C1011" data-account-name="IICOMBINED THAILAND" data-group-code="190">GM_태국법인(JV) IICOMBINED THAILAND </option>
+
+<option value="US1010" data-account-name="GM_NewYork_SS_DSM" data-group-code="180">GM_NewYork_SS_DSM </option>
+
+<option value="US1011" data-account-name="GM_LosAngeles_SS_DSM" data-group-code="180">GM_LosAngeles_SS_DSM </option>
+
+<option value="7748102506" data-account-name="GM_WS_Thug Club" data-group-code="200">GM_WS_Thug Club </option>
+
+<option value="JP1002" data-account-name="GM_ONLINE_Japan_Official" data-group-code="180">GM_ONLINE_Japan_Official </option>
+
+<option value="10000647" data-account-name="GM_WS_Beijing Yuze Technology" data-group-code="200">GM_WS_Beijing Yuze Technology </option>
+
+<option value="JP1003" data-account-name="GM_OFFICE_Japan" data-group-code="180">GM_OFFICE_Japan </option>
+
+<option value="10000664" data-account-name="GM_WS_EKSEPTION" data-group-code="200">GM_WS_EKSEPTION </option>
+
+<option value="10000680" data-account-name="GM_WS_NUBIAN" data-group-code="200">GM_WS_NUBIAN </option>
+
+<option value="2710" data-account-name="GM_DFS_HYUNDAI DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_현대_인천공항T2 GM_DFS_HYUNDAI DUTY FREE(ICN T2) </option>
+
+<option value="TH1001" data-account-name="GM_Bangkok_MALL_EmQuartier" data-group-code="190">GM_Bangkok_MALL_EmQuartier </option>
+
+<option value="10000699" data-account-name="Blizzard Entertainment, Inc." data-group-code="200">Blizzard Entertainment, Inc. </option>
+
+<option value="C1012" data-account-name="IICOMBINED AUSTRALIA" data-group-code="190">GM_호주법인(JV) IICOMBINED AUSTRALIA </option>
+
+<option value="AU1002" data-account-name="GM_Sydney_MALL_DJ" data-group-code="190">GM_Sydney_MALL_DJ </option>
+
+<option value="PH1001" data-account-name="GM_Manila_MALL_Shangri-La" data-group-code="190">GM_Manila_MALL_Shangri-La </option>
+
+<option value="10000716" data-account-name="MUGLER FASHION" data-group-code="200">MUGLER FASHION </option>
+
+<option value="10000727" data-account-name="GM_WS_KITH" data-group-code="200">GM_WS_KITH </option>
+
+<option value="10000728" data-account-name="GM_WS_H.LORENZO" data-group-code="200">GM_WS_H.LORENZO </option>
+
+<option value="10000729" data-account-name="GM_WS_ANT/DOTE" data-group-code="200">GM_WS_ANT/DOTE </option>
+
+<option value="AU1003" data-account-name="GM_ONLINE_Australia_DJ" data-group-code="190">GM_ONLINE_Australia_DJ </option>
+
+<option value="TW1002" data-account-name="GM_ONLINE_Taiwan_Official" data-group-code="190">GM_ONLINE_Taiwan_Official </option>
+
+<option value="10000682" data-account-name="SDH Paris (D&#39;HEYGERE)" data-group-code="200">SDH Paris (D&#39;HEYGERE) </option>
+
+<option value="10000749" data-account-name="GM_WS_HIGHSNOBIETY" data-group-code="200">GM_WS_HIGHSNOBIETY </option>
+
+<option value="10000750" data-account-name="GM_WS_DOVER STREET MARKET PARI" data-group-code="200">GM_WS_DOVER STREET MARKET PARI </option>
+
+<option value="10000751" data-account-name="GM_WS_OTTICA GIULIETTI E GUERR" data-group-code="200">GM_WS_OTTICA GIULIETTI E GUERR </option>
+
+<option value="JP1004" data-account-name="GM_Tokyo_FS_Aoyama" data-group-code="180">GM_Tokyo_FS_Aoyama </option>
+
+<option value="10000810" data-account-name="GM_WS_10 CORSO COMO" data-group-code="200">GM_WS_10 CORSO COMO </option>
+
+<option value="10000811" data-account-name="GM_WS_SKP BEIJING" data-group-code="200">GM_WS_SKP BEIJING </option>
+
+<option value="2720" data-account-name="GM_DFS_SHINSEGAE DUTYFREE ONLINE" data-group-code="130">GM_ONLINE_Korea_DFS_신세계 GM_DFS_SHINSEGAE DUTYFREE ONLINE </option>
+
+<option value="10000827" data-account-name="GM_WS_FAUX CONSULTANCY" data-group-code="200">GM_WS_FAUX CONSULTANCY </option>
+
+<option value="10000828" data-account-name="GM_WS_MAISON MARGIELA CHINA" data-group-code="200">GM_WS_MAISON MARGIELA CHINA </option>
+
+<option value="10000841" data-account-name="GM_WS_Margiela Asia Limited" data-group-code="200">GM_WS_Margiela Asia Limited </option>
+
+<option value="10001001" data-account-name="GM_WS_MAISON MARGIELA DUBAI MA" data-group-code="200">GM_WS_MAISON MARGIELA DUBAI MA </option>
+
+<option value="JP1005" data-account-name="GM_WH_Japan_Maersk" data-group-code="180">GM_WH_Japan_Maersk </option>
+
+<option value="TH1002" data-account-name="GM_Bangkok_PU_S.P_JentleSalon" data-group-code="190">GM_Bangkok_PU_S.P_JentleSalon </option>
+
+<option value="GB1003" data-account-name="GM_London_SS_DSM" data-group-code="180">GM_London_SS_DSM </option>
+
+<option value="JP1006" data-account-name="GM_Osaka_PU_JentleSalon" data-group-code="180">GM_Osaka_PU_JentleSalon </option>
+
+<option value="2730" data-account-name="GM_DFS_SHILLA DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_신라_인천공항T2 GM_DFS_SHILLA DUTY FREE(ICN T2) </option>
+
+<option value="CN1032" data-account-name="GM_Changsha_MALL_IFS" data-group-code="180">GM_Changsha_MALL_IFS </option>
+
+<option value="US1012" data-account-name="GM_NewYork_PU_JentleSalon" data-group-code="180">GM_NewYork_PU_JentleSalon </option>
+
+<option value="AU1004" data-account-name="GM_Melbourne_MALL_Chadstone" data-group-code="190">GM_Melbourne_MALL_Chadstone </option>
+
+<option value="HK1004" data-account-name="GM_HongKong_MALL_HC" data-group-code="190">GM_HongKong_MALL_HC </option>
+
+<option value="1208608519" data-account-name="(주)파리미키코리아" data-group-code="200">(주)파리미키코리아 </option>
+
+<option value="US1013" data-account-name="GM_LasVegas_MALL_TFS" data-group-code="180">GM_LasVegas_MALL_TFS </option>
+
+<option value="AU1005" data-account-name="GM_ONLINE_Australia_Official" data-group-code="190">GM_ONLINE_Australia_Official </option>
+
+<option value="MY1002" data-account-name="GM_PU_Kuala Lumpur_TRX
+" data-group-code="180">GM_PU_Kuala Lumpur_TRX
+</option>
+
+<option value="C4001" data-account-name="HN_중국법인" data-group-code="180">HN_중국법인 </option>
+
+<option value="CN1033" data-account-name="GM_Hangzhou_MALL_MixC" data-group-code="180">GM_Hangzhou_MALL_MixC </option>
+
+<option value="US1014" data-account-name="GM_LosAngeles_PU_Pocket" data-group-code="180">GM_LosAngeles_PU_Pocket </option>
+
+<option value="HK1005" data-account-name="GM_WH_HongKong" data-group-code="190">GM_WH_HongKong </option>
+
+<option value="TW1003" data-account-name="GM_WH_Taiwan" data-group-code="190">GM_WH_Taiwan </option>
+
+<option value="CN1034" data-account-name="GM_Shenzhen_HAUS NOWHERE" data-group-code="180">GM_Shenzhen_HAUS NOWHERE </option>
+
+<option value="CN1035" data-account-name="GM_Sanya_MALL_CDF" data-group-code="180">GM_Sanya_MALL_CDF </option>
+
+<option value="C1013" data-account-name="GM_프랑스법인" data-group-code="180">GM_프랑스법인 </option>
+
+<option value="CN1036" data-account-name="GM_Chongqing_MALL_MixC" data-group-code="180">GM_Chongqing_MALL_MixC </option>
+
+<option value="CN1037" data-account-name="GM_Shanghai_MALL_Xintiandi" data-group-code="180">GM_Shanghai_MALL_Xintiandi </option>
+
+<option value="TH1003" data-account-name="GM_Bangkok_PU_Emporium_2025" data-group-code="190">GM_Bangkok_PU_Emporium_2025 </option>
+
+<option value="10001427" data-account-name="GM_WS_MARGIELA MEXICO-POLANCO" data-group-code="200">GM_WS_MARGIELA MEXICO-POLANCO </option>
+
+<option value="2740" data-account-name="GM_ONLINE_Korea_DFS_신라" data-group-code="130">GM_ONLINE_Korea_DFS_신라 </option>
+
+<option value="C1014" data-account-name="GM_이탈리아법인" data-group-code="180">GM_이탈리아법인 </option>
+
+<option value="IT1001" data-account-name="GM_Milan_DS_10CC" data-group-code="180">GM_Milan_DS_10CC </option>
+
+<option value="C1015" data-account-name="GM_캐나다법인" data-group-code="180">GM_캐나다법인 </option>
+
+<option value="10001431" data-account-name="GM_WS_LUISA VIA ROMA" data-group-code="200">GM_WS_LUISA VIA ROMA </option>
+
+<option value="E1011" data-account-name="GM_ONLINE_Korea_S.I.V" data-group-code="170">GM_ONLINE_Korea_S.I.V </option>
+
+<option value="10001486" data-account-name="GM_WS_MAISON MARGIELA_YORKDALE" data-group-code="200">GM_WS_MAISON MARGIELA_YORKDALE </option>
+
+<option value="2810" data-account-name="SEONGSU POCKET" data-group-code="240">GM_서울_PU_포켓 SEONGSU POCKET </option>
+
+<option value="JP1007" data-account-name="GM_Tokyo_FS_Ginza" data-group-code="180">GM_Tokyo_FS_Ginza </option>
+
+<option value="US1015" data-account-name="GM_OFFICE_USA" data-group-code="180">GM_OFFICE_USA </option>
+
+<option value="TH1004" data-account-name="GM_Bangkok_MALL_SPG" data-group-code="190">GM_Bangkok_MALL_SPG </option>
+
+<option value="FR1001" data-account-name="GM_Paris_FS_Marais" data-group-code="180">GM_Paris_FS_Marais </option>
+
+<option value="2040" data-account-name="GM_FS_HAUS SEOUL" data-group-code="100">GM_서울_하우스 노웨어_서울 GM_FS_HAUS SEOUL </option>
+
+<option value="CA1001" data-account-name="GM_Toronto_MALL_Yorkdale" data-group-code="180">GM_Toronto_MALL_Yorkdale </option>
+
+<option value="1100" data-account-name="GM 물류센터" data-group-code="000">GM 물류센터 </option>
+
+<option value="1110" data-account-name="GM 본사" data-group-code="000">GM 본사 </option>
+
+<option value="US1016" data-account-name="GM_PS_USA" data-group-code="180">GM_PS_USA </option>
+
+<option value="US1017" data-account-name="GM_RX_USA" data-group-code="180">GM_RX_USA </option>
+
+<option value="AE1005" data-account-name="GM_WH_UAE" data-group-code="190">GM_WH_UAE </option>
+
+<option value="TH1005" data-account-name="GM_Bangkok_HAUS NOWHERE" data-group-code="190">GM_Bangkok_HAUS NOWHERE </option>
+
+<option value="CA1002" data-account-name="GM_WH_CANADA" data-group-code="180">GM_WH_CANADA </option>
+
+<option value="10001747" data-account-name="GM_WS_OTB SINGAPORE COMMERCIAL" data-group-code="200">GM_WS_OTB SINGAPORE COMMERCIAL </option>
+
+<option value="US1018" data-account-name="GM_LOST_USA" data-group-code="180">GM_LOST_USA </option>
+
+<option value="1208167338" data-account-name="(주) 와이지플러스" data-group-code="200">(주) 와이지플러스 </option>
+
+<option value="TW1004" data-account-name="GM_Taichung_MALL_Hanshin_Inter" data-group-code="190">GM_Taichung_MALL_Hanshin_Inter </option>
+
+<option value="US1019" data-account-name="GM_ONLINE_USA_TTS" data-group-code="180">GM_ONLINE_USA_TTS </option>
+
+</select>
+</div>
+</td>
+</tr>
+<tr>
+<td>受理人员</td>
+<td>
+<span>서안드레</span>
+</td>
+</tr>
+<tr>
+<td rowspan="2">收货地址</td>
+<td>
+<select class="form-select w-50" name="receptionMethod" id="receptionMethod" style="display: inline">
+<option value="store" selected="selected">门店取货</option>
+<option value="house">送货上门</option>
+</select>
+</td>
+</tr>
+<tr>
+<td class="p-1">
+
+<div class="reception-method-house-area">
+<div >
+<div class="row">
+<div class="col-6">
+<span>country : </span>
+<select class="chosen-select" id="deliveryCountry" name="deliveryCountry" style="width: 100%;">
+<option value="AF" >Afghanistan</option>
+<option value="AL" >Albania</option>
+<option value="DZ" >Algeria</option>
+<option value="AS" >American Samoa</option>
+<option value="AD" >Andorra</option>
+<option value="AO" >Angola</option>
+<option value="AI" >Anguilla</option>
+<option value="AQ" >Antarctica</option>
+<option value="AG" >Antigua And Barbuda</option>
+<option value="AR" >Argentina</option>
+<option value="AM" >Armenia</option>
+<option value="AW" >Aruba</option>
+<option value="AU" >Australia</option>
+<option value="AT" >Austria</option>
+<option value="AZ" >Azerbaijan</option>
+<option value="BS" >Bahamas</option>
+<option value="BH" >Bahrain</option>
+<option value="BD" >Bangladesh</option>
+<option value="BB" >Barbados</option>
+<option value="BE" >Belgium</option>
+<option value="BZ" >Belize</option>
+<option value="BJ" >Benin</option>
+<option value="BM" >Bermuda</option>
+<option value="BT" >Bhutan</option>
+<option value="BO" >Bolivia</option>
+<option value="BA" >Bosnia Hercegovina</option>
+<option value="BW" >Botswana</option>
+<option value="BV" >Bouvet Island</option>
+<option value="BR" >Brazil</option>
+<option value="IO" >British Indian Ocean Territory</option>
+<option value="BN" >Brunei Darussalam</option>
+<option value="BG" >Bulgaria</option>
+<option value="BF" >Burkina Faso</option>
+<option value="BI" >Burundi</option>
+<option value="BY" >Belarus</option>
+<option value="KH" >Cambodia</option>
+<option value="CM" >Cameroon</option>
+<option value="CA" >Canada</option>
+<option value="CV" >Cape Verde</option>
+<option value="KY" >Cayman Islands</option>
+<option value="CF" >Central African Republic</option>
+<option value="TD" >Chad</option>
+<option value="CL" >Chile</option>
+<option value="CN" >China</option>
+<option value="CX" >Christmas Island</option>
+<option value="CC" >Cocos Keeling Islands</option>
+<option value="CO" >Colombia</option>
+<option value="KM" >Comoros</option>
+<option value="CG" >Congo</option>
+<option value="CK" >Cook Islands</option>
+<option value="CR" >Costa Rica</option>
+<option value="HR" >Croatia</option>
+<option value="CU" >Cuba</option>
+<option value="CY" >Cyprus</option>
+<option value="CZ" >Czech Republic</option>
+<option value="CS" >Czechoslovakia</option>
+<option value="DK" >Denmark</option>
+<option value="DJ" >Djibouti</option>
+<option value="DM" >Dominica</option>
+<option value="DO" >Dominican Republic</option>
+<option value="TP" >East Timor</option>
+<option value="EC" >Ecuador</option>
+<option value="EG" >Egypt</option>
+<option value="SV" >El Salvador</option>
+<option value="GQ" >Equatorial Guinea</option>
+<option value="EE" >Estonia</option>
+<option value="ET" >Ethiopia</option>
+<option value="FK" >Falkland Islands </option>
+<option value="FO" >Faroe Islands</option>
+<option value="FJ" >Fiji</option>
+<option value="FI" >Finland</option>
+<option value="FR" >France</option>
+<option value="GF" >French Guiana</option>
+<option value="PF" >French Polynesia</option>
+<option value="TF" >French Southern Territories</option>
+<option value="GA" >Gabon</option>
+<option value="GM" >Gambia</option>
+<option value="GE" >Georgia</option>
+<option value="DE" >Germany</option>
+<option value="GH" >Ghana</option>
+<option value="GI" >Gibraltar</option>
+<option value="GR" >Greece</option>
+<option value="GL" >Greenland</option>
+<option value="GD" >Grenada</option>
+<option value="GP" >Guadeloupe</option>
+<option value="GU" >Guam</option>
+<option value="GT" >Guatemala</option>
+<option value="GN" >Guinea</option>
+<option value="GW" >Guinea-Bissau</option>
+<option value="GY" >Guyana</option>
+<option value="HT" >Haiti</option>
+<option value="HM" >Heard And McDonald Islands</option>
+<option value="HN" >Honduras</option>
+<option value="HK" >Hong Kong SAR</option>
+<option value="HU" >Hungary</option>
+<option value="IS" >Iceland</option>
+<option value="IN" >India</option>
+<option value="ID" >Indonesia</option>
+<option value="IR" >Iran, Islamic Republic Of</option>
+<option value="IQ" >Iraq</option>
+<option value="IE" >Ireland</option>
+<option value="IL" >Israel</option>
+<option value="IT" >Italy</option>
+<option value="JM" >Jamaica</option>
+<option value="JP" >Japan</option>
+<option value="JO" >Jordan</option>
+<option value="KZ" >Kazakhstan</option>
+<option value="KE" >Kenya</option>
+<option value="KI" >Kiribati</option>
+<option value="KR" >Korea, Republic Of</option>
+<option value="KW" >Kuwait</option>
+<option value="KG" >Kyrgyzstan</option>
+<option value="LV" >Latvia</option>
+<option value="LB" >Lebanon</option>
+<option value="LS" >Lesotho</option>
+<option value="LR" >Liberia</option>
+<option value="LY" >Libyan Arab Jamahiriya</option>
+<option value="LI" >Liechtenstein</option>
+<option value="LT" >Lithuania</option>
+<option value="LU" >Luxembourg</option>
+<option value="MO" >Macau</option>
+<option value="MG" >Madagascar</option>
+<option value="MW" >Malawi</option>
+<option value="MY" >Malaysia</option>
+<option value="MV" >Maldives</option>
+<option value="ML" >Mali</option>
+<option value="MT" >Malta</option>
+<option value="MH" >Marshall Islands</option>
+<option value="MQ" >Martinique</option>
+<option value="MR" >Mauritania</option>
+<option value="MU" >Mauritius</option>
+<option value="MX" >Mexico</option>
+<option value="FM" >Micronesia</option>
+<option value="MD" >Moldova, Republic Of</option>
+<option value="MC" >Monaco</option>
+<option value="MN" >Mongolia</option>
+<option value="MS" >Montserrat</option>
+<option value="MA" >Morocco</option>
+<option value="MZ" >Mozambique</option>
+<option value="MM" >Myanmar</option>
+<option value="NA" >Namibia</option>
+<option value="NR" >Nauru</option>
+<option value="NP" >Nepal</option>
+<option value="NL" >Netherlands</option>
+<option value="AN" >Netherlands Antilles</option>
+<option value="NT" >Neutral Zone</option>
+<option value="NC" >New Caledonia</option>
+<option value="NZ" >New Zealand</option>
+<option value="NI" >Nicaragua</option>
+<option value="NE" >Niger</option>
+<option value="NG" >Nigeria</option>
+<option value="NU" >Niue</option>
+<option value="NF" >Norfolk Island</option>
+<option value="MP" >Northern Mariana Islands</option>
+<option value="NO" >Norway</option>
+<option value="OM" >Oman</option>
+<option value="PK" >Pakistan</option>
+<option value="PW" >Palau</option>
+<option value="PA" >Panama</option>
+<option value="PG" >Papua New Guinea</option>
+<option value="PY" >Paraguay</option>
+<option value="PE" >Peru</option>
+<option value="PH" >Philippines</option>
+<option value="PN" >Pitcairn</option>
+<option value="PL" >Poland</option>
+<option value="PT" >Portugal</option>
+<option value="PR" >Puerto Rico</option>
+<option value="QA" >Qatar</option>
+<option value="RE" >Reunion</option>
+<option value="RO" >Romania</option>
+<option value="RU" >Russian Federation</option>
+<option value="RW" >Rwanda</option>
+<option value="SH" >St. Helena</option>
+<option value="KN" >Saint Kitts And Nevis</option>
+<option value="LC" >Saint Lucia</option>
+<option value="PM" >St. Pierre And Miquelon</option>
+<option value="VC" >Saint Vincent And The Grenadines</option>
+<option value="WS" >Samoa</option>
+<option value="SM" >San Marino</option>
+<option value="ST" >Sao Tome And Principe</option>
+<option value="SA" >Saudi Arabia</option>
+<option value="SN" >Senegal</option>
+<option value="SC" >Seychelles</option>
+<option value="SL" >Sierra Leone</option>
+<option value="SG" >Singapore</option>
+<option value="SK" >Slovakia</option>
+<option value="SI" >Slovenia</option>
+<option value="SB" >Solomon Islands</option>
+<option value="SO" >Somalia</option>
+<option value="ZA" >South Africa</option>
+<option value="ES" >Spain</option>
+<option value="LK" >Sri Lanka</option>
+<option value="SD" >Sudan</option>
+<option value="SR" >Suriname</option>
+<option value="SJ" >Svalbard And Jan Mayen Islands</option>
+<option value="SZ" >Swaziland</option>
+<option value="SE" >Sweden</option>
+<option value="CH" >Switzerland</option>
+<option value="SY" >Syrian Arab Republic</option>
+<option value="TW" >Taiwan</option>
+<option value="TJ" >Tajikistan</option>
+<option value="TZ" >Tanzania, United Republic Of</option>
+<option value="TH" >Thailand</option>
+<option value="TG" >Togo</option>
+<option value="TK" >Tokelau</option>
+<option value="TO" >Tonga</option>
+<option value="TT" >Trinidad And Tobago</option>
+<option value="TN" >Tunisia</option>
+<option value="TR" >Turkey</option>
+<option value="TM" >Turkmenistan</option>
+<option value="TC" >Turks And Caicos Islands</option>
+<option value="TV" >Tuvalu</option>
+<option value="UG" >Uganda</option>
+<option value="UA" >Ukraine</option>
+<option value="AE" >United Arab Emirates</option>
+<option value="GB" >United Kingdom</option>
+<option value="US" >United States</option>
+<option value="UM" >United States Minor Outlying Isl</option>
+<option value="UY" >Uruguay</option>
+<option value="SU" >Ussr</option>
+<option value="UZ" >Uzbekistan</option>
+<option value="VU" >Vanuatu</option>
+<option value="VA" >Vatican City State, Holy See</option>
+<option value="VE" >Venezuela</option>
+<option value="VN" >Viet Nam</option>
+<option value="VG" >Virgin Islands, British</option>
+<option value="VI" >Virgin Islands, U.S.</option>
+<option value="WF" >Wallis And Futuna Islands</option>
+<option value="EH" >Western Sahara</option>
+<option value="YE" >Yemen, Republic Of</option>
+<option value="YU" >Yugoslavia</option>
+<option value="ZR" >Zaire</option>
+<option value="ZM" >Zambia</option>
+<option value="ZW" >Zimbabwe</option>
+</select>
+</div>
+<div class="col-6">
+<span>zip code : </span>
+<input type="text" class="form-control" value="" name="deliveryZipcode" id="deliveryZipcode"/>
+</div>
+
+</div>
+</div>
+
+<div class="mb-1">
+<span>address : </span>
+<input type="text" class="form-control" value="" name="deliveryAddress1" id="deliveryAddress1"/>
+</div>
+<div class="mb-1">
+<span>Add Company,C/O,Apt,Suite,Unit : </span>
+<input type="text" class="form-control" value="" name="deliveryAddress2" id="deliveryAddress2"/>
+</div>
+<div class="row">
+<div class="col-6">
+<span>city : </span>
+<input type="text" class="form-control" value="" name="city" id="city"/>
+</div>
+<div class="col-6">
+<span>state : </span>
+<input type="text" class="form-control" value="" name="state" id="state"/>
+</div>
+</div>
+</div>
+<div class="reception-method-store-area">
+<!--- 수령지 매장일때 -->
+<input type="hidden" value="GM_Ningbo_DS_Hankyu" id="receivingStoreName"/>
+<div class="account-api-re-call-area receiving-store-code">
+<select class="chosen-select" id="receivingStoreCode" name="receivingStoreCode" >
+<option value="">Search in English and select..</option>
+<option value="AE1001" data-account-name="GM_Dubai_MALL_TDM" data-group-code="190">GM_Dubai_MALL_TDM </option>
+
+<option value="CN1001" data-account-name="GM_Guangzhou_MALL_Taikoohui" data-group-code="180">GM_Guangzhou_MALL_Taikoohui </option>
+
+<option value="CN1002" data-account-name="GM_MALL_Beijing Taikoo" data-group-code="180">GM_MALL_Beijing Taikoo </option>
+
+<option value="CN1003" data-account-name="GM_Beijing_MALL_SKP-S" data-group-code="180">GM_Beijing_MALL_SKP-S </option>
+
+<option value="CN1005" data-account-name="GM_Shanghai_MALL_IFC" data-group-code="180">GM_Shanghai_MALL_IFC </option>
+
+<option value="CN1006" data-account-name="GM_Xian_DS_SKP" data-group-code="180">GM_Xian_DS_SKP </option>
+
+<option value="CN1007" data-account-name="GM_Chengdu_MALL_Taikooli" data-group-code="180">GM_Chengdu_MALL_Taikooli </option>
+
+<option value="CN1008" data-account-name="GM_Hangzhou_MALL_Tower" data-group-code="180">GM_Hangzhou_MALL_Tower </option>
+
+<option value="CN1009" data-account-name="GM_Shenyang_MALL_MixC" data-group-code="180">GM_Shenyang_MALL_MixC </option>
+
+<option value="CN1010" data-account-name="GM_MALL_Shenzhen_MIXC World" data-group-code="180">GM_MALL_Shenzhen_MIXC World </option>
+
+<option value="CN1011" data-account-name="GM_Nanjing_MALL_Deji" data-group-code="180">GM_Nanjing_MALL_Deji </option>
+
+<option value="CN1012" data-account-name="GM_Ningbo_DS_Hankyu" data-group-code="180"
+selected="selected">GM_Ningbo_DS_Hankyu </option>
+
+<option value="CN1013" data-account-name="GM_Wuhan_MALL_K11" data-group-code="180">GM_Wuhan_MALL_K11 </option>
+
+<option value="CN1014" data-account-name="GM_ONLINE_China_Official" data-group-code="180">GM_ONLINE_China_Official </option>
+
+<option value="CN1015" data-account-name="GM_ONLINE_China_Tmall" data-group-code="180">GM_ONLINE_China_Tmall </option>
+
+<option value="CN1016" data-account-name="GM_ONLINE_China_WeChat" data-group-code="180">GM_ONLINE_China_WeChat </option>
+
+<option value="GB1001" data-account-name="GM_London_DS_Selfridges" data-group-code="180">GM_London_DS_Selfridges </option>
+
+<option value="GB1002" data-account-name="GM_ONLINE_UK_Selfridges" data-group-code="180">GM_ONLINE_UK_Selfridges </option>
+
+<option value="HK1001" data-account-name="GM_HongKong_MALL_LG" data-group-code="190">GM_HongKong_MALL_LG </option>
+
+<option value="HK1002" data-account-name="GM_MALL_K11 HONG KONG" data-group-code="180">GM_MALL_K11 HONG KONG </option>
+
+<option value="SG1001" data-account-name="GM_Singapore_MALL_ION" data-group-code="180">GM_Singapore_MALL_ION </option>
+
+<option value="SG1002" data-account-name="GM_Singapore_MALL_MBS" data-group-code="180">GM_Singapore_MALL_MBS </option>
+
+<option value="TW1001" data-account-name="GM_Taipei_MALL_Breeze_NanShan" data-group-code="190">GM_Taipei_MALL_Breeze_NanShan </option>
+
+<option value="US1001" data-account-name="GM_LosAngeles_FS_Downtown" data-group-code="180">GM_LosAngeles_FS_Downtown </option>
+
+<option value="US1002" data-account-name="GM_NewYork_FS_Soho" data-group-code="180">GM_NewYork_FS_Soho </option>
+
+<option value="US1003" data-account-name="GM_SanJose_MALL_Westfield_VF" data-group-code="180">GM_SanJose_MALL_Westfield_VF </option>
+
+<option value="US1004" data-account-name="GM_ONLINE_USA_Official" data-group-code="180">GM_ONLINE_USA_Official </option>
+
+<option value="US1005" data-account-name="GM_ONLINE_Canada_Official" data-group-code="180">GM_ONLINE_Canada_Official </option>
+
+<option value="CN1017" data-account-name="GM_WS_PUYI CN" data-group-code="200">GM_WS_PUYI CN </option>
+
+<option value="CN1018" data-account-name="GM_PU_Shanghai" data-group-code="180">GM_PU_Shanghai </option>
+
+<option value="HK1003" data-account-name="GM_WS_PUYI HK" data-group-code="200">GM_WS_PUYI HK </option>
+
+<option value="2010" data-account-name="HAUS DOSAN" data-group-code="100">GM_서울_하우스 노웨어_도산 HAUS DOSAN </option>
+
+<option value="2020" data-account-name="SINSA" data-group-code="100">GM_서울_FS_신사 SINSA </option>
+
+<option value="2100" data-account-name="LOTTE JAMSIL WOLD TOWER MALL" data-group-code="120">GM_서울_MALL_롯데_월드몰 LOTTE JAMSIL WOLD TOWER MALL </option>
+
+<option value="2110" data-account-name="SHINSEGAE STARFIELD HANAM" data-group-code="120">GM_경기_MALL_신세계스타필드_하남 SHINSEGAE STARFIELD HANAM </option>
+
+<option value="2300" data-account-name="GALLERIA APGUJEONG" data-group-code="110">GM_서울_DS_갤러리아_압구정 GALLERIA APGUJEONG </option>
+
+<option value="2310" data-account-name="GALLERIA GWANGGYO" data-group-code="110">GM_경기_DS_갤러리아_광교 GALLERIA GWANGGYO </option>
+
+<option value="2320" data-account-name="GALLERIA DAEJEON" data-group-code="110">GM_대전_DS_갤러리아_대전 GALLERIA DAEJEON </option>
+
+<option value="2330" data-account-name="LOTTE MYEONGDONG" data-group-code="110">GM_서울_DS_롯데_명동 LOTTE MYEONGDONG </option>
+
+<option value="2340" data-account-name="LOTTE JAMSIL" data-group-code="110">GM_서울_DS_롯데_잠실 LOTTE JAMSIL </option>
+
+<option value="2350" data-account-name="LOTTE SEOMYUN" data-group-code="110">GM_부산_DS_롯데_서면 LOTTE SEOMYUN </option>
+
+<option value="2360" data-account-name="LOTTE CHUNGRYANGLI" data-group-code="110">GM_DS_롯데(청량리) LOTTE CHUNGRYANGLI </option>
+
+<option value="2370" data-account-name="SHINSEGAE MYEONG DONG" data-group-code="110">GM_서울_DS_신세계_명동 SHINSEGAE MYEONG DONG </option>
+
+<option value="2380" data-account-name="SHINSEGAE CENTUM" data-group-code="110">GM_부산_DS_신세계_센텀 SHINSEGAE CENTUM </option>
+
+<option value="2390" data-account-name="SHINESEGAE DEAGU" data-group-code="110">GM_대구_DS_신세계_대구 SHINESEGAE DEAGU </option>
+
+<option value="2400" data-account-name="SHINESEGAE EUJEONGBU" data-group-code="110">GM_경기_DS_신세계_의정부 SHINESEGAE EUJEONGBU </option>
+
+<option value="2410" data-account-name="SHINSEGAE KYEONGI" data-group-code="110">GM_경기_DS_신세계_사우스시티 SHINSEGAE KYEONGI </option>
+
+<option value="2420" data-account-name="HYUNDAI YEOUIDO" data-group-code="110">GM_서울_DS_현대_여의도 HYUNDAI YEOUIDO </option>
+
+<option value="2430" data-account-name="HYUNDAI PANGYO" data-group-code="110">GM_경기_DS_현대_판교 HYUNDAI PANGYO </option>
+
+<option value="2440" data-account-name="HYUNDAI TRADE CENTER" data-group-code="110">GM_서울_DS_현대_무역 HYUNDAI TRADE CENTER </option>
+
+<option value="2450" data-account-name="HYUNDAI APGUJEONG" data-group-code="110">GM_서울_DS_현대_압구정 HYUNDAI APGUJEONG </option>
+
+<option value="2460" data-account-name="HYUNDAI MOKDONG" data-group-code="110">GM_서울_DS_현대_목동 HYUNDAI MOKDONG </option>
+
+<option value="2470" data-account-name="HYUNDAI DAEGU" data-group-code="110">GM_대구_DS_현대_대구 HYUNDAI DAEGU </option>
+
+<option value="2600" data-account-name="LOTTE SOGONG" data-group-code="130">GM_서울_DFS_롯데_명동 LOTTE SOGONG </option>
+
+<option value="2610" data-account-name="LOTTE WORLD TOWER MALL" data-group-code="130">GM_서울_DFS_롯데_월드몰 LOTTE WORLD TOWER MALL </option>
+
+<option value="2620" data-account-name="LOTTE JEJU" data-group-code="130">GM_제주_DFS_롯데_제주 LOTTE JEJU </option>
+
+<option value="2630" data-account-name="SHILLA SEOUL" data-group-code="130">GM_서울_DFS_신라_서울 SHILLA SEOUL </option>
+
+<option value="2640" data-account-name="SHILLA JEJU" data-group-code="130">GM_제주_DFS_신라_제주 SHILLA JEJU </option>
+
+<option value="2650" data-account-name="SHINSEGAE MYEONGDONG" data-group-code="130">GM_서울_DFS_신세계_명동 SHINSEGAE MYEONGDONG </option>
+
+<option value="2660" data-account-name="SHINSEGAE INCHEON T2 EAST" data-group-code="130">GM_인천_DFS_신세계_인천공항T2_E SHINSEGAE INCHEON T2 EAST </option>
+
+<option value="2670" data-account-name="SHINSEGAE INCHEON T2 WEST" data-group-code="130">GM_인천_DFS_신세계_인천공항T2_W SHINSEGAE INCHEON T2 WEST </option>
+
+<option value="2680" data-account-name="HYUNDAI INCHEON T1" data-group-code="130">GM_인천_DFS_현대_인천공항T1 HYUNDAI INCHEON T1 </option>
+
+<option value="10000050" data-account-name="GM_WS_GR8" data-group-code="200">GM_WS_GR8 </option>
+
+<option value="10000062" data-account-name="GM_WS_INCU" data-group-code="200">GM_WS_INCU </option>
+
+<option value="10000068" data-account-name="GM_WS_RODEN GRAY" data-group-code="200">GM_WS_RODEN GRAY </option>
+
+<option value="10000060" data-account-name="GM_WS_FEATURE" data-group-code="200">GM_WS_FEATURE </option>
+
+<option value="CN1004" data-account-name="GM_Shanghai_HAUS NOWHERE" data-group-code="180">GM_Shanghai_HAUS NOWHERE </option>
+
+<option value="10000073" data-account-name="GM_WS_TOM GREYHOUND" data-group-code="200">GM_WS_TOM GREYHOUND </option>
+
+<option value="10000059" data-account-name="(X)GM_WS_EYESTAR" data-group-code="200">(X)GM_WS_EYESTAR </option>
+
+<option value="10000054" data-account-name="GM_WS_ATOLYE GOZLUK" data-group-code="200">GM_WS_ATOLYE GOZLUK </option>
+
+<option value="10000066" data-account-name="GM_WS_MARC LE BIHAN" data-group-code="200">GM_WS_MARC LE BIHAN </option>
+
+<option value="10000058" data-account-name="(X)" data-group-code="200">(거래중지)GM_WS_DK FRAMES (X) </option>
+
+<option value="10000070" data-account-name="GM_WS_C2 EYEWEAR" data-group-code="200">GM_WS_C2 EYEWEAR </option>
+
+<option value="10000051" data-account-name="GM_WS_ANDRE OPTICAS" data-group-code="200">GM_WS_ANDRE OPTICAS </option>
+
+<option value="10000057" data-account-name="GM_WS_BROWNS" data-group-code="200">GM_WS_BROWNS </option>
+
+<option value="E1002" data-account-name="GM_ONLINE_Korea_Kakao" data-group-code="170">GM_ONLINE_Korea_Kakao </option>
+
+<option value="E1003" data-account-name="GM_ONLINE_Korea_Lotte" data-group-code="170">GM_ONLINE_Korea_Lotte </option>
+
+<option value="E1004" data-account-name="GM_ONLINE_Korea_SSG" data-group-code="170">GM_ONLINE_Korea_SSG </option>
+
+<option value="E1005" data-account-name="GM_ONLINE_Korea_Farfetch" data-group-code="170">GM_ONLINE_Korea_Farfetch </option>
+
+<option value="E1001" data-account-name="GM_ONLINE_Korea_Official_국내" data-group-code="160">GM_ONLINE_Korea_Official_국내 </option>
+
+<option value="E1001" data-account-name="GM_ONLINE_Korea_Official_해외" data-group-code="160">GM_ONLINE_Korea_Official_해외 </option>
+
+<option value="10000074" data-account-name="PUYI(CN)" data-group-code="200">GM_WS_PUYI(CN) PUYI(CN) </option>
+
+<option value="C1001" data-account-name="IICOMBINED CHINA" data-group-code="180">GM_중국법인 IICOMBINED CHINA </option>
+
+<option value="C1002" data-account-name="IICOMBINED U.S.A. INC" data-group-code="180">GM_미국법인 IICOMBINED U.S.A. INC </option>
+
+<option value="C1003" data-account-name="IICOMBINED UK LIMITED" data-group-code="180">GM_영국법인 IICOMBINED UK LIMITED </option>
+
+<option value="C1004" data-account-name="IICOMBINED SINGAPORE PTE.LTD" data-group-code="180">GM_싱가폴법인 IICOMBINED SINGAPORE PTE.LTD </option>
+
+<option value="C1005" data-account-name="IICOMBINED Middle East General Trad" data-group-code="190">GM_두바이법인(JV) IICOMBINED Middle East General Trad </option>
+
+<option value="C1006" data-account-name="HONG KONG IICOMBINED LIMITED" data-group-code="190">GM_홍콩법인(JV) HONG KONG IICOMBINED LIMITED </option>
+
+<option value="C1007" data-account-name="HONG KONG IICOMBINED LIMITED TAIWAN" data-group-code="190">GM_대만법인(JV) HONG KONG IICOMBINED LIMITED TAIWAN </option>
+
+<option value="CN1019" data-account-name="GM_WH_China" data-group-code="180">GM_WH_China </option>
+
+<option value="CN1021" data-account-name="북경 POPUP" data-group-code="180">북경 POPUP </option>
+
+<option value="2331" data-account-name="LOTTE DONGTAN" data-group-code="110">GM_경기_DS_롯데_동탄 LOTTE DONGTAN </option>
+
+<option value="10000064" data-account-name="GM_WS_LEISURE CENTER" data-group-code="200">GM_WS_LEISURE CENTER </option>
+
+<option value="E1007" data-account-name="GM_복지몰" data-group-code="230">GM_복지몰 </option>
+
+<option value="E1008" data-account-name="GM_PS_국내" data-group-code="220">GM_PS_국내 </option>
+
+<option value="E1009" data-account-name="GM_PS_해외" data-group-code="220">GM_PS_해외 </option>
+
+<option value="E1010" data-account-name="GM_PS_PSC" data-group-code="220">GM_PS_PSC </option>
+
+<option value="US1006" data-account-name="GM_WH_USA" data-group-code="180">GM_WH_USA </option>
+
+<option value="10000053" data-account-name="GM_WS_ATELIER NEW YORK" data-group-code="200">GM_WS_ATELIER NEW YORK </option>
+
+<option value="10000072" data-account-name="GM_WS_SMETS" data-group-code="200">GM_WS_SMETS </option>
+
+<option value="10000075" data-account-name="PUYI(HK)" data-group-code="200">GM_WS_PUYI(HK) PUYI(HK) </option>
+
+<option value="CN1020" data-account-name="GM_PU_Beijing_Etype" data-group-code="180">GM_PU_Beijing_Etype </option>
+
+<option value="CN1022" data-account-name="GM_MALL_Chongqing_Starlight 68" data-group-code="180">GM_MALL_Chongqing_Starlight 68 </option>
+
+<option value="2030" data-account-name="HONGDAE" data-group-code="100">GM_서울_FS_홍대 HONGDAE </option>
+
+<option value="2371" data-account-name="SHINSEGAE GANGNAM" data-group-code="110">GM_서울_DS_신세계_강남 SHINSEGAE GANGNAM </option>
+
+<option value="2411" data-account-name="SHINSEGAE DAEJEON" data-group-code="110">GM_대전_DS_신세계_대전 SHINSEGAE DAEJEON </option>
+
+<option value="3199" data-account-name="10 Corso Como  Seoul" data-group-code="150">GM_서울_SS_10CC 10 Corso Como  Seoul </option>
+
+<option value="AE1002" data-account-name="GM_Dubai_MALL_MOE" data-group-code="190">GM_Dubai_MALL_MOE </option>
+
+<option value="AE1003" data-account-name="GM_ONLINE_UAE_Ounass" data-group-code="190">GM_ONLINE_UAE_Ounass </option>
+
+<option value="CN1023" data-account-name="GM_ONLINE_China_JD" data-group-code="180">GM_ONLINE_China_JD </option>
+
+<option value="CN1024" data-account-name="GM_Shanghai_MALL_Taikooli" data-group-code="180">GM_Shanghai_MALL_Taikooli </option>
+
+<option value="10000056" data-account-name="GM_WS_BODEGA" data-group-code="200">GM_WS_BODEGA </option>
+
+<option value="10000061" data-account-name="GM_WS_HBX" data-group-code="200">GM_WS_HBX </option>
+
+<option value="10000067" data-account-name="(X)GM_WS_TSUM" data-group-code="200">(X)GM_WS_TSUM </option>
+
+<option value="10000055" data-account-name="(X)GM_WS_ZEISS VISION CENTRE B" data-group-code="200">(X)GM_WS_ZEISS VISION CENTRE B </option>
+
+<option value="10000071" data-account-name="GM_WS_SLAM JAM" data-group-code="200">GM_WS_SLAM JAM </option>
+
+<option value="10000065" data-account-name="GM_WS_LN-CC" data-group-code="200">GM_WS_LN-CC </option>
+
+<option value="10000063" data-account-name="(X)GM_WS_KM20" data-group-code="200">(X)GM_WS_KM20 </option>
+
+<option value="10000052" data-account-name="GM_WS_END." data-group-code="200">GM_WS_END. </option>
+
+<option value="10000069" data-account-name="(X)GM_WS_LABELS" data-group-code="200">(X)GM_WS_LABELS </option>
+
+<option value="C1008" data-account-name="IICOMBINED Malaysia SDN. BHD." data-group-code="180">GM_말레이시아법인 IICOMBINED Malaysia SDN. BHD. </option>
+
+<option value="MY1001" data-account-name="GM_KualaLumpur_MALL_TRX" data-group-code="180">GM_KualaLumpur_MALL_TRX </option>
+
+<option value="CN1025" data-account-name="GM_MALL_Chengdu Yintai" data-group-code="180">GM_MALL_Chengdu Yintai </option>
+
+<option value="AU1001" data-account-name="GM_Sydney_DFS_AirportT1" data-group-code="190">GM_Sydney_DFS_AirportT1 </option>
+
+<option value="CN1026" data-account-name="GM_MALL_Changsha Hisense" data-group-code="180">GM_MALL_Changsha Hisense </option>
+
+<option value="US1007" data-account-name="GM_CostaMesa_MALL_SCP" data-group-code="180">GM_CostaMesa_MALL_SCP </option>
+
+<option value="US1008" data-account-name="GM_NewJersey_MALL_AD" data-group-code="180">GM_NewJersey_MALL_AD </option>
+
+<option value="10000383" data-account-name="GM_WS_THE WEBSTER" data-group-code="200">GM_WS_THE WEBSTER </option>
+
+<option value="CN1027" data-account-name="GM_Beijing_MALL_Taikooli" data-group-code="180">GM_Beijing_MALL_Taikooli </option>
+
+<option value="CN1028" data-account-name="GM_Qingdao_MALL_Hisense" data-group-code="180">GM_Qingdao_MALL_Hisense </option>
+
+<option value="CN1029" data-account-name="GM_Chengdu_MALL_SKP" data-group-code="180">GM_Chengdu_MALL_SKP </option>
+
+<option value="CN1030" data-account-name="GM_Guangzhou_MALL_PC" data-group-code="180">GM_Guangzhou_MALL_PC </option>
+
+<option value="CN1031" data-account-name="GM_Xiamen_MALL_MixC" data-group-code="180">GM_Xiamen_MALL_MixC </option>
+
+<option value="US1009" data-account-name="GM_Houston_MALL_Galleria" data-group-code="180">GM_Houston_MALL_Galleria </option>
+
+<option value="10000419" data-account-name="GM_WS_TOMORROW_MILANO" data-group-code="200">GM_WS_TOMORROW_MILANO </option>
+
+<option value="E1006" data-account-name="GM_ONLINE_Korea_SSF" data-group-code="170">GM_ONLINE_Korea_SSF </option>
+
+<option value="10000450" data-account-name="GM_WS_HBA" data-group-code="200">GM_WS_HBA </option>
+
+<option value="10000449" data-account-name="GM_WS_MONCLER" data-group-code="200">GM_WS_MONCLER </option>
+
+<option value="SG1003" data-account-name="GM_ONLINE_Singapore_Official" data-group-code="180">GM_ONLINE_Singapore_Official </option>
+
+<option value="AE1004" data-account-name="GM_ONLINE_UAE_Official" data-group-code="190">GM_ONLINE_UAE_Official </option>
+
+<option value="2018132195" data-account-name="(주)신세계" data-group-code="200">(주)신세계 </option>
+
+<option value="10000392" data-account-name="Bluebell Australasia Pty Ltd" data-group-code="200">Bluebell Australasia Pty Ltd </option>
+
+<option value="C1009" data-account-name="IICOMBINED JAPAN Inc." data-group-code="180">GM_일본법인 IICOMBINED JAPAN Inc. </option>
+
+<option value="1048652503" data-account-name="(주)신세계프라퍼티" data-group-code="200">(주)신세계프라퍼티 </option>
+
+<option value="2690" data-account-name="GM_DFS_LOTTE DUTYFREE ONLINE" data-group-code="130">GM_ONLINE_Korea_DFS_롯데 GM_DFS_LOTTE DUTYFREE ONLINE </option>
+
+<option value="10000551" data-account-name="GM_WS_CNTRBND" data-group-code="200">GM_WS_CNTRBND </option>
+
+<option value="10000553" data-account-name="GM_WS_I VISIONARI" data-group-code="200">GM_WS_I VISIONARI </option>
+
+<option value="10000556" data-account-name="GM_WS_ONE POINT SEVEN FOUR" data-group-code="200">GM_WS_ONE POINT SEVEN FOUR </option>
+
+<option value="10000560" data-account-name="(X)GM_WS_FRAMED EWE OPTICAL" data-group-code="200">(X)GM_WS_FRAMED EWE OPTICAL </option>
+
+<option value="10000561" data-account-name="GM_WS_INDICE" data-group-code="200">GM_WS_INDICE </option>
+
+<option value="10000563" data-account-name="GM_WS_MIA BURTON" data-group-code="200">GM_WS_MIA BURTON </option>
+
+<option value="2800" data-account-name="GM_서울_PU_볼드컬렉션" data-group-code="240">GM_서울_PU_볼드컬렉션 </option>
+
+<option value="2480" data-account-name="GM_DS_SHINSEGAE CHEONAN ASAN" data-group-code="110">GM_천안_DS_신세계_천안아산 GM_DS_SHINSEGAE CHEONAN ASAN </option>
+
+<option value="10000584" data-account-name="GM_WS_MARGIELA S.A.S. ITALIAN" data-group-code="200">GM_WS_MARGIELA S.A.S. ITALIAN </option>
+
+<option value="10000585" data-account-name="GM_WS_MARGIELA S.A.S.U." data-group-code="200">GM_WS_MARGIELA S.A.S.U. </option>
+
+<option value="10000586" data-account-name="GM_WS_MARGIELA S.A.S. MUNICH B" data-group-code="200">GM_WS_MARGIELA S.A.S. MUNICH B </option>
+
+<option value="10000587" data-account-name="GM_WS_MARGIELA S.A.S. LONDON B" data-group-code="200">GM_WS_MARGIELA S.A.S. LONDON B </option>
+
+<option value="10000588" data-account-name="GM_WS_MARGIELA USA INC." data-group-code="200">GM_WS_MARGIELA USA INC. </option>
+
+<option value="10000589" data-account-name="GM_WS_MARGIELA JAPAN CO., LTD" data-group-code="200">GM_WS_MARGIELA JAPAN CO., LTD </option>
+
+<option value="10000590" data-account-name="GM_WS_MARGIELA (SHANGHAI) TRAD" data-group-code="200">GM_WS_MARGIELA (SHANGHAI) TRAD </option>
+
+<option value="10000591" data-account-name="GM_WS_MARGIELA ASIA LIMITED" data-group-code="200">GM_WS_MARGIELA ASIA LIMITED </option>
+
+<option value="8748602266" data-account-name="오티비코리아 유한회사" data-group-code="200">오티비코리아 유한회사 </option>
+
+<option value="10000592" data-account-name="GM_WS_OTB Macao Limited" data-group-code="200">GM_WS_OTB Macao Limited </option>
+
+<option value="10000594" data-account-name="GM_WS_MM MONO STORE DUBAI" data-group-code="200">GM_WS_MM MONO STORE DUBAI </option>
+
+<option value="10000595" data-account-name="GM_WS_ANTONIA" data-group-code="200">GM_WS_ANTONIA </option>
+
+<option value="10000596" data-account-name="GM_WS_VOO STORE" data-group-code="200">GM_WS_VOO STORE </option>
+
+<option value="10000597" data-account-name="GM_WS_MACHINE-A" data-group-code="200">GM_WS_MACHINE-A </option>
+
+<option value="10000598" data-account-name="GM_WS_DOVER STREET MARKET SG" data-group-code="200">GM_WS_DOVER STREET MARKET SG </option>
+
+<option value="10000599" data-account-name="GM_WS_MARAIS" data-group-code="200">GM_WS_MARAIS </option>
+
+<option value="10000600" data-account-name="GM_WS_MM MONO STORE KUWAIT" data-group-code="200">GM_WS_MM MONO STORE KUWAIT </option>
+
+<option value="10000601" data-account-name="GM_WS_VITKAC DEPARTMENT STORE" data-group-code="200">GM_WS_VITKAC DEPARTMENT STORE </option>
+
+<option value="10000602" data-account-name="GM_WS_SVRN" data-group-code="200">GM_WS_SVRN </option>
+
+<option value="10000603" data-account-name="GM_WS_LECLAIREUR" data-group-code="200">GM_WS_LECLAIREUR </option>
+
+<option value="10000604" data-account-name="GM_WS_THE BROKEN ARM" data-group-code="200">GM_WS_THE BROKEN ARM </option>
+
+<option value="10000606" data-account-name="GM_WS_DOVER STREET MARKET GINZ" data-group-code="200">GM_WS_DOVER STREET MARKET GINZ </option>
+
+<option value="10000608" data-account-name="(X)GM_WS_NOTRE" data-group-code="200">(X)GM_WS_NOTRE </option>
+
+<option value="2700" data-account-name="GM_DFS_SHINSEGAE DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_신세계_인천공항T2 GM_DFS_SHINSEGAE DUTY FREE(ICN T2) </option>
+
+<option value="JP1001" data-account-name="GM_Osaka_DS_Hankyu" data-group-code="180">GM_Osaka_DS_Hankyu </option>
+
+<option value="C1010" data-account-name="IICOMBINED Philippines" data-group-code="190">GM_필리핀법인(JV) IICOMBINED Philippines </option>
+
+<option value="C1011" data-account-name="IICOMBINED THAILAND" data-group-code="190">GM_태국법인(JV) IICOMBINED THAILAND </option>
+
+<option value="US1010" data-account-name="GM_NewYork_SS_DSM" data-group-code="180">GM_NewYork_SS_DSM </option>
+
+<option value="US1011" data-account-name="GM_LosAngeles_SS_DSM" data-group-code="180">GM_LosAngeles_SS_DSM </option>
+
+<option value="7748102506" data-account-name="GM_WS_Thug Club" data-group-code="200">GM_WS_Thug Club </option>
+
+<option value="JP1002" data-account-name="GM_ONLINE_Japan_Official" data-group-code="180">GM_ONLINE_Japan_Official </option>
+
+<option value="10000647" data-account-name="GM_WS_Beijing Yuze Technology" data-group-code="200">GM_WS_Beijing Yuze Technology </option>
+
+<option value="JP1003" data-account-name="GM_OFFICE_Japan" data-group-code="180">GM_OFFICE_Japan </option>
+
+<option value="10000664" data-account-name="GM_WS_EKSEPTION" data-group-code="200">GM_WS_EKSEPTION </option>
+
+<option value="10000680" data-account-name="GM_WS_NUBIAN" data-group-code="200">GM_WS_NUBIAN </option>
+
+<option value="2710" data-account-name="GM_DFS_HYUNDAI DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_현대_인천공항T2 GM_DFS_HYUNDAI DUTY FREE(ICN T2) </option>
+
+<option value="TH1001" data-account-name="GM_Bangkok_MALL_EmQuartier" data-group-code="190">GM_Bangkok_MALL_EmQuartier </option>
+
+<option value="10000699" data-account-name="Blizzard Entertainment, Inc." data-group-code="200">Blizzard Entertainment, Inc. </option>
+
+<option value="C1012" data-account-name="IICOMBINED AUSTRALIA" data-group-code="190">GM_호주법인(JV) IICOMBINED AUSTRALIA </option>
+
+<option value="AU1002" data-account-name="GM_Sydney_MALL_DJ" data-group-code="190">GM_Sydney_MALL_DJ </option>
+
+<option value="PH1001" data-account-name="GM_Manila_MALL_Shangri-La" data-group-code="190">GM_Manila_MALL_Shangri-La </option>
+
+<option value="10000716" data-account-name="MUGLER FASHION" data-group-code="200">MUGLER FASHION </option>
+
+<option value="10000727" data-account-name="GM_WS_KITH" data-group-code="200">GM_WS_KITH </option>
+
+<option value="10000728" data-account-name="GM_WS_H.LORENZO" data-group-code="200">GM_WS_H.LORENZO </option>
+
+<option value="10000729" data-account-name="GM_WS_ANT/DOTE" data-group-code="200">GM_WS_ANT/DOTE </option>
+
+<option value="AU1003" data-account-name="GM_ONLINE_Australia_DJ" data-group-code="190">GM_ONLINE_Australia_DJ </option>
+
+<option value="TW1002" data-account-name="GM_ONLINE_Taiwan_Official" data-group-code="190">GM_ONLINE_Taiwan_Official </option>
+
+<option value="10000682" data-account-name="SDH Paris (D&#39;HEYGERE)" data-group-code="200">SDH Paris (D&#39;HEYGERE) </option>
+
+<option value="10000749" data-account-name="GM_WS_HIGHSNOBIETY" data-group-code="200">GM_WS_HIGHSNOBIETY </option>
+
+<option value="10000750" data-account-name="GM_WS_DOVER STREET MARKET PARI" data-group-code="200">GM_WS_DOVER STREET MARKET PARI </option>
+
+<option value="10000751" data-account-name="GM_WS_OTTICA GIULIETTI E GUERR" data-group-code="200">GM_WS_OTTICA GIULIETTI E GUERR </option>
+
+<option value="JP1004" data-account-name="GM_Tokyo_FS_Aoyama" data-group-code="180">GM_Tokyo_FS_Aoyama </option>
+
+<option value="10000810" data-account-name="GM_WS_10 CORSO COMO" data-group-code="200">GM_WS_10 CORSO COMO </option>
+
+<option value="10000811" data-account-name="GM_WS_SKP BEIJING" data-group-code="200">GM_WS_SKP BEIJING </option>
+
+<option value="2720" data-account-name="GM_DFS_SHINSEGAE DUTYFREE ONLINE" data-group-code="130">GM_ONLINE_Korea_DFS_신세계 GM_DFS_SHINSEGAE DUTYFREE ONLINE </option>
+
+<option value="10000827" data-account-name="GM_WS_FAUX CONSULTANCY" data-group-code="200">GM_WS_FAUX CONSULTANCY </option>
+
+<option value="10000828" data-account-name="GM_WS_MAISON MARGIELA CHINA" data-group-code="200">GM_WS_MAISON MARGIELA CHINA </option>
+
+<option value="10000841" data-account-name="GM_WS_Margiela Asia Limited" data-group-code="200">GM_WS_Margiela Asia Limited </option>
+
+<option value="10001001" data-account-name="GM_WS_MAISON MARGIELA DUBAI MA" data-group-code="200">GM_WS_MAISON MARGIELA DUBAI MA </option>
+
+<option value="JP1005" data-account-name="GM_WH_Japan_Maersk" data-group-code="180">GM_WH_Japan_Maersk </option>
+
+<option value="TH1002" data-account-name="GM_Bangkok_PU_S.P_JentleSalon" data-group-code="190">GM_Bangkok_PU_S.P_JentleSalon </option>
+
+<option value="GB1003" data-account-name="GM_London_SS_DSM" data-group-code="180">GM_London_SS_DSM </option>
+
+<option value="JP1006" data-account-name="GM_Osaka_PU_JentleSalon" data-group-code="180">GM_Osaka_PU_JentleSalon </option>
+
+<option value="2730" data-account-name="GM_DFS_SHILLA DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_신라_인천공항T2 GM_DFS_SHILLA DUTY FREE(ICN T2) </option>
+
+<option value="CN1032" data-account-name="GM_Changsha_MALL_IFS" data-group-code="180">GM_Changsha_MALL_IFS </option>
+
+<option value="US1012" data-account-name="GM_NewYork_PU_JentleSalon" data-group-code="180">GM_NewYork_PU_JentleSalon </option>
+
+<option value="AU1004" data-account-name="GM_Melbourne_MALL_Chadstone" data-group-code="190">GM_Melbourne_MALL_Chadstone </option>
+
+<option value="HK1004" data-account-name="GM_HongKong_MALL_HC" data-group-code="190">GM_HongKong_MALL_HC </option>
+
+<option value="1208608519" data-account-name="(주)파리미키코리아" data-group-code="200">(주)파리미키코리아 </option>
+
+<option value="US1013" data-account-name="GM_LasVegas_MALL_TFS" data-group-code="180">GM_LasVegas_MALL_TFS </option>
+
+<option value="AU1005" data-account-name="GM_ONLINE_Australia_Official" data-group-code="190">GM_ONLINE_Australia_Official </option>
+
+<option value="MY1002" data-account-name="GM_PU_Kuala Lumpur_TRX
+" data-group-code="180">GM_PU_Kuala Lumpur_TRX
+</option>
+
+<option value="C4001" data-account-name="HN_중국법인" data-group-code="180">HN_중국법인 </option>
+
+<option value="CN1033" data-account-name="GM_Hangzhou_MALL_MixC" data-group-code="180">GM_Hangzhou_MALL_MixC </option>
+
+<option value="US1014" data-account-name="GM_LosAngeles_PU_Pocket" data-group-code="180">GM_LosAngeles_PU_Pocket </option>
+
+<option value="HK1005" data-account-name="GM_WH_HongKong" data-group-code="190">GM_WH_HongKong </option>
+
+<option value="TW1003" data-account-name="GM_WH_Taiwan" data-group-code="190">GM_WH_Taiwan </option>
+
+<option value="CN1034" data-account-name="GM_Shenzhen_HAUS NOWHERE" data-group-code="180">GM_Shenzhen_HAUS NOWHERE </option>
+
+<option value="CN1035" data-account-name="GM_Sanya_MALL_CDF" data-group-code="180">GM_Sanya_MALL_CDF </option>
+
+<option value="C1013" data-account-name="GM_프랑스법인" data-group-code="180">GM_프랑스법인 </option>
+
+<option value="CN1036" data-account-name="GM_Chongqing_MALL_MixC" data-group-code="180">GM_Chongqing_MALL_MixC </option>
+
+<option value="CN1037" data-account-name="GM_Shanghai_MALL_Xintiandi" data-group-code="180">GM_Shanghai_MALL_Xintiandi </option>
+
+<option value="TH1003" data-account-name="GM_Bangkok_PU_Emporium_2025" data-group-code="190">GM_Bangkok_PU_Emporium_2025 </option>
+
+<option value="10001427" data-account-name="GM_WS_MARGIELA MEXICO-POLANCO" data-group-code="200">GM_WS_MARGIELA MEXICO-POLANCO </option>
+
+<option value="2740" data-account-name="GM_ONLINE_Korea_DFS_신라" data-group-code="130">GM_ONLINE_Korea_DFS_신라 </option>
+
+<option value="C1014" data-account-name="GM_이탈리아법인" data-group-code="180">GM_이탈리아법인 </option>
+
+<option value="IT1001" data-account-name="GM_Milan_DS_10CC" data-group-code="180">GM_Milan_DS_10CC </option>
+
+<option value="C1015" data-account-name="GM_캐나다법인" data-group-code="180">GM_캐나다법인 </option>
+
+<option value="10001431" data-account-name="GM_WS_LUISA VIA ROMA" data-group-code="200">GM_WS_LUISA VIA ROMA </option>
+
+<option value="E1011" data-account-name="GM_ONLINE_Korea_S.I.V" data-group-code="170">GM_ONLINE_Korea_S.I.V </option>
+
+<option value="10001486" data-account-name="GM_WS_MAISON MARGIELA_YORKDALE" data-group-code="200">GM_WS_MAISON MARGIELA_YORKDALE </option>
+
+<option value="2810" data-account-name="SEONGSU POCKET" data-group-code="240">GM_서울_PU_포켓 SEONGSU POCKET </option>
+
+<option value="JP1007" data-account-name="GM_Tokyo_FS_Ginza" data-group-code="180">GM_Tokyo_FS_Ginza </option>
+
+<option value="US1015" data-account-name="GM_OFFICE_USA" data-group-code="180">GM_OFFICE_USA </option>
+
+<option value="TH1004" data-account-name="GM_Bangkok_MALL_SPG" data-group-code="190">GM_Bangkok_MALL_SPG </option>
+
+<option value="FR1001" data-account-name="GM_Paris_FS_Marais" data-group-code="180">GM_Paris_FS_Marais </option>
+
+<option value="2040" data-account-name="GM_FS_HAUS SEOUL" data-group-code="100">GM_서울_하우스 노웨어_서울 GM_FS_HAUS SEOUL </option>
+
+<option value="CA1001" data-account-name="GM_Toronto_MALL_Yorkdale" data-group-code="180">GM_Toronto_MALL_Yorkdale </option>
+
+<option value="1100" data-account-name="GM 물류센터" data-group-code="000">GM 물류센터 </option>
+
+<option value="1110" data-account-name="GM 본사" data-group-code="000">GM 본사 </option>
+
+<option value="US1016" data-account-name="GM_PS_USA" data-group-code="180">GM_PS_USA </option>
+
+<option value="US1017" data-account-name="GM_RX_USA" data-group-code="180">GM_RX_USA </option>
+
+<option value="AE1005" data-account-name="GM_WH_UAE" data-group-code="190">GM_WH_UAE </option>
+
+<option value="TH1005" data-account-name="GM_Bangkok_HAUS NOWHERE" data-group-code="190">GM_Bangkok_HAUS NOWHERE </option>
+
+<option value="CA1002" data-account-name="GM_WH_CANADA" data-group-code="180">GM_WH_CANADA </option>
+
+<option value="10001747" data-account-name="GM_WS_OTB SINGAPORE COMMERCIAL" data-group-code="200">GM_WS_OTB SINGAPORE COMMERCIAL </option>
+
+<option value="US1018" data-account-name="GM_LOST_USA" data-group-code="180">GM_LOST_USA </option>
+
+<option value="1208167338" data-account-name="(주) 와이지플러스" data-group-code="200">(주) 와이지플러스 </option>
+
+<option value="TW1004" data-account-name="GM_Taichung_MALL_Hanshin_Inter" data-group-code="190">GM_Taichung_MALL_Hanshin_Inter </option>
+
+<option value="US1019" data-account-name="GM_ONLINE_USA_TTS" data-group-code="180">GM_ONLINE_USA_TTS </option>
+
+</select>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>客户签名</td>
+<td>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcIAAAEECAYAAAC7qTTsAAAQAElEQVR4AezcjZHzSBUF0FkigggWIllCgAiACCADlkggA1IhA1a3duSZGtke/8it7n5ny1rJsiX1O2+qbrU08/3mzX8ECBAgQKCwgCAs3HylEyBAgMDbmyCs9FOgVgIECBDYCAjCDYkdBAgQIFBJQBBW6rZaKwmolQCBGwUE4Y1QvkaAAAECcwoIwjn7qioCBCoJqPUpAUH4FJ+DCRAgQGB0AUE4egeNnwABAgSeEhgsCJ+q1cEECBAgQGAjIAg3JHYQIECAQCUBQVip24PVargECBBoISAIWyi7BgECBAh0KyAIu22NgRGoJKBWAscJCMLj7F2ZAAECBDoQEIQdNMEQCBAgUEmgt1oFYW8dMR4CBAgQaCogCJtyuxgBAgQI9CYgCF/ZEecmQIAAge4FBGH3LTJAAgQIEHilgCB8pa5zVxJQKwECgwoIwkEbZ9gECBAgsI+AINzH0VkIEKgkoNapBAThVO1UDAECBAjcKyAI7xXzfQIECBCYSuCbIJyqVsUQIECAAIGNgCDckNhBgAABApUEBGGlbn9Tq48JECBQUUAQVuy6mgkQIEDgJCAITxQ2CFQSUCsBAquAIFwlrAkQIECgpIAgLNl2RRMgUElArdcFBOF1H58SIECAwOQCgnDyBiuPAAECBK4LzBWE12v1KQECBAgQ2AgIwg2JHQQIECBQSUAQVur2XLWqhgABArsICMJdGJ2EAAECBEYVEISjds64CVQSUCuBFwoIwhfiOjUBAgQI9C8gCPvvkRESIECgkkDzWgVhc3IXJECAAIGeBARhT90wFgIECBBoLiAIm5N/XNAWAQIECBwvIAiP74ERECBAgMCBAoLwQHyXriSgVgIEehUQhL12xrgIECBAoImAIGzC7CIECFQSUOtYAoJwrH4ZLQECBAjsLCAIdwZ1OgIECBAYS+C5IByrVqMlQIAAAQIbAUG4IbGDAAECBCoJCMJK3X6uVkcTIEBgSgFBOGVbFUWAAAECtwoIwlulfI9AJQG1EigkIAgLNVupBAgQILAVEIRbE3sIECBQSaB8rYKw/I8AAAIECNQWEIS1+696AgQIlBcoFYTluw2AAAECBDYCgnBDYgcBAgQIVBIQhJW6XapWxRIgQOA2AUF4m5NvESBAgMCkAoJw0sYqi0AlAbUSeEZAED6j51gCBAgQGF5AEA7fQgUQIECgksD+tQrC/U2dkQABAgQGEhCEAzXLUAkQIEBgfwFBuL/pXmd0HgIECBBoICAIGyC7BAECBAj0KyAI++2NkVUSUCsBAocJCMLD6F2YAAECBHoQEIQ9dMEYCBCoJKDWzgQEYWcNMRwCBAgQaCsgCNt6uxoBAgQIdCbw0iDsrFbDIUCAAAECGwFBuCGxgwABAgQqCQjCSt1+aa1OToAAgTEFBOGYfTNqAgQIENhJQBDuBOk0BCoJqJXATAKCcKZuqoUAAQIE7hYQhHeTOYAAAQKVBOavVRDO32MVEiBAgMAVAUF4BcdHBAgQIDC/gCD86LEtAgQIECgoIAgLNl3JBAgQIPAhIAg/LGxVElArAQIE3gUE4TuEFQECBAjUFBCENfuuagKVBNRK4KqAILzK40MCBAgQmF1AEM7eYfURIECgksADtQrCB9AcQoAAAQLzCAjCeXqpEgIECBB4QEAQPoDWxyFGQYAAAQJ7CAjCPRSdgwABAgSGFRCEw7bOwCsJqJUAgdcJCMLX2TozAQIECAwgIAgHaJIhEiBQSUCtrQUEYWtx1yNAgACBrgQEYVftMBgCBAgQaC1wZBC2rtX1CBAgQIDARkAQbkjsIDCNwO+XSv69LFkvKy8CBM4JCMJzKvbtL+CMLQUSfP9ZLriG4F+WbS8CBC4ICMILMHYTGFTgr8u4E3w/Luu8Eoh/y4aFAIHzAoLwvIu9BEYU+HkZdEJwnRH+eXn/h2VJGC6rZi8XIjCUgCAcql0GS+CiQG6D/vT+aWaACcB/vL+3IkDgioAgvILjIwIDCGT2lxDMOsNNAOb2aLYtBF4vMMEVBOEETVRCWYHcCl1DMLc/E4JZlwVROIFHBAThI2qOIXCsQGZ/CcCvt0KF4LF9cfVBBQThzY3zRQJdCOS2Z0IwYZjg+2EZVfYtKy8CBB4REISPqDmGQHuBBF8CML8VmquvvxCTbQsBAk8ICMIn8Bw6r0BHla0BmBDMdmaBeRZoFthRkwxlbAFBOHb/jH5ugYTd1wBMCCYM565cdQQaCgjChtguReAOgQTg19ugAvAOwNu/6pvVBQRh9Z8A9fcmkFng/5dBuQ26IHgRaCEgCFsouwaB7wUSfGaB3zv5BoGnBM4dLAjPqdhHoK3AGoJZ5/anP4lo6+9qxQUEYfEfAOUfLpBboZkJZiD+JCIKFgKNBQRhY/Bml3OhEQQSgPmFmMwC89ugCcURxm2MBKYSEIRTtVMxgwgk8L7+QkzCcJDhGyaBuQQE4Vz9VE3fAnkGmBDMLDAj3etWaM5lIUDgQQFB+CCcwwjcKZAQTABmyezPL8TcCejrBF4lIAhfJeu8BD4EMgvM88CEYZ4FZvn41BaBewR8d3cBQbg7qRMSOAkk+BKA6ywwAZjZ4OkLNggQOF5AEB7fAyOYU+DzLDDhJwTn7LOqJhDoOAgn0FVCRYHPs8DUnwDMkm0LAQIdCgjCDptiSMMKrCGYtVngsG008GoCgrBaxzutd4Jh5VlglpSy/llEwjDvLQQIdCwgCDtujqENIZDZXwIw6wRfboPm+eAQgzdIAgTe3gShnwICjwsk/NYQNAu82dEXCfQlIAj76ofRjCOQAMxiFjhOz4yUwFkBQXiWxU4CFwVy23P9d0LNAi8y+YDArwIj/F8QjtAlY+xFICGYP47PeBKCeZ9tCwECAwsIwoGbZ+jNBNZngQnB3Ar9YbmyEFwQvAjMICAI9+qi88wqkMDLs8CEYWaB+a3QWWtVF4GSAoKwZNsVfYNAgi8BuM4CE4IJxRsO9RUCBEYSEIQjdctYWwkkBBOAWedW6NcQbDUO1yFAoIGAIGyA7BJDCWTWl5lgQjABmFuhCcOhijBYAgRuFxCEt1v55twCCb4EYGaCqTQBmFDMtqWygNqnFxCE07dYgTcIJPASgAnDzP4SglnfcKivECAwuoAgHL2Dxv+swOcQdCv0WU3HExhQ4FMQDjh6QybwnMB6KzSzv8wCE4rPndHRBAgMJyAIh2uZAe8gkMDzz6TtAOkUBGYQEIQzdPGBGooekmeACcE8DwxBboXmfbYtBAgUFRCERRtfsOyEYAIwS26F+mfSCv4QKJnAOQFBeE7FvtkE8iwwS8Iws8A8D5ytxiv1+IgAgWsCgvCajs9GF0jwrc8CMwtMALoVOnpXjZ/AzgKCcGdQp+tGIIGXWWAGtM4CE4Z5byEwrYDC7hcQhPebOaJvgcwCE4B5FpiRmgVGwUKAwEUBQXiRxgcDCqyzwIRhZn/5hZisByzFkAkQaCUwbhC2EnKdUQTWWWCCL7PALKOM3TgJEDhQQBAeiO/SuwhkFrj+QkyeBWZJGO5ycichQGB+AUE4f49nqPBSDQnB9VlgAjDvheAlLfsJEDgrIAjPstjZuUCeAX6+FZpngQnBzodteAQI9CggCHvsijFdE0jgJQQThpkFehZ4TWvEz4yZQGMBQdgY3OWeEkgArrdCE4AJxadO6GACBAgIQj8DIwhk9pcQzDrPABOCWY8wdmMkQOCyQBefCMIu2mAQVwQy6xOCV4B8RIDAcwKC8Dk/R79WICH4+VZoZoKvvaKzEyBQTkAQNmq5y9wtkFlgQjC3QBOAWd99EgcQIEDgOwFB+J2Qz1sLZBb4+Q/khWDrDrgegWICgrBYwzsvNyGYWWCGmT+NyPtsD7YYLgECIwkIwpG6Ne9Y89ugn2+F+gP5eXutMgLdCQjC7lpSbkBrCGadWWBuhZZDUPC4AkY+voAgHL+HI1eQW5+ZCaaGhGDeZ9tCgACBZgKCsBm1C30SyOwvAbg+D8wsUAh+ArJJgEA7gduDsN2YXGlugQRgloRh/iQizwOznrtq1REg0K2AIOy2NVMNLKH381LR+mcRCb7MArMsu70IECBwnIAgPM6+5yvvNbYEYGZ/WX56P2meBSYAE4bvu6wIECBwnIAgPM5+1iuv4ZfZXwIw71Nrgi+3QT0LjIaFAIFuBARhN60YfiAJvARflmyvBSUAMwPMsu6z7knAWAgUFxCExX8Aniw/gZfgS9hlnffrKbMv4Zcl2+t+awIECHQlIAi7ascwg0ngJfiyZPvH95En8NZngALwHcWKQEcChnJGQBCeQbHrosCflk8SflkSgMvb0+tfy1bCL88AE4jLWy8CBAj0LyAI++/R0SNM4P13GUR++eXvyzrvl9XpldBLAP7xtMcGAQIEBhKYNggH6kHvQ/3nMsDfLsvX1xqACcFsf/3cewIECAwhIAiHaNOhg/zfmasn/LIIwDM4dhEgMJaAIByrX0eM9nfLRfP8b1m9Jfg6DMA3/xEgQOBhAUH4MF2pA/P8L38MLwRLtV2xBGoICMIafVYlgWkEFEJgbwFBuLeo8xEgQIDAUAKCcKh2GSwBAgQqCbSpVRC2cXYVAgQIEOhUQBB22hjDIkCAAIE2AoKwjfN3V/E5AQIECBwkIAgPgndZAgQIEOhDQBD20QejqCSgVgIEuhIQhF21w2AIECBAoLWAIGwt7noECFQSUOsAAoJwgCYZIgECBAi8TkAQvs7WmQkQIEBgAIHdgnCAWg2RAAECBAhsBAThhsQOAgQIEKgkIAgrdXu3Wp2IAAEC8wgIwnl6qRICBAgQeEBAED6A5hAClQTUSmB2AUE4e4fVR4AAAQJXBQThVR4fEiBAoJJAzVoFYc2+q5oAAQIE3gUE4TuEFQECBAjUFKgahDW7rWoCBAgQ2AgIwg2JHQQIECBQSUAQVup21VrVTYAAgSsCgvAKjo8IECBAYH4BQTh/j1VIoJKAWgncLSAI7yZzAAECBAjMJCAIZ+qmWggQIFBJYKdaBeFOkE5DgAABAmMKCMIx+2bUBAgQILCTgCDcCfK1p3F2AgQIEHiVgCB8lazzEiBAgMAQAoJwiDYZZCUBtRIg0FZAELb1djUCBAgQ6ExAEHbWEMMhQKCSgFp7EBCEPXTBGAgQIEDgMAFBeBi9CxMgQIBADwKtgrCHWo2BAAECBAhsBAThhsQOAgQIEKgkIAgrdbtVra5DgACBgQQE4UDNMlQCBAgQ2F9AEO5v6owEKgmolcDwAoJw+BYqgAABAgSeERCEz+g5lgABApUEJq1VEE7aWGURIECAwG0CgvA2J98iQIAAgUkFBOHZxtpJgAABAlUEBGGVTquTAAECBM4KCMKzLHZWElArAQK1BQRh7f6rngABAuUFBGH5HwEABCoJqJXAVkAQbk3sIUCAAIFCAoKwULOVSoAAgUoCt9YqCG+V8j0CBAgQmFJAEE7ZVkURIECAwK0CgvBWqZ6/Z2wECBAg8LCAklVzUAAAAUJJREFUIHyYzoEECBAgMIOAIJyhi2qoJKBWAgR2FhCEO4M6HQECBAiMJSAIx+qX0RIgUElArU0EBGETZhchQIAAgV4FBGGvnTEuAgQIEGgi0EkQNqnVRQgQIECAwEZAEG5I7CBAgACBSgKCsFK3O6nVMAgQINCTgCDsqRvGQoAAAQLNBQRhc3IXJFBJQK0E+hcQhP33yAgJECBA4IUCgvCFuE5NgACBSgKj1ioIR+2ccRMgQIDALgKCcBdGJyFAgACBUQUE4SOdcwwBAgQITCMgCKdppUIIECBA4BEBQfiImmMqCaiVAIHJBQTh5A1WHgECBAhcFxCE1318SoBAJQG1lhQQhCXbrmgCBAgQWAUE4SphTYAAAQKVBE61CsIThQ0CBAgQqCggCCt2Xc0ECBAgcBIQhCeKeTdURoAAAQKXBX4BAAD//6HkyyUAAAAGSURBVAMADTrdCSC+0AMAAAAASUVORK5CYII=" width="100px" height="100px">
+</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>
+<textarea class="form-control" id="storeDelivery" name="storeDelivery" rows="6"
+onchange="handleHeight(this)">테스트.
+
+product name : ALIO-01
+Purchase Location :
+Purchase Date :
+Product Condition :
+Request :
+Lens Condition Left : test
+Lens Condition Right : test
+note
+</textarea>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="row">
+<div class="col-12">
+<div ><span>产品信息</span></div>
+<table class="table fs--1 border">
+<tbody>
+<tr>
+<td width="20%">受理编号</td>
+<td><span>ST524708</span></td>
+<td width="20%">购买凭证</td>
+<td>
+<!-- <span th:text="${WARRANTY_TYPE.get(ticket['puchaseWarrantyType'])}"></span>-->
+<select class="form-select" name="purchaseWarrantyType" id="purchaseWarrantyType">
+<option value="">-</option>
+<option value="warranty1">保固卡</option>
+<option value="warranty2">未确认</option>
+<option value="warranty3" selected="selected">GM会员（韩国）</option>
+<option value="warranty4">购买凭证</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>产品名</td>
+<td style = "min-width: 290px;">
+<div style="position: relative;">
+<span class="cursor-pointer text-decoration-underline productNameText" id="productNameText" onclick="setProductSearchBox('open')">ALIO-01</span>
+<input type="hidden" name="productName" id="productName" value="ALIO-01"/>
+<input type="hidden" name="productSapCode" id="productSapCode" value="11000250"/>
+<div style="position: absolute;width: 100%;height: 150px;border:1px solid #cecece;background: #fff;overflow-y: scroll;" class="search-product-box ps-3 pe-3 pb-1 pt-1 d-none">
+<div>
+<button type="button" class="btn-close" onclick="setProductSearchBox('close')"></button>
+</div>
+<div class="row">
+<div class="search-box me-3 p-1">
+<input class="form-control search-input search" type="search" placeholder="Enter product Name in English" id="searchProductName" onkeypress="if(event.keyCode==13){searchProduct();}"/>
+<span class="fas fa-search search-box-icon"></span>
+</div>
+</div>
+<div id="modal_product_list_area">
+</div>
+</div>
+</div>
+</td>
+<td>认证卡发送与否</td>
+
+<td>
+<select class="form-select w-50" name="havingWarranty" id="havingWarranty">
+<option value="N">N</option>
+<option value="Y">Y</option>
+</select>
+</td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td>眼镜盒发送与否</td>
+<td>
+<select class="form-select w-50" name="havingCase" id="havingCase">
+<option value="N" >N</option>
+<option value="Y">Y</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>产品现象</td>
+<td>
+<textarea class="form-control " id="repairReceipts" name="repairReceipts" readonly></textarea>
+</td>
+<td>购买渠道</td>
+<td>
+<input type="hidden" id="purchaseStoreName" value=""/>
+<div class="account-api-re-call-area purchase-sap-code">
+<select class="chosen-select" id="purchaseSapCode" name="purchaseSapCode" >
+<option value="">Search in English and select..</option>
+<option value="AE1001" data-account-name="GM_Dubai_MALL_TDM" data-group-code="190">GM_Dubai_MALL_TDM </option>
+
+<option value="CN1001" data-account-name="GM_Guangzhou_MALL_Taikoohui" data-group-code="180">GM_Guangzhou_MALL_Taikoohui </option>
+
+<option value="CN1002" data-account-name="GM_MALL_Beijing Taikoo" data-group-code="180">GM_MALL_Beijing Taikoo </option>
+
+<option value="CN1003" data-account-name="GM_Beijing_MALL_SKP-S" data-group-code="180">GM_Beijing_MALL_SKP-S </option>
+
+<option value="CN1005" data-account-name="GM_Shanghai_MALL_IFC" data-group-code="180">GM_Shanghai_MALL_IFC </option>
+
+<option value="CN1006" data-account-name="GM_Xian_DS_SKP" data-group-code="180">GM_Xian_DS_SKP </option>
+
+<option value="CN1007" data-account-name="GM_Chengdu_MALL_Taikooli" data-group-code="180">GM_Chengdu_MALL_Taikooli </option>
+
+<option value="CN1008" data-account-name="GM_Hangzhou_MALL_Tower" data-group-code="180">GM_Hangzhou_MALL_Tower </option>
+
+<option value="CN1009" data-account-name="GM_Shenyang_MALL_MixC" data-group-code="180">GM_Shenyang_MALL_MixC </option>
+
+<option value="CN1010" data-account-name="GM_MALL_Shenzhen_MIXC World" data-group-code="180">GM_MALL_Shenzhen_MIXC World </option>
+
+<option value="CN1011" data-account-name="GM_Nanjing_MALL_Deji" data-group-code="180">GM_Nanjing_MALL_Deji </option>
+
+<option value="CN1012" data-account-name="GM_Ningbo_DS_Hankyu" data-group-code="180">GM_Ningbo_DS_Hankyu </option>
+
+<option value="CN1013" data-account-name="GM_Wuhan_MALL_K11" data-group-code="180">GM_Wuhan_MALL_K11 </option>
+
+<option value="CN1014" data-account-name="GM_ONLINE_China_Official" data-group-code="180">GM_ONLINE_China_Official </option>
+
+<option value="CN1015" data-account-name="GM_ONLINE_China_Tmall" data-group-code="180">GM_ONLINE_China_Tmall </option>
+
+<option value="CN1016" data-account-name="GM_ONLINE_China_WeChat" data-group-code="180">GM_ONLINE_China_WeChat </option>
+
+<option value="GB1001" data-account-name="GM_London_DS_Selfridges" data-group-code="180">GM_London_DS_Selfridges </option>
+
+<option value="GB1002" data-account-name="GM_ONLINE_UK_Selfridges" data-group-code="180">GM_ONLINE_UK_Selfridges </option>
+
+<option value="HK1001" data-account-name="GM_HongKong_MALL_LG" data-group-code="190">GM_HongKong_MALL_LG </option>
+
+<option value="HK1002" data-account-name="GM_MALL_K11 HONG KONG" data-group-code="180">GM_MALL_K11 HONG KONG </option>
+
+<option value="SG1001" data-account-name="GM_Singapore_MALL_ION" data-group-code="180">GM_Singapore_MALL_ION </option>
+
+<option value="SG1002" data-account-name="GM_Singapore_MALL_MBS" data-group-code="180">GM_Singapore_MALL_MBS </option>
+
+<option value="TW1001" data-account-name="GM_Taipei_MALL_Breeze_NanShan" data-group-code="190">GM_Taipei_MALL_Breeze_NanShan </option>
+
+<option value="US1001" data-account-name="GM_LosAngeles_FS_Downtown" data-group-code="180">GM_LosAngeles_FS_Downtown </option>
+
+<option value="US1002" data-account-name="GM_NewYork_FS_Soho" data-group-code="180">GM_NewYork_FS_Soho </option>
+
+<option value="US1003" data-account-name="GM_SanJose_MALL_Westfield_VF" data-group-code="180">GM_SanJose_MALL_Westfield_VF </option>
+
+<option value="US1004" data-account-name="GM_ONLINE_USA_Official" data-group-code="180">GM_ONLINE_USA_Official </option>
+
+<option value="US1005" data-account-name="GM_ONLINE_Canada_Official" data-group-code="180">GM_ONLINE_Canada_Official </option>
+
+<option value="CN1017" data-account-name="GM_WS_PUYI CN" data-group-code="200">GM_WS_PUYI CN </option>
+
+<option value="CN1018" data-account-name="GM_PU_Shanghai" data-group-code="180">GM_PU_Shanghai </option>
+
+<option value="HK1003" data-account-name="GM_WS_PUYI HK" data-group-code="200">GM_WS_PUYI HK </option>
+
+<option value="2010" data-account-name="HAUS DOSAN" data-group-code="100">GM_서울_하우스 노웨어_도산 HAUS DOSAN </option>
+
+<option value="2020" data-account-name="SINSA" data-group-code="100">GM_서울_FS_신사 SINSA </option>
+
+<option value="2100" data-account-name="LOTTE JAMSIL WOLD TOWER MALL" data-group-code="120">GM_서울_MALL_롯데_월드몰 LOTTE JAMSIL WOLD TOWER MALL </option>
+
+<option value="2110" data-account-name="SHINSEGAE STARFIELD HANAM" data-group-code="120">GM_경기_MALL_신세계스타필드_하남 SHINSEGAE STARFIELD HANAM </option>
+
+<option value="2300" data-account-name="GALLERIA APGUJEONG" data-group-code="110">GM_서울_DS_갤러리아_압구정 GALLERIA APGUJEONG </option>
+
+<option value="2310" data-account-name="GALLERIA GWANGGYO" data-group-code="110">GM_경기_DS_갤러리아_광교 GALLERIA GWANGGYO </option>
+
+<option value="2320" data-account-name="GALLERIA DAEJEON" data-group-code="110">GM_대전_DS_갤러리아_대전 GALLERIA DAEJEON </option>
+
+<option value="2330" data-account-name="LOTTE MYEONGDONG" data-group-code="110">GM_서울_DS_롯데_명동 LOTTE MYEONGDONG </option>
+
+<option value="2340" data-account-name="LOTTE JAMSIL" data-group-code="110">GM_서울_DS_롯데_잠실 LOTTE JAMSIL </option>
+
+<option value="2350" data-account-name="LOTTE SEOMYUN" data-group-code="110">GM_부산_DS_롯데_서면 LOTTE SEOMYUN </option>
+
+<option value="2360" data-account-name="LOTTE CHUNGRYANGLI" data-group-code="110">GM_DS_롯데(청량리) LOTTE CHUNGRYANGLI </option>
+
+<option value="2370" data-account-name="SHINSEGAE MYEONG DONG" data-group-code="110">GM_서울_DS_신세계_명동 SHINSEGAE MYEONG DONG </option>
+
+<option value="2380" data-account-name="SHINSEGAE CENTUM" data-group-code="110">GM_부산_DS_신세계_센텀 SHINSEGAE CENTUM </option>
+
+<option value="2390" data-account-name="SHINESEGAE DEAGU" data-group-code="110">GM_대구_DS_신세계_대구 SHINESEGAE DEAGU </option>
+
+<option value="2400" data-account-name="SHINESEGAE EUJEONGBU" data-group-code="110">GM_경기_DS_신세계_의정부 SHINESEGAE EUJEONGBU </option>
+
+<option value="2410" data-account-name="SHINSEGAE KYEONGI" data-group-code="110">GM_경기_DS_신세계_사우스시티 SHINSEGAE KYEONGI </option>
+
+<option value="2420" data-account-name="HYUNDAI YEOUIDO" data-group-code="110">GM_서울_DS_현대_여의도 HYUNDAI YEOUIDO </option>
+
+<option value="2430" data-account-name="HYUNDAI PANGYO" data-group-code="110">GM_경기_DS_현대_판교 HYUNDAI PANGYO </option>
+
+<option value="2440" data-account-name="HYUNDAI TRADE CENTER" data-group-code="110">GM_서울_DS_현대_무역 HYUNDAI TRADE CENTER </option>
+
+<option value="2450" data-account-name="HYUNDAI APGUJEONG" data-group-code="110">GM_서울_DS_현대_압구정 HYUNDAI APGUJEONG </option>
+
+<option value="2460" data-account-name="HYUNDAI MOKDONG" data-group-code="110">GM_서울_DS_현대_목동 HYUNDAI MOKDONG </option>
+
+<option value="2470" data-account-name="HYUNDAI DAEGU" data-group-code="110">GM_대구_DS_현대_대구 HYUNDAI DAEGU </option>
+
+<option value="2600" data-account-name="LOTTE SOGONG" data-group-code="130">GM_서울_DFS_롯데_명동 LOTTE SOGONG </option>
+
+<option value="2610" data-account-name="LOTTE WORLD TOWER MALL" data-group-code="130">GM_서울_DFS_롯데_월드몰 LOTTE WORLD TOWER MALL </option>
+
+<option value="2620" data-account-name="LOTTE JEJU" data-group-code="130">GM_제주_DFS_롯데_제주 LOTTE JEJU </option>
+
+<option value="2630" data-account-name="SHILLA SEOUL" data-group-code="130">GM_서울_DFS_신라_서울 SHILLA SEOUL </option>
+
+<option value="2640" data-account-name="SHILLA JEJU" data-group-code="130">GM_제주_DFS_신라_제주 SHILLA JEJU </option>
+
+<option value="2650" data-account-name="SHINSEGAE MYEONGDONG" data-group-code="130">GM_서울_DFS_신세계_명동 SHINSEGAE MYEONGDONG </option>
+
+<option value="2660" data-account-name="SHINSEGAE INCHEON T2 EAST" data-group-code="130">GM_인천_DFS_신세계_인천공항T2_E SHINSEGAE INCHEON T2 EAST </option>
+
+<option value="2670" data-account-name="SHINSEGAE INCHEON T2 WEST" data-group-code="130">GM_인천_DFS_신세계_인천공항T2_W SHINSEGAE INCHEON T2 WEST </option>
+
+<option value="2680" data-account-name="HYUNDAI INCHEON T1" data-group-code="130">GM_인천_DFS_현대_인천공항T1 HYUNDAI INCHEON T1 </option>
+
+<option value="10000050" data-account-name="GM_WS_GR8" data-group-code="200">GM_WS_GR8 </option>
+
+<option value="10000062" data-account-name="GM_WS_INCU" data-group-code="200">GM_WS_INCU </option>
+
+<option value="10000068" data-account-name="GM_WS_RODEN GRAY" data-group-code="200">GM_WS_RODEN GRAY </option>
+
+<option value="10000060" data-account-name="GM_WS_FEATURE" data-group-code="200">GM_WS_FEATURE </option>
+
+<option value="CN1004" data-account-name="GM_Shanghai_HAUS NOWHERE" data-group-code="180">GM_Shanghai_HAUS NOWHERE </option>
+
+<option value="10000073" data-account-name="GM_WS_TOM GREYHOUND" data-group-code="200">GM_WS_TOM GREYHOUND </option>
+
+<option value="10000059" data-account-name="(X)GM_WS_EYESTAR" data-group-code="200">(X)GM_WS_EYESTAR </option>
+
+<option value="10000054" data-account-name="GM_WS_ATOLYE GOZLUK" data-group-code="200">GM_WS_ATOLYE GOZLUK </option>
+
+<option value="10000066" data-account-name="GM_WS_MARC LE BIHAN" data-group-code="200">GM_WS_MARC LE BIHAN </option>
+
+<option value="10000058" data-account-name="(X)" data-group-code="200">(거래중지)GM_WS_DK FRAMES (X) </option>
+
+<option value="10000070" data-account-name="GM_WS_C2 EYEWEAR" data-group-code="200">GM_WS_C2 EYEWEAR </option>
+
+<option value="10000051" data-account-name="GM_WS_ANDRE OPTICAS" data-group-code="200">GM_WS_ANDRE OPTICAS </option>
+
+<option value="10000057" data-account-name="GM_WS_BROWNS" data-group-code="200">GM_WS_BROWNS </option>
+
+<option value="E1002" data-account-name="GM_ONLINE_Korea_Kakao" data-group-code="170">GM_ONLINE_Korea_Kakao </option>
+
+<option value="E1003" data-account-name="GM_ONLINE_Korea_Lotte" data-group-code="170">GM_ONLINE_Korea_Lotte </option>
+
+<option value="E1004" data-account-name="GM_ONLINE_Korea_SSG" data-group-code="170">GM_ONLINE_Korea_SSG </option>
+
+<option value="E1005" data-account-name="GM_ONLINE_Korea_Farfetch" data-group-code="170">GM_ONLINE_Korea_Farfetch </option>
+
+<option value="E1001" data-account-name="GM_ONLINE_Korea_Official_국내" data-group-code="160">GM_ONLINE_Korea_Official_국내 </option>
+
+<option value="E1001" data-account-name="GM_ONLINE_Korea_Official_해외" data-group-code="160">GM_ONLINE_Korea_Official_해외 </option>
+
+<option value="10000074" data-account-name="PUYI(CN)" data-group-code="200">GM_WS_PUYI(CN) PUYI(CN) </option>
+
+<option value="C1001" data-account-name="IICOMBINED CHINA" data-group-code="180">GM_중국법인 IICOMBINED CHINA </option>
+
+<option value="C1002" data-account-name="IICOMBINED U.S.A. INC" data-group-code="180">GM_미국법인 IICOMBINED U.S.A. INC </option>
+
+<option value="C1003" data-account-name="IICOMBINED UK LIMITED" data-group-code="180">GM_영국법인 IICOMBINED UK LIMITED </option>
+
+<option value="C1004" data-account-name="IICOMBINED SINGAPORE PTE.LTD" data-group-code="180">GM_싱가폴법인 IICOMBINED SINGAPORE PTE.LTD </option>
+
+<option value="C1005" data-account-name="IICOMBINED Middle East General Trad" data-group-code="190">GM_두바이법인(JV) IICOMBINED Middle East General Trad </option>
+
+<option value="C1006" data-account-name="HONG KONG IICOMBINED LIMITED" data-group-code="190">GM_홍콩법인(JV) HONG KONG IICOMBINED LIMITED </option>
+
+<option value="C1007" data-account-name="HONG KONG IICOMBINED LIMITED TAIWAN" data-group-code="190">GM_대만법인(JV) HONG KONG IICOMBINED LIMITED TAIWAN </option>
+
+<option value="CN1019" data-account-name="GM_WH_China" data-group-code="180">GM_WH_China </option>
+
+<option value="CN1021" data-account-name="북경 POPUP" data-group-code="180">북경 POPUP </option>
+
+<option value="2331" data-account-name="LOTTE DONGTAN" data-group-code="110">GM_경기_DS_롯데_동탄 LOTTE DONGTAN </option>
+
+<option value="10000064" data-account-name="GM_WS_LEISURE CENTER" data-group-code="200">GM_WS_LEISURE CENTER </option>
+
+<option value="E1007" data-account-name="GM_복지몰" data-group-code="230">GM_복지몰 </option>
+
+<option value="E1008" data-account-name="GM_PS_국내" data-group-code="220">GM_PS_국내 </option>
+
+<option value="E1009" data-account-name="GM_PS_해외" data-group-code="220">GM_PS_해외 </option>
+
+<option value="E1010" data-account-name="GM_PS_PSC" data-group-code="220">GM_PS_PSC </option>
+
+<option value="US1006" data-account-name="GM_WH_USA" data-group-code="180">GM_WH_USA </option>
+
+<option value="10000053" data-account-name="GM_WS_ATELIER NEW YORK" data-group-code="200">GM_WS_ATELIER NEW YORK </option>
+
+<option value="10000072" data-account-name="GM_WS_SMETS" data-group-code="200">GM_WS_SMETS </option>
+
+<option value="10000075" data-account-name="PUYI(HK)" data-group-code="200">GM_WS_PUYI(HK) PUYI(HK) </option>
+
+<option value="CN1020" data-account-name="GM_PU_Beijing_Etype" data-group-code="180">GM_PU_Beijing_Etype </option>
+
+<option value="CN1022" data-account-name="GM_MALL_Chongqing_Starlight 68" data-group-code="180">GM_MALL_Chongqing_Starlight 68 </option>
+
+<option value="2030" data-account-name="HONGDAE" data-group-code="100">GM_서울_FS_홍대 HONGDAE </option>
+
+<option value="2371" data-account-name="SHINSEGAE GANGNAM" data-group-code="110">GM_서울_DS_신세계_강남 SHINSEGAE GANGNAM </option>
+
+<option value="2411" data-account-name="SHINSEGAE DAEJEON" data-group-code="110">GM_대전_DS_신세계_대전 SHINSEGAE DAEJEON </option>
+
+<option value="3199" data-account-name="10 Corso Como  Seoul" data-group-code="150">GM_서울_SS_10CC 10 Corso Como  Seoul </option>
+
+<option value="AE1002" data-account-name="GM_Dubai_MALL_MOE" data-group-code="190">GM_Dubai_MALL_MOE </option>
+
+<option value="AE1003" data-account-name="GM_ONLINE_UAE_Ounass" data-group-code="190">GM_ONLINE_UAE_Ounass </option>
+
+<option value="CN1023" data-account-name="GM_ONLINE_China_JD" data-group-code="180">GM_ONLINE_China_JD </option>
+
+<option value="CN1024" data-account-name="GM_Shanghai_MALL_Taikooli" data-group-code="180">GM_Shanghai_MALL_Taikooli </option>
+
+<option value="10000056" data-account-name="GM_WS_BODEGA" data-group-code="200">GM_WS_BODEGA </option>
+
+<option value="10000061" data-account-name="GM_WS_HBX" data-group-code="200">GM_WS_HBX </option>
+
+<option value="10000067" data-account-name="(X)GM_WS_TSUM" data-group-code="200">(X)GM_WS_TSUM </option>
+
+<option value="10000055" data-account-name="(X)GM_WS_ZEISS VISION CENTRE B" data-group-code="200">(X)GM_WS_ZEISS VISION CENTRE B </option>
+
+<option value="10000071" data-account-name="GM_WS_SLAM JAM" data-group-code="200">GM_WS_SLAM JAM </option>
+
+<option value="10000065" data-account-name="GM_WS_LN-CC" data-group-code="200">GM_WS_LN-CC </option>
+
+<option value="10000063" data-account-name="(X)GM_WS_KM20" data-group-code="200">(X)GM_WS_KM20 </option>
+
+<option value="10000052" data-account-name="GM_WS_END." data-group-code="200">GM_WS_END. </option>
+
+<option value="10000069" data-account-name="(X)GM_WS_LABELS" data-group-code="200">(X)GM_WS_LABELS </option>
+
+<option value="C1008" data-account-name="IICOMBINED Malaysia SDN. BHD." data-group-code="180">GM_말레이시아법인 IICOMBINED Malaysia SDN. BHD. </option>
+
+<option value="MY1001" data-account-name="GM_KualaLumpur_MALL_TRX" data-group-code="180">GM_KualaLumpur_MALL_TRX </option>
+
+<option value="CN1025" data-account-name="GM_MALL_Chengdu Yintai" data-group-code="180">GM_MALL_Chengdu Yintai </option>
+
+<option value="AU1001" data-account-name="GM_Sydney_DFS_AirportT1" data-group-code="190">GM_Sydney_DFS_AirportT1 </option>
+
+<option value="CN1026" data-account-name="GM_MALL_Changsha Hisense" data-group-code="180">GM_MALL_Changsha Hisense </option>
+
+<option value="US1007" data-account-name="GM_CostaMesa_MALL_SCP" data-group-code="180">GM_CostaMesa_MALL_SCP </option>
+
+<option value="US1008" data-account-name="GM_NewJersey_MALL_AD" data-group-code="180">GM_NewJersey_MALL_AD </option>
+
+<option value="10000383" data-account-name="GM_WS_THE WEBSTER" data-group-code="200">GM_WS_THE WEBSTER </option>
+
+<option value="CN1027" data-account-name="GM_Beijing_MALL_Taikooli" data-group-code="180">GM_Beijing_MALL_Taikooli </option>
+
+<option value="CN1028" data-account-name="GM_Qingdao_MALL_Hisense" data-group-code="180">GM_Qingdao_MALL_Hisense </option>
+
+<option value="CN1029" data-account-name="GM_Chengdu_MALL_SKP" data-group-code="180">GM_Chengdu_MALL_SKP </option>
+
+<option value="CN1030" data-account-name="GM_Guangzhou_MALL_PC" data-group-code="180">GM_Guangzhou_MALL_PC </option>
+
+<option value="CN1031" data-account-name="GM_Xiamen_MALL_MixC" data-group-code="180">GM_Xiamen_MALL_MixC </option>
+
+<option value="US1009" data-account-name="GM_Houston_MALL_Galleria" data-group-code="180">GM_Houston_MALL_Galleria </option>
+
+<option value="10000419" data-account-name="GM_WS_TOMORROW_MILANO" data-group-code="200">GM_WS_TOMORROW_MILANO </option>
+
+<option value="E1006" data-account-name="GM_ONLINE_Korea_SSF" data-group-code="170">GM_ONLINE_Korea_SSF </option>
+
+<option value="10000450" data-account-name="GM_WS_HBA" data-group-code="200">GM_WS_HBA </option>
+
+<option value="10000449" data-account-name="GM_WS_MONCLER" data-group-code="200">GM_WS_MONCLER </option>
+
+<option value="SG1003" data-account-name="GM_ONLINE_Singapore_Official" data-group-code="180">GM_ONLINE_Singapore_Official </option>
+
+<option value="AE1004" data-account-name="GM_ONLINE_UAE_Official" data-group-code="190">GM_ONLINE_UAE_Official </option>
+
+<option value="2018132195" data-account-name="(주)신세계" data-group-code="200">(주)신세계 </option>
+
+<option value="10000392" data-account-name="Bluebell Australasia Pty Ltd" data-group-code="200">Bluebell Australasia Pty Ltd </option>
+
+<option value="C1009" data-account-name="IICOMBINED JAPAN Inc." data-group-code="180">GM_일본법인 IICOMBINED JAPAN Inc. </option>
+
+<option value="1048652503" data-account-name="(주)신세계프라퍼티" data-group-code="200">(주)신세계프라퍼티 </option>
+
+<option value="2690" data-account-name="GM_DFS_LOTTE DUTYFREE ONLINE" data-group-code="130">GM_ONLINE_Korea_DFS_롯데 GM_DFS_LOTTE DUTYFREE ONLINE </option>
+
+<option value="10000551" data-account-name="GM_WS_CNTRBND" data-group-code="200">GM_WS_CNTRBND </option>
+
+<option value="10000553" data-account-name="GM_WS_I VISIONARI" data-group-code="200">GM_WS_I VISIONARI </option>
+
+<option value="10000556" data-account-name="GM_WS_ONE POINT SEVEN FOUR" data-group-code="200">GM_WS_ONE POINT SEVEN FOUR </option>
+
+<option value="10000560" data-account-name="(X)GM_WS_FRAMED EWE OPTICAL" data-group-code="200">(X)GM_WS_FRAMED EWE OPTICAL </option>
+
+<option value="10000561" data-account-name="GM_WS_INDICE" data-group-code="200">GM_WS_INDICE </option>
+
+<option value="10000563" data-account-name="GM_WS_MIA BURTON" data-group-code="200">GM_WS_MIA BURTON </option>
+
+<option value="2800" data-account-name="GM_서울_PU_볼드컬렉션" data-group-code="240">GM_서울_PU_볼드컬렉션 </option>
+
+<option value="2480" data-account-name="GM_DS_SHINSEGAE CHEONAN ASAN" data-group-code="110">GM_천안_DS_신세계_천안아산 GM_DS_SHINSEGAE CHEONAN ASAN </option>
+
+<option value="10000584" data-account-name="GM_WS_MARGIELA S.A.S. ITALIAN" data-group-code="200">GM_WS_MARGIELA S.A.S. ITALIAN </option>
+
+<option value="10000585" data-account-name="GM_WS_MARGIELA S.A.S.U." data-group-code="200">GM_WS_MARGIELA S.A.S.U. </option>
+
+<option value="10000586" data-account-name="GM_WS_MARGIELA S.A.S. MUNICH B" data-group-code="200">GM_WS_MARGIELA S.A.S. MUNICH B </option>
+
+<option value="10000587" data-account-name="GM_WS_MARGIELA S.A.S. LONDON B" data-group-code="200">GM_WS_MARGIELA S.A.S. LONDON B </option>
+
+<option value="10000588" data-account-name="GM_WS_MARGIELA USA INC." data-group-code="200">GM_WS_MARGIELA USA INC. </option>
+
+<option value="10000589" data-account-name="GM_WS_MARGIELA JAPAN CO., LTD" data-group-code="200">GM_WS_MARGIELA JAPAN CO., LTD </option>
+
+<option value="10000590" data-account-name="GM_WS_MARGIELA (SHANGHAI) TRAD" data-group-code="200">GM_WS_MARGIELA (SHANGHAI) TRAD </option>
+
+<option value="10000591" data-account-name="GM_WS_MARGIELA ASIA LIMITED" data-group-code="200">GM_WS_MARGIELA ASIA LIMITED </option>
+
+<option value="8748602266" data-account-name="오티비코리아 유한회사" data-group-code="200">오티비코리아 유한회사 </option>
+
+<option value="10000592" data-account-name="GM_WS_OTB Macao Limited" data-group-code="200">GM_WS_OTB Macao Limited </option>
+
+<option value="10000594" data-account-name="GM_WS_MM MONO STORE DUBAI" data-group-code="200">GM_WS_MM MONO STORE DUBAI </option>
+
+<option value="10000595" data-account-name="GM_WS_ANTONIA" data-group-code="200">GM_WS_ANTONIA </option>
+
+<option value="10000596" data-account-name="GM_WS_VOO STORE" data-group-code="200">GM_WS_VOO STORE </option>
+
+<option value="10000597" data-account-name="GM_WS_MACHINE-A" data-group-code="200">GM_WS_MACHINE-A </option>
+
+<option value="10000598" data-account-name="GM_WS_DOVER STREET MARKET SG" data-group-code="200">GM_WS_DOVER STREET MARKET SG </option>
+
+<option value="10000599" data-account-name="GM_WS_MARAIS" data-group-code="200">GM_WS_MARAIS </option>
+
+<option value="10000600" data-account-name="GM_WS_MM MONO STORE KUWAIT" data-group-code="200">GM_WS_MM MONO STORE KUWAIT </option>
+
+<option value="10000601" data-account-name="GM_WS_VITKAC DEPARTMENT STORE" data-group-code="200">GM_WS_VITKAC DEPARTMENT STORE </option>
+
+<option value="10000602" data-account-name="GM_WS_SVRN" data-group-code="200">GM_WS_SVRN </option>
+
+<option value="10000603" data-account-name="GM_WS_LECLAIREUR" data-group-code="200">GM_WS_LECLAIREUR </option>
+
+<option value="10000604" data-account-name="GM_WS_THE BROKEN ARM" data-group-code="200">GM_WS_THE BROKEN ARM </option>
+
+<option value="10000606" data-account-name="GM_WS_DOVER STREET MARKET GINZ" data-group-code="200">GM_WS_DOVER STREET MARKET GINZ </option>
+
+<option value="10000608" data-account-name="(X)GM_WS_NOTRE" data-group-code="200">(X)GM_WS_NOTRE </option>
+
+<option value="2700" data-account-name="GM_DFS_SHINSEGAE DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_신세계_인천공항T2 GM_DFS_SHINSEGAE DUTY FREE(ICN T2) </option>
+
+<option value="JP1001" data-account-name="GM_Osaka_DS_Hankyu" data-group-code="180">GM_Osaka_DS_Hankyu </option>
+
+<option value="C1010" data-account-name="IICOMBINED Philippines" data-group-code="190">GM_필리핀법인(JV) IICOMBINED Philippines </option>
+
+<option value="C1011" data-account-name="IICOMBINED THAILAND" data-group-code="190">GM_태국법인(JV) IICOMBINED THAILAND </option>
+
+<option value="US1010" data-account-name="GM_NewYork_SS_DSM" data-group-code="180">GM_NewYork_SS_DSM </option>
+
+<option value="US1011" data-account-name="GM_LosAngeles_SS_DSM" data-group-code="180">GM_LosAngeles_SS_DSM </option>
+
+<option value="7748102506" data-account-name="GM_WS_Thug Club" data-group-code="200">GM_WS_Thug Club </option>
+
+<option value="JP1002" data-account-name="GM_ONLINE_Japan_Official" data-group-code="180">GM_ONLINE_Japan_Official </option>
+
+<option value="10000647" data-account-name="GM_WS_Beijing Yuze Technology" data-group-code="200">GM_WS_Beijing Yuze Technology </option>
+
+<option value="JP1003" data-account-name="GM_OFFICE_Japan" data-group-code="180">GM_OFFICE_Japan </option>
+
+<option value="10000664" data-account-name="GM_WS_EKSEPTION" data-group-code="200">GM_WS_EKSEPTION </option>
+
+<option value="10000680" data-account-name="GM_WS_NUBIAN" data-group-code="200">GM_WS_NUBIAN </option>
+
+<option value="2710" data-account-name="GM_DFS_HYUNDAI DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_현대_인천공항T2 GM_DFS_HYUNDAI DUTY FREE(ICN T2) </option>
+
+<option value="TH1001" data-account-name="GM_Bangkok_MALL_EmQuartier" data-group-code="190">GM_Bangkok_MALL_EmQuartier </option>
+
+<option value="10000699" data-account-name="Blizzard Entertainment, Inc." data-group-code="200">Blizzard Entertainment, Inc. </option>
+
+<option value="C1012" data-account-name="IICOMBINED AUSTRALIA" data-group-code="190">GM_호주법인(JV) IICOMBINED AUSTRALIA </option>
+
+<option value="AU1002" data-account-name="GM_Sydney_MALL_DJ" data-group-code="190">GM_Sydney_MALL_DJ </option>
+
+<option value="PH1001" data-account-name="GM_Manila_MALL_Shangri-La" data-group-code="190">GM_Manila_MALL_Shangri-La </option>
+
+<option value="10000716" data-account-name="MUGLER FASHION" data-group-code="200">MUGLER FASHION </option>
+
+<option value="10000727" data-account-name="GM_WS_KITH" data-group-code="200">GM_WS_KITH </option>
+
+<option value="10000728" data-account-name="GM_WS_H.LORENZO" data-group-code="200">GM_WS_H.LORENZO </option>
+
+<option value="10000729" data-account-name="GM_WS_ANT/DOTE" data-group-code="200">GM_WS_ANT/DOTE </option>
+
+<option value="AU1003" data-account-name="GM_ONLINE_Australia_DJ" data-group-code="190">GM_ONLINE_Australia_DJ </option>
+
+<option value="TW1002" data-account-name="GM_ONLINE_Taiwan_Official" data-group-code="190">GM_ONLINE_Taiwan_Official </option>
+
+<option value="10000682" data-account-name="SDH Paris (D&#39;HEYGERE)" data-group-code="200">SDH Paris (D&#39;HEYGERE) </option>
+
+<option value="10000749" data-account-name="GM_WS_HIGHSNOBIETY" data-group-code="200">GM_WS_HIGHSNOBIETY </option>
+
+<option value="10000750" data-account-name="GM_WS_DOVER STREET MARKET PARI" data-group-code="200">GM_WS_DOVER STREET MARKET PARI </option>
+
+<option value="10000751" data-account-name="GM_WS_OTTICA GIULIETTI E GUERR" data-group-code="200">GM_WS_OTTICA GIULIETTI E GUERR </option>
+
+<option value="JP1004" data-account-name="GM_Tokyo_FS_Aoyama" data-group-code="180">GM_Tokyo_FS_Aoyama </option>
+
+<option value="10000810" data-account-name="GM_WS_10 CORSO COMO" data-group-code="200">GM_WS_10 CORSO COMO </option>
+
+<option value="10000811" data-account-name="GM_WS_SKP BEIJING" data-group-code="200">GM_WS_SKP BEIJING </option>
+
+<option value="2720" data-account-name="GM_DFS_SHINSEGAE DUTYFREE ONLINE" data-group-code="130">GM_ONLINE_Korea_DFS_신세계 GM_DFS_SHINSEGAE DUTYFREE ONLINE </option>
+
+<option value="10000827" data-account-name="GM_WS_FAUX CONSULTANCY" data-group-code="200">GM_WS_FAUX CONSULTANCY </option>
+
+<option value="10000828" data-account-name="GM_WS_MAISON MARGIELA CHINA" data-group-code="200">GM_WS_MAISON MARGIELA CHINA </option>
+
+<option value="10000841" data-account-name="GM_WS_Margiela Asia Limited" data-group-code="200">GM_WS_Margiela Asia Limited </option>
+
+<option value="10001001" data-account-name="GM_WS_MAISON MARGIELA DUBAI MA" data-group-code="200">GM_WS_MAISON MARGIELA DUBAI MA </option>
+
+<option value="JP1005" data-account-name="GM_WH_Japan_Maersk" data-group-code="180">GM_WH_Japan_Maersk </option>
+
+<option value="TH1002" data-account-name="GM_Bangkok_PU_S.P_JentleSalon" data-group-code="190">GM_Bangkok_PU_S.P_JentleSalon </option>
+
+<option value="GB1003" data-account-name="GM_London_SS_DSM" data-group-code="180">GM_London_SS_DSM </option>
+
+<option value="JP1006" data-account-name="GM_Osaka_PU_JentleSalon" data-group-code="180">GM_Osaka_PU_JentleSalon </option>
+
+<option value="2730" data-account-name="GM_DFS_SHILLA DUTY FREE(ICN T2)" data-group-code="130">GM_인천_DFS_신라_인천공항T2 GM_DFS_SHILLA DUTY FREE(ICN T2) </option>
+
+<option value="CN1032" data-account-name="GM_Changsha_MALL_IFS" data-group-code="180">GM_Changsha_MALL_IFS </option>
+
+<option value="US1012" data-account-name="GM_NewYork_PU_JentleSalon" data-group-code="180">GM_NewYork_PU_JentleSalon </option>
+
+<option value="AU1004" data-account-name="GM_Melbourne_MALL_Chadstone" data-group-code="190">GM_Melbourne_MALL_Chadstone </option>
+
+<option value="HK1004" data-account-name="GM_HongKong_MALL_HC" data-group-code="190">GM_HongKong_MALL_HC </option>
+
+<option value="1208608519" data-account-name="(주)파리미키코리아" data-group-code="200">(주)파리미키코리아 </option>
+
+<option value="US1013" data-account-name="GM_LasVegas_MALL_TFS" data-group-code="180">GM_LasVegas_MALL_TFS </option>
+
+<option value="AU1005" data-account-name="GM_ONLINE_Australia_Official" data-group-code="190">GM_ONLINE_Australia_Official </option>
+
+<option value="MY1002" data-account-name="GM_PU_Kuala Lumpur_TRX
+" data-group-code="180">GM_PU_Kuala Lumpur_TRX
+</option>
+
+<option value="C4001" data-account-name="HN_중국법인" data-group-code="180">HN_중국법인 </option>
+
+<option value="CN1033" data-account-name="GM_Hangzhou_MALL_MixC" data-group-code="180">GM_Hangzhou_MALL_MixC </option>
+
+<option value="US1014" data-account-name="GM_LosAngeles_PU_Pocket" data-group-code="180">GM_LosAngeles_PU_Pocket </option>
+
+<option value="HK1005" data-account-name="GM_WH_HongKong" data-group-code="190">GM_WH_HongKong </option>
+
+<option value="TW1003" data-account-name="GM_WH_Taiwan" data-group-code="190">GM_WH_Taiwan </option>
+
+<option value="CN1034" data-account-name="GM_Shenzhen_HAUS NOWHERE" data-group-code="180">GM_Shenzhen_HAUS NOWHERE </option>
+
+<option value="CN1035" data-account-name="GM_Sanya_MALL_CDF" data-group-code="180">GM_Sanya_MALL_CDF </option>
+
+<option value="C1013" data-account-name="GM_프랑스법인" data-group-code="180">GM_프랑스법인 </option>
+
+<option value="CN1036" data-account-name="GM_Chongqing_MALL_MixC" data-group-code="180">GM_Chongqing_MALL_MixC </option>
+
+<option value="CN1037" data-account-name="GM_Shanghai_MALL_Xintiandi" data-group-code="180">GM_Shanghai_MALL_Xintiandi </option>
+
+<option value="TH1003" data-account-name="GM_Bangkok_PU_Emporium_2025" data-group-code="190">GM_Bangkok_PU_Emporium_2025 </option>
+
+<option value="10001427" data-account-name="GM_WS_MARGIELA MEXICO-POLANCO" data-group-code="200">GM_WS_MARGIELA MEXICO-POLANCO </option>
+
+<option value="2740" data-account-name="GM_ONLINE_Korea_DFS_신라" data-group-code="130">GM_ONLINE_Korea_DFS_신라 </option>
+
+<option value="C1014" data-account-name="GM_이탈리아법인" data-group-code="180">GM_이탈리아법인 </option>
+
+<option value="IT1001" data-account-name="GM_Milan_DS_10CC" data-group-code="180">GM_Milan_DS_10CC </option>
+
+<option value="C1015" data-account-name="GM_캐나다법인" data-group-code="180">GM_캐나다법인 </option>
+
+<option value="10001431" data-account-name="GM_WS_LUISA VIA ROMA" data-group-code="200">GM_WS_LUISA VIA ROMA </option>
+
+<option value="E1011" data-account-name="GM_ONLINE_Korea_S.I.V" data-group-code="170">GM_ONLINE_Korea_S.I.V </option>
+
+<option value="10001486" data-account-name="GM_WS_MAISON MARGIELA_YORKDALE" data-group-code="200">GM_WS_MAISON MARGIELA_YORKDALE </option>
+
+<option value="2810" data-account-name="SEONGSU POCKET" data-group-code="240">GM_서울_PU_포켓 SEONGSU POCKET </option>
+
+<option value="JP1007" data-account-name="GM_Tokyo_FS_Ginza" data-group-code="180">GM_Tokyo_FS_Ginza </option>
+
+<option value="US1015" data-account-name="GM_OFFICE_USA" data-group-code="180">GM_OFFICE_USA </option>
+
+<option value="TH1004" data-account-name="GM_Bangkok_MALL_SPG" data-group-code="190">GM_Bangkok_MALL_SPG </option>
+
+<option value="FR1001" data-account-name="GM_Paris_FS_Marais" data-group-code="180">GM_Paris_FS_Marais </option>
+
+<option value="2040" data-account-name="GM_FS_HAUS SEOUL" data-group-code="100">GM_서울_하우스 노웨어_서울 GM_FS_HAUS SEOUL </option>
+
+<option value="CA1001" data-account-name="GM_Toronto_MALL_Yorkdale" data-group-code="180">GM_Toronto_MALL_Yorkdale </option>
+
+<option value="1100" data-account-name="GM 물류센터" data-group-code="000">GM 물류센터 </option>
+
+<option value="1110" data-account-name="GM 본사" data-group-code="000">GM 본사 </option>
+
+<option value="US1016" data-account-name="GM_PS_USA" data-group-code="180">GM_PS_USA </option>
+
+<option value="US1017" data-account-name="GM_RX_USA" data-group-code="180">GM_RX_USA </option>
+
+<option value="AE1005" data-account-name="GM_WH_UAE" data-group-code="190">GM_WH_UAE </option>
+
+<option value="TH1005" data-account-name="GM_Bangkok_HAUS NOWHERE" data-group-code="190">GM_Bangkok_HAUS NOWHERE </option>
+
+<option value="CA1002" data-account-name="GM_WH_CANADA" data-group-code="180">GM_WH_CANADA </option>
+
+<option value="10001747" data-account-name="GM_WS_OTB SINGAPORE COMMERCIAL" data-group-code="200">GM_WS_OTB SINGAPORE COMMERCIAL </option>
+
+<option value="US1018" data-account-name="GM_LOST_USA" data-group-code="180">GM_LOST_USA </option>
+
+<option value="1208167338" data-account-name="(주) 와이지플러스" data-group-code="200">(주) 와이지플러스 </option>
+
+<option value="TW1004" data-account-name="GM_Taichung_MALL_Hanshin_Inter" data-group-code="190">GM_Taichung_MALL_Hanshin_Inter </option>
+
+<option value="US1019" data-account-name="GM_ONLINE_USA_TTS" data-group-code="180">GM_ONLINE_USA_TTS </option>
+
+</select>
+</div>
+</td>
+</tr>
+<tr>
+<td>镜片类型</td>
+<td>
+
+<select class="form-select" name="lensType" id="lensType">
+<option value="">-</option>
+<option value="lens1" selected="selected">未安装</option>
+<option value="lens6">产品的原装镜片</option>
+<option value="lens5">定制镜片</option>
+</select>
+
+</td>
+<td>购买日期</td>
+<td>
+
+<input type="date" class="form-control w-50" id="purchaseDate" value=""/>
+</td>
+</tr>
+<tr>
+<td>左边镜片状态</td>
+<td><span id="leftLenseCondition">test</span></td>
+<td>右边镜片状态</td>
+<td><span id="rightLenseCondition">test</span></td>
+
+
+</tr>
+<tr>
+<td>客户要求事项</td>
+<td>
+<textarea class="form-control from-store-reception" id="customerRequest"></textarea>
+</td>
+
+<td>传达事项</td>
+<td>
+<textarea class="form-control from-store-reception" id="note" readonly></textarea>
+</td>
+</tr>
+<tr>
+<td>产品图片</td>
+<td colspan="3">
+<!-- <a th:href="${ticket['physicalImage']}" th:target="_new">image</a>-->
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+<div class="row">
+<div class="col-6">
+<div>维修及支付信息</div>
+<table class="table border-1 fs--1">
+<tbody>
+<tr>
+<td>快递状态</td><!---관리자단에서 연동된값 노출만.--->
+<td>
+<select class="form-select me-1" id="deliveryStatus"><!---배송 상태--->
+<option value="">------</option>
+<!-- <option value="A" th:text="#{global.delivery.status.A}" th:selected="${ticket['globalDeliveryStatus'] eq 'A'}">발송대기중</option>-->
+<!-- <option value="B" th:text="#{global.delivery.status.B}" th:selected="${ticket['globalDeliveryStatus'] eq 'B'}">발송완료</option>-->
+<!-- <option value="C" th:text="#{global.delivery.status.C}" th:selected="${ticket['globalDeliveryStatus'] eq 'C'}">HQ입고</option>-->
+<!-- <option value="D" th:text="#{global.delivery.status.D}" th:selected="${ticket['globalDeliveryStatus'] eq 'D'}">출고완료</option>-->
+<!-- <option value="E" th:text="#{global.delivery.status.E}" th:selected="${ticket['globalDeliveryStatus'] eq 'E'}">법인오피스 도착</option>-->
+<option value="F">货品到店铺</option>
+<option value="G">客人到店取回</option>
+
+</select>
+</td>
+</tr>
+<tr>
+<td>维修进度</td><!---관리자단에서 연동된값 노출만.--->
+<td>
+<span>已收到受理</span>
+</td>
+
+</tr>
+<tr>
+<td>维修方式</td>
+<td><span></span></td>
+</tr>
+<tr>
+<td>维修时参考事项</td>
+<td><span></span></td>
+</tr>
+<tr>
+<td>收费/免费</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>维修费用</td>
+<td>
+<span>0.0 </span>
+</td>
+</tr>
+<tr>
+<td>支付完成与否</td> <!--- c4c-> ps page로 연동 -->
+<td>
+
+
+</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+<div class="col-6">
+<div>法人出库信息</div>
+<table class="table fs--1 border-1">
+<tr>
+<td>出库完成（HQ寄给法人）</td><!----인보이스 생성될때 자동입력--->
+<td>
+<input type="date" class="form-control" id="corporateForwardingDate" />
+</td>
+</tr>
+<tr>
+<td>法人物流运单号</td><!---메인 페이지에서 일괄 등록되면 입력.-->
+<td><input type="text" class="form-control" id="corporateWaybillNumber" value=""/></td>
+</tr>
+<tr>
+<td>法人发票NO.</td>
+<td><input type="text" class="form-control" id="corporateInvoiceNumber" value=""/></td>
+</tr>
+</table>
+<div>HQ出库信息</div>
+<table class="table fs--1 border-1">
+<tr>
+<td style="width: 40%;">HQ出库日</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>HQ货运单NO.</td>
+<td>
+<!-- <input type="text" class="form-control" id="hqWaybillNumber" th:value="${ticket['hqWaybillNumber']}"/>-->
+</td>
+</tr>
+<tr>
+<td>HQ发货单NO.</td>
+<td>
+<!-- <input type="text" class="form-control" id="hqInvoiceNumber" th:value="${ticket['hqInvoiceNumber']}"/>-->
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="row">
+<div class="col-2">
+<input type="button" class="btn btn-sm btn-primary" value="储存" onclick="saveDetail()"/>
+</div>
+</div>
+</div>
+<!---개요탭 끝 --->
+<div class="tab-pane fade" id="tab-mail" role="tabpanel" aria-labelledby="mail-tab">
+<div class="row mb-3">
+<div class="col-md-12"> <button class="btn btn-secondary p-2 float-end" onclick="refreshMailHistory();"><span data-feather="rotate-ccw"></span></button> </div>
+</div>
+<div id="talkSummary">
+<div class="border-top border-bottom border-200 position-relative top-1">
+<div class="table-responsive scrollbar">
+<table class="table fs--1 mb-0 border-200 mt-1">
+<thead>
+<tr class="text-center">
+<th class=" white-space-nowrap align-middle" scope="col" data-sort="ticket_id">Ticket Id</th>
+<th class="align-middle" scope="col" data-sort="template_title">Template Name</th>
+<th class="align-middle" scope="col" data-sort="send_date">Send Date</th>
+<th class="align-middle" scope="col" data-sort="send_type">Send Type</th>
+<th class="align-middle" scope="col" data-sort="status">Status</th>
+</tr>
+</thead>
+
+<tbody class="list" id="project-list-table-body-mail" >
+<tr class="text-center border-left-0 border-right-0">
+<td colspan="6" class="border-0">No History</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<input type="hidden" value="64154" id="ticketReceptionProductId">
+<input type="hidden" value="64202" id="storeReceptionDetailId">
+<input type="hidden" value="67828" id="customerReceptionInformationId">
+</div>
+</div>
+<!---- 화면 콘텐츠 끝 ---->
+
+<!------ footer start----->
+<html>
+<!--- 세션 연장 --->
+<div class="modal fade" id="sessionExtendModal" tabindex="-1" aria-labelledby="sessionExtendModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header border-bottom-0">
+<h5 class="modal-title" id="sessionExtendModalLabel"></h5>
+<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close" onclick="noExtendSession()"><span class="fas fa-times fs--1"></span></button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-md-12">
+<span>距登录到期还有不到 5 分钟的时间。你想延长你的时间吗</span>
+
+</div>
+</div>
+</div>
+
+<div class="modal-footer border-top-0">
+<button class="btn btn-primary" type="button" onclick="extendSessionTime()">查看</button>
+</div>
+</div>
+</div>
+</div>
+
+<footer class="footer position-absolute" >
+<div class="row g-0 justify-content-between align-items-center h-100">
+<div class="col-12 col-sm-auto text-center">
+<p class="mb-0 mt-2 mt-sm-0 text-900">주)아이아이컴바인드<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />사업자번호: 119-86-38589</p>
+</div>
+<div class="col-12 col-sm-auto text-center">
+<p class="mb-0 text-600">v1.9.0</p>
+</div>
+</div>
+</footer>
+
+<script src="./files/popper.min.js"></script>
+<script src="./files/bootstrap.min.js"></script>
+<script src="./files/anchor.min.js"></script>
+<script src="./files/is.min.js"></script>
+<script src="./files/all.min.js"></script>
+<script src="./files/lodash/lodash.min.js"></script>
+<!--<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>-->
+<script src="./files/list.min.js"></script>
+<script src="./files/feather.min.js"></script>
+<script src="./files/dayjs/dayjs.min.js"></script>
+<script src="./files/prism.js"></script>
+<script src="./files/phoenix.js"></script>
+<script src="./files/common.js"></script>
+<script>
+menu_arr.forEach(function(data,index) {
+$('.'+data).remove();
+})
+if (location.pathname != "/" && !location.pathname.startsWith("/notice")) { //글자 수정하기
+if(1 <= 0) {
+$('.content').append("<div style='background: #fff;width: 100%;position: absolute;height: 100%;left: 0;top: 0;'>" +
+"<div style='color: #000;position: absolute;top: 50%;left:50%;text-align: center;margin: auto;'>No permission"+
+"</div>" +
+"</div>");
+// 권한 체크 불편하면 주석.
+setTimeout(function(){
+alert("You are not authorized to access this page.");
+},100)
+
+location.href = "/";
+}
+}
+resetActiveTime();
+function resetActiveTime() {
+let currentTime = Date.now();
+localStorage.setItem("sessionCreateTime",currentTime);
+}
+function noExtendSession() {
+localStorage.setItem("sessionNoExtend","true");
+}
+function extendSessionTime() {
+$.ajax({
+url: "/session/extend",
+type: "POST",
+dataType:"json",
+success: function (data) {
+if (data.result) {
+let json = JSON.parse(data.stringData);
+localStorage.setItem("sessionCreateTime", json.sessionCreateTime);
+let sessionDuration = 60 * 60 * 1000; //60m
+if (data.sessionTime == '4') {
+sessionDuration = 240 * 60 * 1000; //240
+}
+localStorage.setItem("sessionDuration", sessionDuration);
+
+} else {
+alert(data.message);
+}
+localStorage.setItem("sessionNoExtend",""); // 연장안한다고 하면 얼럿 안뜨게 설정
+$('#sessionExtendModal').modal('hide');
+},
+error: function (request, status, error) {
+location.reload();
+}
+});
+}
+
+let intervalId = setInterval(checkSessionTime, 10000);
+function checkSessionTime() {
+localStorage.setItem("sessionNoExtend","")
+console.log("session time check", new Date());
+let sessionCreateTime = localStorage.getItem("sessionCreateTime");
+let sessionDuration = localStorage.getItem("sessionDuration");
+let sessionExpiryTime = parseInt(sessionCreateTime)+parseInt(sessionDuration);
+let currentTime = Date.now();
+
+let timeRemaining = sessionExpiryTime - currentTime ;
+
+let timeRemainingInMinutes = timeRemaining / (1000 * 60);
+let sessionNoExtendFlag = localStorage.getItem("sessionNoExtend");
+console.info("로그아웃 까지 ",timeRemainingInMinutes,"분 남았습니다.");
+// localStorage.setItem("sessionCreateTime",currentTime);
+localStorage.setItem("sessionNoExtend","");
+if (timeRemainingInMinutes <= 5 ) {
+if (sessionNoExtendFlag != "true") {
+$('#sessionExtendModal').modal('show');
+}
+
+} else {
+if (sessionNoExtendFlag === undefined || sessionNoExtendFlag == null) {
+localStorage.setItem("sessionNoExtend","true");
+}
+
+}
+}
+</script>
+
+</html>
+<!------- footer end ----->
+</div>
+</div>
+</div>
+<!--content 기본 끝--->
+
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
+<script type="text/javascript" >
+let originReceivingCode = "CN1012";
+let emailHasBeenSent = "\u5DF2\u5BC4\u51FA\u96FB\u5B50\u90F5\u4EF6\u3002\u8ACB\u6E96\u5099\u5546\u54C1\uFF0C\u4EE5\u4FBF\u9867\u5BA2\u4F86\u5E97\u6642\u53EF\u7ACB\u5373\u53D6\u8CA8";
+let customerPickupCompleteMsg = "\u53D6\u4EF6\u5DF2\u5B8C\u6210\u3002\u6211\u5011\u5DF2\u5BC4\u51FA\u78BA\u8A8D\u96FB\u5B50\u90F5\u4EF6";
+</script>
+<script>
+
+$(document).ready(function(){
+$('.chosen-select').chosen({
+search_contains: true
+});
+if ($('#receptionMethod').val()=='store') {//매장 수령이면 수령지 자택 영역 숨기기
+$('.reception-method-house-area').addClass('d-none');
+}
+if ($('#storeReceptionDetailId').val() == "") { //온라인 접수라 키 값이 없으면 수정할 필드가 없으므로 비활처리.
+$('.from-store-reception').attr('readonly', true);
+}
+refreshMailHistory();
+});
+
+function isAsianCountry(countryCode) {
+const asianCountries = ['KR','JP','CN','VN','TW'];
+return asianCountries.includes(countryCode);
+}
+
+function handleHeight(obj) {
+console.log($(obj).scrollHeight);
+// $(obj).css('height', 'auto');
+$(obj).css('height',$('textarea[name="storeDelivery"]').prop('scrollHeight')+'px');
+}
+function saveDetail() {
+let feeConfirmStatus = "";
+let name = "";
+let firstName = $('#firstName').val();
+let lastName = $('#lastName').val();
+let country = $('#CountryCode').val();
+
+if ($("#feeConfirmStatus").length != 0) {
+feeConfirmStatus = $("#feeConfirmStatus").val();
+}
+
+if (isAsianCountry(country)) {
+name = lastName + firstName;
+} else {
+name = firstName +' '+ lastName;
+}
+
+$('#actualReceptionAccountName').val($('#actualReceptionAccountCode option:selected').data('account-name')); //접수처명
+$('#purchaseStoreName').val($('#purchaseSapCode option:selected').data('account-name')); //구매처명
+$('#receivingStoreName').val($('#receivingStoreCode option:selected').data('account-name')); // 수령지명
+
+
+
+
+$.ajax({
+type: "POST",
+url: "/store/global/detail/update",
+data: {
+globalDeliveryStatus: $("#deliveryStatus").val(),
+feeConfirmStatus: feeConfirmStatus,
+corporateForwardingDate: $("#corporateForwardingDate").val(),
+corporateWaybillNumber: $("#corporateWaybillNumber").val(),
+corporateInvoiceNumber: $("#corporateInvoiceNumber").val(),
+ticketId: $("#ticketId").val(),
+lastName: lastName,
+firstName: firstName,
+customerName: name,
+CountryCode: country,
+customerPhone: $('#customerPhone').val(),
+customerEmail: $('#customerEmail').val(),
+marketingAgreeYn: $('#marketingAgreeYn').val(),
+actualReceptionAccountCode: $('#actualReceptionAccountCode').val(), //실접수법인(접수처)
+actualReceptionAccountName: $('#actualReceptionAccountName').val(),
+receptionMethod: $('#receptionMethod').val(), //수령방법
+receivingStoreCode: $('#receivingStoreCode').val(),//수령매장 code
+receivingStoreName: $('#receivingStoreName').val(),//수령매장
+deliveryCountry: $('#deliveryCountry').val(),//배송국가
+deliveryZipcode: $('#deliveryZipcode').val(),//배송우편번호
+deliveryAddress1: $('#deliveryAddress1').val(),
+deliveryAddress2: $('#deliveryAddress2').val(),
+city: $('#city').val(),
+state: $('#state').val(),
+storeDelivery: $('#storeDelivery').val(), //전달사항
+
+purchaseWarrantyType: $('#purchaseWarrantyType').val(), //구매 증빙 수단
+productName: $('#productName').val(), //상품명
+productSapCode: $('#productSapCode').val(), //상품코드
+havingWarranty: $('#havingWarranty').val(), //보증서 발송여부
+havingCase: $('#havingCase').val(), //케이스 발송여부
+repairReceipts: $('#repairReceipts').val(), //제품현상
+purchaseSapCode: $('#purchaseSapCode').val(), //구매처 코드
+purchaseStoreName: $('#purchaseStoreName').val(), //구매처 매장명
+lensType: $('#lensType').val(), //렌즈타입
+purchaseDate: $('#purchaseDate').val(), //구매일
+leftLenseCondition: $('#leftLenseCondition').text(), //좌측 렌즈 상태
+rightLenseCondition: $('#rightLenseCondition').text(), //우측 렌즈 상태
+customerRequest: $('#customerRequest').val(), //고객 요청사항
+note: $('#note').val(), //비고
+ticketReceptionProductId: $('#ticketReceptionProductId').val(),
+storeReceptionDetailId: $('#storeReceptionDetailId').val(),
+customerReceptionInformationId: $('#customerReceptionInformationId').val()
+},
+}).done(function( data ) {
+alert(data.message);
+
+}).fail(function(data){
+
+alert("Server Error1");
+});
+
+
+
+}
+
+function setProductSearchBox(flag) {
+if (flag == 'open') {
+$('.search-product-box').removeClass('d-none');
+} else {
+$('.search-product-box').addClass('d-none');
+}
+}
+function searchProduct() {
+let keyword = $('#searchProductName').val();
+if (keyword.length < 2) {
+alert("Please enter at least 2 characters.");
+return;
+}
+
+$.ajax({
+type: "POST",
+url: "/store/search/product",
+data: {keyword: keyword}
+}).done(function (data) {
+$('#modal_product_list_area').empty();
+$('#modal_product_list_area').append(data);
+
+}).fail(function (msg) {
+alert("Server Error");
+});
+}
+
+
+function setProduct(obj,sapCode) {
+
+let pName = $(obj).text();
+$('#productNameText').text(pName);
+$('#productName').val(pName);
+$('#productSapCode').val(sapCode);
+
+$('.search-product-box').addClass('d-none');
+
+}
+
+$('#receptionMethod').on('change',function(){
+if ($(this).val() == 'store') {
+$('.reception-method-store-area').removeClass('d-none');
+$('.reception-method-house-area').addClass('d-none');
+} else {
+$('.reception-method-store-area').addClass('d-none');
+$('.reception-method-house-area').removeClass('d-none');
+}
+});
+
+function apiReCall() {
+$.ajax({
+type: "POST",
+url: "/store/global/call/account/list",
+dataType: "json"
+}).done(function( data ) {
+if (data.result) {
+let array = data.listData;
+$('.account-api-re-call-area').empty();
+$('.account-api-re-call-area.actual-reception-account-code').append('<select class="form-select chosen-select" id="actualReceptionAccountCode"></select>');
+$('.account-api-re-call-area.receiving-store-code').append('<select class="form-select chosen-select" id="receivingStoreCode"></select>');
+$('.account-api-re-call-area.purchase-sap-code').append('<select class="form-select chosen-select" id="purchaseSapCode"></select>');
+for (var i=0; i<array.length;i++) {
+if (array[i]['NAME3'] == null || array[i]['NAME3'] == '') {
+$('#actualReceptionAccountCode').append('<option value='+array[i]['SAP_CODE']+' data-account-name="'+array[i]['STORE_NAME']+'" '
++'data-group-code="'+array[i]['GROUP_CODE']+'"'+' >'
++ array[i]['STORE_NAME']+ ' ' + '['+array[i]['SAP_CODE']+']'
++'</option>');
+$('#receivingStoreCode').append('<option value='+array[i]['SAP_CODE']+' data-account-name="'+array[i]['STORE_NAME']+'" '
++'data-group-code="'+array[i]['GROUP_CODE']+'"'+' >'
++ array[i]['STORE_NAME']+ ' ' +'['+array[i]['SAP_CODE']+']'
++'</option>');
+$('#purchaseSapCode').append('<option value='+array[i]['SAP_CODE']+' data-account-name="'+array[i]['STORE_NAME']+'" '
++'data-group-code="'+array[i]['GROUP_CODE']+'"'+' >'
++ array[i]['STORE_NAME']+ ' ' + '['+array[i]['SAP_CODE']+']'
++'</option>');
+} else {
+$('#actualReceptionAccountCode').append('<option value='+array[i]['SAP_CODE']+' data-account-name="'+array[i]['NAME3']+'" '
++'data-group-code="'+array[i]['GROUP_CODE']+'"'+' >'
++ array[i]['STORE_NAME']+' '+array[i]['NAME3']+'['+array[i]['SAP_CODE']+']'
++'</option>') ;
+$('#receivingStoreCode').append('<option value='+array[i]['SAP_CODE']+' data-account-name="'+array[i]['NAME3']+'" '
++'data-group-code="'+array[i]['GROUP_CODE']+'"'+' >'
++ array[i]['STORE_NAME']+' '+array[i]['NAME3']+'['+array[i]['SAP_CODE']+']'
++'</option>');
+$('#purchaseSapCode').append('<option value='+array[i]['SAP_CODE']+' data-account-name="'+array[i]['STORE_NAME']+'" '
++'data-group-code="'+array[i]['GROUP_CODE']+'"'+' >'
++ array[i]['STORE_NAME']+ ' ' + '['+array[i]['SAP_CODE']+']'
++'</option>');
+}
+}
+$('#actualReceptionAccountCode').val('3102');
+$('#receivingStoreCode').val('CN1012');
+$('#purchaseSapCode').val(''); //구매처
+$('.chosen-select').chosen({
+search_contains: true
+});
+}
+
+}).fail(function(data){
+alert("Api call failed");
+});
+
+}
+
+function refreshMailHistory() {
+$('#mailHistoryWrapper').removeClass('d-none');
+let ticketId = $('#ticketId').val();
+$.ajax(
+{
+type: "POST",
+url: "/store/getMailHistory",
+data: {
+ticketId: ticketId
+},
+async: false
+}
+).done(function (data) {
+$('#project-list-table-body-mail').replaceWith(data);
+}).fail(function (data) {
+});
+}
+let mailSendFlag = false;
+$(document).on('click', '#sendEmailBtn', function() {
+if (mailSendFlag) {
+alert("Processing.");
+return;
+}
+mailSendFlag = true;
+let templateNo = "";
+if ($('#deliveryStatus').val()=='F') { //매장 도착
+templateNo = "product_arrival_store";
+} else if ($('#deliveryStatus').val() == 'G') { //고객 픽업완료
+templateNo = "customer_pickup_complete";
+} else {
+mailSendFlag = false;
+alert("Please check send condition.");
+return;
+}
+
+$.ajax({
+type: "POST",
+url: "/service/global/send/email",
+dataType: "json",
+data: {
+ticketId: $("#ticketId").val(),
+mailTemplateName: templateNo
+}
+}).done(function (data) {
+if (data.result) {
+if ($('#deliveryStatus').val()=='F') {
+alert(emailHasBeenSent);
+} else {
+alert(customerPickupCompleteMsg);
+}
+
+} else {
+if (data.message != '') {
+alert(data.message);
+} else {
+alert("email sending failed. Please contact the administrator." );
+}
+}
+refreshMailHistory();
+mailSendFlag = false;
+}).fail(function (jqXHR, textStatus, errorThrown) {
+alert("Please Check the email, if it is persist, please contact the administrator.");
+mailSendFlag = false;
+refreshMailHistory();
+});
+});
+</script>

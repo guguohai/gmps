@@ -1,0 +1,1365 @@
+<html lang="ko">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><!--- bot 차단 --->
+<meta name="googlebot" content="noindex">
+
+<!-- ===============================================-->
+<!-- Document Title-->
+<!-- ===============================================-->
+<title>ProductService</title>
+<!-- ===============================================-->
+<!-- Favicons-->
+<!-- ===============================================-->
+<!-- <link rel="apple-touch-icon" sizes="180x180" href="./files/apple-touch-icon.png">-->
+<link rel="icon" type="image/png" sizes="32x32" href="./files/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./files/favicon-16x16.png">
+<!-- <meta name="msapplication-TileImage" content="./files/mstile-150x150.png">-->
+<meta name="theme-color" content="#ffffff">
+<script src="./files/imagesloaded.pkgd.min.js"></script>
+<script src="./files/simplebar.min.js"></script>
+<script src="./files/config.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+<script src="./files/jquery-3.2.1.min.js"></script>
+<script src="./files/choices.min.js"></script>
+<!-- <script src="./files/flatpickr.js"></script>-->
+
+
+<!-- ===============================================-->
+<!-- Stylesheets-->
+<!-- ===============================================-->
+<link href="./files/choices.min.css" rel="stylesheet" />
+<link href="./files/flatpickr.min.css" rel="stylesheet">
+<link href="./files/prism-okaidia.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900" rel="stylesheet">
+<link href="./files/simplebar.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./files/line.css">
+<link href="./files/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+<link href="./files/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+<link href="./files/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+<link href="./files/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+
+<script>
+var phoenixIsRTL = window.config.config.phoenixIsRTL;
+if (phoenixIsRTL) {
+var linkDefault = document.getElementById('style-default');
+var userLinkDefault = document.getElementById('user-style-default');
+linkDefault.setAttribute('disabled', true);
+userLinkDefault.setAttribute('disabled', true);
+document.querySelector('html').setAttribute('dir', 'rtl');
+} else {
+var linkRTL = document.getElementById('style-rtl');
+var userLinkRTL = document.getElementById('user-style-rtl');
+linkRTL.setAttribute('disabled', true);
+userLinkRTL.setAttribute('disabled', true);
+}
+</script>
+<link href="./files/custom.css" type="text/css" rel="stylesheet">
+</head>
+<style>
+.sticky-position-ticket {
+position: sticky;
+background: #fff !important;
+left: 0;
+}
+.sticky-position-ticket-2 {
+position: sticky;
+background: #fff !important;
+left: 2%;
+border-bottom-width: 1px;
+}
+.sticky-header-title {
+position: sticky;
+top: 0;
+background: #fff;
+z-index: 9;
+}
+.chosen-container .chosen-single {
+height: 33px !important;
+background: #fff !important;
+border: 1px solid #cbd0dd !important;
+box-shadow: none !important;
+padding-top:3px !important;
+}
+/* Additional styles for Chosen in dropdown */
+.dropdown-menu .chosen-container {
+min-width: 200px;
+width: 100% !important;
+}
+.dropdown-menu .chosen-container-single .chosen-drop {
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+z-index: 9999;
+}
+.dropdown-menu .chosen-container-active .chosen-drop {
+z-index: 9999;
+}
+/* Ensure the chosen dropdown is visible and not cut off */
+.dropdown-menu {
+overflow: visible !important;
+}
+/* Fix for chosen dropdown positioning */
+.chosen-container .chosen-drop {
+left: 0;
+width: 100%;
+}
+/* Ensure the chosen dropdown is visible */
+.chosen-container-active.chosen-with-drop .chosen-drop {
+display: block !important;
+}
+</style>
+<!--content 기본 시작--->
+<div class="main" id="top">
+<div class="container-fluid px-0">
+<html lang="ko">
+
+<nav class="navbar navbar-vertical navbar-expand-lg">
+<script>
+var navbarStyle = window.config.config.phoenixNavbarStyle;
+if (navbarStyle && navbarStyle !== 'transparent') {
+document.querySelector('body').classList.add(`navbar-${navbarStyle}`);
+}
+</script>
+<div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+<!-- scrollbar removed-->
+<div class="navbar-vertical-content">
+<ul class="navbar-nav flex-column" id="navbarVerticalNav">
+<!-- <li th:each="menu : ${menuList}" class="nav-item" >-->
+<!-- <div class="nav-item-wrapper">-->
+<!-- <a class="nav-link dropdown-indicator label-1" th:href="'#'+${menu.AT_NAME}" role="button" data-bs-toggle="collapse" aria-expanded="false" th:aria-controls="${menu.AT_NAME}">-->
+<!-- <div class="d-flex align-items-center">-->
+<!-- <div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>-->
+<!-- <span class="nav-link-icon"><span th:data-feather="${menu.ICON}"></span></span>-->
+<!-- <span class="nav-link-text" th:text="#{${menu.AUTH_NAME}}"></span>-->
+<!-- </div>-->
+<!-- </a>-->
+<!-- </div>-->
+<!-- <div>-->
+<!-- <div class="parent-wrapper label-1" th:if="${menu.AUTH_NAME}">-->
+<!-- <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" th:id="${menu.AT_NAME}">-->
+<!-- <li class="collapsed-nav-item-title d-none" th:text="${menu.AUTH_NAME}" >-->
+<!-- </li>-->
+
+<!-- <li class="nav-item" th:block th:if="${menu['SUB_MENU']}" th:each="sub_item : ${menu['SUB_MENU']}">-->
+<!-- <a class="nav-link" th:href="${sub_item.PAGE}" data-bs-toggle="" aria-expanded="false">-->
+<!-- <div class="d-flex align-items-center"><span class="nav-link-text" th:text="#{${sub_item.AUTH_NAME}}"></span>-->
+<!-- </div>-->
+<!-- </a>-->
+<!-- &lt;!&ndash; more inner pages&ndash;&gt;-->
+<!-- </li>-->
+
+<!-- </ul>-->
+<!-- </div>-->
+<!-- </div>-->
+<!-- </li>-->
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="member_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="users"></span></span>
+<span class="nav-link-text">Users</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="member_menu">
+<li class="collapsed-nav-item-title d-none">사용자</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/member/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">User List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/member/role/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Permission Management</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="product_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="inbox"></span></span>
+<span class="nav-link-text">Product</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="product_menu">
+<li class="collapsed-nav-item-title d-none">제품</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/product/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Product List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="subsidiary_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="package"></span></span>
+<span class="nav-link-text">Part Master</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="subsidiary_menu">
+<li class="collapsed-nav-item-title d-none">부속품마스터</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/part/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Part Master List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/part/process" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Part Request/Process Status</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="stock_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="edit"></span></span>
+<span class="nav-link-text">Stock Request</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="stock_menu">
+<li class="collapsed-nav-item-title d-none">재고요청</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/stock/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">List</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="customer_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="users"></span></span>
+<span class="nav-link-text">Customer</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="customer_menu">
+<li class="collapsed-nav-item-title d-none">고객</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/customer/b2b/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Store/B2B</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/customer/b2c/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Individual Customer/B2C</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/survey/index" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">survey</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+<li class="nav-item" >
+<!-- parent pages-->
+<div class="nav-item-wrapper"><!--th:href="'#'+${menu.AT_NAME}"--->
+<a class="nav-link dropdown-indicator label-1" role="button" aria-expanded="true" aria-controls="service_menu">
+<div class="d-flex align-items-center"><!--data-bs-toggle="collapse"--->
+<div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span></div>
+<span class="nav-link-icon"><span data-feather="edit"></span></span>
+<span class="nav-link-text">Service</span>
+</div>
+</a>
+<div class="parent-wrapper label-1">
+<ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="service_menu">
+<li class="collapsed-nav-item-title d-none">서비스</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/service/tickets" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">产品服务受理</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/kr" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">Domestic Store Receipt</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/cn" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_CHINA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/us" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_USA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/sg" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_SINGAPORE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/uk" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_UK</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/puyi" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_PUYI</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/jp" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_JAPAN</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ae" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_UAE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/th" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_THAILAND</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ph" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_PHILIPPINES</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/au" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_AUSTRALIA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/my" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_MALAYSIA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/hk" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_HONGKONG</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/tw" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_TAIWAN</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/fr" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_FRANCE</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/store/ca" data-bs-toggle="" aria-expanded="false">
+<div class="d-flex align-items-center"><span class="nav-link-text">PS REQUEST_CANADA</span>
+</div>
+</a>
+<!-- more inner pages-->
+</li>
+</ul>
+</div>
+</div>
+</li>
+
+
+
+</ul>
+</div>
+</div>
+<div class="navbar-vertical-footer">
+<button class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-0"></span><span class="uil uil-arrow-from-right fs-0"></span><span class="navbar-vertical-footer-text ms-2">Collapsed View</span></button>
+</div>
+</nav>
+<!---- 상단 가로 영역 로고,사람 아이콘 있는 위치---->
+<nav class="navbar navbar-top navbar-expand" id="navbarDefault">
+<div class="collapse navbar-collapse justify-content-between">
+<div class="navbar-logo">
+
+<button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+<a class="navbar-brand me-1 me-sm-3" href="/">
+<div class="d-flex align-items-center">
+<div class="d-flex align-items-center"><img src="./files/ms-iic-icon.png" alt="iic" width="27" />
+<p class="logo-text ms-2 d-none d-sm-block">PRODUCT SERVICE</p>
+</div>
+</div>
+</a>
+</div>
+<ul class="navbar-nav navbar-nav-icons flex-row">
+<li class="nav-item dropdown">
+<a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+<div class="avatar avatar-l ">
+<img class="rounded-circle " src="./files/avatar-rounded.webp" alt="" />
+
+</div>
+</a>
+<div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300" aria-labelledby="navbarDropdownUser">
+<div class="card position-relative border-0">
+<div class="card-body p-0">
+<div class="text-center pt-4 pb-3">
+<h6 class="mt-2 text-black">monstercn256</h6>
+</div>
+</div>
+
+<div class="card-footer p-0 border-top">
+<div class="p-2">
+<select class="form-select" id="selLanguage" onchange="changeLanguage(this)">
+<option value="ko">한국어</option>
+<option value="en">English</option>
+<option value="zh">中文 (简体)</option>
+<option value="zh-tw">中文 (繁體)</option>
+<option value="ja">日本語</option>
+</select>
+</div>
+<hr />
+<div class="px-3 m-2">
+<a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/logout">
+<span class="me-2" data-feather="log-out"> </span>
+Sign out</a>
+</div>
+
+</div>
+</div>
+</div>
+</li>
+
+</ul>
+</div>
+
+</nav>
+<!----상단 영역 ---->
+<script>
+let menu_arr = new Array();
+menu_arr.push("member_list_menu");
+menu_arr.push("member_auth_menu");
+menu_arr.push("product_list_menu");
+menu_arr.push("service_cn_ps_menu");
+menu_arr.push("service_us_ps_menu");
+menu_arr.push("service_sg_ps_menu");
+menu_arr.push("service_uk_ps_menu");
+menu_arr.push("service_puyi_ps_menu");
+menu_arr.push("service_jp_ps_menu");
+menu_arr.push("service_ae_ps_menu");
+menu_arr.push("service_th_jv_ps_menu");
+menu_arr.push("service_ph_ps_menu");
+menu_arr.push("service_au_ps_menu");
+menu_arr.push("service_my_ps_menu");
+menu_arr.push("service_hk_ps_menu");
+menu_arr.push("service_tw_ps_menu");
+menu_arr.push("service_fr_ps_menu");
+menu_arr.push("service_ca_ps_menu");
+</script>
+<script>
+function changeLanguage (obj) {
+location.href = "/?lang="+$(obj).val();
+}
+
+let cookieArr = document.cookie.split(';')
+for (let i=0 ; i < cookieArr.length ; i++) {
+let detailArr = cookieArr[i].split('=');
+if (detailArr[0].replace(/ /g,'') == "lang") {
+$('#selLanguage').val(detailArr[1]);
+}
+}
+</script>
+</html>
+
+<!----------- 메뉴 끝 ------------>
+<div class="content">
+<!---- 화면 콘텐츠 시작 ---->
+<nav class="mb-2" aria-label="breadcrumb">
+<ol class="breadcrumb mb-0">
+<li class="breadcrumb-item active">客户</li>
+</ol>
+</nav>
+<div class="mb-9">
+<div id="projectDiv">
+<div class="row mb-4 gx-6 gy-3 align-items-center">
+<div class="col-auto">
+<h4 class="mb-0">调查问卷</h4>
+</div>
+</div>
+<div class="row">
+<div class="col-8">
+<div class="d-flex">
+<div class="d-flex" style="margin-right:10px;">
+<div class="form-floating">
+<input type="date" class="form-control search-input d-inline" id="sDate" value="2026-02-16"/>
+<label for="sDate">問卷結束日期</label>
+</div>
+<span class="mx-2 pt-2">~</span>
+<div class="form-floating">
+<input type="date" class="form-control search-input d-inline" id="eDate" value="2026-03-18"/>
+<label for="eDate">問卷結束日期</label>
+</div>
+</div><button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</div>
+<div class="row g-3 mt-1">
+<div class="col-8">
+<div class="d-flex">
+<div class="form-floating me-2">
+<select class="form-select" id="satisfiedKeyword" name="satisfiedKeyword" style="widht:250px;" data-excel-filter>
+<option value="">满意关键词</option>
+</select>
+
+</div>
+<div class="form-floating me-2">
+<select class="form-select" id="dissatisfiedKeyword" name="dissatisfiedKeyword" data-excel-filter>
+<option value="">不满意关键词</option>
+</select>
+</div>
+<div class="">
+<select class="form-select" name="enforceKeyword" id="enforceKeyword" style="height: 33px;" data-excel-filter>
+<option value="">加强关键词</option>
+<option value="1">维修完成度</option>
+<option value="2">合理的维修费用</option>
+<option value="3">快速维修流程</option>
+<option value="4">员工服务亲切且专业</option>
+<option value="5">简单便捷的服务流程</option>
+<option value="6">售后服务保修期</option>
+<option value="7">如果没有适合的，请留下您想说的关键词。</option>
+</select>
+</div>
+</div>
+</div>
+<div class="col-4">
+<div class="float-end">
+<button class="btn btn-secondary p-2" onclick="javascript:location.reload()"><span data-feather="rotate-ccw"></span></button>
+<button type="button" class="btn btn-outline-secondary btn-sm p-2" onclick="excelDownload()">excel</button>
+</div>
+</div>
+
+</div>
+
+<div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1 mt-2" >
+<div class="table-responsive scrollbar" style="min-height:450px;max-height:450px;overflow-y: scroll;">
+<table class="table fs--1 mb-0 border-200 mt-1" style="width:2200px">
+<input type="text" class="d-none" id="userEmail"/><!---자동완성 때문에 숨겨둔 항목을 추가..-->
+<thead>
+<tr class="text-center sticky-header-title">
+<th class="sort align-middle ps-0 sticky-position-ticket" scope="col" >
+<input type="checkbox" class="form-check" name="allChk[]" id="allChk" onclick="allChk(this)">
+</th>
+<th class="sort align-middle th-title sticky-position-ticket-2 " scope="col">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >服务单号</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222;width:200px;">
+<div class="dropdown-item" onclick="setOrderBy('ticketId','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('ticketId','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="ticketId" id="ticketId" value="" autocomplete="new-password" data-excel-filter/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >問卷結束日期</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('responseExpiredAt','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('responseExpiredAt','desc',this)">Desc</div>
+<!-- <div class="dropdown-item p-1 d-flex">-->
+<!-- <button class="btn btn-sm p-2 deleteNextValue">X</button>-->
+<!-- <input class="form-control me-1" type="date" name="responseExpiredAt" id="responseExpiredAt" value=""/>-->
+<!-- <button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>-->
+<!-- </div>-->
+</div>
+</th>
+
+<th class="sort align-middle th-title" scope="col">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">满意度状态</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('satisfaction','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('satisfaction','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<select class="form-select" name="satisfaction" id="satisfaction" data-excel-filter>
+<option value="">-</option>
+<option value="1">Y</option>
+<option value="2">N</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">关键词组</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('keyword','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('keyword','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<select class="form-select" name="keyword" id="keyword" data-excel-filter>
+<option value="">-</option>
+<option value="service.process">服务流程</option>
+<option value="cost.and.period">维修费用&amp;时间</option>
+<option value="repair.care">维修 / 保养服务</option>
+<option value="package">包装</option>
+<option value="response.satisfaction">客服满意度</option>
+<option value="etc">其他</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">满意关键词</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('satisfactionKeyword','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('satisfactionKeyword','desc',this)">Desc</div>
+</div>
+</th>
+<th class="sort align-middle th-title" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">不满意关键词</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('dissatisfiedKeyword','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('dissatisfiedKeyword','desc',this)">Desc</div>
+
+</div>
+</th>
+<th class="sort align-middle th-title" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">开放式回答</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('satisfactionEtcText','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('satisfactionEtcText','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="satisfactionEtcText" id="satisfactionEtcText" value="" data-excel-filter/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >维修办公室
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+
+<div class="dropdown-item" onclick="setOrderBy('repairDepartment','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('repairDepartment','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<select class="form-select" name="repairDepartment" id="repairDepartment" data-excel-filter>
+<option value="">-</option>
+<option value="1">总部</option>
+<option value="4">合作商</option>
+<option value="5">美国办公室</option>
+<option value="6">日本办公室</option>
+<option value="7">3PL</option>
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col" >
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >加强关键词
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('enforceKeyword','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('enforceKeyword','desc',this)">Desc</div>
+
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">加强关键词 开放式回答</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('enforceKeywordEtc','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('enforceKeywordEtc','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="enforceKeywordEtc" id="enforceKeywordEtc" value="" autocomplete="false" data-excel-filter/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th class="sort align-middle th-title" scope="col">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">其他意见</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('additionalComment','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('additionalComment','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="additionalComment" id="additionalComment" value="" autocomplete="false" data-excel-filter/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th class="sort align-middle th-title" scope="col" style="min-width: 105px !important;">
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">回电状态
+<i class="fas fa-arrow-up d-none"></i>
+<i class="fas fa-arrow-down d-none"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('callBack','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('callBack','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<select class="form-select" id="callBack" name="callBack" data-excel-filter>
+<option value="">-</option>
+
+<option value="Y">已回电</option>
+
+
+<option value="W">等待回电</option>
+
+
+<option value="A">无人接听</option>
+
+</select>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+
+<th>
+<button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal show th-title" type="button" data-bs-toggle="dropdown"
+data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" >内容</button>
+<div class="dropdown-menu dropdown-menu-end py-2" style="z-index:2222">
+<div class="dropdown-item" onclick="setOrderBy('contentMemo','asc',this)">Asc</div>
+<div class="dropdown-item" onclick="setOrderBy('contentMemo','desc',this)">Desc</div>
+<div class="dropdown-item p-1 d-flex">
+<button class="btn btn-sm p-2 deleteNextValue">X</button>
+<input class="form-control me-1" type="text" name="contentMemo" id="contentMemo" value="" autocomplete="new-password" data-excel-filter="commentMemo"/>
+<button type="button" class="btn btn-sm action-search" onclick="searching(0)"><i class="fas fa-search"></i></button>
+</div>
+</div>
+</th>
+<th>
+
+</th>
+
+</tr>
+</thead>
+<tbody class="list" id="surveyList">
+<tr id="loadingSpinner" class="d-none">
+<td colspan="40" class="align-center; align-middle">
+<div class="spinner-grow text-primary" role="status" style="float:right;">
+<span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status" style="float:right;">
+<span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+<span class="visually-hidden">Loading...</span>
+</div>
+<div class="spinner-grow text-info" role="status">
+<span class="visually-hidden">Loading...</span>
+</div>
+
+</td>
+</tr>
+<input type="hidden" id="startPage" value=""/>
+<input type="hidden" id="endPage" value=""/>
+<input type="hidden" id="nowPage" value=""/>
+<input type="hidden" id="totalPage" value=""/>
+<input type="hidden" name="rows" id="rows" value="100"/>
+</tbody>
+</table>
+</div>
+<div class="d-flex flex-wrap align-items-center justify-content-between py-3 pe-0 fs--1 border-200">
+<div class="d-flex">
+<select class="form-select" name="selRows" onchange="searching(0)" style="width: 60%">
+<option value="10">10</option>
+<option value="30">30</option>
+<option value="50">50</option>
+<option value="100" selected>100</option>
+</select>
+<div style="width:40%; margin: auto;padding-left: 4px;">
+<span id="chkTotalCnt">0</span>selected
+</div>
+</div>
+<div class="d-flex paging-btn-area">
+
+</div>
+</div>
+
+</div>
+<input type="text" class="d-none" name="orderByKey" id="orderByKey" >
+<input type="text" class="d-none" name="orderBy" id="orderBy"/>
+</div>
+</div>
+<!---- 화면 콘텐츠 끝 ---->
+
+<!------ footer start----->
+<html>
+<!--- 세션 연장 --->
+<div class="modal fade" id="sessionExtendModal" tabindex="-1" aria-labelledby="sessionExtendModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header border-bottom-0">
+<h5 class="modal-title" id="sessionExtendModalLabel"></h5>
+<button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close" onclick="noExtendSession()"><span class="fas fa-times fs--1"></span></button>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-md-12">
+<span>距登录到期还有不到 5 分钟的时间。你想延长你的时间吗</span>
+
+</div>
+</div>
+</div>
+
+<div class="modal-footer border-top-0">
+<button class="btn btn-primary" type="button" onclick="extendSessionTime()">查看</button>
+</div>
+</div>
+</div>
+</div>
+
+<footer class="footer position-absolute" >
+<div class="row g-0 justify-content-between align-items-center h-100">
+<div class="col-12 col-sm-auto text-center">
+<p class="mb-0 mt-2 mt-sm-0 text-900">주)아이아이컴바인드<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />사업자번호: 119-86-38589</p>
+</div>
+<div class="col-12 col-sm-auto text-center">
+<p class="mb-0 text-600">v1.9.0</p>
+</div>
+</div>
+</footer>
+
+<script src="./files/popper.min.js"></script>
+<script src="./files/bootstrap.min.js"></script>
+<script src="./files/anchor.min.js"></script>
+<script src="./files/is.min.js"></script>
+<script src="./files/all.min.js"></script>
+<script src="./files/lodash/lodash.min.js"></script>
+<!--<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>-->
+<script src="./files/list.min.js"></script>
+<script src="./files/feather.min.js"></script>
+<script src="./files/dayjs/dayjs.min.js"></script>
+<script src="./files/prism.js"></script>
+<script src="./files/phoenix.js"></script>
+<script src="./files/common.js"></script>
+<script>
+menu_arr.forEach(function(data,index) {
+$('.'+data).remove();
+})
+if (location.pathname != "/" && !location.pathname.startsWith("/notice")) { //글자 수정하기
+if(1 <= 0) {
+$('.content').append("<div style='background: #fff;width: 100%;position: absolute;height: 100%;left: 0;top: 0;'>" +
+"<div style='color: #000;position: absolute;top: 50%;left:50%;text-align: center;margin: auto;'>No permission"+
+"</div>" +
+"</div>");
+// 권한 체크 불편하면 주석.
+setTimeout(function(){
+alert("You are not authorized to access this page.");
+},100)
+
+location.href = "/";
+}
+}
+resetActiveTime();
+function resetActiveTime() {
+let currentTime = Date.now();
+localStorage.setItem("sessionCreateTime",currentTime);
+}
+function noExtendSession() {
+localStorage.setItem("sessionNoExtend","true");
+}
+function extendSessionTime() {
+$.ajax({
+url: "/session/extend",
+type: "POST",
+dataType:"json",
+success: function (data) {
+if (data.result) {
+let json = JSON.parse(data.stringData);
+localStorage.setItem("sessionCreateTime", json.sessionCreateTime);
+let sessionDuration = 60 * 60 * 1000; //60m
+if (data.sessionTime == '4') {
+sessionDuration = 240 * 60 * 1000; //240
+}
+localStorage.setItem("sessionDuration", sessionDuration);
+
+} else {
+alert(data.message);
+}
+localStorage.setItem("sessionNoExtend",""); // 연장안한다고 하면 얼럿 안뜨게 설정
+$('#sessionExtendModal').modal('hide');
+},
+error: function (request, status, error) {
+location.reload();
+}
+});
+}
+
+let intervalId = setInterval(checkSessionTime, 10000);
+function checkSessionTime() {
+localStorage.setItem("sessionNoExtend","")
+console.log("session time check", new Date());
+let sessionCreateTime = localStorage.getItem("sessionCreateTime");
+let sessionDuration = localStorage.getItem("sessionDuration");
+let sessionExpiryTime = parseInt(sessionCreateTime)+parseInt(sessionDuration);
+let currentTime = Date.now();
+
+let timeRemaining = sessionExpiryTime - currentTime ;
+
+let timeRemainingInMinutes = timeRemaining / (1000 * 60);
+let sessionNoExtendFlag = localStorage.getItem("sessionNoExtend");
+console.info("로그아웃 까지 ",timeRemainingInMinutes,"분 남았습니다.");
+// localStorage.setItem("sessionCreateTime",currentTime);
+localStorage.setItem("sessionNoExtend","");
+if (timeRemainingInMinutes <= 5 ) {
+if (sessionNoExtendFlag != "true") {
+$('#sessionExtendModal').modal('show');
+}
+
+} else {
+if (sessionNoExtendFlag === undefined || sessionNoExtendFlag == null) {
+localStorage.setItem("sessionNoExtend","true");
+}
+
+}
+}
+</script>
+
+</html>
+<!------- footer end ----->
+</div>
+</div>
+</div>
+<!--content 기본 끝--->
+
+<script>
+document.addEventListener('keydown',function(e){
+if (e.keyCode===13) {
+searching(0);
+}
+},true);
+
+function excelDownload() {
+let startDate = $('#sDate').val();
+let endDate = $('#eDate').val();
+if (!startDate || !endDate) {
+alert("설문종료일 조회 기간 설정은 필수입니다.");
+return;
+}
+
+const validation = validateDateRange(startDate, endDate);
+if (!validation.valid) {
+alert(validation.message);
+return;
+}
+let form = document.createElement('form');
+form.method = 'POST';
+form.action = '/survey/index/download/excel';
+form.appendChild(createHiddenInput('startDate', startDate));
+form.appendChild(createHiddenInput('endDate', endDate));
+document.querySelectorAll('[data-excel-filter]').forEach(function(el) {
+if (el.value) {
+let name = el.dataset.excelFilter || el.name;
+form.appendChild(createHiddenInput(name, el.value));
+}
+});
+
+document.body.appendChild(form);
+form.submit();
+setTimeout(function() {
+if (form.parentNode) {
+document.body.removeChild(form);
+}
+}, 100);
+}
+
+function createHiddenInput(name, value) {
+let input = document.createElement('input');
+input.type = 'hidden';
+input.name = name;
+input.value = value;
+return input;
+}
+
+
+let page = 0;
+$(document).ready(function () {
+// Load satisfaction keywords
+$.ajax({
+url: "/api/v1/common/select-option?type=survey.positive.response",
+type: "GET",
+success: function(data) {
+var select = $('#satisfiedKeyword');
+// Clear existing options except the first one (-)
+select.find('option:not(:first)').remove();
+// Add new options
+$.each(data, function(index, item) {
+select.append($('<option></option>')
+.attr('value', item.code)
+.text(item.name));
+});
+
+select.chosen({
+search_contains: true,
+width: '250px',
+disable_search_threshold: 5
+});
+},
+error: function(xhr, status, error) {
+console.error("Error loading satisfaction keywords:", error);
+}
+});
+// Load dissatisfaction keywords
+$.ajax({
+url: "/api/v1/common/select-option?type=survey.negative.response",
+type: "GET",
+success: function(data) {
+var select = $('#dissatisfiedKeyword');
+// Clear existing options except the first one (-)
+select.find('option:not(:first)').remove();
+// Add new options
+$.each(data, function(index, item) {
+select.append($('<option></option>')
+.attr('value', item.code)
+.text(item.name));
+});
+// Initialize chosen for this select box after data is loaded
+select.chosen({
+search_contains: true,
+width: '250px',
+disable_search_threshold: 5 // Show search box only when there are more than 5 options
+});
+},
+error: function(xhr, status, error) {
+console.error("Error loading dissatisfaction keywords:", error);
+}
+});
+
+setTimeout(function () {
+searching(0);
+}, 100);
+});
+function searching(flag) {
+let size = $('select[name="selRows"]').val();
+if (size == '') {
+size = 100;
+}
+if (flag != "") {
+page = flag;
+}
+
+// 날짜 범위 검증
+const sDate = $('#sDate').val();
+const eDate = $('#eDate').val();
+if (sDate && eDate) {
+const validation = validateDateRange(sDate, eDate);
+if (!validation.valid) {
+alert(validation.message);
+return;
+}
+}
+
+$('#loadingSpinner').removeClass('d-none');
+let startPage = 0;
+let endPage = 0;
+let nowPage = 0;
+let totalPage = 0;
+let appendHtml = "";
+$.ajax({
+type: "POST",
+url: "/survey/index/search",
+data: {
+page: flag,
+size : size,
+startDate: $('#sDate').val(),
+endDate: $('#eDate').val(),
+ticketId: $('#ticketId').val(),
+responseExpiredAt: $('#responseExpiredAt').val(),
+additionalComment: $('#additionalComment').val(),
+keyword: $('#keyword').val(),
+satisfaction: $('#satisfaction').val(),
+callBack: $('#callBack').val(),
+satisfiedKeyword: $('#satisfiedKeyword').val(),
+dissatisfiedKeyword: $('#dissatisfiedKeyword').val(),
+commentMemo: $('#contentMemo').val(),
+satisfactionEtcText: $('#satisfactionEtcText').val(),
+repairDepartment: $('#repairDepartment').val(),
+enforceKeyword: $('#enforceKeyword').val(),
+enforceKeywordEtc: $('#enforceKeywordEtc').val(),
+orderByKey: $('#orderByKey').val(),
+orderBy: $('#orderBy').val()
+
+}
+}).done(function (data) {
+$('#loadingSpinner').addClass('d-none');
+$('#surveyList').replaceWith(data);
+$('.th-title').find('.fa-filter').remove();
+startPage = $('#startPage').val();
+endPage = $('#endPage').val();
+nowPage = $('#nowPage').val();//0부터 시작
+totalPage = $('#totalPage').val();
+let disabled = "disabled";
+if (Number(nowPage-1) > -1) { //이전 페이지가 있으면
+disabled = "";
+}
+appendHtml += '<button class="page-link '+disabled+'" data-list-pagination="prev" '+disabled+' onclick="paging('+Number(Number(nowPage)-1)+')"><span class="fas fa-chevron-left"></span></button>';
+appendHtml += '<ul class="mb-0 pagination">';
+for (let i = startPage; i <= endPage && i < totalPage ; i++) { //페이지0부터 시작이라 보여주는 페이지는+1
+if (nowPage == i) {
+appendHtml += '<li class="active"><button type="button" class="page" onclick="paging('+i+')" disabled>'+Number(Number(i)+Number(1))+'</button></li>';
+} else {
+appendHtml += '<li class=""><button type="button" class="page bg-white" onclick="paging('+i+')">'+Number(Number(i)+Number(1))+'</button></li>';
+}
+}
+
+disabled = "disabled";
+if (Number(Number(nowPage)+Number(1)) < totalPage) {
+disabled = "";
+}
+appendHtml += '</ul>';
+appendHtml += '<button class="page-link '+disabled+'" data-list-pagination="next"'+disabled+' onclick="paging('+Number(Number(nowPage)+Number(1))+')"><span class="fas fa-chevron-right"></span></button>';
+$('.paging-btn-area').empty();
+$('.paging-btn-area').append(appendHtml);
+
+$('input[name="s_idx[]"]').each(function () { //선택한 체크박스 인경우 체크한다.
+if (chk_arr.indexOf($(this).val()) > -1) {
+$(this).prop('checked', true);
+}
+});
+//검색한 항목 옆에 필터그림추가.
+$('.th-title').closest('th').find('input,select').each(function(index,target) {
+if ($(this).val() != "") {
+$(target).closest('th').find('.th-title').append('<i class="fas fa-filter"></i>');
+}
+});
+//오름차순 내림차순 세팅
+if ($('#orderByKey').val() != "") {
+$('.th-title').find('.fa-arrow-up').addClass('d-none');
+$('.th-title').find('.fa-arrow-down').addClass('d-none');
+if ($('#orderBy').val() == "asc") {
+$('input[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-up').removeClass('d-none');
+$('input[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-down').addClass('d-none');
+
+$('select[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-up').removeClass('d-none');
+$('select[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-down').addClass('d-none');
+} else {
+$('input[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-up').addClass('d-none');
+$('input[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-down').removeClass('d-none');
+$('select[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-up').addClass('d-none');
+$('select[name="'+$('#orderByKey').val()+'"]').closest('.th-title').find('.fa-arrow-down').removeClass('d-none');
+}
+
+}
+});
+
+}
+function paging(flag) {
+$('#allChk').prop('checked', false);
+page = flag;
+searching(flag);
+}
+
+function setOrderBy(order_by_key,order_by,obj) {
+console.log('order by'+order_by_key+" "+order_by);
+
+$('#orderByKey').val(order_by_key);
+$('#orderBy').val(order_by);
+searching(0);
+
+}
+
+let chk_arr = [];
+function addCheck(obj) { //페이지 넘겨도 선택되게.
+let index = 0;
+if ($(obj).prop('checked')) {
+chk_arr.push($(obj).val());
+
+} else {
+index = chk_arr.indexOf($(obj).val());
+chk_arr.splice(index, 1);//해당 키 삭제.
+
+}
+$('#chkTotalCnt').text(chk_arr.length);
+}
+function allChk(obj) {
+let index = "";
+if ($(obj).is(':checked')) {
+$('input[name="s_idx[]"]').each(function (i,target) {
+$(target).prop('checked', true);
+chk_arr.push($(target).val());
+});
+} else {
+$('input[name="s_idx[]"]').each(function (index,target) {
+let index2 = chk_arr.indexOf($(target).val());
+chk_arr.splice(index2, 1);//해당 키 삭제.
+$(target).prop('checked', false);
+});
+}
+chk_arr = [...new Set(chk_arr)];//중복제거
+console.log(chk_arr);
+$('#chkTotalCnt').text(chk_arr.length);
+}
+
+// var body = document.querySelector("body");
+// body.addEventListener('click', clickBodyEvent);
+// function clickBodyEvent(event) {
+// var target = event.target;
+// let obj = target;
+// if(target == event.currentTarget.querySelector(".th-title") ){
+// $(obj).find('.th-title-bottom').removeClass('d-none');
+// } else {
+// $('.th-title').find('.th-title-bottom').addClass('d-none');
+// }
+//
+// }
+$('.deleteNextValue').on('click',function(event) {
+$(this).next('select,input').val('');
+event.stopPropagation(); //엑스 눌러도 안닫히게
+});
+
+function showUpdateBtn(surveyIdx,obj) { //데이터 변경시 수정버튼 활성화
+$(obj).closest('tr').find('.btn-update').removeClass('d-none');
+}
+function updateOne(surveyIdx,obj) {
+let callBack = $(obj).closest('tr').find('select[name="callBackItem"]').val();
+let commentMemo = $(obj).closest('tr').find('textarea[name="contentMemo"]').val();
+$.ajax({
+type: "PUT",
+url: "/survey/index/change/one",
+data: {
+id: surveyIdx,
+commentMemo: commentMemo,
+callBack: callBack,
+
+}
+}).done(function (data) {
+if (data.result) {
+$(obj).closest('tr').find('.btn-update').addClass('d-none');
+} else {
+alert("update fail");
+}
+}).fail(function (msg) {
+alert("update fail..");
+});
+}
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
+<!-- Chosen initialization moved to AJAX success callbacks -->
+
+</html>
