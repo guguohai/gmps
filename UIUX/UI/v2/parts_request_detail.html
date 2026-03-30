@@ -16,9 +16,6 @@
 
     <!-- Uicons Icons -->
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
-    <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet">
-    <link href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'
-        rel='stylesheet'>
 
     <!-- Uicons Custom CSS for fi-sr -->
     <style>
@@ -349,9 +346,7 @@
                             <div class="space-y-1">
                                 <label
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求负责人</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="text" value="李强" readonly />
+                                <span class="block w-full rounded-lg py-2 text-on-surface text-[13px]">John Smith</span>
                             </div>
 
                             <!-- 门店类型 -->
@@ -359,11 +354,10 @@
                                 <label
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">门店类型</label>
                                 <select
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option>旗舰店</option>
-                                    <option selected>标准店</option>
-                                    <option>社区店</option>
-                                    <option>其他</option>
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-body">
+                                    <option value="办公室">办公室</option>
+                                    <option value="法人">法人</option>
+                                    <option value="其他">其他</option>
                                 </select>
                             </div>
 
@@ -372,8 +366,8 @@
                                 <label
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">门店名称</label>
                                 <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="text" value="上海静安寺店" readonly />
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
+                                    type="text" value="上海淮海路旗舰店" readonly />
                             </div>
 
                             <!-- 产品名称 -->
@@ -381,43 +375,42 @@
                                 <label
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
                                 <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="text" value="iPhone 15 Pro Max" readonly />
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
+                                    type="text" value="Maison Margiela MM100" readonly />
                             </div>
 
-                            <!-- 小零件名称 -->
+                            <!-- 配件名称 -->
                             <div class="space-y-1">
                                 <label
-                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">小零件名称</label>
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件名称</label>
                                 <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="text" value="充电线 Lightning" readonly />
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
+                                    type="text" value="左侧镜腿 (Left Temple)" readonly />
                             </div>
 
-                            <!-- 小零件存放位置 -->
+                            <!-- 配件存放位置 -->
                             <div class="space-y-1">
                                 <label
-                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">小零件存放位置</label>
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件存放位置</label>
                                 <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="text" value="仓库 A 区 -03 货架" readonly />
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
+                                    type="text" value="A-12-05" readonly />
                             </div>
 
                             <!-- 颜色 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">颜色</label>
                                 <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="text" value="白色" readonly />
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
+                                    type="text" value="黑色 (Black)" readonly />
                             </div>
 
-                            <!-- 数量（对） -->
+                            <!-- 数量 -->
                             <div class="space-y-1">
-                                <label
-                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">数量（对）</label>
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">数量</label>
                                 <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="number" value="50" readonly />
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
+                                    type="number" value="20" readonly />
                             </div>
 
                             <!-- 附加需求事项 -->

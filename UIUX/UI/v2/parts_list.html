@@ -16,9 +16,8 @@
 
     <!-- Uicons Icons -->
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
-    <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet">
-    <link href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'
-        rel='stylesheet'>
+
+
 
     <!-- Uicons Custom CSS for fi-sr -->
     <style>
@@ -373,54 +372,80 @@
 
                 <!-- Filters Card -->
                 <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
-                    <div class="flex items-end gap-5">
-                        <!-- Form Fields -->
-                        <div class="flex-1 flex gap-4">
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">配件
-                                    ID</label>
-                                <input
-                                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                                    type="text" placeholder="PRT-2024..." />
-                            </div>
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">配件名称</label>
-                                <input
-                                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                                    type="text" placeholder="请输入配件名称" />
-                            </div>
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">类型</label>
-                                <select
-                                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                                    <option>全部类型</option>
-                                    <option>Screw</option>
-                                    <option>Bolt</option>
-                                    <option>Nut</option>
-                                    <option>Washer</option>
-                                </select>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-1">
+                            <div class="grid grid-cols-4 gap-4">
+                                <!-- 1: 配件 ID -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">配件
+                                        ID</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="100001" />
+                                </div>
+                                <!-- 2: 配件名称 -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">配件名称</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="输入配件名称" />
+                                </div>
+                                <!-- 3: 颜色 -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">颜色</label>
+                                    <select
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none font-body">
+                                        <option>全部颜色</option>
+                                        <option>黑色 (Black)</option>
+                                        <option>银色 (Silver)</option>
+                                        <option>金色 (Gold)</option>
+                                        <option>枪色 (Gunmetal)</option>
+                                        <option>玫瑰金 (Rose Gold)</option>
+                                        <option>透明 (Clear)</option>
+                                    </select>
+                                </div>
+                                <!-- 4: 规格 -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">规格</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="输入规格" />
+                                </div>
+
+                                <!-- 5: 存放位置 -->
+                                <div class="advanced-filter hidden">
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">存放位置</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="输入存放位置" />
+                                </div>
                             </div>
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="flex justify-end gap-2 w-auto pb-[3px]">
-                            <button
-                                class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20"
-                                title="Search">
-                                <i class="fi fi-rr-search text-[12px]"></i>
-                            </button>
-                            <button
-                                class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm"
-                                title="Expand">
-                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </button>
+                        <div class="w-[72px] flex items-start pt-[27px]">
+                            <div class="flex justify-end gap-2 w-full">
+                                <button
+                                    class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20 shrink-0"
+                                    title="Search">
+                                    <i class="fi fi-rr-search text-[12px]"></i>
+                                </button>
+                                <button
+                                    class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm shrink-0"
+                                    title="Expand" onclick="toggleFilters()">
+                                    <svg id="expand-icon" class="w-3.5 h-3.5 transition-transform duration-300"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -431,63 +456,74 @@
                         <table cellpadding="0" cellspacing="0" style="min-width: 100%; font-size: 13px;"
                             class="text-left">
                             <thead
-                                class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px]">
+                                class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px] whitespace-nowrap">
                                 <tr>
-                                    <th class="px-6 py-4">配件 ID</th>
+                                    <th class="px-6 py-4 w-[50px]">
+                                        <input type="checkbox"
+                                            class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer">
+                                    </th>
+                                    <th class="px-6 py-4">配件ID</th>
                                     <th class="px-6 py-4">配件名称</th>
-                                    <th class="px-6 py-4">配件类型</th>
-                                    <th class="px-6 py-4">数量类型</th>
-                                    <th class="px-6 py-4">数量值</th>
+                                    <th class="px-6 py-4">数量</th>
                                     <th class="px-6 py-4">颜色</th>
                                     <th class="px-6 py-4">规格</th>
-                                    <th class="px-6 py-4">配件存放位置</th>
-                                    <th class="px-6 py-4">操作</th>
+                                    <th class="px-6 py-4">存放位置</th>
+                                    <th class="px-6 py-4 sticky right-0 bg-slate-50/50">操作</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-50">
-                                <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
-                                    onclick="window.location.href='./parts_detail.html?id=PRT-2024-001'">
-                                    <td class="px-6 py-4 font-bold text-primary">#PRT-2024-001</td>
-                                    <td class="px-6 py-4 font-medium">Hex Bolt M8</td>
-                                    <td class="px-6 py-4 text-slate-600">Bolt</td>
-                                    <td class="px-6 py-4 text-slate-600">Pieces</td>
-                                    <td class="px-6 py-4 text-slate-600">500</td>
-                                    <td class="px-6 py-4 text-slate-600">Silver</td>
-                                    <td class="px-6 py-4 text-slate-600">M8×20mm</td>
-                                    <td class="px-6 py-4 text-slate-600">Bin A-01-03</td>
-                                    <td class="px-6 py-4">
-                                        <a href="./parts_detail.html?id=PRT-2024-001"
-                                            class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                            <tbody class="divide-y divide-slate-100 text-[13px] whitespace-nowrap">
+                                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                                    onclick="window.location.href='./parts_detail.html?id=100001'">
+                                    <td class="px-6 py-4 w-[50px]">
+                                        <input type="checkbox"
+                                            class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                                            onclick="event.stopPropagation()">
+                                    </td>
+                                    <td class="px-6 py-4 font-semibold text-primary">100001</td>
+                                    <td class="px-6 py-4 font-semibold text-slate-800">钛合金鼻托 (Titanium Nose Pad)</td>
+                                    <td class="px-6 py-4 font-bold text-slate-600">500</td>
+                                    <td class="px-6 py-4 text-slate-500">银色 (Silver)</td>
+                                    <td class="px-6 py-4 text-slate-500">12mm</td>
+                                    <td class="px-6 py-4 text-slate-500">A1, 1/A01</td>
+                                    <td class="px-6 py-4 sticky right-0 bg-white hover:bg-slate-50/50">
+                                        <a href="./parts_detail.html?id=100001"
+                                            class="text-primary hover:opacity-90 transition-opacity font-medium">查看</a>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
-                                    onclick="window.location.href='./parts_detail.html?id=PRT-2024-002'">
-                                    <td class="px-6 py-4 font-bold text-primary">#PRT-2024-002</td>
-                                    <td class="px-6 py-4 font-medium">Lock Nut M10</td>
-                                    <td class="px-6 py-4 text-slate-600">Nut</td>
-                                    <td class="px-6 py-4 text-slate-600">Pieces</td>
-                                    <td class="px-6 py-4 text-slate-600">1000</td>
-                                    <td class="px-6 py-4 text-slate-600">Zinc</td>
-                                    <td class="px-6 py-4 text-slate-600">M10×1.5</td>
-                                    <td class="px-6 py-4 text-slate-600">Bin B-02-05</td>
-                                    <td class="px-6 py-4">
-                                        <a href="./parts_detail.html?id=PRT-2024-001"
-                                            class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                                    onclick="window.location.href='./parts_detail.html?id=100002'">
+                                    <td class="px-6 py-4 w-[50px]">
+                                        <input type="checkbox"
+                                            class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                                            onclick="event.stopPropagation()">
+                                    </td>
+                                    <td class="px-6 py-4 font-semibold text-primary">100002</td>
+                                    <td class="px-6 py-4 font-semibold text-slate-800">定制镜腿螺丝 (Temple Screw)</td>
+                                    <td class="px-6 py-4 font-bold text-slate-600">1200</td>
+                                    <td class="px-6 py-4 text-slate-500">金色 (Gold)</td>
+                                    <td class="px-6 py-4 text-slate-500">1.2×3.5mm</td>
+                                    <td class="px-6 py-4 text-slate-500">B2, 3/B12</td>
+                                    <td class="px-6 py-4 sticky right-0 bg-white hover:bg-slate-50/50">
+                                        <a href="./parts_detail.html?id=100002"
+                                            class="text-primary hover:opacity-90 transition-opacity font-medium">查看</a>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
-                                    onclick="window.location.href='./parts_detail.html?id=PRT-2024-003'">
-                                    <td class="px-6 py-4 font-bold text-primary">#PRT-2024-003</td>
-                                    <td class="px-6 py-4 font-medium">Flat Washer</td>
-                                    <td class="px-6 py-4 text-slate-600">Washer</td>
-                                    <td class="px-6 py-4 text-slate-600">Pieces</td>
-                                    <td class="px-6 py-4 text-slate-600">2000</td>
-                                    <td class="px-6 py-4 text-slate-600">Steel</td>
-                                    <td class="px-6 py-4 text-slate-600">Φ10mm</td>
-                                    <td class="px-6 py-4 text-slate-600">Bin C-03-01</td>
-                                    <td class="px-6 py-4">
-                                        <a href="./parts_detail.html?id=PRT-2024-001"
-                                            class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                                    onclick="window.location.href='./parts_detail.html?id=100003'">
+                                    <td class="px-6 py-4 w-[50px]">
+                                        <input type="checkbox"
+                                            class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                                            onclick="event.stopPropagation()">
+                                    </td>
+                                    <td class="px-6 py-4 font-semibold text-primary">100003</td>
+                                    <td class="px-6 py-4 font-semibold text-slate-800">HER系列 镜腿内衬套</td>
+                                    <td class="px-6 py-4 font-bold text-slate-600">350</td>
+                                    <td class="px-6 py-4 text-slate-500">黑色 (Black)</td>
+                                    <td class="px-6 py-4 text-slate-500">145mm 适用</td>
+                                    <td class="px-6 py-4 text-slate-500">C1, 2/C05</td>
+                                    <td class="px-6 py-4 sticky right-0 bg-white hover:bg-slate-50/50">
+                                        <a href="./parts_detail.html?id=100003"
+                                            class="text-primary hover:opacity-90 transition-opacity font-medium">查看</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -565,6 +601,25 @@
                 const sidebar = document.getElementById('sidebar');
                 sidebar.classList.toggle('w-64');
                 sidebar.classList.toggle('w-20');
+            }
+
+            // Toggle advanced filters
+            function toggleFilters() {
+                const advancedFilters = document.querySelectorAll('.advanced-filter');
+                const expandIcon = document.getElementById('expand-icon');
+
+                let isHidden = true;
+                if (advancedFilters.length > 0) {
+                    isHidden = advancedFilters[0].classList.contains('hidden');
+                }
+
+                if (isHidden) {
+                    advancedFilters.forEach(el => el.classList.remove('hidden'));
+                    expandIcon.style.transform = 'rotate(180deg)';
+                } else {
+                    advancedFilters.forEach(el => el.classList.add('hidden'));
+                    expandIcon.style.transform = 'rotate(0deg)';
+                }
             }
         </script>
 </body>

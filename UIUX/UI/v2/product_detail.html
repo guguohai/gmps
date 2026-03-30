@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>产品详情 | PRODUCT SERVICE</title>
-    
+    <title>产品详情 - 产品管理系统</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+
     <!-- Uicons Icons -->
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
-    <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet">
-    <link href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css' rel='stylesheet'>
-    
+
+    <!-- Uicons Custom CSS for fi-sr -->
+    <style>
+        @font-face {
+            font-family: 'uicons-solid';
+            src: url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff2') format('woff2'),
+                url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        [class^="fi-sr-"] {
+            font-family: 'uicons-solid' !important;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
     <!-- Tailwind Config -->
     <script id="tailwind-config">
         tailwind.config = {
@@ -23,57 +46,14 @@
             theme: {
                 extend: {
                     colors: {
-                        "error-container": "#fe8983",
-                        "on-secondary-fixed": "#2a4159",
-                        "on-primary-fixed-variant": "#0058ba",
-                        "inverse-on-surface": "#999da1",
-                        "on-surface": "#26343d",
-                        "on-primary-fixed": "#003d85",
-                        "secondary-fixed-dim": "#bfd7f4",
-                        "primary-container": "#d8e2ff",
-                        "secondary-dim": "#3e556e",
-                        "on-tertiary": "#f9f9f9",
-                        "on-background": "#26343d",
-                        "surface-container-high": "#e2e8f0",
-                        "on-error": "#fff7f6",
-                        "inverse-surface": "#0a0f12",
-                        "on-secondary-container": "#3d546c",
-                        "on-tertiary-container": "#5a5c5c",
-                        "tertiary-fixed": "#f4f3f3",
-                        "secondary-fixed": "#cfe4ff",
-                        "on-error-container": "#752121",
-                        "tertiary-dim": "#525354",
-                        "surface-bright": "#ffffff",
-                        "on-tertiary-fixed-variant": "#656666",
-                        "background": "#F5F7FA",
-                        "outline-variant": "#a4b4be",
-                        "surface-container": "#f1f5f9",
-                        "inverse-primary": "#4a8eff",
-                        "secondary-container": "#cfe4ff",
-                        "on-surface-variant": "#52616a",
-                        "surface-container-lowest": "#ffffff",
-                        "on-primary-container": "#004fa8",
-                        "on-secondary": "#f7f9ff",
-                        "secondary": "#4a617a",
-                        "primary-fixed-dim": "#c2d4ff",
-                        "on-primary": "#f7f7ff",
-                        "outline": "#cbd0dd",
-                        "surface-container-low": "#f8fafc",
-                        "tertiary": "#5e5f5f",
-                        "error": "#9f403d",
-                        "tertiary-container": "#f4f3f3",
-                        "surface": "#F5F7FA",
-                        "error-dim": "#4e0309",
-                        "surface-variant": "#d5e5ef",
-                        "surface-container-highest": "#cbd5e1",
-                        "tertiary-fixed-dim": "#e5e5e5",
-                        "on-tertiary-fixed": "#484a4a",
-                        "primary-dim": "#004fa9",
-                        "surface-dim": "#cadde9",
                         "primary": "#177ee5",
-                        "primary-fixed": "#d8e2ff",
-                        "surface-tint": "#177ee5",
-                        "on-secondary-fixed-variant": "#465d76"
+                        "on-surface": "#26343d",
+                        "on-surface-variant": "#52616a",
+                        "background": "#F5F7FA",
+                        "outline": "#cbd0dd",
+                        "surface": "#ffffff",
+                        "secondary": "#4a617a",
+                        "error": "#9f403d"
                     },
                     fontFamily: {
                         "headline": ["Manrope"],
@@ -90,251 +70,366 @@
             }
         }
     </script>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FA;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-headline {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .heroicon {
+            vertical-align: middle;
+        }
+    </style>
 </head>
-<body class="bg-[#F5F7FA] text-on-surface min-h-screen flex flex-col relative overflow-x-hidden font-body">
+
+<body class="text-on-surface bg-background min-h-screen">
     <!-- Top Navigation Bar -->
-    <header class="bg-white border-b border-slate-200 h-16 fixed top-0 left-0 right-64 z-50 flex items-center justify-between px-6 shadow-sm">
-        <!-- Left: Breadcrumb & Search -->
-        <div class="flex items-center gap-6 h-full">
-            <!-- Breadcrumb -->
-            <div>
-                <h1 class="font-bold text-on-surface font-headline tracking-tight text-[14px]">
-                    <span class="font-medium text-[#177ee5]">产品管理</span>
-                    <span class="mx-2 text-slate-300">/</span>
-                    <span class="text-[#6e7891]">产品详情</span>
-                </h1>
+    <header
+        class="bg-white border-b border-outline fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <!-- Logo & Brand -->
+            <div class="flex items-center gap-2">
+                <img alt="PRODUCT SERVICE Logo" class="w-10 h-10 rounded-lg" src="logo.png" />
+                <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="relative hidden md:block">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z">
+                    </path>
+                </svg>
+                <input
+                    class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    style="background-color: #f5f7fa; width: 364px;" type="text" placeholder="Scan barcode" />
             </div>
         </div>
-        
+
         <!-- Right Actions -->
-        <div class="flex items-center gap-4 h-full">
-            <button class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center" title="Language">
+        <div class="flex items-center gap-4">
+            <button
+                class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center"
+                title="Language">
                 <i class="fi fi-rr-globe text-[20px] leading-none"></i>
             </button>
-            <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8">
+            <div class="flex items-center gap-3 pl-4 border-l border-slate-200 cursor-pointer">
                 <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px;">
-                                            <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20"><path d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0" p-id="1651"></path></svg>
+                    <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20">
+                        <path
+                            d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0"
+                            p-id="1651"></path>
+                    </svg>
                 </div>
             </div>
         </div>
     </header>
-    
+
     <!-- Main Layout -->
     <div class="flex pt-16 h-screen">
         <!-- Sidebar Navigation -->
-        <aside id="sidebar" class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-sm font-medium z-40 border-r border-[#cbd0dd]">
+        <aside id="sidebar"
+            class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-sm font-medium z-40 border-r border-[#cbd0dd]">
             <nav class="py-4 flex-grow space-y-1">
                 <!-- Dashboard -->
-                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all" href="./dashboard.html">
+                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all"
+                    href="./dashboard.html">
                     <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                     <span class="text-[13px]">Dashboard</span>
                 </a>
-                
+
                 <!-- 工单管理 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">工单管理</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./ticket_list.html">列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./ticket_list.html">列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 产品管理 Menu Group - Active -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">产品管理</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                     <div class="menu-content py-1 bg-slate-50/50">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./product_list.html">列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./product_detail.html">详情</a>
+                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
+                            href="./product_list.html">列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 库存 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_request_list.html">申请列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./inventory_request_list.html">申请列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 配件 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
-                            <i class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+                            <i
+                                class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">配件</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_list.html">列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_request_list.html">申请列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./parts_list.html">列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./parts_request_list.html">申请列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 服务 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
-                            <i class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+                            <i
+                                class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">服务</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_survey.html">问卷</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_consultation.html">咨询</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./service_survey.html">问卷</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./service_consultation.html">咨询</a>
                     </div>
                 </div>
-                
+
                 <!-- 用户权限 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">用户权限</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">用户列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_list.html">角色列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./permission_list.html">权限列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./user_list.html">用户列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./role_list.html">角色列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./permission_list.html">权限列表</a>
                     </div>
                 </div>
             </nav>
-            
+
             <!-- Collapse Button -->
-            <div class="border-t border-slate-100 bg-white p-4">
-                <button class="w-full flex items-center px-6 py-4 text-slate-400 hover:text-primary transition-colors group" onclick="toggleSidebar()">
-                    <i class="fi fi-rr-chevron-left w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                    <span class="text-xs font-semibold">Collapse</span>
+            <div class="border-t border-slate-100 p-4">
+                <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors"
+                    onclick="toggleSidebar()">
+                    <i class="fi fi-rr-angle-left w-5 h-5 mr-3"></i>
+                    <span class="text-xs font-semibold uppercase">Collapse</span>
                 </button>
             </div>
         </aside>
-        
+
         <!-- Main Content -->
-        <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA]">
-            <div class="w-full max-w-full px-[30px] py-5">
-                <!-- Action Buttons -->
-                <div class="flex justify-between items-center mb-5">
-                    <button class="h-8 px-4 bg-primary text-white rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
-                        <i class="fi fi-rr-arrow-left text-[12px]"></i>
-                        Back to List
-                    </button>
-                    <div class="flex gap-2">
-                        <button class="h-8 px-4 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-50 transition-colors flex items-center gap-1.5 shadow-sm">
-                            <i class="fi fi-rr-edit text-[12px]"></i>
-                            Edit
-                        </button>
-                        <button class="h-8 px-4 bg-primary text-white rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
-                            <i class="fi fi-rr-check text-[12px]"></i>
-                            Save Changes
+        <main class="ml-64 flex-1 p-5 overflow-y-auto w-full">
+            <!-- Breadcrumb -->
+            <nav class="mb-5 text-sm font-medium flex items-center">
+                <a href="./product_list.html" class="text-primary hover:underline">产品管理</a>
+                <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <a href="./product_list.html" class="text-primary hover:underline">产品列表</a>
+                <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <span class="text-slate-500">产品详情</span>
+            </nav>
+
+            <div class="space-y-8 w-full">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight px-2">
+                                20000001
+                            </h2>
+                        </div>
+                        <p class="text-xs text-on-surface-variant px-2">创建于 2024 年 3 月 15 日 • 最后更新 1 小时前</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 transition-all inline-flex items-center gap-1.5">
+                            <i class="fi fi-rr-disk w-4 h-4"></i>
+                            <span>保存</span>
                         </button>
                     </div>
                 </div>
-                
-                <!-- Detail Form -->
-                <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-8">
-                    <h2 class="text-lg font-bold text-on-surface mb-6">Product Information</h2>
-                    
-                    <div class="grid grid-cols-3 gap-6">
-                        <!-- Row 1 -->
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Product ID</label>
-                            <div class="text-[13px] font-semibold text-on-surface">PRD-2024-001</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Product Name</label>
-                            <div class="text-[13px] font-semibold text-on-surface">Air Filter Pro</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Category</label>
-                            <div class="text-[13px] font-semibold text-on-surface">Filtration</div>
-                        </div>
-                        
-                        <!-- Row 2 -->
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Factory 1</label>
-                            <div class="text-[13px] text-on-surface">Plant A</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Factory 2</label>
-                            <div class="text-[13px] text-on-surface">Plant B</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Factory 3</label>
-                            <div class="text-[13px] text-on-surface">-</div>
-                        </div>
-                        
-                        <!-- Row 3 -->
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Market Date</label>
-                            <div class="text-[13px] text-on-surface">2024-01-15</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Parts Life</label>
-                            <div class="text-[13px] text-on-surface">5 years</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Storage Location</label>
-                            <div class="text-[13px] text-on-surface">Warehouse A-01</div>
-                        </div>
-                        
-                        <!-- Row 4 -->
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Safety Stock Status</label>
-                            <div><span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Normal</span></div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">PS Stock Qty</label>
-                            <div class="text-[13px] text-on-surface">1,250</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">3PL Stock Qty</label>
-                            <div class="text-[13px] text-on-surface">850</div>
+
+                <!-- Product Detail Forms -->
+                <!-- Product Detail Unified Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
+                    <div class="px-8 py-8 text-[13px]">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
+                            <!-- 1: 产品 ID -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">产品
+                                    ID</label>
+                                <div class="font-bold text-on-surface py-2">20000001</div>
+                            </div>
+                            <!-- 2: 产品名称 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
+                                <div class="font-bold text-on-surface py-2">MOLSION 陌森太阳镜</div>
+                            </div>
+                            <!-- 3: 产品类别 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">产品类别</label>
+                                <div class="text-on-surface py-2">太阳镜</div>
+                            </div>
+                            <!-- 4: 生产工厂 1 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">生产工厂
+                                    1</label>
+                                <div class="text-on-surface py-2">Factory KR-01</div>
+                            </div>
+                            <!-- 5: 生产工厂 2 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">生产工厂
+                                    2</label>
+                                <div class="text-on-surface py-2">Factory CN-05</div>
+                            </div>
+                            <!-- 6: 生产工厂 3 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">生产工厂
+                                    3</label>
+                                <div class="text-on-surface py-2">-</div>
+                            </div>
+                            <!-- 7: 上市日期 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">上市日期</label>
+                                <div class="text-on-surface py-2">2024-03-15</div>
+                            </div>
+                            <!-- 8: 零件保有期限 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">零件保有期限</label>
+                                <div class="text-on-surface py-2">5 年</div>
+                            </div>
+                            <!-- 9: 库存存放位置 (EDITABLE) -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">库存存放位置</label>
+                                <input
+                                    class="w-full h-[40px] px-4 bg-white border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-primary transition-all font-semibold text-on-surface"
+                                    type="text" value="Warehouse A-102-05" placeholder="请输入存放位置" />
+                            </div>
+                            <!-- Spacer for alignment -->
+                            <div class="hidden md:block"></div>
+                            <!-- 11: PS 库存数量 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">PS
+                                    库存数量</label>
+                                <div class="font-semibold text-on-surface py-2">1,250</div>
+                            </div>
+                            <!-- 12: 3PL 库存数量 -->
+                            <div class="space-y-1">
+                                <label class="font-bold text-slate-400 uppercase tracking-wider">3PL
+                                    库存数量</label>
+                                <div class="font-semibold text-on-surface py-2">850</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-    
-    <!-- Scripts -->
+
     <script>
-        // Toggle menu expand/collapse - only one menu can be open at a time
+        // Toggle menu collapse/expand
         function toggleMenu(btn) {
             const content = btn.nextElementSibling;
             const allMenus = document.querySelectorAll('.menu-content');
-            
+
             // Close all other menus
             allMenus.forEach(menu => {
                 if (menu !== content) {
                     menu.classList.add('hidden');
                 }
             });
-            
+
             // Toggle current menu
             content.classList.toggle('hidden');
         }
-        
-        // Toggle sidebar collapse
+
+        // Toggle sidebar collapse/expand
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('w-64');
@@ -342,4 +437,5 @@
         }
     </script>
 </body>
+
 </html>

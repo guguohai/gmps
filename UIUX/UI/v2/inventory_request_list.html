@@ -10,9 +10,7 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet" />
-  <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet" />
-  <link href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    rel="stylesheet" />
+
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -227,7 +225,15 @@
 
     <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA]">
       <div class="w-full max-w-full px-[30px] py-5">
-        <div class="flex justify-end mb-5">
+        <!-- Page Header -->
+        <div class="flex justify-between items-center mb-5 mt-2">
+          <div>
+            <h1 class="text-on-surface font-headline tracking-tight text-[13px]">
+              <a href="./inventory_request_list.html" class="font-medium text-[#177ee5] hover:underline">库存管理</a>
+              <span class="mx-2 text-slate-300">/</span>
+              <span class="text-[#6e7891]">申请列表</span>
+            </h1>
+          </div>
           <div class="flex gap-2">
             <button
               class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm"
@@ -247,48 +253,130 @@
         </div>
 
         <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
-          <div class="flex items-end gap-5">
-            <div class="flex-1 flex gap-4">
-              <div class="flex-1">
-                <label
-                  class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">申请编号</label><input
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                  type="text" placeholder="REQ-2024..." />
-              </div>
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">日期范围</label>
-                <div class="relative">
+          <div class="flex items-start gap-4">
+            <div class="flex-1">
+              <div class="grid grid-cols-4 gap-4">
+                <!-- 1: 工单ID -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">工单ID</label>
                   <input
-                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                    type="text" placeholder="选择日期范围" onfocus="this.type = 'date'" onblur="this.type = 'text'" /><i
-                    class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入工单ID" />
+                </div>
+                <!-- 2: 请求时间 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">请求时间</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                      type="text" placeholder="选择日期范围" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none pointer-events-none"></i>
+                  </div>
+                </div>
+                <!-- 3: 进度状态 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">进度状态</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none font-body">
+                    <option>全部状态</option>
+                    <option>待处理</option>
+                    <option>已完成</option>
+                    <option>已拒绝</option>
+                  </select>
+                </div>
+                <!-- 4: 请求负责人 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">请求负责人</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入请求负责人" />
+                </div>
+
+                <!-- 5: 产品编码 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">产品编码</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入产品编码" />
+                </div>
+                <!-- 6: 产品名称 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">产品名称</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入产品名称" />
+                </div>
+                <!-- 7: 存放位置 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">存放位置</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入存放位置" />
+                </div>
+                <!-- 8: 请求数量 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">请求数量</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="number" placeholder="输入请求数量" />
+                </div>
+
+                <!-- 9: 请求原因（大类） -->
+                <div class="advanced-filter hidden">
+                  <label
+                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">请求原因（大类）</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入大类" />
+                </div>
+                <!-- 10: 请求原因（中类） -->
+                <div class="advanced-filter hidden">
+                  <label
+                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">请求原因（中类）</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入中类" />
+                </div>
+                <!-- 11: 处理时间 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">处理时间</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                      type="text" placeholder="选择处理时间范围" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none pointer-events-none"></i>
+                  </div>
+                </div>
+                <!-- 12: 处理人 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">处理人</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-[13px] text-slate-700 focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                    type="text" placeholder="输入处理人名称" />
                 </div>
               </div>
-              <div class="flex-1">
-                <label
-                  class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">状态</label><select
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                  <option>全部状态</option>
-                  <option>待处理</option>
-                  <option>已通过</option>
-                  <option>已拒绝</option>
-                </select>
-              </div>
             </div>
-            <div class="flex justify-end gap-2 w-auto pb-[3px]">
-              <button
-                class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20"
-                title="Search">
-                <i class="fi fi-rr-search text-[12px]"></i>
-              </button>
-              <button
-                class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm"
-                title="Expand">
-                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                  stroke-width="2" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
-              </button>
+
+            <!-- Action Buttons -->
+            <div class="w-[72px] flex items-start pt-[27px]">
+              <div class="flex justify-end gap-2 w-full">
+                <button
+                  class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20 shrink-0"
+                  title="Search">
+                  <i class="fi fi-rr-search text-[12px]"></i>
+                </button>
+                <button
+                  class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm shrink-0"
+                  title="Expand" onclick="toggleFilters()">
+                  <svg id="expand-icon" class="w-3.5 h-3.5 transition-transform duration-300"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -297,107 +385,173 @@
           <div class="w-full overflow-x-auto">
             <table cellpadding="0" cellspacing="0" style="min-width: 100%; font-size: 13px" class="text-left">
               <thead
-                class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px]">
-                <tr>
-                  <th class="px-6 py-4">申请编号</th>
-                  <th class="px-6 py-4">申请时间</th>
-                  <th class="px-6 py-4">申请主体</th>
-                  <th class="px-6 py-4">申请人</th>
-                  <th class="px-6 py-4">门店名称</th>
-                  <th class="px-6 py-4">产品名称</th>
-                  <th class="px-6 py-4">产品 ID</th>
-                  <th class="px-6 py-4">存放位置</th>
-                  <th class="px-6 py-4">申请数量</th>
-                  <th class="px-6 py-4">申请原因</th>
-                  <th class="px-6 py-4">状态</th>
-                  <th class="px-6 py-4">处理人</th>
-                  <th class="px-6 py-4">处理时间</th>
-                  <th class="px-6 py-4">操作</th>
+                class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px] whitespace-nowrap">
+                <th class="px-6 py-4 w-[50px]">
+                  <input type="checkbox"
+                    class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer">
+                </th>
+                <th class="px-6 py-4">工单ID</th>
+                <th class="px-6 py-4">请求时间</th>
+                <th class="px-6 py-4">进度状态</th>
+                <th class="px-6 py-4">请求负责人</th>
+                <th class="px-6 py-4">产品编码</th>
+                <th class="px-6 py-4">产品名称</th>
+                <th class="px-6 py-4">存放位置</th>
+                <th class="px-6 py-4">请求数量</th>
+                <th class="px-6 py-4">请求原因（大类）</th>
+                <th class="px-6 py-4">请求原因（中类）</th>
+                <th class="px-6 py-4">处理时间</th>
+                <th class="px-6 py-4">处理人</th>
+                <th class="px-6 py-4 sticky right-0 bg-slate-50/50">操作</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-slate-100 text-[13px]">
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer" onclick="
-                      window.location.href =
-                        './inventory_request_detail.html?id=REQ-2024-001'
-                    ">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    REQ-2024-001
+              <tbody class="divide-y divide-slate-100 text-[13px] whitespace-nowrap">
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./inventory_request_detail.html?id=23569'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">2024-01-15 09:30</td>
-                  <td class="px-6 py-4">John Smith</td>
-                  <td class="px-6 py-4">Downtown Store</td>
-                  <td class="px-6 py-4">Air Filter Pro</td>
-                  <td class="px-6 py-4">PRD-2024-001</td>
-                  <td class="px-6 py-4">Warehouse A-01</td>
-                  <td class="px-6 py-4">50</td>
-                  <td class="px-6 py-4">Stock Replenishment</td>
+                  <td class="px-6 py-4 font-semibold text-primary">23569</td>
+                  <td class="px-6 py-4 text-slate-500">2026-03-10 09:48</td>
                   <td class="px-6 py-4">
                     <span
-                      class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">Pending</span>
+                      class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold whitespace-nowrap">待处理</span>
                   </td>
-                  <td class="px-6 py-4">-</td>
-                  <td class="px-6 py-4">-</td>
-                  <td>-</td>
-                  <td class="px-6 py-4">
-                    <a href="./inventory_request_detail.html?id=REQ-2024-001"
-                      class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                  <td class="px-6 py-4 font-medium text-slate-800">李新惠</td>
+                  <td class="px-6 py-4 text-slate-500">11004270</td>
+                  <td class="px-6 py-4 font-semibold text-slate-800">MIRO-01</td>
+                  <td class="px-6 py-4 text-slate-400">-</td>
+                  <td class="px-6 py-4 font-bold text-slate-600">1</td>
+                  <td class="px-6 py-4 font-medium">维修内容变更</td>
+                  <td class="px-6 py-4 text-slate-500 max-w-[200px] truncate" title="524384 给新惠">524384 给新惠</td>
+                  <td class="px-6 py-4 text-slate-400">-</td>
+                  <td class="px-6 py-4 text-slate-400">-</td>
+                  <td class="px-6 py-4 sticky right-0 bg-white hover:bg-slate-50/50">
+                    <a href="./inventory_request_detail.html?id=23569"
+                      class="text-primary hover:opacity-90 font-medium">查看</a>
                   </td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer" onclick="
-                      window.location.href =
-                        './inventory_request_detail.html?id=REQ-2024-002'
-                    ">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    REQ-2024-002
+
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./inventory_request_detail.html?id=23568'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">2024-01-16 14:20</td>
-                  <td class="px-6 py-4">Sarah Johnson</td>
-                  <td class="px-6 py-4">Westside Branch</td>
-                  <td class="px-6 py-4">Oil Filter Elite</td>
-                  <td class="px-6 py-4">PRD-2024-002</td>
-                  <td class="px-6 py-4">Warehouse B-12</td>
-                  <td class="px-6 py-4">100</td>
-                  <td class="px-6 py-4">Urgent Order</td>
+                  <td class="px-6 py-4 font-semibold text-primary">23568</td>
+                  <td class="px-6 py-4 text-slate-500">2026-03-10 09:16</td>
                   <td class="px-6 py-4">
                     <span
-                      class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Approved</span>
+                      class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold whitespace-nowrap">已完成</span>
                   </td>
-                  <td class="px-6 py-4">Mike Wilson</td>
-                  <td class="px-6 py-4">2024-01-16 16:45</td>
-                  <td>-</td>
-                  <td class="px-6 py-4">
-                    <a href="./inventory_request_detail.html?id=REQ-2024-002"
-                      class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                  <td class="px-6 py-4 font-medium text-slate-800">李新惠</td>
+                  <td class="px-6 py-4 text-slate-500">11001301</td>
+                  <td class="px-6 py-4 font-semibold text-slate-800">CLOUDY DAY ONLY-02</td>
+                  <td class="px-6 py-4">A3, 2/B10</td>
+                  <td class="px-6 py-4 font-bold text-slate-600">1</td>
+                  <td class="px-6 py-4 text-red-600 font-medium">紧急件</td>
+                  <td class="px-6 py-4 text-slate-500 max-w-[200px] truncate" title="盘点前紧急提货 给新惠">盘点前紧急提货 给新惠</td>
+                  <td class="px-6 py-4 text-slate-500">2026-03-10 09:24:19</td>
+                  <td class="px-6 py-4">李书妍</td>
+                  <td class="px-6 py-4 sticky right-0 bg-white hover:bg-slate-50/50">
+                    <a href="./inventory_request_detail.html?id=23568"
+                      class="text-primary hover:opacity-90 font-medium">查看</a>
                   </td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer" onclick="
-                      window.location.href =
-                        './inventory_request_detail.html?id=REQ-2024-003'
-                    ">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    REQ-2024-003
+
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./inventory_request_detail.html?id=23567'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">2024-01-17 10:15</td>
-                  <td class="px-6 py-4">David Brown</td>
-                  <td class="px-6 py-4">Eastside Outlet</td>
-                  <td class="px-6 py-4">Cabin Filter Max</td>
-                  <td class="px-6 py-4">PRD-2024-003</td>
-                  <td class="px-6 py-4">Warehouse C-05</td>
-                  <td class="px-6 py-4">75</td>
-                  <td class="px-6 py-4">Regular Restock</td>
+                  <td class="px-6 py-4 font-semibold text-primary">23567</td>
+                  <td class="px-6 py-4 text-slate-500">2026-03-10 09:01</td>
                   <td class="px-6 py-4">
-                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Rejected</span>
+                    <span
+                      class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold whitespace-nowrap">已完成</span>
                   </td>
-                  <td class="px-6 py-4">Lisa Chen</td>
-                  <td class="px-6 py-4">2024-01-17 15:30</td>
-                  <td>-</td>
+                  <td class="px-6 py-4 font-medium text-slate-800">朴智贤</td>
+                  <td class="px-6 py-4 text-slate-500">11000130</td>
+                  <td class="px-6 py-4 font-semibold text-slate-800">OTAS-M01</td>
+                  <td class="px-6 py-4">A4, 4/B8</td>
+                  <td class="px-6 py-4 font-bold text-slate-600">1</td>
+                  <td class="px-6 py-4 font-medium">维修中损坏</td>
+                  <td class="px-6 py-4 text-slate-500 max-w-[200px] truncate" title="环螺丝损坏">环螺丝损坏</td>
+                  <td class="px-6 py-4 text-slate-500">2026-03-10 09:24:19</td>
+                  <td class="px-6 py-4">李书妍</td>
+                  <td class="px-6 py-4 sticky right-0 bg-white hover:bg-slate-50/50">
+                    <a href="./inventory_request_detail.html?id=23567"
+                      class="text-primary hover:opacity-90 font-medium">查看</a>
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="window.location.href='./inventory_request_detail.html?id=23566'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
+                  </td>
+                  <td class="px-6 py-4 font-semibold text-primary">23566</td>
+                  <td class="px-6 py-4 text-slate-500">2026-03-09 20:20</td>
                   <td class="px-6 py-4">
-                    <a href="./inventory_request_detail.html?id=REQ-2024-003"
-                      class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                    <span
+                      class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold whitespace-nowrap">已完成</span>
+                  </td>
+                  <td class="px-6 py-4 font-medium text-slate-800">金秀儿</td>
+                  <td class="px-6 py-4 text-slate-500">11000099</td>
+                  <td class="px-6 py-4 font-semibold text-slate-800">KUBO-C1</td>
+                  <td class="px-6 py-4">A4, 2/B7</td>
+                  <td class="px-6 py-4 font-bold text-slate-600">1</td>
+                  <td class="px-6 py-4 font-medium">维修内容变更</td>
+                  <td class="px-6 py-4 text-slate-500 max-w-[200px] truncate" title="525780">525780</td>
+                  <td class="px-6 py-4 text-slate-500">2026-03-10 08:50:47</td>
+                  <td class="px-6 py-4">李书妍</td>
+                  <td class="px-6 py-4 sticky right-0 bg-white hover:bg-slate-50/50">
+                    <a href="./inventory_request_detail.html?id=23566"
+                      class="text-primary hover:opacity-90 font-medium">查看</a>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
+            <p class="text-[10px] font-bold text-slate-500 uppercase">
+              Showing 1-10 of 428 results
+            </p>
+            <div class="flex items-center gap-2">
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400 disabled:opacity-50"
+                disabled>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">
+                1
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
+                2
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
+                3
+              </button>
+              <span class="text-slate-400 px-1">...</span>
+              <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -435,6 +589,28 @@
       const sidebar = document.getElementById("sidebar");
       sidebar.classList.toggle("w-64");
       sidebar.classList.toggle("w-20");
+    }
+
+    // Toggle advanced filters
+    function toggleFilters() {
+      const advancedFilters = document.querySelectorAll(".advanced-filter");
+      const icon = document.getElementById("expand-icon");
+
+      let isHidden = false;
+      advancedFilters.forEach((filter) => {
+        if (filter.classList.contains("hidden")) {
+          isHidden = true;
+          filter.classList.remove("hidden");
+        } else {
+          filter.classList.add("hidden");
+        }
+      });
+
+      if (isHidden) {
+        icon.style.transform = "rotate(180deg)";
+      } else {
+        icon.style.transform = "rotate(0deg)";
+      }
     }
   </script>
 </body>

@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>库存申请详情 - 库存管理系统</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+
     <!-- Uicons Icons -->
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
-    <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet">
-    <link href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css' rel='stylesheet'>
-    
+
+
+
     <!-- Uicons Custom CSS for fi-sr -->
     <style>
         @font-face {
             font-family: 'uicons-solid';
             src: url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff2') format('woff2'),
-                 url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff') format('woff');
+                url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff') format('woff');
             font-weight: normal;
             font-style: normal;
         }
+
         [class^="fi-sr-"] {
             font-family: 'uicons-solid' !important;
             speak: none;
@@ -37,7 +41,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
     </style>
-    
+
     <!-- Tailwind Config -->
     <script id="tailwind-config">
         tailwind.config = {
@@ -69,76 +73,98 @@
             }
         }
     </script>
-    
+
     <style>
-        .no-scrollbar::-webkit-scrollbar { 
-            display: none; 
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        .no-scrollbar { 
-            -ms-overflow-style: none; 
-            scrollbar-width: none; 
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #F5F7FA; 
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FA;
         }
-        h1, h2, h3, .font-headline { 
-            font-family: 'Manrope', sans-serif; 
+
+        h1,
+        h2,
+        h3,
+        .font-headline {
+            font-family: 'Manrope', sans-serif;
         }
+
         .heroicon {
             vertical-align: middle;
         }
     </style>
 </head>
+
 <body class="text-on-surface bg-background min-h-screen">
     <!-- Top Navigation Bar -->
-    <header class="bg-white border-b border-outline fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
+    <header
+        class="bg-white border-b border-outline fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
         <div class="flex items-center gap-8">
             <!-- Logo & Brand -->
             <div class="flex items-center gap-2">
-                <img alt="PRODUCT SERVICE Logo" class="w-10 h-10 rounded-lg" src="logo.png"/>
+                <img alt="PRODUCT SERVICE Logo" class="w-10 h-10 rounded-lg" src="logo.png" />
                 <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
             </div>
-            
+
             <!-- Search Bar -->
             <div class="relative hidden md:block">
-                <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z"></path>
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z">
+                    </path>
                 </svg>
-                <input class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all" 
-                       style="background-color: #f5f7fa; width: 364px;" 
-                       type="text" 
-                       placeholder="Scan barcode"/>
+                <input
+                    class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                    style="background-color: #f5f7fa; width: 364px;" type="text" placeholder="Scan barcode" />
             </div>
         </div>
-        
+
         <!-- Right Actions -->
         <div class="flex items-center gap-4">
-            <button class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center" title="Language">
+            <button
+                class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center"
+                title="Language">
                 <i class="fi fi-rr-globe text-[20px] leading-none"></i>
             </button>
             <div class="flex items-center gap-3 pl-4 border-l border-slate-200 cursor-pointer">
                 <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px;">
-                                            <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20"><path d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0" p-id="1651"></path></svg>
+                    <svg t="1774707118806" style="fill:#657489" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20">
+                        <path
+                            d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0"
+                            p-id="1651"></path>
+                    </svg>
                 </div>
             </div>
         </div>
     </header>
-    
+
     <!-- Main Layout -->
     <div class="flex pt-16 h-screen">
         <!-- Sidebar Navigation -->
-        <aside id="sidebar" class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-sm font-medium z-40 border-r border-[#cbd0dd]">
+        <aside id="sidebar"
+            class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-sm font-medium z-40 border-r border-[#cbd0dd]">
             <nav class="py-4 flex-grow space-y-1">
                 <!-- Dashboard -->
-                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all" href="./dashboard.html">
+                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all"
+                    href="./dashboard.html">
                     <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                     <span class="text-[13px]">Dashboard</span>
                 </a>
-                
+
                 <!-- 工单管理 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">工单管理</span>
@@ -146,13 +172,16 @@
                         <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
                     </button>
                     <div class="menu-content hidden py-1 bg-slate-50/50">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./ticket_list.html">列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./ticket_list.html">列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 产品管理 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">产品管理</span>
@@ -160,202 +189,261 @@
                         <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./product_list.html">列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./product_list.html">列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 库存 Menu Group - Active -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
                     <div class="menu-content py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./inventory_request_list.html">申请列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
+                            href="./inventory_request_list.html">申请列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 配件 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
-                            <i class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+                            <i
+                                class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">配件</span>
                         </div>
                         <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_list.html">列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_request_list.html">申请列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./parts_list.html">列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./parts_request_list.html">申请列表</a>
                     </div>
                 </div>
-                
+
                 <!-- 服务 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
-                            <i class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+                            <i
+                                class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">服务</span>
                         </div>
                         <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_survey.html">问卷</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_consultation.html">咨询</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./service_survey.html">问卷</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./service_consultation.html">咨询</a>
                     </div>
                 </div>
-                
+
                 <!-- 用户权限 Menu Group -->
                 <div class="menu-group">
-                    <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+                    <button
+                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+                        onclick="toggleMenu(this)">
                         <div class="flex items-center">
                             <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">用户权限</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200" style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
+                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">用户列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_list.html">角色列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./permission_list.html">权限列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./user_list.html">用户列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./role_list.html">角色列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./permission_list.html">权限列表</a>
                     </div>
                 </div>
             </nav>
-            
+
             <!-- Collapse Button -->
             <div class="border-t border-slate-100 p-4">
-                <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors" onclick="toggleSidebar()">
+                <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors"
+                    onclick="toggleSidebar()">
                     <i class="fi fi-rr-angle-left w-5 h-5 mr-3"></i>
                     <span class="text-xs font-semibold uppercase">Collapse</span>
                 </button>
             </div>
         </aside>
-        
+
         <!-- Main Content -->
         <main class="ml-64 flex-1 p-5 overflow-y-auto w-full">
             <!-- Breadcrumb -->
             <nav class="mb-5 text-sm font-medium flex items-center">
                 <a href="./inventory_request_list.html" class="text-primary hover:underline">库存管理</a>
-                <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
                 <a href="./inventory_request_list.html" class="text-primary hover:underline">申请列表</a>
-                <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
                 <span class="text-slate-500">申请详情</span>
             </nav>
-            
+
             <div class="space-y-8 w-full">
                 <!-- Page Header -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
                     <div class="space-y-1">
                         <div class="flex items-center gap-3">
                             <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">库存申请详情</h2>
-                            <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[10px] font-bold rounded uppercase">待处理</span>
+                            <span
+                                class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[10px] font-bold rounded uppercase">待处理</span>
                         </div>
                         <p class="text-xs text-on-surface-variant">创建于 2024 年 1 月 15 日 • 最后更新 2 小时前</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 transition-all inline-flex items-center gap-1.5">
+                        <button
+                            class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 transition-all inline-flex items-center gap-1.5">
                             <i class="fi fi-rr-disk w-4 h-4"></i>
                             <span>保存</span>
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Inventory Request Detail Form -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
                     <div class="px-8 py-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- 申请单编号 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请单编号</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="REQ-2024-001" readonly/>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请单编号</label>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="text" value="REQ-2024-001" readonly />
                             </div>
-                            
+
                             <!-- 申请日期 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请日期</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="date" value="2024-01-15" readonly/>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请日期</label>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="date" value="2024-01-15" readonly />
                             </div>
-                            
+
                             <!-- 申请负责人 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请负责人</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="张伟" readonly/>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请负责人</label>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="text" value="张伟" readonly />
                             </div>
-                            
+
                             <!-- 申请日期时间 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请日期时间</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2024-01-15T10:30" readonly/>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请日期时间</label>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="datetime-local" value="2024-01-15T10:30" readonly />
                             </div>
-                            
+
                             <!-- 分类 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">分类</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                <select
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                     <option>办公用品</option>
                                     <option selected>IT 设备</option>
                                     <option>生产物料</option>
                                     <option>其他</option>
                                 </select>
                             </div>
-                            
+
                             <!-- 产品名称 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="MacBook Pro 16 寸" readonly/>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="text" value="MacBook Pro 16 寸" readonly />
                             </div>
-                            
+
                             <!-- 申请数量 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请数量</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="number" value="5" readonly/>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请数量</label>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="number" value="5" readonly />
                             </div>
-                            
+
                             <!-- 请求原因（大类） -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求原因（大类）</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求原因（大类）</label>
+                                <select
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                     <option>新员工入职</option>
                                     <option selected>设备更换</option>
                                     <option>项目需求</option>
                                     <option>其他</option>
                                 </select>
                             </div>
-                            
+
                             <!-- 请求原因（中类） -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求原因（中类）</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求原因（中类）</label>
+                                <select
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                     <option>性能不足</option>
                                     <option selected>设备老化</option>
                                     <option>损坏维修</option>
                                     <option>其他</option>
                                 </select>
                             </div>
-                            
+
                             <!-- 特殊事项 -->
                             <div class="space-y-1 md:col-span-2">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">特殊事项</label>
-                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="3" readonly>需要高性能配置用于视频编辑工作，建议配备 32GB 内存和 1TB SSD。</textarea>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">特殊事项</label>
+                                <textarea
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    rows="3" readonly>需要高性能配置用于视频编辑工作，建议配备 32GB 内存和 1TB SSD。</textarea>
                             </div>
-                            
+
                             <!-- 备注 -->
                             <div class="space-y-1 md:col-span-2">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">备注</label>
-                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2" readonly>优先审批，该项目急需人手。</textarea>
+                                <textarea
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    rows="2" readonly>优先审批，该项目急需人手。</textarea>
                             </div>
-                            
+
                             <!-- 状态 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                <select
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                     <option>草稿</option>
                                     <option selected>待处理</option>
                                     <option>已批准</option>
@@ -363,17 +451,22 @@
                                     <option>已完成</option>
                                 </select>
                             </div>
-                            
+
                             <!-- 处理日期 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理日期</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="date" value="" placeholder="待填写"/>
+                                <label
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理日期</label>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="date" value="" placeholder="待填写" />
                             </div>
-                            
+
                             <!-- 处理人 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理人</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="" placeholder="待填写"/>
+                                <input
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
+                                    type="text" value="" placeholder="待填写" />
                             </div>
                         </div>
                     </div>
@@ -381,24 +474,24 @@
             </div>
         </main>
     </div>
-    
+
     <script>
         // Toggle menu collapse/expand
         function toggleMenu(btn) {
             const content = btn.nextElementSibling;
             const allMenus = document.querySelectorAll('.menu-content');
-            
+
             // Close all other menus
             allMenus.forEach(menu => {
                 if (menu !== content) {
                     menu.classList.add('hidden');
                 }
             });
-            
+
             // Toggle current menu
             content.classList.toggle('hidden');
         }
-        
+
         // Toggle sidebar collapse/expand
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -407,4 +500,5 @@
         }
     </script>
 </body>
+
 </html>

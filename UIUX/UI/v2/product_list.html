@@ -16,9 +16,6 @@
 
   <!-- Uicons Icons -->
   <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet" />
-  <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet" />
-  <link href="https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    rel="stylesheet" />
 
   <!-- Tailwind Config -->
   <script id="tailwind-config">
@@ -94,6 +91,15 @@
       },
     };
   </script>
+
+  <style>
+    .form-text13 input,
+    .form-text13 textarea,
+    .form-text13 select,
+    .form-text13 button {
+      font-size: 13px !important;
+    }
+  </style>
 </head>
 
 <body class="bg-[#F5F7FA] text-on-surface min-h-screen flex flex-col relative overflow-x-hidden font-body">
@@ -320,12 +326,12 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA]">
+    <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA] form-text13">
       <div class="w-full max-w-full px-[30px] py-5">
         <!-- Page Header -->
         <div class="flex justify-between items-center mb-5">
           <div>
-            <h1 class="font-bold text-on-surface font-headline tracking-tight text-[14px]">
+            <h1 class="text-on-surface font-headline tracking-tight text-[13px]">
               <span class="font-medium text-[#177ee5]">产品管理</span>
               <span class="mx-2 text-slate-300">/</span>
               <span class="text-[#6e7891]">产品列表</span>
@@ -345,7 +351,7 @@
             </button>
             <button
               class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm"
-              title="History">
+              title="History" onclick="openHistoryModal(event)">
               <i class="fi fi-rr-time-past text-[12px]"></i>
             </button>
             <button
@@ -363,49 +369,103 @@
         </div>
 
         <!-- Filters Card -->
-        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
-          <div class="flex items-end gap-5">
-            <!-- Form Fields -->
-            <div class="flex-1 flex gap-4">
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">产品 ID</label>
-                <input
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                  type="text" placeholder="PRD-2024..." />
-              </div>
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">产品名称</label>
-                <input
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                  type="text" placeholder="请输入产品名称" />
-              </div>
-              <div class="flex-1">
-                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">类别</label>
-                <select
-                  class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                  <option>全部类别</option>
-                  <option>Category A</option>
-                  <option>Category B</option>
-                  <option>Category C</option>
-                </select>
+        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative transition-all duration-300">
+          <div class="flex gap-4">
+            <div class="flex-1">
+              <div class="grid grid-cols-4 gap-4" id="filterGrid">
+                <!-- 1: 产品 ID -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">产品 ID</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body text-[13px]"
+                    type="text" placeholder="20000001..." />
+                </div>
+                <!-- 2: 产品名称 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">产品名称</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="请输入产品名称" />
+                </div>
+                <!-- 3: 类别 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">类别</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                    <option>全部类别</option>
+                    <option>太阳镜</option>
+                    <option>光学眼镜</option>
+                    <option>联名款</option>
+                    <option>限量款</option>
+                  </select>
+                </div>
+                <!-- 4: 安全库存状态 -->
+                <div>
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">安全库存状态</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                    <option>全部状态</option>
+                    <option>正常 (-)</option>
+                    <option>缺货</option>
+                  </select>
+                </div>
+
+                <!-- 5: 上市日期 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">上市日期</label>
+                  <div class="relative">
+                    <input
+                      class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                      type="text" placeholder="选择上市日期" onfocus="this.type = 'date'" onblur="this.type = 'text'" />
+                    <i
+                      class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                  </div>
+                </div>
+                <!-- 6: 库存存放位置 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">库存存放位置</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="输入存放位置" />
+                </div>
+                <!-- 7: 生产工厂 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">生产工厂</label>
+                  <select
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+                    <option>全部工厂</option>
+                    <option>Factory KR</option>
+                    <option>Factory CN</option>
+                  </select>
+                </div>
+                <!-- 8: 零件保有期限 -->
+                <div class="advanced-filter hidden">
+                  <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">零件保有期限</label>
+                  <input
+                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                    type="text" placeholder="输入年限" />
+                </div>
               </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex justify-end gap-2 w-auto pb-[3px]">
-              <button
-                class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20"
-                title="Search">
-                <i class="fi fi-rr-search text-[12px]"></i>
-              </button>
-              <button
-                class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm"
-                title="Expand">
-                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                  stroke-width="2" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                </svg>
-              </button>
+            <div class="w-[72px] flex items-start pt-[27px]">
+              <div class="flex justify-end gap-2 w-full">
+                <button
+                  class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20 shrink-0"
+                  title="Search">
+                  <i class="fi fi-rr-search text-[12px]"></i>
+                </button>
+                <button
+                  class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm shrink-0"
+                  title="Expand" onclick="toggleFilters()">
+                  <svg id="expand-icon" class="w-3.5 h-3.5 transition-transform duration-300"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -417,6 +477,10 @@
               <thead
                 class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px]">
                 <tr>
+                  <th class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer">
+                  </th>
                   <th class="px-6 py-4">产品 ID</th>
                   <th class="px-6 py-4">产品名称</th>
                   <th class="px-6 py-4">产品类别</th>
@@ -432,92 +496,122 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 text-[13px]">
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    PRD-2024-001
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="location.href='./product_detail.html'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">Air Filter Pro</td>
-                  <td class="px-6 py-4">Filtration</td>
-                  <td class="px-6 py-4">Plant A</td>
-                  <td class="px-6 py-4">Plant B</td>
+                  <td class="px-6 py-4 font-bold text-primary">
+                    20000001
+                  </td>
+                  <td class="px-6 py-4">HER 01</td>
+                  <td class="px-6 py-4">太阳镜</td>
+                  <td class="px-6 py-4">Factory KR</td>
+                  <td class="px-6 py-4">Factory CN</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">2024-01-15</td>
                   <td class="px-6 py-4">5 years</td>
-                  <td class="px-6 py-4">Warehouse A-01</td>
+                  <td class="px-6 py-4">A1, 1/B01</td>
                   <td class="px-6 py-4">
-                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Normal</span>
+                    -
                   </td>
                   <td class="px-6 py-4">1,250</td>
                   <td class="px-6 py-4">850</td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    PRD-2024-002
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="location.href='./product_detail.html'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">Oil Filter Elite</td>
-                  <td class="px-6 py-4">Filtration</td>
-                  <td class="px-6 py-4">Plant C</td>
+                  <td class="px-6 py-4 font-bold text-primary">
+                    20000002
+                  </td>
+                  <td class="px-6 py-4">DREAMER 17 01</td>
+                  <td class="px-6 py-4">太阳镜</td>
+                  <td class="px-6 py-4">Factory KR</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">2024-02-20</td>
                   <td class="px-6 py-4">3 years</td>
-                  <td class="px-6 py-4">Warehouse B-12</td>
+                  <td class="px-6 py-4">B2, 3/C12</td>
                   <td class="px-6 py-4">
-                    <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">Low</span>
+                    -
                   </td>
                   <td class="px-6 py-4">450</td>
                   <td class="px-6 py-4">320</td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    PRD-2024-003
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="location.href='./product_detail.html'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">Cabin Filter Max</td>
-                  <td class="px-6 py-4">Filtration</td>
-                  <td class="px-6 py-4">Plant A</td>
-                  <td class="px-6 py-4">Plant D</td>
-                  <td class="px-6 py-4">Plant E</td>
+                  <td class="px-6 py-4 font-bold text-primary">
+                    20000003
+                  </td>
+                  <td class="px-6 py-4">LANG 01</td>
+                  <td class="px-6 py-4">太阳镜</td>
+                  <td class="px-6 py-4">Factory KR</td>
+                  <td class="px-6 py-4">Factory CN</td>
+                  <td class="px-6 py-4">Factory KR-B</td>
                   <td class="px-6 py-4">2024-03-10</td>
                   <td class="px-6 py-4">7 years</td>
-                  <td class="px-6 py-4">Warehouse C-05</td>
+                  <td class="px-6 py-4">C1, 2/A05</td>
                   <td class="px-6 py-4">
-                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Normal</span>
+                    -
                   </td>
                   <td class="px-6 py-4">2,100</td>
                   <td class="px-6 py-4">1,450</td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    PRD-2024-004
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="location.href='./product_detail.html'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">Fuel Filter Ultra</td>
-                  <td class="px-6 py-4">Injection</td>
-                  <td class="px-6 py-4">Plant B</td>
+                  <td class="px-6 py-4 font-bold text-primary">
+                    20000004
+                  </td>
+                  <td class="px-6 py-4">SOUTH SIDE 01</td>
+                  <td class="px-6 py-4">光学眼镜</td>
+                  <td class="px-6 py-4">Factory KR</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">2024-04-05</td>
                   <td class="px-6 py-4">4 years</td>
-                  <td class="px-6 py-4">Warehouse A-08</td>
+                  <td class="px-6 py-4">A3, 4/B08</td>
                   <td class="px-6 py-4">
-                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">Critical</span>
+                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">缺货</span>
                   </td>
-                  <td class="px-6 py-4">180</td>
-                  <td class="px-6 py-4">95</td>
+                  <td class="px-6 py-4">2</td>
+                  <td class="px-6 py-4">1</td>
                 </tr>
-                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer">
-                  <td class="px-6 py-4 font-semibold text-primary">
-                    PRD-2024-005
+                <tr class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                  onclick="location.href='./product_detail.html'">
+                  <td class="px-6 py-4 w-[50px]">
+                    <input type="checkbox"
+                      class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                      onclick="event.stopPropagation()">
                   </td>
-                  <td class="px-6 py-4">Spark Plug Premium</td>
-                  <td class="px-6 py-4">Ignition</td>
-                  <td class="px-6 py-4">Plant C</td>
-                  <td class="px-6 py-4">Plant D</td>
+                  <td class="px-6 py-4 font-bold text-primary">
+                    20000005
+                  </td>
+                  <td class="px-6 py-4">MY MARS 01</td>
+                  <td class="px-6 py-4">限量款</td>
+                  <td class="px-6 py-4">Factory KR</td>
+                  <td class="px-6 py-4">Factory KR-B</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">2024-05-12</td>
                   <td class="px-6 py-4">10 years</td>
-                  <td class="px-6 py-4">Warehouse B-03</td>
+                  <td class="px-6 py-4">B1, 1/A03</td>
                   <td class="px-6 py-4">
-                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Normal</span>
+                    -
                   </td>
                   <td class="px-6 py-4">3,500</td>
                   <td class="px-6 py-4">2,200</td>
@@ -563,8 +657,140 @@
     </main>
   </div>
 
+  <!-- History Modal -->
+  <div id="history-modal" class="fixed inset-0 z-[100] hidden">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onclick="closeHistoryModal()"></div>
+
+    <!-- Modal Content -->
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+      <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+        <div
+          class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-6xl border border-slate-100">
+          <!-- Close button -->
+          <button onclick="closeHistoryModal()"
+            class="absolute right-5 top-5 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 hover:bg-slate-100 p-1.5 rounded-lg">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <!-- Modal Header -->
+          <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
+            <h3
+              class="text-[15px] font-bold text-slate-800 font-headline uppercase tracking-wider flex items-center gap-2">
+              历史记录
+            </h3>
+          </div>
+
+          <!-- Modal Body (Table) -->
+          <div class="p-6">
+            <!-- Modal Filters -->
+            <div class="flex items-end gap-4 mb-6">
+              <div class="flex-1 max-w-sm">
+                <label class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[11px]">变更日期</label>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="relative">
+                    <input type="text" placeholder="起始日期" onfocus="this.type='date'" onblur="this.type='text'"
+                      class="w-full h-9 px-3 bg-[#f5f7fa] border-none rounded-lg text-[13px] focus:ring-1 focus:ring-primary focus:bg-white transition-all font-body">
+                    <i
+                      class="fi fi-rr-calendar absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[14px] pointer-events-none"></i>
+                  </div>
+                  <div class="relative">
+                    <input type="text" placeholder="结束日期" onfocus="this.type='date'" onblur="this.type='text'"
+                      class="w-full h-9 px-3 bg-[#f5f7fa] border-none rounded-lg text-[13px] focus:ring-1 focus:ring-primary focus:bg-white transition-all font-body">
+                    <i
+                      class="fi fi-rr-calendar absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[14px] pointer-events-none"></i>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="h-9 px-4 bg-primary text-white rounded-lg text-[13px] font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
+                <i class="fi fi-rr-search text-[12px]"></i>
+              </button>
+            </div>
+
+            <div class="w-full overflow-x-auto border border-slate-100 rounded-lg">
+              <table class="w-full text-left font-body text-[13px] whitespace-nowrap">
+                <thead class="bg-[#f5f7fa] text-slate-500 font-bold tracking-wider border-b border-slate-100">
+                  <tr>
+                    <th class="px-4 py-3.5">日期</th>
+                    <th class="px-4 py-3.5">交易编号</th>
+                    <th class="px-4 py-3.5">出库目的</th>
+                    <th class="px-4 py-3.5">负责人</th>
+                    <th class="px-4 py-3.5">产品名称</th>
+                    <th class="px-4 py-3.5">88码</th>
+                    <th class="px-4 py-3.5">产品ID</th>
+                    <th class="px-4 py-3.5">调整数量</th>
+                    <th class="px-4 py-3.5">库存变动（前/后）</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <!-- Data Row 1 -->
+                  <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td class="px-4 py-3 text-slate-600">2024-03-29 14:30</td>
+                    <td class="px-4 py-3 font-semibold text-primary">883921</td>
+                    <td class="px-4 py-3 text-slate-600">客户销售</td>
+                    <td class="px-4 py-3 text-slate-600">张伟</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">HER 01</td>
+                    <td class="px-4 py-3 text-slate-600">8812345678</td>
+                    <td class="px-4 py-3 text-slate-600 font-body">20000001</td>
+                    <td class="px-4 py-3">
+                      <span
+                        class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-red-50 text-red-600 border border-red-100">-2</span>
+                    </td>
+                    <td class="px-4 py-3 text-slate-600">10 <span class="mx-1 text-slate-300">/</span> <span
+                        class="font-bold text-slate-800">8</span></td>
+                  </tr>
+                  <!-- Data Row 2 -->
+                  <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td class="px-4 py-3 text-slate-600">2024-03-28 09:15</td>
+                    <td class="px-4 py-3 font-semibold text-primary">883918</td>
+                    <td class="px-4 py-3 text-slate-600">入库退换</td>
+                    <td class="px-4 py-3 text-slate-600">李娜</td>
+                    <td class="px-4 py-3 font-semibold text-slate-800">HER 01</td>
+                    <td class="px-4 py-3 text-slate-600">8812345678</td>
+                    <td class="px-4 py-3 text-slate-600 font-body">20000001</td>
+                    <td class="px-4 py-3">
+                      <span
+                        class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-green-50 text-green-600 border border-green-100">+5</span>
+                    </td>
+                    <td class="px-4 py-3 text-slate-600">5 <span class="mx-1 text-slate-300">/</span> <span
+                        class="font-bold text-slate-800">10</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+              <button onclick="closeHistoryModal()"
+                class="px-6 py-2.5 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors font-semibold text-[13px] shadow-sm">
+                关闭
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script>
+    // History Modal functions
+    function openHistoryModal(event) {
+      if (event) {
+        event.stopPropagation();
+      }
+      const modal = document.getElementById('history-modal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeHistoryModal() {
+      const modal = document.getElementById('history-modal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
     // Toggle menu expand/collapse - only one menu can be open at a time
     function toggleMenu(btn) {
       const content = btn.nextElementSibling;
@@ -594,6 +820,25 @@
         } else {
           arrow.style.transform = "rotate(180deg)";
         }
+      }
+    }
+
+    // Toggle advanced filters
+    function toggleFilters() {
+      const advancedFilters = document.querySelectorAll(".advanced-filter");
+      const expandIcon = document.getElementById("expand-icon");
+
+      let isHidden = true;
+      if (advancedFilters.length > 0) {
+        isHidden = advancedFilters[0].classList.contains("hidden");
+      }
+
+      if (isHidden) {
+        advancedFilters.forEach((el) => el.classList.remove("hidden"));
+        expandIcon.style.transform = "rotate(180deg)";
+      } else {
+        advancedFilters.forEach((el) => el.classList.add("hidden"));
+        expandIcon.style.transform = "rotate(0deg)";
       }
     }
 

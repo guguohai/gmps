@@ -16,9 +16,6 @@
 
     <!-- Uicons Icons -->
     <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
-    <link href="https://cdn-uicons.flaticon.com/uicons-solid/css/uicons-solid.css" rel="stylesheet">
-    <link href='https://cdn-uicons.flaticon.com/4.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'
-        rel='stylesheet'>
 
     <!-- Uicons Custom CSS for fi-sr -->
     <style>
@@ -372,58 +369,104 @@
                 </div>
 
                 <!-- Filters Card -->
-                <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
-                    <div class="flex items-end gap-5">
-                        <!-- Form Fields -->
-                        <div class="flex-1 flex gap-4">
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">申请单号</label>
-                                <input
-                                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                                    type="text" placeholder="PREQ-2024..." />
-                            </div>
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">日期范围</label>
-                                <div class="relative">
-                                    <input
-                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                                        type="text" placeholder="选择日期范围" onfocus="(this.type='date')"
-                                        onblur="(this.type='text')" />
-                                    <i
-                                        class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none"></i>
+                <div
+                    class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative transition-all duration-300">
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <div class="grid grid-cols-4 gap-4" id="filterGrid">
+                                <!-- 1: 请求时间 -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">请求时间</label>
+                                    <div class="relative">
+                                        <input
+                                            class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                            type="text" placeholder="选择日期范围" onfocus="this.type = 'date'"
+                                            onblur="this.type = 'text'" />
+                                        <i
+                                            class="fi fi-rr-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[16px] leading-none pointer-events-none"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[13px]">状态</label>
-                                <select
-                                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                                    <option>全部状态</option>
-                                    <option>待处理</option>
-                                    <option>已通过</option>
-                                    <option>已拒绝</option>
-                                </select>
+                                <!-- 2: 请求负责人 -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">请求负责人</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="输入负责人姓名" />
+                                </div>
+                                <!-- 3: 状态 -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">状态</label>
+                                    <select
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none font-body">
+                                        <option>全部状态</option>
+                                        <option>待处理</option>
+                                        <option>已通过</option>
+                                        <option>已拒绝</option>
+                                    </select>
+                                </div>
+                                <!-- 4: 门店类型 -->
+                                <div>
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">门店类型</label>
+                                    <select
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none font-body">
+                                        <option>全部类型</option>
+                                        <option>办公室</option>
+                                        <option>法人</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+
+                                <!-- Advanced Filters -->
+                                <!-- 5: 门店名称 -->
+                                <div class="advanced-filter hidden">
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">门店名称</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="输入门店名称" />
+                                </div>
+                                <!-- 6: 产品名称 -->
+                                <div class="advanced-filter hidden">
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">产品名称</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="输入产品名称" />
+                                </div>
+                                <!-- 7: 配件名称 -->
+                                <div class="advanced-filter hidden">
+                                    <label
+                                        class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">配件名称</label>
+                                    <input
+                                        class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body"
+                                        type="text" placeholder="输入配件名称" />
+                                </div>
                             </div>
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="flex justify-end gap-2 w-auto pb-[3px]">
-                            <button
-                                class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20"
-                                title="Search">
-                                <i class="fi fi-rr-search text-[12px]"></i>
-                            </button>
-                            <button
-                                class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm"
-                                title="Expand">
-                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </button>
+                        <div class="w-[72px] flex items-start pt-[27px]">
+                            <div class="flex justify-end gap-2 w-full">
+                                <button
+                                    class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20 shrink-0"
+                                    title="Search">
+                                    <i class="fi fi-rr-search text-[12px]"></i>
+                                </button>
+                                <button
+                                    class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm shrink-0"
+                                    title="Expand" onclick="toggleFilters()">
+                                    <svg id="expand-icon" class="w-3.5 h-3.5 transition-transform duration-300"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -434,78 +477,76 @@
                         <table cellpadding="0" cellspacing="0" style="min-width: 100%; font-size: 13px;"
                             class="text-left">
                             <thead
-                                class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px]">
+                                class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100 text-[13px] whitespace-nowrap">
                                 <tr>
-                                    <th class="px-6 py-4">申请单号</th>
+                                    <th class="px-6 py-4 w-[50px]">
+                                        <input type="checkbox"
+                                            class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer">
+                                    </th>
                                     <th class="px-6 py-4">请求时间</th>
-                                    <th class="px-6 py-4">申请主体</th>
                                     <th class="px-6 py-4">请求负责人</th>
                                     <th class="px-6 py-4">门店类型</th>
                                     <th class="px-6 py-4">门店名称</th>
                                     <th class="px-6 py-4">产品名称</th>
                                     <th class="px-6 py-4">配件名称</th>
-                                    <th class="px-6 py-4">配件类型</th>
                                     <th class="px-6 py-4">配件存放位置</th>
                                     <th class="px-6 py-4">颜色</th>
                                     <th class="px-6 py-4">数量</th>
-                                    <th class="px-6 py-4">申请原因</th>
                                     <th class="px-6 py-4">状态</th>
-                                    <th class="px-6 py-4">处理人</th>
-                                    <th class="px-6 py-4">处理时间</th>
-                                    <th class="px-6 py-4">操作</th>
+                                    <th class="px-6 py-4 sticky right-0 bg-slate-50/50">操作</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-50">
+                            <tbody class="divide-y divide-slate-50 whitespace-nowrap">
                                 <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
-                                    onclick="window.location.href='./parts_request_detail.html?id=PREQ-2024-001'">
-                                    <td class="px-6 py-4 font-bold text-primary">#PREQ-2024-001</td>
-                                    <td class="px-6 py-4 text-slate-600">2024-01-15 10:30</td>
-                                    <td class="px-6 py-4 font-medium">John Smith</td>
-                                    <td class="px-6 py-4 text-slate-600">4S Store</td>
-                                    <td class="px-6 py-4 text-slate-600">Downtown Store</td>
-                                    <td class="px-6 py-4 text-slate-600">Air Filter Pro</td>
-                                    <td class="px-6 py-4 font-medium">Hex Bolt M8</td>
-                                    <td class="px-6 py-4 text-slate-600">Bolt</td>
-                                    <td class="px-6 py-4 text-slate-600">Bin A-01-03</td>
-                                    <td class="px-6 py-4 text-slate-600">Silver</td>
-                                    <td class="px-6 py-4 text-slate-600">50</td>
-                                    <td class="px-6 py-4 text-slate-600">Maintenance Stock</td>
+                                    onclick="window.location.href='./parts_request_detail.html?id=PREQ-2024-002'">
+                                    <td class="px-6 py-4 w-[50px]">
+                                        <input type="checkbox"
+                                            class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                                            onclick="event.stopPropagation()">
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600 font-body">2024-03-24 14:15</td>
+                                    <td class="px-6 py-4 font-bold text-slate-800">Sarah Johnson</td>
+                                    <td class="px-6 py-4 text-slate-600">百货</td>
+                                    <td class="px-6 py-4 text-slate-600">北京SKP店</td>
+                                    <td class="px-6 py-4 text-slate-600">Bold Series B-01</td>
+                                    <td class="px-6 py-4 font-bold text-primary">鼻托 (Nose Pads)</td>
+                                    <td class="px-6 py-4 text-slate-500">C-03-12</td>
+                                    <td class="px-6 py-4 text-slate-600">透明 (Clear)</td>
+                                    <td class="px-6 py-4 font-bold text-slate-800">100</td>
                                     <td class="px-6 py-4">
                                         <span
-                                            class="px-2 py-1 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-700">Pending</span>
+                                            class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">已通过</span>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-600">-</td>
-                                    <td class="px-6 py-4 text-slate-600">-</td>
-                                    <td class="px-6 py-4 text-slate-600">-</td>
-                                    <td class="px-6 py-4">
-                                        <a href="./parts_request_detail.html?id=PREQ-2024-001"
-                                            class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                                    <td
+                                        class="px-6 py-4 sticky right-0 bg-white group-hover:bg-slate-50 transition-colors">
+                                        <a href="./parts_request_detail.html?id=PREQ-2024-002"
+                                            class="text-primary hover:underline font-bold transition-all">查看</a>
                                     </td>
                                 </tr>
                                 <tr class="hover:bg-slate-50 transition-colors cursor-pointer"
-                                    onclick="window.location.href='./parts_request_detail.html?id=PREQ-2024-002'">
-                                    <td class="px-6 py-4 font-bold text-primary">#PREQ-2024-002</td>
-                                    <td class="px-6 py-4 text-slate-600">2024-01-16 11:20</td>
-                                    <td class="px-6 py-4 font-medium">Sarah Johnson</td>
-                                    <td class="px-6 py-4 text-slate-600">Service Center</td>
-                                    <td class="px-6 py-4 text-slate-600">Westside Branch</td>
-                                    <td class="px-6 py-4 text-slate-600">Oil Filter Elite</td>
-                                    <td class="px-6 py-4 font-medium">Lock Nut M10</td>
-                                    <td class="px-6 py-4 text-slate-600">Nut</td>
-                                    <td class="px-6 py-4 text-slate-600">Bin B-02-05</td>
-                                    <td class="px-6 py-4 text-slate-600">Zinc</td>
-                                    <td class="px-6 py-4 text-slate-600">100</td>
-                                    <td class="px-6 py-4 text-slate-600">Repair Order</td>
+                                    onclick="window.location.href='./parts_request_detail.html?id=PREQ-2024-003'">
+                                    <td class="px-6 py-4 w-[50px]">
+                                        <input type="checkbox"
+                                            class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
+                                            onclick="event.stopPropagation()">
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-600 font-body">2024-03-24 16:45</td>
+                                    <td class="px-6 py-4 font-bold text-slate-800">Emma Davis</td>
+                                    <td class="px-6 py-4 text-slate-600">免税店</td>
+                                    <td class="px-6 py-4 text-slate-600">三亚海棠湾免税店</td>
+                                    <td class="px-6 py-4 text-slate-600">LILIT 01</td>
+                                    <td class="px-6 py-4 font-bold text-primary">镜片 (Lens)</td>
+                                    <td class="px-6 py-4 text-slate-500">L-05-02</td>
+                                    <td class="px-6 py-4 text-slate-600">渐变灰 (Grey Gradient)</td>
+                                    <td class="px-6 py-4 font-bold text-slate-800">15</td>
                                     <td class="px-6 py-4">
                                         <span
-                                            class="px-2 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Approved</span>
+                                            class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700">已拒绝</span>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-600">Mike Wilson</td>
-                                    <td class="px-6 py-4 text-slate-600">2024-01-16 15:45</td>
-                                    <td class="px-6 py-4 text-slate-600"></td>
-                                    <td class="px-6 py-4">
-                                        <a href="./parts_request_detail.html?id=PREQ-2024-001"
-                                            class="text-primary hover:opacity-90 transition-opacity inline-flex items-center gap-1.5">查看</a>
+                                    <td
+                                        class="px-6 py-4 sticky right-0 bg-white group-hover:bg-slate-50 transition-colors">
+                                        <a href="./parts_request_detail.html?id=PREQ-2024-003"
+                                            class="text-primary hover:underline font-bold transition-all">查看</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -583,6 +624,21 @@
                 const sidebar = document.getElementById('sidebar');
                 sidebar.classList.toggle('w-64');
                 sidebar.classList.toggle('w-20');
+            }
+
+            // Toggle Search Filters
+            function toggleFilters() {
+                const advancedFilters = document.querySelectorAll('.advanced-filter');
+                const expandIcon = document.getElementById('expand-icon');
+
+                advancedFilters.forEach(filter => {
+                    filter.classList.toggle('hidden');
+                });
+
+                if (expandIcon) {
+                    const isHidden = advancedFilters[0].classList.contains('hidden');
+                    expandIcon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
             }
         </script>
 </body>
