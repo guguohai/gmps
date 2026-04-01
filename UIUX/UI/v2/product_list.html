@@ -14,9 +14,16 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet" />
 
-  <!-- Uicons Icons -->
-  <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet" />
+    <!-- Uicons Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
+    />
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
+    />
   <!-- Tailwind Config -->
   <script id="tailwind-config">
     tailwind.config = {
@@ -109,7 +116,7 @@
     <div class="flex items-center gap-8">
       <!-- Logo & Brand -->
       <div class="flex items-center gap-3">
-        <img class="w-10 h-10 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
+        <img class="w-6 h-6 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
         <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
       </div>
 
@@ -124,6 +131,13 @@
         <input
           class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
           style="background-color: #f5f7fa; width: 440px" type="text" placeholder="Scan barcode" />
+      </div>
+
+      <!-- Inventory Warning Bar -->
+      <div
+        class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
+        <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
+        <span>当前库存不足</span>
       </div>
     </div>
 
@@ -393,10 +407,10 @@
                   <select
                     class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
                     <option>全部类别</option>
-                    <option>太阳镜</option>
-                    <option>光学眼镜</option>
+                    <option>SUNGLASS COMBI</option>
+                    <option>SUNGLASS COMBI</option>
                     <option>联名款</option>
-                    <option>限量款</option>
+                    <option>SUNGLASS METAL</option>
                   </select>
                 </div>
                 <!-- 4: 安全库存状态 -->
@@ -507,7 +521,7 @@
                     20000001
                   </td>
                   <td class="px-6 py-4">HER 01</td>
-                  <td class="px-6 py-4">太阳镜</td>
+                  <td class="px-6 py-4">SUNGLASS COMBI</td>
                   <td class="px-6 py-4">Factory KR</td>
                   <td class="px-6 py-4">Factory CN</td>
                   <td class="px-6 py-4">-</td>
@@ -531,7 +545,7 @@
                     20000002
                   </td>
                   <td class="px-6 py-4">DREAMER 17 01</td>
-                  <td class="px-6 py-4">太阳镜</td>
+                  <td class="px-6 py-4">SUNGLASS COMBI</td>
                   <td class="px-6 py-4">Factory KR</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">-</td>
@@ -555,7 +569,7 @@
                     20000003
                   </td>
                   <td class="px-6 py-4">LANG 01</td>
-                  <td class="px-6 py-4">太阳镜</td>
+                  <td class="px-6 py-4">SUNGLASS COMBI</td>
                   <td class="px-6 py-4">Factory KR</td>
                   <td class="px-6 py-4">Factory CN</td>
                   <td class="px-6 py-4">Factory KR-B</td>
@@ -579,7 +593,7 @@
                     20000004
                   </td>
                   <td class="px-6 py-4">SOUTH SIDE 01</td>
-                  <td class="px-6 py-4">光学眼镜</td>
+                  <td class="px-6 py-4">SUNGLASS COMBI</td>
                   <td class="px-6 py-4">Factory KR</td>
                   <td class="px-6 py-4">-</td>
                   <td class="px-6 py-4">-</td>
@@ -603,7 +617,7 @@
                     20000005
                   </td>
                   <td class="px-6 py-4">MY MARS 01</td>
-                  <td class="px-6 py-4">限量款</td>
+                  <td class="px-6 py-4">SUNGLASS METAL</td>
                   <td class="px-6 py-4">Factory KR</td>
                   <td class="px-6 py-4">Factory KR-B</td>
                   <td class="px-6 py-4">-</td>

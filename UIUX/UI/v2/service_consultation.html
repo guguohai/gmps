@@ -15,9 +15,15 @@
         rel="stylesheet" />
 
     <!-- Uicons Icons -->
-    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
+    />
 
-    <!-- Uicons Custom CSS for fi-sr -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
+    />
     <style>
         @font-face {
             font-family: 'uicons-solid';
@@ -144,7 +150,7 @@
         <div class="flex items-center gap-8">
             <!-- Logo & Brand -->
             <div class="flex items-center gap-2">
-                <img alt="Product Service Logo" class="w-10 h-10" src="logo.png" />
+                <img alt="Product Service Logo" class="w-8 h-8" src="logo.png" />
                 <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
             </div>
 
@@ -159,6 +165,13 @@
                 <input
                     class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                     style="background-color: #f5f7fa; width: 440px;" type="text" placeholder="Scan barcode" />
+            </div>
+
+            <!-- Inventory Warning Bar -->
+            <div
+                class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
+                <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
+                <span>当前库存不足</span>
             </div>
         </div>
 

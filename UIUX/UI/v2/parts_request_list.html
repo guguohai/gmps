@@ -15,9 +15,16 @@
         rel="stylesheet" />
 
     <!-- Uicons Icons -->
-    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
+    />
 
-    <!-- Uicons Custom CSS for fi-sr -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
+    />
+    
     <style>
         @font-face {
             font-family: 'uicons-solid';
@@ -144,7 +151,7 @@
         <div class="flex items-center gap-8">
             <!-- Logo & Brand -->
             <div class="flex items-center gap-3">
-                <img class="w-10 h-10 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
+                <img class="w-6 h-6 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
                 <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
             </div>
 
@@ -159,6 +166,13 @@
                 <input
                     class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                     style="background-color: #f5f7fa; width: 364px;" type="text" placeholder="Scan barcode" />
+            </div>
+
+            <!-- Inventory Warning Bar -->
+            <div
+                class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
+                <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
+                <span>当前库存不足</span>
             </div>
         </div>
 
@@ -505,14 +519,14 @@
                                             onclick="event.stopPropagation()">
                                     </td>
                                     <td class="px-6 py-4 text-slate-600 font-body">2024-03-24 14:15</td>
-                                    <td class="px-6 py-4 font-bold text-slate-800">Sarah Johnson</td>
+                                    <td class="px-6 py-4 text-slate-800">Sarah Johnson</td>
                                     <td class="px-6 py-4 text-slate-600">百货</td>
                                     <td class="px-6 py-4 text-slate-600">北京SKP店</td>
                                     <td class="px-6 py-4 text-slate-600">Bold Series B-01</td>
-                                    <td class="px-6 py-4 font-bold text-primary">鼻托 (Nose Pads)</td>
+                                    <td class="px-6 py-4 text-primary">鼻托 (Nose Pads)</td>
                                     <td class="px-6 py-4 text-slate-500">C-03-12</td>
                                     <td class="px-6 py-4 text-slate-600">透明 (Clear)</td>
-                                    <td class="px-6 py-4 font-bold text-slate-800">100</td>
+                                    <td class="px-6 py-4 text-slate-800">100</td>
                                     <td class="px-6 py-4">
                                         <span
                                             class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">已通过</span>
@@ -531,14 +545,14 @@
                                             onclick="event.stopPropagation()">
                                     </td>
                                     <td class="px-6 py-4 text-slate-600 font-body">2024-03-24 16:45</td>
-                                    <td class="px-6 py-4 font-bold text-slate-800">Emma Davis</td>
+                                    <td class="px-6 py-4 text-slate-800">Emma Davis</td>
                                     <td class="px-6 py-4 text-slate-600">免税店</td>
                                     <td class="px-6 py-4 text-slate-600">三亚海棠湾免税店</td>
                                     <td class="px-6 py-4 text-slate-600">LILIT 01</td>
-                                    <td class="px-6 py-4 font-bold text-primary">镜片 (Lens)</td>
+                                    <td class="px-6 py-4 text-primary">镜片 (Lens)</td>
                                     <td class="px-6 py-4 text-slate-500">L-05-02</td>
                                     <td class="px-6 py-4 text-slate-600">渐变灰 (Grey Gradient)</td>
-                                    <td class="px-6 py-4 font-bold text-slate-800">15</td>
+                                    <td class="px-6 py-4 text-slate-800">15</td>
                                     <td class="px-6 py-4">
                                         <span
                                             class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700">已拒绝</span>

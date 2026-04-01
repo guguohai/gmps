@@ -15,9 +15,16 @@
         rel="stylesheet" />
 
     <!-- Uicons Icons -->
-    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
+    />
 
-    <!-- Uicons Custom CSS for fi-sr -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
+    />
+
     <style>
         @font-face {
             font-family: 'uicons-solid';
@@ -97,6 +104,32 @@
         .heroicon {
             vertical-align: middle;
         }
+
+        /* Custom Scrollbar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Generic Dropdown Panel Styles */
+        .custom-dropdown-panel {
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .animate-in {
+            animation: fadeIn 0.2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -107,7 +140,7 @@
         <div class="flex items-center gap-8">
             <!-- Logo & Brand -->
             <div class="flex items-center gap-2">
-                <img alt="PRODUCT SERVICE Logo" class="w-10 h-10 rounded-lg" src="logo.png" />
+                <img alt="PRODUCT SERVICE Logo" class="w-8 h-8 rounded-lg" src="logo.png" />
                 <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
             </div>
 
@@ -122,6 +155,13 @@
                 <input
                     class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                     style="background-color: #f5f7fa; width: 364px;" type="text" placeholder="Scan barcode" />
+            </div>
+
+            <!-- Inventory Warning Bar -->
+            <div
+                class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
+                <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
+                <span>当前库存不足</span>
             </div>
         </div>
 
@@ -335,10 +375,12 @@
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">进度状态</label>
                                 <select
                                     class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option>待处理</option>
-                                    <option selected>进行中</option>
-                                    <option>已完成</option>
-                                    <option>已取消</option>
+                                    <option value="A">数量变动出库</option>
+                                    <option value="B">等待库存入库</option>
+                                    <option value="C" selected="selected">等待出库</option>
+                                    <option value="D">出库完成</option>
+                                    <option value="E">特殊注意事项</option>
+                                    <option value="F">无法出库</option>
                                 </select>
                             </div>
 
@@ -355,37 +397,222 @@
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">门店类型</label>
                                 <select
                                     class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-body">
-                                    <option value="办公室">办公室</option>
-                                    <option value="法人">法人</option>
+                                    <option value="旗舰店">旗舰店</option>
+                                    <option value="百货">百货</option>
+                                    <option value="商场">商场</option>
+                                    <option value="免税店">免税店</option>
+                                    <option value="眼镜店">眼镜店</option>
+                                    <option value="买手店">买手店</option>
+                                    <option value="集合店">集合店</option>
+                                    <option value="官方线上商城">官方线上商城</option>
+                                    <option value="海外法人（子公司）">海外法人（子公司）</option>
+                                    <option value="海外法人（合资公司）">海外法人（合资公司）</option>
+                                    <option value="PS">PS</option>
                                     <option value="其他">其他</option>
                                 </select>
                             </div>
 
                             <!-- 门店名称 -->
-                            <div class="space-y-1">
+                            <div class="space-y-1 relative custom-select-wrapper" data-prefix="store-name">
                                 <label
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">门店名称</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
-                                    type="text" value="上海淮海路旗舰店" readonly />
+                                <div onclick="toggleCustomDropdown(event)"
+                                    class="w-full h-[38px] px-3 bg-[#f5f7fa] border-none rounded-lg text-sm flex items-center justify-between cursor-pointer group hover:bg-slate-100/80 transition-colors">
+                                    <span
+                                        class="dropdown-selected-text text-on-surface font-medium truncate">上海淮海路旗舰店</span>
+                                    <i
+                                        class="fi fi-rr-angle-small-down text-slate-400 transition-transform duration-200"></i>
+                                </div>
+
+                                <!-- Search Dropdown Panel -->
+                                <div
+                                    class="custom-dropdown-panel hidden fixed z-[9999] mt-1 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden ring-1 ring-slate-900/5 animate-in fade-in duration-200">
+                                    <div class="p-2 border-b border-slate-50">
+                                        <div class="relative">
+                                            <i
+                                                class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                            <input type="text"
+                                                class="w-full bg-slate-50 border-none rounded-lg py-1.5 pl-9 pr-3 text-sm focus:ring-1 focus:ring-primary focus:bg-white transition-all"
+                                                placeholder="搜索门店..." onkeyup="filterCustomDropdownInternal(event)">
+                                        </div>
+                                    </div>
+                                    <div class="max-h-60 overflow-y-auto no-scrollbar py-1">
+                                        <div onclick="selectGenericOption(event, '上海淮海路旗舰店', 'S-001')"
+                                            class="px-4 py-2 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">上海淮海路旗舰店</span>
+                                                <span class="text-[10px] text-slate-400 font-mono">S-001 |
+                                                    SHANGHAI</span>
+                                            </div>
+                                        </div>
+                                        <div onclick="selectGenericOption(event, '北京王府井店', 'S-002')"
+                                            class="px-4 py-2 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">北京王府井店</span>
+                                                <span class="text-[10px] text-slate-400 font-mono">S-002 |
+                                                    BEIJING</span>
+                                            </div>
+                                        </div>
+                                        <div onclick="selectGenericOption(event, '广州天河店', 'S-003')"
+                                            class="px-4 py-2 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">广州天河店</span>
+                                                <span class="text-[10px] text-slate-400 font-mono">S-003 |
+                                                    GUANGZHOU</span>
+                                            </div>
+                                        </div>
+                                        <div onclick="selectGenericOption(event, '深圳万象城店', 'S-004')"
+                                            class="px-4 py-2 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">深圳万象城店</span>
+                                                <span class="text-[10px] text-slate-400 font-mono">S-004 |
+                                                    SHENZHEN</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- 产品名称 -->
-                            <div class="space-y-1">
+                            <div class="space-y-1 relative custom-select-wrapper" data-prefix="product-name">
                                 <label
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
-                                    type="text" value="Maison Margiela MM100" readonly />
+                                <div onclick="toggleCustomDropdown(event)"
+                                    class="w-full h-[38px] px-3 bg-[#f5f7fa] border-none rounded-lg text-sm flex items-center justify-between cursor-pointer group hover:bg-slate-100/80 transition-colors">
+                                    <span class="dropdown-selected-text text-on-surface font-medium truncate">Maison
+                                        Margiela MM100</span>
+                                    <i
+                                        class="fi fi-rr-angle-small-down text-slate-400 transition-transform duration-200"></i>
+                                </div>
+
+                                <!-- Search Dropdown Panel -->
+                                <div
+                                    class="custom-dropdown-panel hidden fixed z-[9999] mt-1 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden ring-1 ring-slate-900/5 animate-in fade-in duration-200">
+                                    <div class="p-2 border-b border-slate-50">
+                                        <div class="relative">
+                                            <i
+                                                class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                            <input type="text"
+                                                class="w-full bg-slate-50 border-none rounded-lg py-1.5 pl-9 pr-3 text-sm focus:ring-1 focus:ring-primary focus:bg-white transition-all"
+                                                placeholder="搜索产品..." onkeyup="filterCustomDropdownInternal(event)">
+                                        </div>
+                                    </div>
+                                    <div class="max-h-60 overflow-y-auto no-scrollbar py-1">
+                                        <div onclick="selectGenericOption(event, 'GM Sunglasses A01', 'P000123')"
+                                            class="px-4 py-2.5 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col gap-0.5">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">GM
+                                                    Sunglasses A01</span>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="text-[10px] text-slate-400 font-mono">P000123</span>
+                                                    <span class="text-slate-300">|</span>
+                                                    <span
+                                                        class="text-[10px] text-slate-400 uppercase tracking-tighter">Sunglasses</span>
+                                                    <span class="text-slate-300">|</span>
+                                                    <span
+                                                        class="px-1.5 py-0.5 rounded-full bg-green-100 text-green-700 font-bold uppercase tracking-tighter text-[9px]">有库存</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div onclick="selectGenericOption(event, 'GM Sunglasses B02', 'P000124')"
+                                            class="px-4 py-2.5 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col gap-0.5">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">GM
+                                                    Sunglasses B02</span>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="text-[10px] text-slate-400 font-mono">P000124</span>
+                                                    <span class="text-slate-300">|</span>
+                                                    <span
+                                                        class="text-[10px] text-slate-400 uppercase tracking-tighter">Accessories</span>
+                                                    <span class="text-slate-300">|</span>
+                                                    <span
+                                                        class="px-1.5 py-0.5 rounded-full bg-orange-100 text-orange-700 font-bold uppercase tracking-tighter text-[9px]">库存告急</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div onclick="selectGenericOption(event, 'GM Sunglasses C03', 'P000125')"
+                                            class="px-4 py-2.5 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col gap-0.5">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">GM
+                                                    Sunglasses C03</span>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="text-[10px] text-slate-400 font-mono">P000125</span>
+                                                    <span class="text-slate-300">|</span>
+                                                    <span
+                                                        class="text-[10px] text-slate-400 uppercase tracking-tighter">Glasses</span>
+                                                    <span class="text-slate-300">|</span>
+                                                    <span
+                                                        class="px-1.5 py-0.5 rounded-full bg-green-100 text-green-700 font-bold uppercase tracking-tighter text-[9px]">有库存</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- 配件名称 -->
-                            <div class="space-y-1">
+                            <div class="space-y-1 relative custom-select-wrapper" data-prefix="parts-name">
                                 <label
                                     class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件名称</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
-                                    type="text" value="左侧镜腿 (Left Temple)" readonly />
+                                <div onclick="toggleCustomDropdown(event)"
+                                    class="w-full h-[38px] px-3 bg-[#f5f7fa] border-none rounded-lg text-sm flex items-center justify-between cursor-pointer group hover:bg-slate-100/80 transition-colors">
+                                    <span class="dropdown-selected-text text-on-surface font-medium truncate">环螺丝</span>
+                                    <i
+                                        class="fi fi-rr-angle-small-down text-slate-400 transition-transform duration-200"></i>
+                                </div>
+
+                                <!-- Search Dropdown Panel -->
+                                <div
+                                    class="custom-dropdown-panel hidden fixed z-[9999] mt-1 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden ring-1 ring-slate-900/5 animate-in fade-in duration-200">
+                                    <div class="p-2 border-b border-slate-50">
+                                        <div class="relative">
+                                            <i
+                                                class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                            <input type="text"
+                                                class="w-full bg-slate-50 border-none rounded-lg py-1.5 pl-9 pr-3 text-sm focus:ring-1 focus:ring-primary focus:bg-white transition-all"
+                                                placeholder="搜索配件..." onkeyup="filterCustomDropdownInternal(event)">
+                                        </div>
+                                    </div>
+                                    <div class="max-h-60 overflow-y-auto no-scrollbar py-1">
+                                        <div onclick="selectGenericOption(event, '钛合金鼻托', '100001')"
+                                            class="px-4 py-2 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">钛合金鼻托
+                                                    (Titanium Nose Pad)</span>
+                                                <span class="text-[10px] text-slate-400 font-mono">100001 | SILV |
+                                                    12mm</span>
+                                            </div>
+                                        </div>
+                                        <div onclick="selectGenericOption(event, '定制镜腿螺丝', '100002')"
+                                            class="px-4 py-2 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">定制镜腿螺丝
+                                                    (Temple Screw)</span>
+                                                <span class="text-[10px] text-slate-400 font-mono">100002 | GOLD |
+                                                    1.2×3.5mm</span>
+                                            </div>
+                                        </div>
+                                        <div onclick="selectGenericOption(event, 'HER系列 镜腿内衬套', '100003')"
+                                            class="px-4 py-2 hover:bg-primary/5 cursor-pointer flex items-center justify-between group transition-colors border-b border-slate-50 last:border-0">
+                                            <div class="flex flex-col">
+                                                <span
+                                                    class="font-semibold text-on-surface group-hover:text-primary text-sm">HER系列
+                                                    镜腿内衬套</span>
+                                                <span class="text-[10px] text-slate-400 font-mono">100003 | BLK |
+                                                    145mm</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- 配件存放位置 -->
@@ -400,17 +627,30 @@
                             <!-- 颜色 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">颜色</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
-                                    type="text" value="黑色 (Black)" readonly />
+                                <select
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-body">
+                                    <option value="黑色 (Black)" selected>黑色 (Black)</option>
+                                    <option value="玳瑁色 (Tortoise)">玳瑁色 (Tortoise)</option>
+                                    <option value="金色 (Gold)">金色 (Gold)</option>
+                                    <option value="银色 (Silver)">银色 (Silver)</option>
+                                    <option value="透明 (Clear)">透明 (Clear)</option>
+                                    <option value="灰色 (Grey)">灰色 (Grey)</option>
+                                </select>
                             </div>
 
                             <!-- 数量 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">数量</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
-                                    type="number" value="20" readonly />
+                                <select
+                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-body">
+                                    <option value="1">1</option>
+                                    <option value="3">3</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20" selected>20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                </select>
                             </div>
 
                             <!-- 附加需求事项 -->
@@ -444,6 +684,101 @@
             // Toggle current menu
             content.classList.toggle('hidden');
         }
+
+        // --- Searchable Dropdown Logic (Portal Pattern) ---
+        let activeDropdownPanel = null;
+
+        function toggleCustomDropdown(e) {
+            e.stopPropagation();
+            const trigger = e.currentTarget;
+            const container = trigger.closest('.custom-select-wrapper');
+            let panel = container.querySelector('.custom-dropdown-panel');
+
+            // If already open and it's the same one, close it
+            if (activeDropdownPanel === panel) {
+                closeAllCustomDropdowns();
+                return;
+            }
+
+            closeAllCustomDropdowns();
+
+            // Store reference for selection logic
+            panel._originalContainer = container;
+            activeDropdownPanel = panel;
+
+            // Move to body (Portal Pattern)
+            const rect = trigger.getBoundingClientRect();
+
+            panel.style.position = 'fixed';
+            panel.style.top = (rect.bottom + 4) + 'px';
+            panel.style.left = rect.left + 'px';
+            panel.style.width = rect.width + 'px';
+            panel.style.zIndex = '9999';
+
+            document.body.appendChild(panel);
+            panel.classList.remove('hidden');
+
+            // Update UI state
+            const arrow = container.querySelector('.fi-rr-angle-small-down');
+            if (arrow) arrow.style.transform = 'rotate(180deg)';
+
+            const search = panel.querySelector('input[type="text"]');
+            if (search) setTimeout(() => search.focus(), 50);
+        }
+
+        function closeAllCustomDropdowns() {
+            if (activeDropdownPanel) {
+                const panel = activeDropdownPanel;
+                const container = panel._originalContainer;
+
+                panel.classList.add('hidden');
+                if (container) {
+                    const arrow = container.querySelector('.fi-rr-angle-small-down');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    container.appendChild(panel);
+                }
+                activeDropdownPanel = null;
+            }
+        }
+
+        function selectGenericOption(e, name, code) {
+            e.stopPropagation();
+            const panel = e.currentTarget.closest('.custom-dropdown-panel');
+            const container = panel ? panel._originalContainer || panel.closest('.custom-select-wrapper') : null;
+
+            if (container) {
+                const displaySpan = container.querySelector('.dropdown-selected-text');
+                if (displaySpan) {
+                    displaySpan.innerHTML = `<span class="font-bold font-headline">${name}</span> <span class="text-slate-400 font-mono ml-2 text-[10px]">${code}</span>`;
+                    displaySpan.classList.remove('text-slate-500');
+                }
+            }
+            closeAllCustomDropdowns();
+        }
+
+        function filterCustomDropdownInternal(e) {
+            const query = e.target.value.toLowerCase();
+            const panel = e.target.closest('.custom-dropdown-panel');
+            const items = panel.querySelectorAll('.max-h-60 > div');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.classList.toggle('hidden', !text.includes(query));
+            });
+        }
+
+        // Global listeners for Dropdown cleanup
+        window.addEventListener('scroll', (e) => {
+            if (activeDropdownPanel && !activeDropdownPanel.contains(e.target)) {
+                closeAllCustomDropdowns();
+            }
+        }, true);
+        window.addEventListener('resize', closeAllCustomDropdowns);
+        document.addEventListener('click', (e) => {
+            if (activeDropdownPanel && !activeDropdownPanel.contains(e.target)) {
+                closeAllCustomDropdowns();
+            }
+        });
 
         // Toggle sidebar collapse/expand
         function toggleSidebar() {

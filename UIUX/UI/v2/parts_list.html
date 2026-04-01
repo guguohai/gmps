@@ -15,11 +15,17 @@
         rel="stylesheet" />
 
     <!-- Uicons Icons -->
-    <link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
+    />
 
 
-
-    <!-- Uicons Custom CSS for fi-sr -->
     <style>
         @font-face {
             font-family: 'uicons-solid';
@@ -146,7 +152,7 @@
         <div class="flex items-center gap-8">
             <!-- Logo & Brand -->
             <div class="flex items-center gap-2">
-                <img alt="Product Service Logo" class="w-10 h-10" src="logo.png" />
+                <img alt="Product Service Logo" class="w-8 h-8" src="logo.png" />
                 <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
             </div>
 
@@ -162,6 +168,14 @@
                     class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
                     style="background-color: #f5f7fa; width: 440px;" type="text" placeholder="Scan barcode" />
             </div>
+
+            <!-- Inventory Warning Bar -->
+            <div
+                class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
+                <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
+                <span>当前库存不足</span>
+            </div>
+
         </div>
 
         <!-- Right Actions -->
@@ -363,7 +377,7 @@
                             <i class="fi fi-rr-refresh text-[12px]"></i>
                         </button>
                         <button
-                            class="h-8 px-3 bg-primary text-white rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
+                            class="h-8 px-3 bg-primary text-white rounded-lg text-xs hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
                             <i class="fi fi-rr-plus text-[12px]"></i>
                             新增
                         </button>
@@ -479,8 +493,8 @@
                                             class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
                                             onclick="event.stopPropagation()">
                                     </td>
-                                    <td class="px-6 py-4 font-semibold text-primary">100001</td>
-                                    <td class="px-6 py-4 font-semibold text-slate-800">钛合金鼻托 (Titanium Nose Pad)</td>
+                                    <td class="px-6 py-4 text-primary">100001</td>
+                                    <td class="px-6 py-4 text-slate-800">钛合金鼻托 (Titanium Nose Pad)</td>
                                     <td class="px-6 py-4 font-bold text-slate-600">500</td>
                                     <td class="px-6 py-4 text-slate-500">银色 (Silver)</td>
                                     <td class="px-6 py-4 text-slate-500">12mm</td>
@@ -497,8 +511,8 @@
                                             class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
                                             onclick="event.stopPropagation()">
                                     </td>
-                                    <td class="px-6 py-4 font-semibold text-primary">100002</td>
-                                    <td class="px-6 py-4 font-semibold text-slate-800">定制镜腿螺丝 (Temple Screw)</td>
+                                    <td class="px-6 py-4 text-primary">100002</td>
+                                    <td class="px-6 py-4 text-slate-800">定制镜腿螺丝 (Temple Screw)</td>
                                     <td class="px-6 py-4 font-bold text-slate-600">1200</td>
                                     <td class="px-6 py-4 text-slate-500">金色 (Gold)</td>
                                     <td class="px-6 py-4 text-slate-500">1.2×3.5mm</td>
@@ -515,8 +529,8 @@
                                             class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
                                             onclick="event.stopPropagation()">
                                     </td>
-                                    <td class="px-6 py-4 font-semibold text-primary">100003</td>
-                                    <td class="px-6 py-4 font-semibold text-slate-800">HER系列 镜腿内衬套</td>
+                                    <td class="px-6 py-4 text-primary">100003</td>
+                                    <td class="px-6 py-4 text-slate-800">HER系列 镜腿内衬套</td>
                                     <td class="px-6 py-4 font-bold text-slate-600">350</td>
                                     <td class="px-6 py-4 text-slate-500">黑色 (Black)</td>
                                     <td class="px-6 py-4 text-slate-500">145mm 适用</td>
