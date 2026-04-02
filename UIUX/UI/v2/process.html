@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>售后流程图 | After-Sales Process</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Manrope & Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- Uicons Icons -->
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+
+    <style>
+        [class^="fi-"] {
+            display: inline-block;
+            line-height: normal;
+            vertical-align: middle;
+        }
+
+        body {
+            font-family: 'Inter', 'Manrope', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        .step-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .step-circle.completed {
+            background-color: #1c80e1;
+        }
+
+        .step-circle.pending {
+            background-color: #ffffff;
+            border: 2px solid #cccccc;
+        }
+
+        .progress-track {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .line-track {
+            position: absolute;
+            top: 22px;
+            /* Center with 44px circle */
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #cccccc;
+            z-index: 0;
+        }
+
+        .line-active {
+            height: 100%;
+            background-color: #1c80e1;
+            transition: width 0.5s ease;
+        }
+
+        .step-label {
+            margin-top: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #7c8ea1;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Card Wrapper -->
+    <div class="w-full max-w-4xl p-12 md:p-24 relative">
+
+        <!-- Progress Flow Component -->
+        <div class="progress-track relative">
+
+            <!-- Connector Line Track (Background) -->
+            <div class="line-track">
+                <!-- Active Line Overlay (Covers up to circle 3) -->
+                <div class="line-active" style="width: 40%;"></div>
+            </div>
+
+            <!-- Step 1: 受理 (Completed) -->
+            <div class="flex flex-col items-center">
+                <div class="step-circle completed">
+                    <i class="fi fi-rr-book text-white text-lg"></i>
+                </div>
+                <span class="step-label">受理</span>
+            </div>
+
+            <!-- Step 2: 判定 (Completed) -->
+            <div class="flex flex-col items-center">
+                <div class="step-circle completed">
+                    <i class="fi fi-rr-search text-white text-lg"></i>
+                </div>
+                <span class="step-label">判定</span>
+            </div>
+
+            <!-- Step 3: 付款 (Pending) -->
+            <div class="flex flex-col items-center">
+                <div class="step-circle pending">
+                    <i class="fi fi-rr-credit-card text-slate-400 text-lg"></i>
+                </div>
+                <span class="step-label">付款</span>
+            </div>
+
+            <!-- Step 4: 维修 (Pending) -->
+            <div class="flex flex-col items-center">
+                <div class="step-circle pending">
+                    <i class="fi fi-rr-settings text-slate-400 text-lg"></i>
+                </div>
+                <span class="step-label">维修</span>
+            </div>
+
+            <!-- Step 5: 配送 (Pending) -->
+            <div class="flex flex-col items-center">
+                <div class="step-circle pending">
+                    <i class="fi fi-rr-truck-side text-slate-400 text-lg"></i>
+                </div>
+                <span class="step-label">配送</span>
+            </div>
+
+            <!-- Step 6: 完成 (Pending) -->
+            <div class="flex flex-col items-center">
+                <div class="step-circle pending">
+                    <i class="fi fi-rr-check-circle text-slate-400 text-lg"></i>
+                </div>
+                <span class="step-label">完成</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

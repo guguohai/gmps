@@ -177,7 +177,8 @@
                             <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">工单管理</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1 bg-slate-50/50">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -194,7 +195,8 @@
                             <i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">产品管理</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -211,10 +213,8 @@
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content py-1">
                         <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
@@ -232,7 +232,8 @@
                                 class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">小零件</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -252,7 +253,8 @@
                                 class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">服务</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -271,10 +273,8 @@
                             <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">用户权限</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -283,6 +283,8 @@
                             href="./role_list.html">角色列表</a>
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
                             href="./permission_list.html">权限列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./role_permission_list.html">角色权限</a>
                     </div>
                 </div>
             </nav>
@@ -291,7 +293,10 @@
             <div class="border-t border-slate-100 p-4">
                 <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors"
                     onclick="toggleSidebar()">
-                    <i class="fi fi-rr-angle-left w-5 h-5 mr-3"></i>
+                    <svg class="w-4 h-4 mr-3 transition-transform duration-200" fill="none" stroke="currentColor"
+                        stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
                     <span class="text-xs font-semibold uppercase">Collapse</span>
                 </button>
             </div>
@@ -334,8 +339,102 @@
                     </div>
                 </div>
 
+                <!-- Processing Action Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-visible p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- 状态 -->
+                        <div class="space-y-1.5">
+                            <label
+                                class="text-[12px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+                                <span>处理状态</span>
+                            </label>
+                            <div class="relative">
+                                <select
+                                    class="w-full h-11 bg-slate-50 border border-slate-100 rounded-xl text-[13px] font-medium px-4 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all appearance-none cursor-pointer">
+                                    <option selected>待处理</option>
+                                    <option>已批准</option>
+                                    <option>已拒绝</option>
+                                    <option>已完成</option>
+                                </select>
+                                <i
+                                    class="fi fi-rr-angle-small-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                            </div>
+                        </div>
+
+                        <!-- 处理日期 -->
+                        <div class="space-y-1.5">
+                            <label
+                                class="text-[12px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+                                <span>处理日期</span>
+                            </label>
+                            <div class="relative">
+                                <input
+                                    class="w-full h-11 bg-slate-50 border border-slate-100 rounded-xl text-[13px] font-medium px-4 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all appearance-none"
+                                    type="date" value="" placeholder="请选择日期" />
+                            </div>
+                        </div>
+
+                        <!-- 处理人 (Searchable Dropdown) -->
+                        <div class="space-y-1.5 relative" id="processor-search-container">
+                            <label
+                                class="text-[12px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+                                <span>处理人</span>
+                            </label>
+                            <div class="relative">
+                                <div onclick="toggleProcessorDropdown()"
+                                    class="w-full h-11 bg-slate-50 border border-slate-100 rounded-xl text-[13px] font-medium px-4 flex items-center justify-between cursor-pointer hover:bg-slate-100/50 transition-all group"
+                                    id="processor-display">
+                                    <span class="text-slate-400" id="selected-processor-text">请选择处理人...</span>
+                                    <i
+                                        class="fi fi-rr-angle-small-down text-slate-400 group-hover:text-primary transition-colors text-lg"></i>
+                                </div>
+
+                                <!-- Search Dropdown Menu -->
+                                <div id="processor-dropdown"
+                                    class="hidden absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl z-[60] overflow-hidden animate-in fade-in slide-in-from-top-1 duration-200">
+                                    <div class="p-2 border-b border-slate-100 bg-slate-50">
+                                        <div class="relative">
+                                            <i
+                                                class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                                            <input type="text" id="processor-search-input" onkeyup="filterProcessors()"
+                                                placeholder="搜索姓名..."
+                                                class="w-full h-9 pl-9 pr-4 bg-white border border-slate-200 rounded-lg text-[13px] focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                                        </div>
+                                    </div>
+                                    <div class="max-h-[200px] overflow-y-auto no-scrollbar py-1" id="processor-options">
+                                        <div onclick="selectProcessor('张伟')"
+                                            class="px-4 py-2.5 text-[13px] text-slate-700 hover:bg-primary/5 hover:text-primary cursor-pointer transition-colors flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                                            <span>张伟</span>
+                                        </div>
+                                        <div onclick="selectProcessor('李娜')"
+                                            class="px-4 py-2.5 text-[13px] text-slate-700 hover:bg-primary/5 hover:text-primary cursor-pointer transition-colors flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                                            <span>李娜</span>
+                                        </div>
+                                        <div onclick="selectProcessor('王五')"
+                                            class="px-4 py-2.5 text-[13px] text-slate-700 hover:bg-primary/5 hover:text-primary cursor-pointer transition-colors flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                                            <span>王五</span>
+                                        </div>
+                                        <div onclick="selectProcessor('赵六')"
+                                            class="px-4 py-2.5 text-[13px] text-slate-700 hover:bg-primary/5 hover:text-primary cursor-pointer transition-colors flex items-center gap-2">
+                                            <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                                            <span>赵六</span>
+                                        </div>
+                                        <div id="no-processor-results"
+                                            class="hidden px-4 py-4 text-[13px] text-slate-400 text-center italic">
+                                            未找到匹配人员
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Inventory Request Detail Form -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
                     <div class="px-8 py-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- 申请单编号 -->
@@ -443,34 +542,7 @@
                                     rows="2" readonly></textarea>
                             </div>
 
-                            <!-- 状态 -->
-                            <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
-                                <select
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option selected>待处理</option>
-                                    <option>已批准</option>
-                                    <option>已拒绝</option>
-                                    <option>已完成</option>
-                                </select>
-                            </div>
 
-                            <!-- 处理日期 -->
-                            <div class="space-y-1">
-                                <label
-                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理日期</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="date" value="" placeholder="待填写" />
-                            </div>
-
-                            <!-- 处理人 -->
-                            <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理人</label>
-                                <input
-                                    class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary"
-                                    type="text" value="" placeholder="待填写" />
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -488,12 +560,90 @@
             allMenus.forEach(menu => {
                 if (menu !== content) {
                     menu.classList.add('hidden');
+                    // Reset arrow rotation
+                    const closeBtn = menu.previousElementSibling;
+                    const arrow = closeBtn.querySelector('.fi-rr-angle-small-down');
+                    if (arrow) {
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
                 }
             });
 
             // Toggle current menu
             content.classList.toggle('hidden');
+
+            // Rotate arrow
+            const arrow = btn.querySelector('.fi-rr-angle-small-down');
+            if (arrow) {
+                if (content.classList.contains('hidden')) {
+                    arrow.style.transform = 'rotate(0deg)';
+                } else {
+                    arrow.style.transform = 'rotate(180deg)';
+                }
+            }
         }
+
+        // Searchable Processor Dropdown Functions
+        function toggleProcessorDropdown() {
+            const dropdown = document.getElementById('processor-dropdown');
+            const isHidden = dropdown.classList.contains('hidden');
+
+            // Close other dropdowns if any (optional)
+
+            if (isHidden) {
+                dropdown.classList.remove('hidden');
+                document.getElementById('processor-search-input').focus();
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+
+        function filterProcessors() {
+            const input = document.getElementById('processor-search-input');
+            const filter = input.value.toLowerCase();
+            const options = document.getElementById('processor-options').querySelectorAll('div:not(#no-processor-results)');
+            let hasResults = false;
+
+            options.forEach(option => {
+                const text = option.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    option.classList.remove('hidden');
+                    hasResults = true;
+                } else {
+                    option.classList.add('hidden');
+                }
+            });
+
+            const noResults = document.getElementById('no-processor-results');
+            if (hasResults) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+        }
+
+        function selectProcessor(name) {
+            const displayText = document.getElementById('selected-processor-text');
+            displayText.textContent = name;
+            displayText.classList.remove('text-slate-400');
+            displayText.classList.add('text-slate-900');
+
+            // Close dropdown
+            document.getElementById('processor-dropdown').classList.add('hidden');
+
+            // Log for verification
+            console.log('Selected processor:', name);
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            const container = document.getElementById('processor-search-container');
+            const dropdown = document.getElementById('processor-dropdown');
+
+            if (container && !container.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
 
         // Toggle sidebar collapse/expand
         function toggleSidebar() {

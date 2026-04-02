@@ -78,10 +78,7 @@
                             <i class="fi fi-rr-box-open w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">产品管理</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -98,10 +95,7 @@
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -116,10 +110,7 @@
                             <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">工单管理</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content py-1">
                         <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
@@ -137,10 +128,7 @@
                                 class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">服务</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -157,10 +145,7 @@
                             <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">用户权限</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -255,13 +240,16 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>待处理</option>
-                                        <option selected>维修中</option>
-                                        <option>已完成</option>
-                                        <option>已关闭</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
+                                            <option>待处理</option>
+                                            <option selected>维修中</option>
+                                            <option>已完成</option>
+                                            <option>已关闭</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1 hidden">
                                     <label
@@ -280,11 +268,12 @@
                                         </button>
                                     </div>
                                     <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
                                         <option>维修完成通知</option>
                                         <option>延迟通知</option>
                                         <option>报价确认</option>
                                     </select>
+                                    <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
                                 </div>
                                 <div class="space-y-1">
                                     <div class="flex items-center justify-between">
@@ -296,23 +285,25 @@
                                         </button>
                                     </div>
                                     <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
                                         <option>Repair Completion Notification</option>
                                         <option>Delay Notice Template</option>
                                         <option>Quotation Approval</option>
                                     </select>
+                                    <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
                                 </div>
 
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">判定负责人</label>
                                     <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
                                         <option selected>张经理</option>
                                         <option>李经理</option>
                                         <option>王经理</option>
                                         <option>赵经理</option>
                                     </select>
+                                    <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
                                 </div>
 
                                 <div class="space-y-1">
@@ -354,13 +345,16 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">国家</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option>中国 (China)</option>
-                                        <option>美国 (United States)</option>
-                                        <option>日本 (Japan)</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                            disabled>
+                                            <option>中国 (China)</option>
+                                            <option>美国 (United States)</option>
+                                            <option>日本 (Japan)</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -402,12 +396,15 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">收货类型</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>快递</option>
-                                        <option>自提</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                            disabled>
+                                            <option selected>快递</option>
+                                            <option>自提</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1 md:col-span-2">
                                     <label
@@ -439,13 +436,16 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">受理渠道类型</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>邮寄 (Official Website)</option>
-                                        <option>门店送修</option>
-                                        <option>上门取件</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                            disabled>
+                                            <option selected>邮寄 (Official Website)</option>
+                                            <option>门店送修</option>
+                                            <option>上门取件</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -538,13 +538,16 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户请求分类</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>镜架损坏 / 漆面剥落</option>
-                                        <option>镜片划伤</option>
-                                        <option>螺丝松动</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                            disabled>
+                                            <option selected>镜架损坏 / 漆面剥落</option>
+                                            <option>镜片划伤</option>
+                                            <option>螺丝松动</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1 md:col-span-2">
                                     <label
@@ -641,12 +644,15 @@
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否需要咨询</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option selected>是</option>
-                                            <option>否</option>
-                                        </select>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                                disabled>
+                                                <option selected>是</option>
+                                                <option>否</option>
+                                            </select>
+                                            <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
@@ -658,13 +664,16 @@
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">外呼类型</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option>技术支持</option>
-                                            <option selected>售后服务</option>
-                                            <option>客户关怀</option>
-                                        </select>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                                disabled>
+                                                <option>技术支持</option>
+                                                <option selected>售后服务</option>
+                                                <option>客户关怀</option>
+                                            </select>
+                                            <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
@@ -676,13 +685,16 @@
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">咨询状态</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option>待处理</option>
-                                            <option selected>处理中</option>
-                                            <option>已完成</option>
-                                        </select>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                                disabled>
+                                                <option>待处理</option>
+                                                <option selected>处理中</option>
+                                                <option>已完成</option>
+                                            </select>
+                                            <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
@@ -694,13 +706,16 @@
                                     <div class="space-y-1 md:col-span-2">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">异常分类</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option selected>产品质量问题</option>
-                                            <option>物流损坏</option>
-                                            <option>客户使用不当</option>
-                                        </select>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                                disabled>
+                                                <option selected>产品质量问题</option>
+                                                <option>物流损坏</option>
+                                                <option>客户使用不当</option>
+                                            </select>
+                                            <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -709,12 +724,15 @@
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">确认类型</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                            <option>电话确认</option>
-                                            <option selected>邮件确认</option>
-                                            <option>短信确认</option>
-                                        </select>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
+                                                <option>电话确认</option>
+                                                <option selected>邮件确认</option>
+                                                <option>短信确认</option>
+                                            </select>
+                                            <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
@@ -735,23 +753,29 @@
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步状态</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option selected>已同步</option>
-                                            <option>未同步</option>
-                                        </select>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                                disabled>
+                                                <option selected>已同步</option>
+                                                <option>未同步</option>
+                                            </select>
+                                            <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
                                             class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">客户确认状态</label>
-                                        <select
-                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                            disabled>
-                                            <option>待确认</option>
-                                            <option selected>已确认</option>
-                                            <option>拒绝</option>
-                                        </select>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                                disabled>
+                                                <option>待确认</option>
+                                                <option selected>已确认</option>
+                                                <option>拒绝</option>
+                                            </select>
+                                            <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                        </div>
                                     </div>
                                     <div class="space-y-1">
                                         <label
@@ -812,13 +836,16 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">库存状态</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>IN STOCK</option>
-                                        <option>OUT OF STOCK</option>
-                                        <option>PRE-ORDER</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                            disabled>
+                                            <option selected>IN STOCK</option>
+                                            <option>OUT OF STOCK</option>
+                                            <option>PRE-ORDER</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -837,12 +864,15 @@
                                 <div class="space-y-1">
                                     <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">电镀 /
                                         焊接维修是否可行</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none"
-                                        disabled>
-                                        <option selected>可行</option>
-                                        <option>不可行</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10"
+                                            disabled>
+                                            <option selected>可行</option>
+                                            <option>不可行</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -895,14 +925,17 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">问题现象</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>漆面剥落</option>
-                                        <option>镜片划伤</option>
-                                        <option>螺丝松动</option>
-                                        <option>镜架变形</option>
-                                        <option>鼻托损坏</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
+                                            <option selected>漆面剥落</option>
+                                            <option>镜片划伤</option>
+                                            <option>螺丝松动</option>
+                                            <option>镜架变形</option>
+                                            <option>鼻托损坏</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -914,24 +947,30 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">镜片类型</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>标准镜片</option>
-                                        <option>偏光镜片</option>
-                                        <option>变色镜片</option>
-                                        <option>防蓝光镜片</option>
-                                        <option>渐进多焦镜片</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
+                                            <option selected>标准镜片</option>
+                                            <option>偏光镜片</option>
+                                            <option>变色镜片</option>
+                                            <option>防蓝光镜片</option>
+                                            <option>渐进多焦镜片</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修处</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>总部维修中心</option>
-                                        <option>合作方维修中心</option>
-                                        <option>门店维修</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
+                                            <option selected>总部维修中心</option>
+                                            <option>合作方维修中心</option>
+                                            <option>门店维修</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
@@ -978,22 +1017,28 @@
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">是否产品问题</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>是</option>
-                                        <option selected>否</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
+                                            <option>是</option>
+                                            <option selected>否</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label
                                         class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">维修费用判定</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option selected>免费维修</option>
-                                        <option>收费维修</option>
-                                        <option>保修期内</option>
-                                        <option>待判定</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer pr-10">
+                                            <option selected>免费维修</option>
+                                            <option>收费维修</option>
+                                            <option>保修期内</option>
+                                            <option>待判定</option>
+                                        </select>
+                                        <i class="fi fi-rr-angle-small-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-lg"></i>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label

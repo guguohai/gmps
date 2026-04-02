@@ -19,6 +19,8 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css" />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flaticon-remix-icon@1.0.0/font/remixicon.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
@@ -106,6 +108,84 @@
 
         .heroicon {
             vertical-align: middle;
+        }
+
+        /* Mini Process Flow Header Implementation */
+        .header-progress-track {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 24px;
+            padding-left: 24px;
+            border-left: 1px solid #e2e8f0;
+            height: 32px;
+        }
+
+        .header-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            min-width: 40px;
+        }
+
+        .header-step-circle {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .header-step-circle.completed {
+            background-color: #177ee5;
+            box-shadow: 0 0 0 2px rgba(23, 126, 229, 0.1);
+        }
+
+        .header-step-circle.pending {
+            background-color: #ffffff;
+            border: 1.5px solid #cbd5e1;
+        }
+
+        .header-step-circle i {
+            font-size: 8px;
+            color: white;
+        }
+
+        .header-step-circle.pending i {
+            color: #94a3b8;
+        }
+
+        .header-line-track {
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #e2e8f0;
+            z-index: 0;
+        }
+
+        .header-line-active {
+            height: 100%;
+            background-color: #177ee5;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .header-step-label {
+            margin-top: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .header-step.active .header-step-label {
+            color: #177ee5;
         }
     </style>
 </head>
@@ -296,12 +376,14 @@
                         </svg>
                     </button>
                     <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
                             href="./user_list.html">用户列表</a>
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
                             href="./role_list.html">角色列表</a>
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
                             href="./permission_list.html">权限列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./role_permission_list.html">角色权限</a>
                     </div>
                 </div>
             </nav>
@@ -336,7 +418,48 @@
                         <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">
                             115001</h2>
                         <span
-                            class="px-2 py-0.5 bg-blue-100 text-primary text-xs font-bold rounded uppercase">维修中</span>
+                            class="px-2 py-1 bg-blue-100 text-primary text-[10px] font-black rounded uppercase flex items-center justify-center">维修中</span>
+
+                        <!-- Mini Process Flow -->
+                        <!--div class="header-progress-track hidden xl:flex">
+                            <div class="header-step active">
+                                <div class="header-step-circle completed">
+                                    <i class="fi fi-sr-check"></i>
+                                </div>
+                                <span class="header-step-label">受理</span>
+                                <div class="header-line-track"><div class="header-line-active" style="width: 100%;"></div></div>
+                            </div>
+                            <div class="header-step active">
+                                <div class="header-step-circle completed">
+                                    <i class="fi fi-sr-check"></i>
+                                </div>
+                                <span class="header-step-label">判定</span>
+                                <div class="header-line-track"><div class="header-line-active" style="width: 100%;"></div></div>
+                            </div>
+                            <div class="header-step active">
+                                <div class="header-step-circle completed">
+                                    <i class="fi fi-sr-check"></i>
+                                </div>
+                                <span class="header-step-label">付款</span>
+                                <div class="header-line-track"><div class="header-line-active" style="width: 100%;"></div></div>
+                            </div>
+                            <div class="header-step active">
+                                <div class="header-step-circle completed">
+                                    <i class="fi fi-sr-play text-[6px]"></i>
+                                </div>
+                                <span class="header-step-label">维修</span>
+                                <div class="header-line-track"><div class="header-line-active" style="width: 0%;"></div></div>
+                            </div>
+                            <div class="header-step">
+                                <div class="header-step-circle pending"></div>
+                                <span class="header-step-label">配送</span>
+                                <div class="header-line-track"></div>
+                            </div>
+                            <div class="header-step">
+                                <div class="header-step-circle pending"></div>
+                                <span class="header-step-label">完成</span>
+                            </div>
+                        </div-->
                     </div>
                     <p class="text-xs text-on-surface-variant">Created on Oct 27, 2023 10:45 AM • Last updated 2
                         hours ago</p>
@@ -413,16 +536,15 @@
                             <option>赵经理</option>
                         </select>
                     </div>
-                    <div class="space-y-1">
+                    <!--div class="space-y-1">
                         <label class="font-bold text-slate-400 uppercase tracking-wider">历史记录</label>
                         <div class="flex items-center gap-2 py-2">
                             <span class="text-on-surface" style="color: #94a3b8;">当前记录2条，</span>
                             <a href="javascript:void(0)" onclick="openStatusHistoryModal()"
                                 class="text-primary font-medium hover:underline cursor-pointer">点击查看</a>
                         </div>
-                    </div>
+                    </div-->
 
-                    <div class="space-y-1"></div>
 
                     <div class="space-y-1 hidden">
                         <label class="font-bold text-slate-400 uppercase tracking-wider">原工单编号</label>
@@ -668,6 +790,9 @@
                             </ul>
                         </div>
                     </div>
+
+                    <div class="space-y-1"></div>
+
                     <div class="space-y-1 relative custom-select-wrapper" data-prefix="email-notify">
                         <div class="flex items-center justify-between">
                             <label class="font-bold text-slate-400 uppercase tracking-wider">电子邮件</label>
@@ -738,7 +863,7 @@
                                     onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 已付款')">
                                     [咨询]换取其他产品 - 已付款</li>
                                 <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 免费')">
+                                    执行 onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 免费')">
                                     [咨询]换取其他产品 - 免费</li>
                                 <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
                                     onclick="selectCustomOption('email-notify', '[检查]换取其他产品 - 已付款')">
@@ -820,7 +945,7 @@
                         <div class="break-inside-avoid mb-6 bg-white rounded-xl border border-slate-200">
                             <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline ">
-                                    <i class="bi bi-person text-secondary text-lg"></i>
+                                    <i class="fi fi-rr-user text-secondary text-xs"></i>
                                     客户信息
                                 </h3>
                             </div>
@@ -912,6 +1037,78 @@
                             </div>
                         </div>
 
+                        <!-- （2.1）寄件信息 -->
+                        <div class="break-inside-avoid mb-6 bg-white rounded-xl border border-slate-200">
+                            <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
+                                <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline ">
+                                    <i class="fi fi-rr-truck-side text-secondary text-lg"></i>
+                                    寄件信息<span class="text-slate-400">（受理后隐藏）</span>
+                                </h3>
+                            </div>
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">寄件方式</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>快递</option>
+                                        <option>自提</option>
+                                        <option>同城配送</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">快递公司</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none text-[13px]">
+                                        <option>顺丰快递 (SF Express)</option>
+                                        <option>中通快递 (ZTO Express)</option>
+                                        <option>圆通快递 (YTO Express)</option>
+                                        <option>申通快递 (STO Express)</option>
+                                        <option>韵达快递 (Yunda)</option>
+                                        <option>EMS</option>
+                                        <option>京东物流 (JD Logistics)</option>
+                                        <option>其他</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">运单号</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="SF14223908812" placeholder="请输入运单号" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">寄件时间</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="datetime-local" value="2023-11-01T14:30" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">物流状态</label>
+                                    <select
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                        <option>待发货</option>
+                                        <option selected>运输中</option>
+                                        <option>派送中</option>
+                                        <option>已签收</option>
+                                        <option>异常</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">物流轨迹入口</label>
+                                    <div class="py-2">
+                                        <a href="https://www.sf-express.com/chn/zh/waybill/list?billno=SF14223908812"
+                                            target="_blank"
+                                            class="inline-flex items-center gap-2 text-primary font-bold hover:underline group">
+                                            <i class="fi fi-rr-search-location"></i>
+                                            点击查询实时轨迹
+                                            <i
+                                                class="fi fi-rr-arrow-small-right transition-transform group-hover:translate-x-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- （3）受理信息 -->
                         <div class="break-inside-avoid mb-6 bg-white rounded-xl border border-slate-200">
                             <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
@@ -979,7 +1176,8 @@
                                         </div>
                                         <ul id="channel-list" class="max-h-48 overflow-y-auto py-1">
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('channel', 'Online Support')">Online
+                                                onclick="selectCustomOption('channel', 'Online Support')">
+                                                Online
                                                 Support
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
@@ -994,7 +1192,8 @@
                                                 onclick="selectCustomOption('channel', 'Authorized Retailer - Century')">
                                                 Authorized Retailer - Century</li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('channel', 'Duty Free')">Duty Free
+                                                onclick="selectCustomOption('channel', 'Duty Free')">Duty
+                                                Free
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
                                                 onclick="selectCustomOption('channel', 'Call Center')">Call
@@ -1005,7 +1204,8 @@
                                                 Seoul
                                                 Subsidiary</li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('channel', 'Tokyo Flagship')">Tokyo
+                                                onclick="selectCustomOption('channel', 'Tokyo Flagship')">
+                                                Tokyo
                                                 Flagship
                                             </li>
                                         </ul>
@@ -1151,23 +1351,28 @@
                                         </div>
                                         <ul id="purchase_channel-list" class="max-h-48 overflow-y-auto py-1">
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('purchase_channel', '官方旗舰店')">官方旗舰店
+                                                onclick="selectCustomOption('purchase_channel', '官方旗舰店')">
+                                                官方旗舰店
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('purchase_channel', '百货专柜')">百货专柜
+                                                onclick="selectCustomOption('purchase_channel', '百货专柜')">
+                                                百货专柜
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('purchase_channel', '独立精品店')">独立精品店
+                                                onclick="selectCustomOption('purchase_channel', '独立精品店')">
+                                                独立精品店
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
                                                 onclick="selectCustomOption('purchase_channel', '线上官方商城')">
                                                 线上官方商城
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('purchase_channel', '授权零售商')">授权零售商
+                                                onclick="selectCustomOption('purchase_channel', '授权零售商')">
+                                                授权零售商
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('purchase_channel', '免税店')">免税店</li>
+                                                onclick="selectCustomOption('purchase_channel', '免税店')">免税店
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1186,6 +1391,22 @@
                                     <textarea
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
                                         rows="3">右眼下部分的镜框有缺失，且有裂纹。请帮忙维修该部分。</textarea>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">客户签名</label>
+                                    <div
+                                        class="h-[60px] bg-[#f5f7fa] rounded-lg flex items-center justify-center overflow-hidden">
+                                        <!-- Static Signature Image Placeholder -->
+                                        <div class="text-slate-400 opacity-40">
+                                            <svg width="160" height="50" viewBox="0 0 200 60" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 45C30 40 50 20 80 25C110 30 130 50 170 35"
+                                                    stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                                                <path d="M40 30C60 25 80 15 110 20S150 40 180 30" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" />
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- 附件信息表格 -->
@@ -1234,7 +1455,8 @@
                                             <tbody>
                                                 <tr class="border-t border-slate-100">
                                                     <td class="py-2 px-3"><a href="#"
-                                                            class="text-primary">purchase_receipt.pdf</a></td>
+                                                            class="text-primary">purchase_receipt.pdf</a>
+                                                    </td>
                                                     <td class="py-2 px-3">购买凭证</td>
                                                     <td class="py-2 px-3">PDF</td>
                                                     <td class="py-2 px-3">2.5 MB</td>
@@ -1430,7 +1652,7 @@
                         <div class="break-inside-avoid mb-6 bg-white rounded-xl border border-slate-200">
                             <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline ">
-                                    <i class="bi bi-eyeglasses text-slate-500 text-lg"></i>
+                                    <i class="fi fi-rc-glasses text-slate-500 text-xs"></i>
                                     产品信息
                                 </h3>
                             </div>
@@ -1462,7 +1684,8 @@
                                                 <div class="flex flex-col">
                                                     <span
                                                         class="font-semibold text-on-surface group-hover:text-primary text-sm">JUDE-01</span>
-                                                    <span class="text-[10px] text-slate-400 font-mono">P-JD01 |
+                                                    <span class="text-[10px] text-slate-400 font-mono">P-JD01
+                                                        |
                                                         SUNGLASS
                                                         COMBI</span>
                                                 </div>
@@ -1473,7 +1696,8 @@
                                                     <span
                                                         class="font-semibold text-on-surface group-hover:text-primary text-sm">LIBERTY
                                                         X-02</span>
-                                                    <span class="text-[10px] text-slate-400 font-mono">P-LX02 |
+                                                    <span class="text-[10px] text-slate-400 font-mono">P-LX02
+                                                        |
                                                         SUNGLASS
                                                         METAL</span>
                                                 </div>
@@ -1484,7 +1708,8 @@
                                                     <span
                                                         class="font-semibold text-on-surface group-hover:text-primary text-sm">GM
                                                         Sunglasses A01</span>
-                                                    <span class="text-[10px] text-slate-400 font-mono">P000123 |
+                                                    <span class="text-[10px] text-slate-400 font-mono">P000123
+                                                        |
                                                         SUNGLASS ACETATE</span>
                                                 </div>
                                             </div>
@@ -1574,7 +1799,7 @@
 
                                     <!-- Dropdown Box -->
                                     <div id="phenomenon-dropdown"
-                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden text-[13px] custom-dropdown-panel">
                                         <div class="p-2 border-b border-slate-50">
                                             <div class="relative">
                                                 <i
@@ -2236,7 +2461,133 @@
                     </div>
                 </div>
 
-                <div id="content-logs" class="hidden">log</div>
+                <div id="content-logs" class="hidden">
+                    <!-- Operation Logs Tab Content -->
+                    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 mt-6">
+                        <div class="relative flex-1 max-w-md">
+                            <i class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text"
+                                class="w-full bg-white border border-slate-200 rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                placeholder="搜索操作、人员或时间..." />
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto border border-slate-100 rounded-xl bg-white">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-slate-50/80 border-b border-slate-100">
+                                <tr>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        编号
+                                    </th>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        操作时间
+                                    </th>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        操作人
+                                    </th>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        操作内容
+                                    </th>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        备注 / 详情
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50 text-[13px]">
+                                <!-- Log Item 1 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-4 py-4 font-mono text-slate-400">00012</td>
+                                    <td class="px-4 py-4 text-on-surface-variant whitespace-nowrap">
+                                        2023-11-01 15:30:45
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center text-primary font-bold text-[11px]">
+                                                JV</div>
+                                            <span class="font-medium text-on-surface">Jameson Vance</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <span
+                                            class="px-2 py-0.5 rounded-md bg-green-50 text-green-600 font-bold text-[11px]">创建工单</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-slate-500">
+                                        门店受理完成，进入维修分拣流程。
+                                    </td>
+                                </tr>
+                                <!-- Log Item 2 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-4 py-4 font-mono text-slate-400">00013</td>
+                                    <td class="px-4 py-4 text-on-surface-variant whitespace-nowrap">
+                                        2023-11-01 16:15:22
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-[11px]">
+                                                ZM</div>
+                                            <span class="font-medium text-on-surface">张经理</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <span
+                                            class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 font-bold text-[11px]">状态更新</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-slate-500">
+                                        状态由 <span class="bg-slate-100 px-1 rounded">待处理</span> 变更为 <span
+                                            class="bg-blue-100 text-primary px-1 rounded">修理中</span>。
+                                    </td>
+                                </tr>
+                                <!-- Log Item 3 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-4 py-4 font-mono text-slate-400">00014</td>
+                                    <td class="px-4 py-4 text-on-surface-variant whitespace-nowrap">
+                                        2023-11-02 09:30:00
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-7 h-7 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 font-bold text-[11px]">
+                                                SYS</div>
+                                            <span class="font-medium text-on-surface">系统</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <span
+                                            class="px-2 py-0.5 rounded-md bg-purple-50 text-purple-600 font-bold text-[11px]">消息通知</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-slate-500">
+                                        <i class="fi fi-rr-comment-check mr-1 text-green-500 text-[11px]"></i>
+                                        已发送 [受理] 门店受理完成 (SMS: +86 138****1922)
+                                    </td>
+                                </tr>
+                                <!-- Log Item 4 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-4 py-4 font-mono text-slate-400">00015</td>
+                                    <td class="px-4 py-4 text-on-surface-variant whitespace-nowrap">
+                                        2023-11-02 11:00:12
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center text-primary font-bold text-[11px]">
+                                                JV</div>
+                                            <span class="font-medium text-on-surface">Jameson Vance</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <span
+                                            class="px-2 py-0.5 rounded-md bg-orange-50 text-orange-600 font-bold text-[11px]">附件更新</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-slate-500">
+                                        上传并关联了客户签名图片。
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
 

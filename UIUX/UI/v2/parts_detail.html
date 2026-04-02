@@ -175,7 +175,7 @@
                             <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">工单管理</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1 bg-slate-50/50">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -192,7 +192,7 @@
                             <i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">产品管理</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -209,7 +209,7 @@
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -227,10 +227,7 @@
                                 class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">小零件</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content py-1">
                         <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
@@ -250,7 +247,7 @@
                                 class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">服务</span>
                         </div>
-                        <i class="fi fi-rr-chevron-right w-[10px] h-[10px] text-slate-500"></i>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -269,10 +266,7 @@
                             <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">用户权限</span>
                         </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -281,6 +275,8 @@
                             href="./role_list.html">角色列表</a>
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
                             href="./permission_list.html">权限列表</a>
+                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+                            href="./role_permission_list.html">角色权限</a>
                     </div>
                 </div>
             </nav>
@@ -289,7 +285,9 @@
             <div class="border-t border-slate-100 p-4">
                 <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors"
                     onclick="toggleSidebar()">
-                    <i class="fi fi-rr-angle-left w-5 h-5 mr-3"></i>
+                    <svg class="w-4 h-4 mr-3 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
                     <span class="text-xs font-semibold uppercase">Collapse</span>
                 </button>
             </div>
@@ -574,18 +572,26 @@
             allMenus.forEach(menu => {
                 if (menu !== content) {
                     menu.classList.add('hidden');
-                    // Reset arrow rotation if needed (depends on SVG used)
+                    // Reset arrow rotation
                     const closeBtn = menu.previousElementSibling;
-                    const arrow = closeBtn.querySelector('svg');
-                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    const arrow = closeBtn.querySelector('.fi-rr-angle-small-down');
+                    if (arrow) {
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
                 }
             });
 
             // Toggle current menu
             content.classList.toggle('hidden');
-            const arrow = btn.querySelector('svg');
+
+            // Rotate arrow
+            const arrow = btn.querySelector('.fi-rr-angle-small-down');
             if (arrow) {
-                arrow.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                if (content.classList.contains('hidden')) {
+                    arrow.style.transform = 'rotate(0deg)';
+                } else {
+                    arrow.style.transform = 'rotate(180deg)';
+                }
             }
         }
 
