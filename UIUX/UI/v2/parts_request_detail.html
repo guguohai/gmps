@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>配件申请详情 - 配件管理系统</title>
+    <title>小零件申请详情 - 小零件管理系统</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -15,15 +15,9 @@
         rel="stylesheet" />
 
     <!-- Uicons Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css" />
 
     <style>
         @font-face {
@@ -140,7 +134,7 @@
         <div class="flex items-center gap-8">
             <!-- Logo & Brand -->
             <div class="flex items-center gap-2">
-                <img alt="PRODUCT SERVICE Logo" class="w-8 h-8 rounded-lg" src="logo.png" />
+                <img alt="PRODUCT SERVICE Logo" class="w-6 h-6 rounded-lg" src="logo.png" />
                 <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
             </div>
 
@@ -249,7 +243,7 @@
                     </div>
                 </div>
 
-                <!-- 配件 Menu Group - Active -->
+                <!-- 小零件 Menu Group - Active -->
                 <div class="menu-group">
                     <button
                         class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group"
@@ -257,7 +251,7 @@
                         <div class="flex items-center">
                             <i
                                 class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">配件</span>
+                            <span class="text-[13px]">小零件</span>
                         </div>
                         <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
                             style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
@@ -331,7 +325,7 @@
         <main class="ml-64 flex-1 p-5 overflow-y-auto w-full">
             <!-- Breadcrumb -->
             <nav class="mb-5 text-sm font-medium flex items-center">
-                <a href="./parts_request_list.html" class="text-primary hover:underline">配件管理</a>
+                <a href="./parts_request_list.html" class="text-primary hover:underline">小零件管理</a>
                 <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -557,10 +551,10 @@
                                 </div>
                             </div>
 
-                            <!-- 配件名称 -->
+                            <!-- 小零件名称 -->
                             <div class="space-y-1 relative custom-select-wrapper" data-prefix="parts-name">
                                 <label
-                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件名称</label>
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">小零件名称</label>
                                 <div onclick="toggleCustomDropdown(event)"
                                     class="w-full h-[38px] px-3 bg-[#f5f7fa] border-none rounded-lg text-sm flex items-center justify-between cursor-pointer group hover:bg-slate-100/80 transition-colors">
                                     <span class="dropdown-selected-text text-on-surface font-medium truncate">环螺丝</span>
@@ -577,7 +571,7 @@
                                                 class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
                                             <input type="text"
                                                 class="w-full bg-slate-50 border-none rounded-lg py-1.5 pl-9 pr-3 text-sm focus:ring-1 focus:ring-primary focus:bg-white transition-all"
-                                                placeholder="搜索配件..." onkeyup="filterCustomDropdownInternal(event)">
+                                                placeholder="搜索小零件..." onkeyup="filterCustomDropdownInternal(event)">
                                         </div>
                                     </div>
                                     <div class="max-h-60 overflow-y-auto no-scrollbar py-1">
@@ -615,10 +609,10 @@
                                 </div>
                             </div>
 
-                            <!-- 配件存放位置 -->
+                            <!-- 小零件存放位置 -->
                             <div class="space-y-1">
                                 <label
-                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件存放位置</label>
+                                    class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">小零件存放位置</label>
                                 <input
                                     class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-body"
                                     type="text" value="A-12-05" readonly />

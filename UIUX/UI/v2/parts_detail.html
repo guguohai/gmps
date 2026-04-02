@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>配件详情 - 配件管理系统</title>
+    <title>小零件详情 - 小零件管理系统</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -15,15 +15,9 @@
         rel="stylesheet" />
 
     <!-- Uicons Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css" />
 
     <style>
         @font-face {
@@ -113,7 +107,7 @@
         <div class="flex items-center gap-8">
             <!-- Logo & Brand -->
             <div class="flex items-center gap-2">
-                <img alt="PRODUCT SERVICE Logo" class="w-8 h-8 rounded-lg" src="logo.png" />
+                <img alt="PRODUCT SERVICE Logo" class="w-6 h-6 rounded-lg" src="logo.png" />
                 <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
             </div>
 
@@ -223,7 +217,7 @@
                     </div>
                 </div>
 
-                <!-- 配件 Menu Group - Active -->
+                <!-- 小零件 Menu Group - Active -->
                 <div class="menu-group">
                     <button
                         class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group"
@@ -231,7 +225,7 @@
                         <div class="flex items-center">
                             <i
                                 class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">配件</span>
+                            <span class="text-[13px]">小零件</span>
                         </div>
                         <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
                             style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
@@ -305,17 +299,17 @@
         <main class="ml-64 flex-1 p-5 overflow-y-auto w-full">
             <!-- Breadcrumb -->
             <nav class="mb-5 text-sm font-medium flex items-center">
-                <a href="./parts_list.html" class="text-primary hover:underline">配件管理</a>
+                <a href="./parts_list.html" class="text-primary hover:underline">小零件管理</a>
                 <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
-                <a href="./parts_list.html" class="text-primary hover:underline">配件列表</a>
+                <a href="./parts_list.html" class="text-primary hover:underline">小零件列表</a>
                 <svg class="w-3 h-3 mx-2 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
-                <span class="text-slate-500">配件详情</span>
+                <span class="text-slate-500">小零件详情</span>
             </nav>
 
             <div class="space-y-8 w-full">
@@ -341,17 +335,17 @@
 
                 <!-- Parts Detail Form -->
                 <div class="space-y-6">
-                    <!-- 配件基本信息 Section -->
+                    <!-- 小零件基本信息 Section -->
                     <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
                         <div class="px-8 py-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                                <!-- 配件名称 -->
+                                <!-- 小零件名称 -->
                                 <div class="space-y-2">
                                     <label
-                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配件名称</label>
+                                        class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">小零件名称</label>
                                     <input id="partNameInput"
                                         class="w-full h-[42px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all font-body text-on-surface"
-                                        type="text" value="钛合金鼻托 (Titanium Nose Pad)" placeholder="输入配件名称" />
+                                        type="text" value="钛合金鼻托 (Titanium Nose Pad)" placeholder="输入小零件名称" />
                                 </div>
                                 <!-- 数量 -->
                                 <div class="space-y-2">
@@ -449,18 +443,48 @@
         <!-- Backdrop -->
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="closeStoreModal()"></div>
         <!-- Modal Content -->
-        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all">
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg transform transition-all">
             <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
                 <h3 class="text-base font-bold text-slate-800 font-headline">选择门店类型</h3>
                 <button onclick="closeStoreModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
                     <i class="fi fi-rr-cross-small text-xl"></i>
                 </button>
             </div>
-            <div class="px-6 py-5 grid grid-cols-1 gap-2 max-h-[500px] overflow-y-auto no-scrollbar">
-                <!-- 旗舰店/百货/商场/免税店 -->
-                <button onclick="addStoreRow('旗舰店/百货/商场/免税店')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
-                    <span class="text-[13px] font-bold text-slate-700">旗舰店/百货/商场/免税店</span>
+            <div class="px-6 py-5 grid grid-cols-1 gap-2 max-h-[500px] overflow-y-auto">
+                <!-- 旗舰店 -->
+                <button onclick="addStoreRow('旗舰店')"
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    <span class="text-[13px] font-bold text-slate-700">旗舰店</span>
+                    <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- 百货 -->
+                <button onclick="addStoreRow('百货')"
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    <span class="text-[13px] font-bold text-slate-700">百货</span>
+                    <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- 商场 -->
+                <button onclick="addStoreRow('商场')"
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    <span class="text-[13px] font-bold text-slate-700">商场</span>
+                    <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- 免税店 -->
+                <button onclick="addStoreRow('免税店')"
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    <span class="text-[13px] font-bold text-slate-700">免税店</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -469,7 +493,7 @@
 
                 <!-- 眼镜店 -->
                 <button onclick="addStoreRow('眼镜店')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
                     <span class="text-[13px] font-bold text-slate-700">眼镜店</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -479,7 +503,7 @@
 
                 <!-- 买手店/集合店 -->
                 <button onclick="addStoreRow('买手店/集合店')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
                     <span class="text-[13px] font-bold text-slate-700">买手店/集合店</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -489,7 +513,7 @@
 
                 <!-- 官方线上商城 -->
                 <button onclick="addStoreRow('官方线上商城')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
                     <span class="text-[13px] font-bold text-slate-700">官方线上商城</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -499,7 +523,7 @@
 
                 <!-- 海外法人（子公司） -->
                 <button onclick="addStoreRow('海外法人（子公司）')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
                     <span class="text-[13px] font-bold text-slate-700">海外法人（子公司）</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -509,7 +533,7 @@
 
                 <!-- 海外法人（合资公司） -->
                 <button onclick="addStoreRow('海外法人（合资公司）')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
                     <span class="text-[13px] font-bold text-slate-700">海外法人（合资公司）</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -519,7 +543,7 @@
 
                 <!-- PS -->
                 <button onclick="addStoreRow('PS')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
                     <span class="text-[13px] font-bold text-slate-700">PS</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -529,7 +553,7 @@
 
                 <!-- 其他 -->
                 <button onclick="addStoreRow('其他')"
-                    class="flex items-center justify-between px-5 py-3.5 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
+                    class="flex items-center justify-between px-5 py-2 rounded-xl border border-slate-50 hover:border-primary/20 hover:bg-primary/5 transition-all group text-left">
                     <span class="text-[13px] font-bold text-slate-700">其他</span>
                     <svg class="w-2.5 h-2.5 text-slate-300 group-hover:text-primary transform group-hover:translate-x-1 transition-all"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -589,7 +613,7 @@
             const newRow = document.createElement('tr');
             newRow.className = "hover:bg-slate-50/50 transition-colors";
             newRow.innerHTML = `
-                <td class="px-8 py-4 font-bold text-slate-700">${storeName}</td>
+                <td class="px-8 py-4 text-slate-700">${storeName}</td>
                 <td class="px-4 py-2"><input type="number" class="w-full h-8 px-3 bg-[#f5f7fa] border-none rounded-md text-xs focus:ring-1 focus:ring-primary" placeholder="0"></td>
                 <td class="px-4 py-2"><input type="number" class="w-full h-8 px-3 bg-[#f5f7fa] border-none rounded-md text-xs focus:ring-1 focus:ring-primary" placeholder="0"></td>
                 <td class="px-4 py-2"><input type="number" class="w-full h-8 px-3 bg-[#f5f7fa] border-none rounded-md text-xs focus:ring-1 focus:ring-primary" placeholder="0"></td>

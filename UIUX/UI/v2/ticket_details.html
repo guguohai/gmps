@@ -235,7 +235,7 @@
                     </div>
                 </div>
 
-                <!-- 配件 Menu Group -->
+                <!-- 小零件 Menu Group -->
                 <div class="menu-group">
                     <button
                         class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
@@ -243,7 +243,7 @@
                         <div class="flex items-center">
                             <i
                                 class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">配件</span>
+                            <span class="text-[13px]">小零件</span>
                         </div>
                         <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
                             style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
@@ -452,7 +452,7 @@
 
                         <!-- Dropdown Box -->
                         <div id="message-notify-dropdown"
-                            class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                            class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel text-[13px] form-text13">
                             <div class="p-2 border-b border-slate-50">
                                 <div class="relative">
                                     <i class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 "></i>
@@ -690,7 +690,7 @@
 
                         <!-- Dropdown Box -->
                         <div id="email-notify-dropdown"
-                            class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                            class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel text-[13px] form-text13">
                             <div class="p-2 border-b border-slate-50">
                                 <div class="relative">
                                     <i class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 "></i>
@@ -1298,7 +1298,7 @@
                                     <label class="font-bold text-slate-400 uppercase tracking-wider">咨询负责人</label>
                                     <div class="relative cursor-pointer"
                                         onclick="toggleCustomDropdown(event, 'consult-PIC')">
-                                        <input type="text" id="consult-PIC-display" value="赵敏" placeholder="请选择咨询负责人"
+                                        <input type="text" id="consult-PIC-display" value="赵师傅" placeholder="请选择咨询负责人"
                                             class="w-full bg-[#f5f7fa] border-none rounded-lg py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
                                             autocomplete="off" />
                                         <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
@@ -1311,7 +1311,7 @@
 
                                     <!-- Dropdown Box -->
                                     <div id="consult-PIC-dropdown"
-                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel">
+                                        class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel text-[13px] form-text13">
                                         <div class="p-2 border-b border-slate-50">
                                             <div class="relative">
                                                 <i
@@ -1324,16 +1324,12 @@
                                         </div>
                                         <ul id="consult-PIC-list" class="max-h-48 overflow-y-auto py-1">
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('consult-PIC', '赵敏')">赵敏
+                                                onclick="selectCustomOption('consult-PIC', '赵师傅')">赵师傅
                                             </li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
                                                 onclick="selectCustomOption('consult-PIC', '张师傅')">张师傅</li>
                                             <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('consult-PIC', '刘晓晨')">刘晓晨</li>
-                                            <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('consult-PIC', '李雷')">李雷</li>
-                                            <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                                onclick="selectCustomOption('consult-PIC', '韩梅梅')">韩梅梅</li>
+                                                onclick="selectCustomOption('consult-PIC', '刘师傅')">刘师傅</li>
                                         </ul>
                                     </div>
                                 </div>

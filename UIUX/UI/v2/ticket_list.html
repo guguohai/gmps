@@ -14,16 +14,10 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet" />
 
-    <!-- Uicons Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
-    />
+  <!-- Uicons Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css"
-    />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css" />
   <style>
     @font-face {
       font-family: "uicons-solid";
@@ -155,7 +149,7 @@
     <div class="flex items-center gap-8">
       <!-- Logo & Brand -->
       <div class="flex items-center gap-3">
-        <img class="w-8 h-8 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
+        <img class="w-6 h-6 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
         <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
       </div>
 
@@ -299,14 +293,14 @@
           </div>
         </div>
 
-        <!-- 配件 Menu Group -->
+        <!-- 小零件 Menu Group -->
         <div class="menu-group">
           <button
             class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
             onclick="toggleMenu(this)">
             <div class="flex items-center">
               <i class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-              <span class="text-[13px]">配件</span>
+              <span class="text-[13px]">小零件</span>
             </div>
             <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
               style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
@@ -391,9 +385,22 @@
             </h1>
           </div>
           <div class="flex gap-2">
-            <button onclick="window.location.href='./delivery_invoice_list.html'"
-              class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm"
-              title="打印"><i class="fi fi-rr-print"></i></button>
+            <div class="relative">
+              <button onclick="toggleDropdown('print-dropdown')"
+                class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm"
+                title="打印方式"><i class="fi fi-rr-print"></i></button>
+              <div id="print-dropdown"
+                class="hidden absolute right-0 top-full mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50 overflow-hidden">
+                <a href="javascript:void(0)"
+                  class="block px-4 py-2.5 text-[12px] font-medium text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors border-b border-slate-50 last:border-none">
+                  条码批量打印
+                </a>
+                <a href="./delivery_invoice_list.html"
+                  class="block px-4 py-2.5 text-[12px] font-medium text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors border-b border-slate-50 last:border-none">
+                  运单号打印
+                </a>
+              </div>
+            </div>
             <button
               class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm"
               title="Download">
