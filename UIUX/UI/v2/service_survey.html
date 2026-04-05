@@ -161,12 +161,6 @@
                     style="background-color: #f5f7fa; width: 440px;" type="text" placeholder="Scan barcode" />
             </div>
 
-            <!-- Inventory Warning Bar -->
-            <div
-                class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
-                <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
-                <span>当前库存不足</span>
-            </div>
         </div>
 
         <!-- Right Actions -->
@@ -211,7 +205,8 @@
                             <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">工单管理</span>
                         </div>
-                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1 bg-slate-50/50">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -228,7 +223,8 @@
                             <i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">产品管理</span>
                         </div>
-                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -245,7 +241,8 @@
                             <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">库存</span>
                         </div>
-                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -263,7 +260,8 @@
                                 class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">小零件</span>
                         </div>
-                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content hidden py-1">
                         <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -283,7 +281,8 @@
                                 class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
                             <span class="text-[13px]">服务</span>
                         </div>
-                        <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+                        <i
+                            class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
                     </button>
                     <div class="menu-content py-1">
                         <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
@@ -366,44 +365,20 @@
                 <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative">
                     <div class="flex items-end gap-5">
                         <!-- Form Fields -->
-                        <div class="flex-1 flex gap-4">
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">Ticket
-                                    No.</label>
-                                <input
-                                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
-                                    type="text" placeholder="TKT-2024..." />
-                            </div>
-                            <div class="flex-1">
-                                <label
-                                    class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">Survey
-                                    Status</label>
-                                <select
-                                    class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
-                                    <option>全部状态</option>
-                                    <option>待处理</option>
-                                    <option>Completed</option>
-                                    <option>Overdue</option>
-                                </select>
-                            </div>
+                        <div class="w-1/4">
+                            <label
+                                class="block font-bold text-slate-500 uppercase mb-2 tracking-wider text-[12px]">截至日期</label>
+                            <input
+                                class="w-full h-[38px] px-4 bg-[#f5f7fa] border-none rounded-lg text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all"
+                                type="date" />
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="flex justify-end gap-2 w-auto pb-[3px]">
+                        <div class="pb-[3px]">
                             <button
                                 class="w-[32px] h-[32px] bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm shadow-primary/20"
                                 title="Search">
                                 <i class="fi fi-rr-search text-[12px]"></i>
-                            </button>
-                            <button
-                                class="w-[32px] h-[32px] bg-white border border-slate-200 text-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors shadow-sm"
-                                title="Expand">
-                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
                             </button>
                         </div>
                     </div>
@@ -437,7 +412,7 @@
                                             class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
                                             onclick="event.stopPropagation()">
                                     </td>
-                                    <td class="px-6 py-4 font-bold text-primary">#SVY-2024-001</td>
+                                    <td class="px-6 py-4 font-bold text-primary">115001</td>
                                     <td class="px-6 py-4 text-slate-600">2024-02-15</td>
                                     <td class="px-6 py-4 font-medium">After-Service Satisfaction Survey</td>
                                     <td class="px-6 py-4 text-slate-600">Regular Maintenance</td>
@@ -460,7 +435,7 @@
                                             class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
                                             onclick="event.stopPropagation()">
                                     </td>
-                                    <td class="px-6 py-4 font-bold text-primary">#SVY-2024-002</td>
+                                    <td class="px-6 py-4 font-bold text-primary">114088</td>
                                     <td class="px-6 py-4 text-slate-600">2024-02-20</td>
                                     <td class="px-6 py-4 font-medium">Repair Service Feedback</td>
                                     <td class="px-6 py-4 text-slate-600">Engine Repair</td>
@@ -483,7 +458,7 @@
                                             class="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary/20 transition-all cursor-pointer"
                                             onclick="event.stopPropagation()">
                                     </td>
-                                    <td class="px-6 py-4 font-bold text-primary">#SVY-2024-003</td>
+                                    <td class="px-6 py-4 font-bold text-primary">114042</td>
                                     <td class="px-6 py-4 text-red-600">2024-01-25</td>
                                     <td class="px-6 py-4 font-medium">Parts Replacement Survey</td>
                                     <td class="px-6 py-4 text-slate-600">Brake Pad Replacement</td>

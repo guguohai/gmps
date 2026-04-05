@@ -102,33 +102,25 @@
 根据判定结果，工单可进入支付、维修、交换或结束等不同处理路径。
 
 ```mermaid
-flowchart TD
-
-A[售后申请] --> B[创建工单]
-
-B --> C[接收]
-C --> D[检测]
-D --> E{判定结果}
-
-C -. 可发起 .-> X[发起咨询]
-X --> Y[客户确认/回复]
-Y -. 记录结果 .-> E
-
-E -->|有偿类| F[支付]
-E -->|无偿类| G[进入维修 / 合作厂家处理]
-E -->|交换类| H[进入交换流程]
-E -->|无法维修/假货| I[判定结束]
-
-F --> J{是否支付成功}
-J -->|是| G
-J -->|否| K[未支付结束]
-
-G --> L[处理完成]
-H --> L
-
-L --> M[返还客户]
-M --> N[服务完成]
-N --> O[满意度调查]
+flowchart TD  
+  
+A[售后申请] --> B[创建工单]  
+B --> C[接收]  
+C --> D[检测 / 判定]  
+  
+D --> E{处理类型}  
+E -->|有偿类| F[支付后进入处理]  
+E -->|无偿类| G[进入处理]  
+E -->|交换类| H[进入交换流程]  
+E -->|结束类| I[结束]  
+  
+F --> J[处理完成]  
+G --> J  
+H --> J  
+  
+J --> K[返还客户]  
+K --> L[服务完成]  
+L --> M[满意度调查]
 ```
 
 
@@ -718,39 +710,50 @@ A->>A: 更新确认状态
 A->>A: 记录确认时间与确认内容
 ```
 
-## 4.2 SAP 协同
 
-### 4.2.1 产品主数据同步
+# 4.2 SAP 协同
 
-为保证售后工单中的产品资料与 SAP 保持一致，PS Admin 需接收 SAP 提供的产品主数据，并更新本地产品档案。
+## 4.2.1 协同说明
 
-此处“产品”包含售后维修中涉及的主商品、替换件、零部件等业务对象，不再单独区分“配件主数据”。
+在本项目中，PS Admin 作为售后工单管理核心系统，负责售后工单创建、状态流转、业务处理控制及与小程序侧的协同展示；SAP 主要负责产品主数据、库存数据、价格基础数据、3PL 出库处理、交换出库、原品退回收货以及服务完成后的 SO 单据处理。
 
-该接口主要用于同步：
+双方通过业务数据同步与结果回传，共同完成售后流程闭环。
 
-* 产品ID
+本章节主要说明 PS Admin 与 SAP 在售后业务中的协同内容，重点面向业务评审，不展开具体技术接口定义。
+
+
+## 4.2.2 产品主数据同步
+
+为保证售后工单中的产品资料与 SAP 保持一致，PS Admin 需定时接收 SAP 提供的产品主数据，并更新本地产品档案。
+
+同步内容主要包括：
+
+* 产品 ID
 * 产品名称
 * 型号
 * 类别
-* 颜色
 * 上市日期
 * 生产工厂
 * 库存地点
 * 状态
+
+该能力用于确保售后工单、产品识别、库存判断及后续处理过程中的产品信息统一，以 SAP 数据为准。
 
 ```mermaid
 sequenceDiagram
     participant SAP as SAP
     participant PS as PS Admin
 
-    SAP-->>PS: syncProductMaster(产品主数据)
-    PS->>PS: 更新产品档案
+    SAP-->>PS: 定时同步产品主数据
+    PS->>PS: 更新本地产品档案
 ```
 
 
-### 4.2.2 产品库存查询
+## 4.2.3 产品库存同步与判断
 
-在维修准备、维修执行、产品更换或库存判断前，PS Admin 需向 SAP 查询产品库存，以判断库存是否充足。所有库存相关判断均以 SAP 返回结果为准。
+在维修准备、维修执行、产品更换、他品交换或 3PL 发货等场景下，PS Admin 需基于 SAP 库存数据进行库存判断，以确认后续业务是否可以继续执行。
+
+库存相关数据由 SAP 定时同步或定时提供查询结果，PS Admin 依据同步结果进行业务判断，所有库存口径以 SAP 为准。
 
 此处“产品库存”统一覆盖：
 
@@ -759,120 +762,113 @@ sequenceDiagram
 * 零部件库存
 * 3PL 场景库存
 
+当 SAP 判断库存不足时，工单不可直接进入后续处理，需进入等待补货或人工协调状态，待库存满足后再恢复流程。
+
+```mermaid
+sequenceDiagram
+    participant SAP as SAP
+    participant PS as PS Admin
+
+    SAP-->>PS: 定时同步库存数据 / 定时提供库存结果
+    PS->>PS: 判断库存是否满足后续处理条件
+```
+
+
+## 4.2.4 3PL 场景库存判断
+
+在“有偿_3PL”场景下，客户支付完成后，PS Admin 需进一步确认 3PL 库存是否充足，再决定是否进入 3PL 发货流程。
+
+如库存充足，则进入后续 3PL 履约处理；如库存不足，则工单进入等待补货或人工协调状态。
+
+该判断仍以 SAP 提供的库存数据为准。
+
 ```mermaid
 sequenceDiagram
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: queryProductInventory(产品ID, 仓库, 库存地点)
-    SAP-->>PS: 返回库存数量/可用库存/状态
-    PS->>PS: 判断库存是否充足
+    PS->>PS: 支付完成
+    SAP-->>PS: 提供3PL库存结果
+    PS->>PS: 判断是否进入3PL发货流程
 ```
 
 
-### 4.2.3 3PL 库存查询
+## 4.2.5 产品价格获取与维修费用生成
 
-在“有偿_3PL”场景下，支付完成后，PS Admin 需向 SAP 查询 3PL 库存是否充足，再决定是否进入 3PL 发货流程。
-
-如库存不足，则工单进入等待补货或人工协调状态。
-
-由于库存统一按产品口径管理，因此这里查询的是 3PL 产品库存，不再区分配件库存。
-
-```mermaid
-sequenceDiagram
-    participant PS as PS Admin
-    participant SAP as SAP
-
-    PS->>SAP: query3plInventory(产品ID, 3PL仓)
-    SAP-->>PS: 返回3PL库存数量/可用状态
-    PS->>PS: 判断是否可进入3PL发货
-```
-
-
-### 4.2.4 产品价格查询与维修费用生成
-
-当工单判定为有偿维修时，PS Admin 需先向 SAP 获取产品价格基础数据，再按预设百分比规则自动计算最终维修费用，并生成报价结果用于后续支付流程。
+当工单判定为有偿维修时，PS Admin 需依据 SAP 提供的产品价格基础数据，结合预设业务规则自动生成维修费用，用于后续报价与支付流程。
 
 在该场景下：
 
 * SAP 提供产品价格基础值
-* PS Admin 按规则自动计算最终维修费用
+* PS Admin 按业务规则计算最终维修费用
+
+该能力用于确保维修费用生成依据统一，价格基础以 SAP 为准，最终报价由 PS Admin 负责生成。
 
 ```mermaid
 sequenceDiagram
-    participant PS as PS Admin
     participant SAP as SAP
+    participant PS as PS Admin
 
-    PS->>SAP: queryProductBasePrice(产品ID/型号/维修类型)
-    SAP-->>PS: 返回产品价格基础值
-    PS->>PS: 按预设百分比计算最终维修费用
+    SAP-->>PS: 提供产品价格基础数据
+    PS->>PS: 计算最终维修费用
+    PS->>PS: 生成报价结果
 ```
 
 
-### 4.2.5 维修完成后的产品消耗同步
+## 4.2.6 维修完成后的产品消耗同步
 
-在维修完成提交后，PS Admin 需将本次维修实际消耗的产品信息同步给 SAP，由 SAP 统一完成库存扣减。
+在维修完成后，PS Admin 需将本次维修实际消耗的产品信息同步至 SAP，由 SAP 统一完成库存扣减处理。
 
 此处“产品消耗”统一覆盖：
 
 * 维修更换件
 * 产品替换消耗
+* 其他实际使用的产品或配件
 
-```mermaid
-sequenceDiagram
-    participant R as 维修人员
-    participant PS as PS Admin
-    participant SAP as SAP
-
-    R->>PS: 提交维修完成
-    PS->>PS: 汇总实际产品消耗
-    PS->>SAP: postProductConsumption(工单号, 产品明细, 数量)
-    SAP-->>PS: 返回扣减结果
-    PS->>PS: 更新扣减状态
-```
-
-
-### 4.2.6 产品消耗冲销
-
-如维修完成后发生撤销、异常回退或取消处理，已提交给 SAP 的产品消耗需支持冲销。PS Admin 发起冲销请求后，SAP 返回冲销结果，并同步更新工单状态。
-
-主要用于异常恢复场景。
+该能力用于保证维修实际消耗与 SAP 库存数据保持一致。
 
 ```mermaid
 sequenceDiagram
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: reverseProductConsumption(原消耗记录ID, 冲销原因)
-    SAP-->>PS: 返回冲销结果
-    PS->>PS: 更新工单与库存处理状态
+    PS->>PS: 维修完成并汇总实际消耗
+    PS-->>SAP: 同步实际产品消耗
+    SAP->>SAP: 完成库存扣减
 ```
 
 
-### 4.2.7 库存不足后的产品申请与到货回传
+## 4.2.7 库存不足后的产品申请与到货恢复
 
-当维修过程中库存不足时，工单可能进入等待库存流程。此时，PS Admin 需要发起产品申请，或接收外部系统回传的申请状态与到货结果，以便在产品到位后恢复维修流程。
+当维修过程中出现库存不足时，工单可能进入等待库存状态。此时，PS Admin 需发起产品申请，或接收相关处理结果，以便在产品到位后恢复维修流程。
 
-本节所述“产品申请”统一覆盖更换件申请、零部件申请及替换用产品申请，整体用于支撑产品申请创建、申请状态跟踪、产品到货 / 入库回传及等待库存后的流程恢复。
+本节所述“产品申请”统一覆盖：
+
+* 更换件申请
+* 替换用产品申请
+* 其他维修相关物料申请
+
+在产品到货或入库后，PS Admin 需据此更新工单状态，并恢复后续处理。
 
 ```mermaid
 sequenceDiagram
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: createProductRequest(工单号, 产品, 数量)
-    SAP-->>PS: 返回申请结果
-    SAP-->>PS: productRequestStatusCallback(申请状态变化)
-    SAP-->>PS: inboundResultCallback(已到货/已入库)
-    PS->>PS: 更新等待库存状态并恢复维修流程
+    PS-->>SAP: 发起产品申请
+    SAP-->>PS: 返回申请处理结果
+    SAP-->>PS: 返回到货/入库结果
+    PS->>PS: 更新等待库存状态并恢复流程
 ```
 
 
-### 4.2.8 DO 创建
+## 4.2.8 3PL 发货单据处理（DO）
 
-当工单满足 3PL 发货条件后，PS Admin 需调用 SAP 创建 DO 单据，由 SAP 向 WMS / 3PL 下发发货指令。PS Admin 记录 DO 编号及创建结果，用于后续履约推进。
+当工单满足 3PL 发货条件后，PS Admin 需通知 SAP 生成 DO 单据，由 SAP 推进后续 WMS / 3PL 发货处理。
 
-该接口是 3PL 发货场景中的核心接口之一。
+PS Admin 需保存 DO 处理结果，用于后续履约跟踪。
+
+该能力主要用于 3PL 发货场景下的业务衔接，DO 为 SAP 侧出库处理单据。
 
 ```mermaid
 sequenceDiagram
@@ -880,33 +876,18 @@ sequenceDiagram
     participant SAP as SAP
     participant WMS as WMS/3PL
 
-    PS->>SAP: createDeliveryOrder(工单号, 收货信息, 产品明细)
+    PS-->>SAP: 提交3PL发货需求
     SAP->>SAP: 生成DO单据
-    SAP->>WMS: 下发DO发货指令
-    SAP-->>PS: 返回DO单号/创建结果
+    SAP->>WMS: 下发发货处理
+    SAP-->>PS: 返回DO处理结果
 ```
 
 
-### 4.2.9 DO 状态查询
+## 4.2.9 出库结果同步
 
-若 SAP 未主动回传 DO 当前状态，或回调失败导致状态缺失，PS Admin 可通过查询接口获取 DO 状态，并更新工单履约信息。
+当 WMS / 3PL 完成发货后，相关出库结果需同步至 PS Admin，以便更新工单发货状态，并支撑后续物流跟踪与履约展示。
 
-该接口建议作为回调机制的补偿查询能力保留。
-
-```mermaid
-sequenceDiagram
-    participant PS as PS Admin
-    participant SAP as SAP
-
-    PS->>SAP: queryDeliveryOrderStatus(DO单号)
-    SAP-->>PS: 返回DO状态
-    PS->>PS: 更新工单履约状态
-```
-
-
-### 4.2.10 出库结果回传
-
-WMS / 3PL 发货后，需将出库结果回传给 SAP，再由 SAP 或相关系统同步给 PS Admin。PS Admin 根据出库结果更新工单发货状态，并为后续物流展示和履约跟踪提供基础数据。
+PS Admin 根据同步结果更新工单发货状态，并推进后续售后履约流程。
 
 ```mermaid
 sequenceDiagram
@@ -915,16 +896,18 @@ sequenceDiagram
     participant PS as PS Admin
 
     WMS-->>SAP: 返回出库结果
-    SAP-->>PS: outboundResultCallback(出库状态, 时间, 明细)
-    PS->>PS: 更新发货状态
+    SAP-->>PS: 同步出库结果
+    PS->>PS: 更新工单发货状态
 ```
 
-### 4.2.11 3PL 运单号返回
-目前3PL 能不能回传物流单号还需要确认，可能有以下3种情况：
 
-#### 4.2.11.1 3PL 直接回传
+## 4.2.10 3PL 运单号返回
 
-在该场景下，3PL / WMS 在发货完成后，可直接向 PS Admin 返回承运商、真实运单号、发货时间等物流信息。PS Admin 再将物流信息同步至小程序，供客户查看真实物流轨迹。
+目前 3PL 是否能够回传真实物流运单号，未最终确认。结合现阶段情况，先按以下 3 种可能方式进行说明，最终以客户确认后的实际模式为准。
+
+### 4.2.10.1 3PL 直接回传物流信息
+
+在该场景下，3PL / WMS 在发货完成后，可直接返回承运商、真实运单号、发货时间等物流信息，PS Admin 接收后用于物流展示与履约跟踪。
 
 ```mermaid
 sequenceDiagram
@@ -932,14 +915,14 @@ sequenceDiagram
     participant SAP as SAP
     participant WMS as WMS/3PL
 
-    PS->>SAP: createDeliveryOrder
-    SAP->>WMS: 下发发货指令
+    PS-->>SAP: 提交3PL发货需求
+    SAP->>WMS: 下发发货处理
     WMS-->>PS: 返回承运商/真实运单号/发货时间
 ```
 
-#### 4.2.11.2 先回 SAP，再给 PS Admin
+### 4.2.10.2 3PL 先回 SAP，再同步给 PS Admin
 
-在该场景下，3PL / WMS 不直接向 PS Admin 返回物流信息，而是先回传给 SAP，再由 SAP 提供给 PS Admin。PS Admin 接收后同步至小程序。
+在该场景下，3PL / WMS 不直接向 PS Admin 返回物流信息，而是先返回给 SAP，再由 SAP 同步给 PS Admin。
 
 ```mermaid
 sequenceDiagram
@@ -947,15 +930,15 @@ sequenceDiagram
     participant SAP as SAP
     participant WMS as WMS/3PL
 
-    PS->>SAP: createDeliveryOrder
-    SAP->>WMS: 下发发货指令
+    PS-->>SAP: 提交3PL发货需求
+    SAP->>WMS: 下发发货处理
     WMS-->>SAP: 返回承运商/真实运单号/发货时间
-    SAP-->>PS: 返回物流信息
+    SAP-->>PS: 同步物流信息
 ```
 
-#### 4.2.11.3 仅返回发货状态
+### 4.2.10.3 仅返回发货状态，不返回真实运单号
 
-在该场景下，3PL / WMS 只能返回已发货状态或内部单号，无法返回客户可查询的真实快递运单号。PS Admin 只能先同步“已发货”状态，后续如有需要，再由人工补录真实运单号。
+在该场景下，3PL / WMS 仅返回已发货状态或内部单号，无法返回可查询的真实物流运单号。PS Admin 先同步“已发货”状态，后续如业务需要，再由人工补录真实运单号。
 
 ```mermaid
 sequenceDiagram
@@ -963,110 +946,293 @@ sequenceDiagram
     participant SAP as SAP
     participant WMS as WMS/3PL
 
-    PS->>SAP: createDeliveryOrder(...)
-    SAP->>WMS: 下发发货指令
-    WMS-->>SAP: 返回已发货/内部单号
-    SAP-->>PS: 返回发货状态
-    PS->>PS: 手动补录真实运单号
+    PS-->>SAP: 提交3PL发货需求
+    SAP->>WMS: 下发发货处理
+    WMS-->>SAP: 返回已发货状态/内部单号
+    SAP-->>PS: 同步发货结果
+    PS->>PS: 视需要人工补录真实运单号
 ```
 
 
-### 4.2.12 交换出库
+## 4.2.11 交换出库
 
-在产品交换或他品交换场景下，如需发出新产品，PS Admin 需调用 SAP 发起交换类出库处理。SAP 返回出库单据结果后，PS Admin 更新交换履约状态。
+在产品交换或他品交换场景下，如需发出新产品，PS Admin 需通知 SAP 执行交换类出库处理，SAP 完成处理后将结果同步至 PS Admin。
+
+PS Admin 根据该结果更新交换履约状态。
 
 ```mermaid
 sequenceDiagram
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: createExchangeDelivery(工单号, 新产品信息, 数量)
-    SAP-->>PS: 返回出库单据结果
+    PS-->>SAP: 提交换货出库需求
+    SAP->>SAP: 执行交换类出库处理
+    SAP-->>PS: 返回出库处理结果
     PS->>PS: 更新交换履约状态
 ```
 
 
-### 4.2.13 原品退回收货
+## 4.2.12 原品退回收货
 
-在产品交换、他品交换或取消返还等场景下，如需对原品进行回收或退回收货，PS Admin 需调用 SAP 记录收货结果，并更新原品回收状态。
+在产品交换、他品交换或取消返还等场景下，如需对原品进行回收或退回收货，PS Admin 需通知 SAP 记录相关收货结果，并同步更新原品回收状态。
 
-是否需要形成正式收货单据，需由 SAP 侧进一步确认。
+该能力主要用于保证原品回收过程可追踪，并与 SAP 保持一致。
 
 ```mermaid
 sequenceDiagram
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: postReturnReceipt(工单号, 原品信息, 数量)
-    SAP-->>PS: 返回收货结果
+    PS-->>SAP: 提交原品退回收货信息
+    SAP-->>PS: 返回收货处理结果
     PS->>PS: 更新原品回收状态
 ```
 
 
-### 4.2.14 服务完成后结算单据回传
+## 4.2.13 服务完成后的 SO 回传
 
-在服务完成后，如 SAP 侧需要生成结算单、服务单或其他财务类单据，PS Admin 需接收单据编号及处理结果，并保存到工单详情中，用于后续查询与闭环管理。
+在服务完成后，SAP 生成 SO（销售订单）并进入后续处理流程。
+
+当 SO 的所有条件中，**最后一个条件状态变更为“结束”时**，SAP 自动将 SO 单据编号发送至 PS Admin。PS Admin 保存该 SO 单据编号，用于工单闭环及后续查询。
+
+本项目中，服务完成后的结算单据按 SO 进行处理。
 
 ```mermaid
 sequenceDiagram
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: createServiceSettlement(工单号, 服务结果)
-    SAP-->>PS: 返回结算单号/状态
-    PS->>PS: 保存单据编号
+    PS-->>SAP: 服务完成
+    SAP->>SAP: 处理SO
+    SAP->>SAP: 最后一个条件状态变更为“结束”
+    SAP-->>PS: 返回SO单据编号
+    PS->>PS: 保存SO编号
 ```
 
 
-### 4.2.15 DO 取消
+## 4.2.14 支付结果同步
 
-当工单取消或履约终止时，如前序已创建 DO 单据但尚未完成发货，PS Admin 需调用 SAP 执行 DO 取消，并根据返回结果更新工单状态。
+在有偿维修、有偿_3PL、合作厂家有偿、他品交换有偿等场景下，客户完成支付后，PS Admin 除更新本地支付状态外，还需将最终支付结果同步给 SAP，用于后续财务处理与业务闭环。
 
-用于取消流程中的单据回退处理。
+该能力用于保证支付结果与 SAP 后续单据处理保持一致。
 
 ```mermaid
 sequenceDiagram
+    participant MP as 小程序/支付侧
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: cancelDeliveryOrder(DO单号, 取消原因)
-    SAP-->>PS: 返回取消结果
-    PS->>PS: 更新工单状态
+    MP-->>PS: 回写支付结果
+    PS->>PS: 更新工单支付状态
+    PS-->>SAP: 同步支付结果
+    SAP->>SAP: 进入后续处理
 ```
 
 
-### 4.2.16 出库冲销
+## 4.2.15 异常回退与单据冲销
 
-当出库已完成但后续发生取消、异常回退或逆向处理时，PS Admin 需调用 SAP 执行出库冲销，并更新履约状态。
+当售后流程后续发生取消、异常回退或业务终止时，如前序已在 SAP 产生库存扣减、出库处理、SO 处理或其他相关业务结果，系统需支持与 SAP 协同完成相应的取消或冲销处理。
 
-是否支持自动冲销，需与 SAP 进一步确认。
+SAP 处理完成后，需将结果同步至 PS Admin，用于更新工单状态、单据状态及异常闭环记录。
 
-```mermaid
-sequenceDiagram
-    participant PS as PS Admin
-    participant SAP as SAP
-
-    PS->>SAP: reverseGoodsIssue(出库单号, 原因)
-    SAP-->>PS: 返回冲销结果
-    PS->>PS: 更新履约状态
-```
-
-
-### 4.2.17 结算单取消 / 冲销
-
-如服务完成后已生成结算单、服务单或财务类单据，但工单后续发生取消或异常回退，PS Admin 需调用 SAP 处理对应单据的取消或冲销，并同步更新工单与单据状态。
-
-用于财务类异常闭环场景。
+该能力主要用于确保售后异常场景下，PS Admin 与 SAP 的业务结果保持一致。
 
 ```mermaid
 sequenceDiagram
     participant PS as PS Admin
     participant SAP as SAP
 
-    PS->>SAP: cancelSettlementDocument(单据号, 原因)
-    SAP-->>PS: 返回取消/冲销结果
+    PS-->>SAP: 提交取消/冲销处理需求
+    SAP->>SAP: 执行取消或冲销
+    SAP-->>PS: 返回处理结果
     PS->>PS: 更新工单与单据状态
 ```
+
+
+## 4.2.16 协同异常处理说明
+
+在库存、价格、出库、SO 回传或其他 SAP 协同场景中，如出现处理失败、结果延迟或状态不一致等情况，PS Admin 需保留相应异常状态，并支持后续人工跟进，避免工单流程中断或业务结果丢失。
+
+该能力主要用于保障异常场景下的业务连续性与数据一致性。
+
+```mermaid
+sequenceDiagram
+    participant SAP as SAP
+    participant PS as PS Admin
+    participant A as 管理员
+
+    SAP-->>PS: 返回异常结果或延迟处理
+    PS->>PS: 记录异常状态
+    A->>PS: 人工跟进处理
+    PS->>PS: 更新最终结果
+```
+
+
+## 4.2.17 待确认事项
+
+以下内容需在后续项目推进中进一步确认：
+
+1. **3PL 运单号回传方式**
+   当前暂按 3 种可能情况描述，最终需确认实际采用哪一种方式。
+
+2. **原品退回收货的单据形式**
+   是否需要在 SAP 中形成正式收货单据，需进一步确认。
+
+3. **部分异常回退场景的处理边界**
+   如 SO 已进入处理后是否支持回退、已出库后的取消或冲销处理方式等，需结合 SAP 实际业务规则进一步确认。
+
+
+## 4.3 物流系统协同
+
+物流系统作为外部协同系统，主要负责售后过程中的寄件、运输、派送、签收及物流状态反馈，为 PS Admin 提供物流过程数据支持。
+
+
+### 4.3.1 寄件与运输跟踪
+
+客户或门店寄出产品后，物流系统负责运输，并将物流状态返回给 PS Admin。
+
+```mermaid
+sequenceDiagram
+participant U as 客户 / 门店
+participant A as PS Admin
+participant L as 物流系统
+
+U ->> A: 提交运单号
+A ->> L: 查询物流状态
+L -->> A: 返回物流状态
+```
+
+### 4.3.2 收货签收结果回传
+
+产品到达后，物流系统返回签收结果，PS Admin 更新工单状态。
+
+```mermaid
+sequenceDiagram
+participant L as 物流系统
+participant A as PS Admin
+
+L -->> A: 回传签收结果
+A ->> A: 更新工单状态
+```
+
+### 4.3.3 维修完成后的发货协同
+
+维修完成后，PS Admin 记录发货信息，物流系统执行后续派送，并返回物流结果。
+
+```mermaid
+sequenceDiagram
+participant A as PS Admin
+participant L as 物流系统
+
+A ->> L: 提交发货信息
+L -->> A: 返回运单号 / 发货结果
+A ->> A: 更新物流信息
+```
+
+### 4.3.4 物流异常反馈
+
+发生延误、丢件、拒收等异常时，物流系统返回异常信息，PS Admin 记录并处理。
+
+```mermaid
+sequenceDiagram
+participant L as 物流系统
+participant A as PS Admin
+
+L -->> A: 回传异常信息
+A ->> A: 记录异常并处理
+```
+
+
+## 4.4 通知协同
+
+小程序通知适合用于工单状态更新、支付提醒、维修进度、发货进度及问卷邀请等轻量通知场景。  
+但小程序订阅消息通常需由用户主动授权，常见的一次性订阅模式下，授权一次通常仅支持发送一条消息，因此不适合单独承担所有高频提醒场景。对于受理成功、支付催缴、无法维修、发货、到店提醒等关键节点，建议结合短信或邮件进行补充，以保证通知触达效果。
+
+### 4.4.1 各通知渠道定位
+
+| 通知渠道   | 适用场景                                         | 特点                             |
+| ---------- | ------------------------------------------------ | -------------------------------- |
+| 小程序通知 | 状态更新、支付提醒、维修进度、发货进度、问卷邀请 | 适合轻量提醒，可直接跳转业务页面 |
+| 短信通知   | 受理成功、支付催缴、无法维修、发货、到店提醒     | 触达直接，适合关键节点通知       |
+| 邮件通知   | 判定结果、处理方案、保修确认、出库说明、门店指引 | 信息完整，适合正式说明与留档     |
+
+### 4.4.2 综合通知策略
+
+| 业务节点                | 小程序通知 | 短信通知 | 邮件通知 | 推荐方式      | 说明                                     |
+| ----------------------- | ---------- | -------- | -------- | ------------- | ---------------------------------------- |
+| 工单受理完成            | 可发送     | 建议发送 | 可发送   | 短信 + 小程序 | 作为首次确认通知，需确保客户及时知晓     |
+| 判定结果通知            | 可发送     | 可补充   | 建议发送 | 邮件 + 小程序 | 判定结果内容较多，邮件更适合承载详细说明 |
+| 有偿维修待支付          | 建议发送   | 建议发送 | 可发送   | 小程序 + 短信 | 小程序承接支付操作，短信用于增强触达     |
+| 支付催缴提醒            | 建议发送   | 建议发送 | 可选     | 短信 + 小程序 | 催缴场景建议双通道提醒                   |
+| 支付完成                | 可发送     | 可发送   | 可发送   | 小程序 + 短信 | 用于通知客户已完成付款并进入后续流程     |
+| 维修进行中              | 建议发送   | 可选     | 可选     | 小程序        | 适合轻量过程通知                         |
+| 合作商维修延期          | 可发送     | 可发送   | 建议发送 | 邮件 + 短信   | 延期说明通常需要较完整内容               |
+| 无法维修 / 假货         | 可发送     | 建议发送 | 建议发送 | 邮件 + 短信   | 属于关键结果通知，建议正式说明并强提醒   |
+| 维修取消                | 可发送     | 建议发送 | 建议发送 | 邮件 + 短信   | 需明确取消原因及后续处理方式             |
+| 更换产品 / 更换其他产品 | 可发送     | 可补充   | 建议发送 | 邮件 + 小程序 | 涉及方案说明，邮件更适合详细表达         |
+| 保修卡 / 质保确认       | 可发送     | 可选     | 建议发送 | 邮件          | 适合承载说明与补充材料要求               |
+| 出库发货                | 建议发送   | 建议发送 | 可发送   | 小程序 + 短信 | 发货状态建议及时触达，便于客户跟踪       |
+| 发往门店                | 可发送     | 建议发送 | 可发送   | 短信 + 小程序 | 到店类通知建议短信补充                   |
+| 门店到货 / 门店可取     | 可发送     | 建议发送 | 可选     | 短信 + 小程序 | 属于强提醒节点                           |
+| 门店取货完成            | 可发送     | 可选     | 可选     | 小程序        | 用于结果确认即可                         |
+| 问卷邀请                | 建议发送   | 可选     | 可选     | 小程序        | 最适合在小程序内直接承接填写动作         |
+| 门店信息指引            | 不建议     | 可选     | 建议发送 | 邮件          | 内容较长，适合邮件承载                   |
+
+
+### 4.4.3 小程序通知
+
+当工单在关键业务节点发生状态变化时，PS Admin 根据通知规则匹配对应模板，并通过小程序消息方式向客户发送通知，客户可在小程序中查看详情或继续后续操作。
+
+```mermaid
+sequenceDiagram
+participant A as PS Admin
+participant M as 小程序
+participant U as 客户
+
+A ->> A: 触发小程序通知条件
+A ->> A: 匹配通知模板
+A ->> M: 发送小程序通知
+M -->> U: 展示通知消息
+U ->> M: 查看消息详情
+```
+
+
+### 4.4.4 短信通知
+
+当工单在关键业务节点发生状态变化时，PS Admin 根据通知规则匹配对应短信模板，并调用短信服务向客户发送通知，发送结果回写系统留痕。
+
+```mermaid
+sequenceDiagram
+participant A as PS Admin
+participant S as 短信服务
+participant U as 客户
+
+A ->> A: 触发短信发送条件
+A ->> A: 匹配短信模板
+A ->> S: 发送短信
+S -->> U: 下发短信通知
+S -->> A: 返回发送结果
+A ->> A: 记录发送日志
+```
+
+### 4.4.5 邮件通知
+
+当工单在关键业务节点需要进行较完整说明时，PS Admin 根据通知规则匹配对应邮件模板，并通过邮件服务向客户发送通知，发送结果回写系统留痕。
+
+```mermaid
+sequenceDiagram
+participant A as PS Admin
+participant E as 邮件服务
+participant U as 客户
+
+A ->> A: 触发邮件发送条件
+A ->> A: 匹配邮件模板
+A ->> E: 发送邮件
+E -->> U: 下发邮件通知
+E -->> A: 返回发送结果
+A ->> A: 记录发送日志
+```
+
 
 
 ## 4.3 物流系统协同
@@ -1383,9 +1549,6 @@ A ->> A: 记录发送日志
 
 
 #### （6）咨询信息
-
-**备注**
-- 咨询信息选择OUTBOUND类型时，“是否希望咨询”自动更新为 Y，并在咨询界面生成咨询工单。
 
 | 字段名称     | 说明             | 备注 |
 | ------------ | ---------------- | ---- |

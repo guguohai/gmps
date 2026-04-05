@@ -218,7 +218,7 @@
             <div
                 class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
                 <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
-                <span>当前库存不足</span>
+                <span>3PL 库存不足，当前可用库存 1</span>
             </div>
         </div>
 
@@ -506,7 +506,7 @@
                     </div>
                     <div class="space-y-1">
                         <label class="font-bold text-slate-400 uppercase tracking-wider">当前状态</label>
-                        <select
+                        <select disabled
                             class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                             <option value="1">1-已收到受理</option>
                             <option value="Z4">Z4-待维修判定</option>
@@ -1376,7 +1376,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="space-y-1">
+                                <!-- <div class="space-y-1">
                                     <label class="font-bold text-slate-400 uppercase tracking-wider">客户要求事项分类</label>
                                     <select
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
@@ -1385,18 +1385,17 @@
                                         <option>镜片划伤</option>
                                         <option>螺丝松动</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="space-y-1 md:col-span-2">
                                     <label class="font-bold text-slate-400 uppercase tracking-wider">客户要求事项内容</label>
                                     <textarea
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
                                         rows="3">右眼下部分的镜框有缺失，且有裂纹。请帮忙维修该部分。</textarea>
                                 </div>
-                                <div class="space-y-1">
+                                <!-- <div class="space-y-1">
                                     <label class="font-bold text-slate-400 uppercase tracking-wider">客户签名</label>
                                     <div
                                         class="h-[60px] bg-[#f5f7fa] rounded-lg flex items-center justify-center overflow-hidden">
-                                        <!-- Static Signature Image Placeholder -->
                                         <div class="text-slate-400 opacity-40">
                                             <svg width="160" height="50" viewBox="0 0 200 60" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1407,7 +1406,7 @@
                                             </svg>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- 附件信息表格 -->
                                 <div class="col-span-2">
@@ -1479,7 +1478,7 @@
                             <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                                 <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline ">
                                     <i class="bi bi-receipt text-slate-500 text-lg"></i>
-                                    咨询信息
+                                    咨询 / 确认信息
                                 </h3>
                             </div>
                             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1510,10 +1509,16 @@
                                     <select id="outbound-type-select" onchange="handleOutboundTypeChange(this)"
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                         <option>请选择外呼类型</option>
-                                        <option value="TEL">电话</option>
+                                        <!-- <option value="TEL">电话</option>
                                         <option value="WECHAT">微信小程序</option>
                                         <option value="EMAIL">邮件</option>
-                                        <option value="SMS">短信</option>
+                                        <option value="SMS">短信</option> -->
+                                        <option>维修方案确认</option>
+                                        <option>费用确认</option>
+                                        <option>产品状态确认</option>
+                                        <option>异常说明</option>
+                                        <option>他品交换确认</option>
+                                        <option>合作厂家延迟通知</option>
                                     </select>
                                 </div>
                                 <div class="space-y-1 relative custom-select-wrapper" data-prefix="consult-PIC">
@@ -1618,10 +1623,10 @@
                                     <select
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                         <option>等待中</option>
-                                        <option>未回复</option>
-                                        <option>等待回复</option>
-                                        <option>需要回复</option>
-                                        <option>咨询完成</option>
+                                        <option>已发送</option>
+                                        <option>待客户确认</option>
+                                        <option>客户已回复</option>
+                                        <option>已完成</option>
                                     </select>
                                 </div>
                                 <div class="space-y-1">
@@ -2176,14 +2181,15 @@
                             </div>
                             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="space-y-1">
-                                    <label class="font-bold text-slate-400 uppercase tracking-wider">支付状态</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>待支付</option>
-                                        <option>已支付</option>
-                                        <option>退款中</option>
-                                        <option>已退款</option>
-                                    </select>
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">支付完成状态</label>
+                                    <div class="flex items-center gap-3 py-2">
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer">
+                                            <div
+                                                class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label class="font-bold text-slate-400 uppercase tracking-wider">支付方式</label>
@@ -2208,13 +2214,19 @@
                                         type="text" value="¥0.00" />
                                 </div>
                                 <div class="space-y-1">
-                                    <label class="font-bold text-slate-400 uppercase tracking-wider">支付时间</label>
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">支付截至日期</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
                                         type="datetime-local" value="" />
                                 </div>
                                 <div class="space-y-1">
-                                    <label class="font-bold text-slate-400 uppercase tracking-wider">支付流水号</label>
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">支付日期</label>
+                                    <input
+                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
+                                        type="text" value="" readonly />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">支付授权号</label>
                                     <input
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
                                         type="text" value="" />
@@ -2251,22 +2263,29 @@
                                         type="date" value="" />
                                 </div>
                                 <div class="space-y-1">
-                                    <label class="font-bold text-slate-400 uppercase tracking-wider">配送方式</label>
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">出库方式</label>
                                     <select
                                         class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>顺丰快递</option>
-                                        <option>EMS</option>
-                                        <option>京东物流</option>
+                                        <option value="">-</option>
+                                        <option value="p">快递（总部）</option>
+                                        <option value="b">邮件袋（总部）</option>
+                                        <option value="d">国际配送（总部）</option>
+                                        <option value="h">配送服务（3PL）</option>
+                                        <option value="g">海外配送（3PL）</option>
+                                        <option value="s">亲自取件</option>
+                                        <option value="q">特快快递服务</option>
                                     </select>
                                 </div>
                                 <div class="space-y-1">
-                                    <label class="font-bold text-slate-400 uppercase tracking-wider">配送完成情况</label>
-                                    <select
-                                        class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                        <option>待配送</option>
-                                        <option>配送中</option>
-                                        <option>已签收</option>
-                                    </select>
+                                    <label class="font-bold text-slate-400 uppercase tracking-wider">配送完成</label>
+                                    <div class="flex items-center gap-3 py-2">
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer">
+                                            <div
+                                                class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary">
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="space-y-1">
                                     <label class="font-bold text-slate-400 uppercase tracking-wider">配送日期</label>
