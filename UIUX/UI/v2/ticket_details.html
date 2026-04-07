@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -187,6 +187,108 @@
         .header-step.active .header-step-label {
             color: #177ee5;
         }
+
+        .progress-wrap {
+            display: flex;
+            align-items: flex-start;
+            width: 370px;
+            font-family: Arial, sans-serif;
+            min-width: 0;
+            padding: 0;
+            border-radius: 5px;
+        }
+
+        .progress-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 0 0 auto;
+            min-width: 25px;
+        }
+
+        .step-node {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #e8edf3;
+            border: 2px solid #cfd8e3;
+            color: #9ca3af;
+            font-size: 10px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-label {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #9ca3af;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .progress-item.done .step-label {
+            color: #177ee5;
+            /* Color inherited from done state */
+        }
+
+        .progress-item.warning .step-node {
+            background: #f87171;
+            /* Lighter red for warning */
+            border-color: #f87171;
+            color: #fff;
+            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.14);
+        }
+
+        .progress-item.warning .step-label {
+            color: #f87171;
+            /* Lighter red for warning */
+        }
+
+        .step-desc {
+            position: absolute;
+            left: 50%;
+            top: 45px;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: #f87171;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .progress-line {
+            flex: 1 1 0;
+            height: 2px;
+            background: #cbd5e1;
+            margin-top: 9px;
+            margin-left: 0px;
+            margin-right: 0px;
+            min-width: 5px;
+        }
+
+        .progress-item.done .step-node,
+        .progress-item.active .step-node {
+            background: #177ee5;
+            border-color: #177ee5;
+            color: #fff;
+        }
+
+        .progress-item.warning .step-node {
+            background: #f87171;
+            border-color: #f87171;
+            color: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.14);
+        }
+
+        .progress-line.done {
+            background: #177ee5;
+        }
     </style>
 </head>
 
@@ -215,11 +317,11 @@
             </div>
 
             <!-- Inventory Warning Bar -->
-            <div
+            <!-- <div
                 class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
                 <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
                 <span>3PL 库存不足，当前可用库存 1</span>
-            </div>
+            </div> -->
         </div>
 
         <!-- Right Actions -->
@@ -412,85 +514,198 @@
             </nav>
 
             <!-- Page Header -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full mb-6">
-                <div class="space-y-1 px-2">
-                    <div class="flex items-center gap-3">
-                        <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tight">
-                            115001</h2>
-                        <span
-                            class="px-2 py-1 bg-blue-100 text-primary text-[10px] font-black rounded uppercase flex items-center justify-center">维修中</span>
+            <div class="w-full mb-4">
+                <!-- Row 1: Ticket Number + Status + PIC + Progress Bar -->
+                <div class="flex items-start justify-between gap-4 px-2">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-[30px] font-extrabold text-on-surface font-headline tracking-tight">
+                                115001</h2>
+                            <!-- Status Custom Dropdown -->
+                            <div class="relative custom-select-wrapper inline-flex items-center"
+                                data-prefix="header-status">
+                                <div onclick="toggleCustomDropdown(event, 'header-status')"
+                                    class="px-2 py-1 bg-blue-100 text-primary text-[13px] rounded uppercase cursor-pointer flex items-center group transition-all duration-300 hover:bg-blue-200">
+                                    <span id="header-status-display">等待配件</span>
+                                    <i id="header-status-arrow"
+                                        class="fi fi-rr-angle-small-down text-[12px] w-0 opacity-0 overflow-hidden transition-all duration-300 group-hover:w-[14px] group-hover:ml-1 group-hover:opacity-100"></i>
+                                </div>
 
-                        <!-- Mini Process Flow -->
-                        <!--div class="header-progress-track hidden xl:flex">
-                            <div class="header-step active">
-                                <div class="header-step-circle completed">
-                                    <i class="fi fi-sr-check"></i>
+                                <div id="header-status-dropdown"
+                                    class="absolute z-[100] mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel min-w-[200px] text-[12px]">
+                                    <div class="p-2 border-b border-slate-50">
+                                        <div class="relative">
+                                            <i
+                                                class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400"></i>
+                                            <input type="text" id="header-status-search" placeholder="搜索状态..."
+                                                class="w-full bg-[#f5f7fa] border-none rounded-md py-1.5 pl-8 pr-3 text-[11px] focus:ring-1 focus:ring-primary"
+                                                onkeyup="filterCustomOptions('header-status')" />
+                                        </div>
+                                    </div>
+                                    <ul id="header-status-list" class="max-h-60 overflow-y-auto py-1">
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', '1', '1-已收到受理')">1-已收到受理</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Z4', 'Z4-待维修判定')">Z4-待维修判定</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Z5', 'Z5-产品已收到并检查')">Z5-产品已收到并检查</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Y3', 'Y3-付款请求')">Y3-付款请求</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Y4', 'Y4-付款完成')">Y4-付款完成</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Z7', 'Z7-已发送给合作商')">Z7-已发送给合作商</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Z8', 'Z8-合作商已收到并正在检查')">
+                                            Z8-合作商已收到并正在检查
+                                        </li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Z6', 'Z6-维修进行中')">Z6-维修进行中</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Z9', 'Z9-维修已完成')">Z9-维修已完成</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Y5', 'Y5-待发货')">Y5-待发货</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'D1', 'D1-正在配送（送货到家）')">D1-正在配送（送货到家）
+                                        </li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'D2', 'D2-已送达（送货到家）')">D2-已送达（送货到家）
+                                        </li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'F', 'F-服务已完成')">F-服务已完成</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Z2', 'Z2-已取消')">Z2-已取消</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('status', 'Y7', 'Y7-待领取')">Y7-待领取</li>
+                                    </ul>
                                 </div>
-                                <span class="header-step-label">受理</span>
-                                <div class="header-line-track"><div class="header-line-active" style="width: 100%;"></div></div>
                             </div>
-                            <div class="header-step active">
-                                <div class="header-step-circle completed">
-                                    <i class="fi fi-sr-check"></i>
+
+                            <!-- PIC Custom Dropdown -->
+                            <div class="relative custom-select-wrapper inline-flex items-center"
+                                data-prefix="header-pic">
+                                <div onclick="toggleCustomDropdown(event, 'header-pic')"
+                                    class="px-2 py-1 bg-blue-100 text-primary text-[13px] rounded uppercase cursor-pointer flex items-center group transition-all duration-300 hover:bg-blue-200">
+                                    <span id="header-pic-display">负责人：张经理</span>
+                                    <i id="header-pic-arrow"
+                                        class="fi fi-rr-angle-small-down text-[12px] w-0 opacity-0 overflow-hidden transition-all duration-300 group-hover:w-[14px] group-hover:ml-1 group-hover:opacity-100"></i>
                                 </div>
-                                <span class="header-step-label">判定</span>
-                                <div class="header-line-track"><div class="header-line-active" style="width: 100%;"></div></div>
-                            </div>
-                            <div class="header-step active">
-                                <div class="header-step-circle completed">
-                                    <i class="fi fi-sr-check"></i>
+
+                                <div id="header-pic-dropdown"
+                                    class="absolute z-[100] mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel min-w-[150px] text-[12px]">
+                                    <div class="p-2 border-b border-slate-50">
+                                        <div class="relative">
+                                            <i
+                                                class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400"></i>
+                                            <input type="text" id="header-pic-search" placeholder="搜索负责人..."
+                                                class="w-full bg-[#f5f7fa] border-none rounded-md py-1.5 pl-8 pr-3 text-[11px] focus:ring-1 focus:ring-primary"
+                                                onkeyup="filterCustomOptions('header-pic')" />
+                                        </div>
+                                    </div>
+                                    <ul id="header-pic-list" class="max-h-60 overflow-y-auto py-1">
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('pic', '张经理', '张经理')">张经理</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('pic', '李经理', '李经理')">李经理</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('pic', '王经理', '王经理')">王经理</li>
+                                        <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                            onclick="selectHeaderOption('pic', '赵经理', '赵经理')">赵经理</li>
+                                    </ul>
                                 </div>
-                                <span class="header-step-label">付款</span>
-                                <div class="header-line-track"><div class="header-line-active" style="width: 100%;"></div></div>
                             </div>
-                            <div class="header-step active">
-                                <div class="header-step-circle completed">
-                                    <i class="fi fi-sr-play text-[6px]"></i>
-                                </div>
-                                <span class="header-step-label">维修</span>
-                                <div class="header-line-track"><div class="header-line-active" style="width: 0%;"></div></div>
-                            </div>
-                            <div class="header-step">
-                                <div class="header-step-circle pending"></div>
-                                <span class="header-step-label">配送</span>
-                                <div class="header-line-track"></div>
-                            </div>
-                            <div class="header-step">
-                                <div class="header-step-circle pending"></div>
-                                <span class="header-step-label">完成</span>
-                            </div>
-                        </div-->
+                        </div>
+                        <p class="text-[13px]">SO 文件编号：SO-8829011</p>
                     </div>
-                    <p class="text-xs text-on-surface-variant">Created on Oct 27, 2023 10:45 AM • Last updated 2
-                        hours ago</p>
+
+                    <!-- Progress Bar (pushed to right) -->
+                    <div class="progress-wrap">
+                        <div class="progress-item done">
+                            <div class="step-node"><i class="fi fi-sr-check text-[10px]"></i></div>
+                            <div class="step-label">申请</div>
+                        </div>
+
+                        <div class="progress-line done"></div>
+
+                        <div class="progress-item done">
+                            <div class="step-node"><i class="fi fi-sr-check text-[10px]"></i></div>
+                            <div class="step-label">接收</div>
+                        </div>
+
+                        <div class="progress-line done"></div>
+
+                        <div class="progress-item done">
+                            <div class="step-node"><i class="fi fi-sr-check text-[10px]"></i></div>
+                            <div class="step-label">判定</div>
+                        </div>
+
+                        <div class="progress-line done"></div>
+
+                        <div class="progress-item done">
+                            <div class="step-node"><i class="fi fi-sr-check text-[10px]"></i></div>
+                            <div class="step-label">支付</div>
+                        </div>
+
+                        <div class="progress-line done"></div>
+
+                        <div class="progress-item warning active">
+                            <div class="step-node">!</div>
+                            <div class="step-label">维修</div>
+                        </div>
+
+                        <div class="progress-line"></div>
+
+                        <div class="progress-item">
+                            <div class="step-node"></div>
+                            <div class="step-label">出库</div>
+                        </div>
+
+                        <div class="progress-line"></div>
+
+                        <div class="progress-item">
+                            <div class="step-node"></div>
+                            <div class="step-label">完成</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex items-center gap-2  form-text13">
-                    <button
-                        class="h-9 px-5 bg-white rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm">
-                        <i class="fi fi-rr-print"></i>
-                        <span>条码打印</span>
-                    </button>
 
-                    <button onclick="openInventoryModal()"
-                        class="h-9 px-5 bg-white rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm">
-                        库存申请
-                    </button>
+                <!-- Row 2: SO Number + Action Buttons -->
+                <div class="flex items-center justify-between gap-4 px-2">
+                    <div
+                        class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#FFFBEB] border border-[#FEF3C7] rounded-lg text-[#D97706] text-xs font-semibold shadow-sm">
+                        <i class="fi fi-sr-exclamation text-[14px] leading-none"></i>
+                        <span>当前工单配件库存不足，已发起库存申请，库存申请单 <a href="inventory_request_detail.html"
+                                class="text-primary">23569</a> 处理中。</span>
+                    </div>
+                    <div class="flex items-center gap-2 form-text13">
+                        <button
+                            class="h-8 px-4 bg-white rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm">
+                            <i class="fi fi-rr-print"></i>
+                            <span>条码打印</span>
+                        </button>
 
-                    <button
-                        class="h-9 px-5 bg-white rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm">
-                        工单复制
-                    </button>
+                        <button onclick="openInventoryModal()"
+                            class="h-8 px-4 bg-white rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm">
+                            库存申请
+                        </button>
 
-                    <button
-                        class="h-9 px-5 bg-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
-                        <i class="fi fi-rr-disk"></i>
-                        保存
-                    </button>
+                        <button
+                            class="h-8 px-4 bg-white rounded-lg hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm">
+                            工单复制
+                        </button>
+
+                        <button
+                            class="h-8 px-4 bg-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5 shadow-sm shadow-primary/20">
+                            <i class="fi fi-rr-disk"></i>
+                            保存
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- （1）基本信息 -->
-            <div
+
+            <!--div
                 class="break-inside-avoid mb-6 bg-white rounded-xl border shadow-sm border-slate-100 text-[13px] form-text13">
                 <div class="px-6 py-3 border-b border-slate-50 bg-slate-50/50">
                     <h3 class="font-bold text-on-surface flex items-center gap-2 font-headline ">
@@ -536,15 +751,6 @@
                             <option>赵经理</option>
                         </select>
                     </div>
-                    <!--div class="space-y-1">
-                        <label class="font-bold text-slate-400 uppercase tracking-wider">历史记录</label>
-                        <div class="flex items-center gap-2 py-2">
-                            <span class="text-on-surface" style="color: #94a3b8;">当前记录2条，</span>
-                            <a href="javascript:void(0)" onclick="openStatusHistoryModal()"
-                                class="text-primary font-medium hover:underline cursor-pointer">点击查看</a>
-                        </div>
-                    </div-->
-
 
                     <div class="space-y-1 hidden">
                         <label class="font-bold text-slate-400 uppercase tracking-wider">原工单编号</label>
@@ -552,245 +758,6 @@
                             class="w-full bg-[#f5f7fa] border-none rounded-lg py-2 px-3 focus:ring-1 focus:ring-primary"
                             type="text" value="—" />
                     </div>
-                    <div class="space-y-1 relative custom-select-wrapper" data-prefix="message-notify">
-                        <div class="flex items-center justify-between">
-                            <label class="font-bold text-slate-400 uppercase tracking-wider">消息通知</label>
-                            <button onclick="openMsgHistoryModal()"
-                                class="text-primary hover:text-primary/70 transition-colors" title="查看消息通知发送历史">
-                                <i class="fi fi-rr-time-past"></i>
-                            </button>
-                        </div>
-                        <div class="relative cursor-pointer" onclick="toggleCustomDropdown(event, 'message-notify')">
-                            <input type="text" id="message-notify-display" value="-" placeholder="请选择"
-                                class="w-full bg-[#f5f7fa] border-none rounded-lg py-[8px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8"
-                                autocomplete="off" />
-                            <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
-                                id="message-notify-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-
-                        <!-- Dropdown Box -->
-                        <div id="message-notify-dropdown"
-                            class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel text-[13px] form-text13">
-                            <div class="p-2 border-b border-slate-50">
-                                <div class="relative">
-                                    <i class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 "></i>
-                                    <input type="text" id="message-notify-search" placeholder="搜索..." autocomplete="off"
-                                        class="w-full bg-[#f5f7fa] border-none rounded-md py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
-                                        onkeyup="filterCustomOptions('message-notify')" />
-                                </div>
-                            </div>
-                            <ul id="message-notify-list" class="max-h-60 overflow-y-auto py-1">
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '-')">-</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[受理] 门店受理完成')">[受理]
-                                    门店受理完成
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[受理] 快递受理完成_圣水')">[受理]
-                                    快递受理完成_圣水</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 配件退回')">[通知] 配件退回
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 产品更换')">[判定] 产品更换
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 产品更换_眼镜店')">[判定]
-                                    产品更换_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_总公司(20日)')">[判定]
-                                    有偿_总公司(20日)</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_总公司_眼镜店(20日)')">
-                                    [判定] 有偿_总公司_眼镜店(20日)</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无偿')">[判定] 无偿</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无偿_眼镜店')">[判定]
-                                    无偿_眼镜店
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_3PL')">[判定]
-                                    有偿_3PL
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_眼镜店_3PL')">[判定]
-                                    有偿_眼镜店_3PL</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无偿/抛光')">[判定] 无偿/抛光
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无偿/抛光_眼镜店')">[判定]
-                                    无偿/抛光_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/无偿')">[判定]
-                                    合作企业/无偿</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/有偿')">[判定]
-                                    合作企业/有偿</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/有偿_眼镜店')">[判定]
-                                    合作企业/有偿_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/无偿_眼镜店')">[判定]
-                                    合作企业/无偿_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 合作企业维修延迟通知')">[咨询]
-                                    合作企业维修延迟通知</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 合作企业维修延迟通知_眼镜店')">
-                                    [咨询]
-                                    合作企业维修延迟通知_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修')">[判定] 无法维修
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修_眼镜店')">[判定]
-                                    无法维修_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修/假货')">[判定]
-                                    无法维修/假货</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修/假货_眼镜店')">[判定]
-                                    无法维修/假货_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 维修取消')">[通知] 维修取消
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 维修取消_眼镜店')">[通知]
-                                    维修取消_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/有偿')">[咨询]
-                                    更换其他产品/有偿</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/有偿_眼镜店')">
-                                    [咨询]
-                                    更换其他产品/有偿_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/无偿')">[咨询]
-                                    更换其他产品/无偿</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/无偿_眼镜店')">
-                                    [咨询]
-                                    更换其他产品/无偿_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/有偿')">[判定]
-                                    更换其他产品/有偿</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/有偿_眼镜店')">
-                                    [判定]
-                                    更换其他产品/有偿_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/无偿')">[判定]
-                                    更换其他产品/无偿</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/无偿_眼镜店')">
-                                    [判定]
-                                    更换其他产品/无偿_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 镜片补偿')">[咨询] 镜片补偿
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次(通用)')">[付款]
-                                    未入账_第1次(通用)</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次(通用)')">[付款]
-                                    未入账_第2次(通用)</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 未入账 最终(退回)')">[通知]
-                                    未入账
-                                    最终(退回)</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次_合作企业')">[付款]
-                                    未入账_第1次_合作企业</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次_合作企业')">[付款]
-                                    未入账_第2次_合作企业</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次(通用)_眼镜店')">
-                                    [付款] 未入账_第1次(通用)_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次(通用)_眼镜店')">
-                                    [付款] 未入账_第2次(通用)_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 未入账 最终(退回)_眼镜店')">
-                                    [通知]
-                                    未入账 最终(退回)_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次_合作企业_眼镜店')">
-                                    [付款] 未入账_第1次_合作企业_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次_合作企业_眼镜店')">
-                                    [付款] 未入账_第2次_合作企业_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 付款完成')">[付款] 付款完成
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[付款] 付款完成_眼镜店')">[付款]
-                                    付款完成_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 维修进行中_总公司')">[判定]
-                                    维修进行中_总公司</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[判定] 维修进行中_合作企业')">[判定]
-                                    维修进行中_合作企业</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[请求] 确认保证书')">[请求] 确认保证书
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[请求] 确认保证书_眼镜店')">[请求]
-                                    确认保证书_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 未接通（不在位）')">[咨询]
-                                    未接通（不在位）</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[咨询] 未接通_眼镜店')">[咨询]
-                                    未接通_眼镜店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[出库] 门店移动中_总公司')">[出库]
-                                    门店移动中_总公司</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[出库] 快递 (配送查询)')">[出库] 快递
-                                    (配送查询)</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[出库] 住宅_3PL')">[出库]
-                                    住宅_3PL
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[出库] 维修取消_快递')">[出库]
-                                    维修取消_快递</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[出库] 无法维修_快递')">[出库]
-                                    无法维修_快递</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[出库] 维修取消_门店')">[出库]
-                                    维修取消_门店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[出库] 无法维修_门店')">[出库]
-                                    无法维修_门店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 到达门店及领取')">[通知]
-                                    到达门店及领取</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 门店领取完成')">[通知]
-                                    门店领取完成
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[请求] 问卷调查')">[请求] 问卷调查
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('message-notify', '[通知] 门店信息指南')">[通知]
-                                    门店信息指南
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <div class="space-y-1"></div>
 
                     <div class="space-y-1 relative custom-select-wrapper" data-prefix="email-notify">
@@ -812,113 +779,11 @@
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </div>
-
-                        <!-- Dropdown Box -->
-                        <div id="email-notify-dropdown"
-                            class="absolute z-50 w-full mt-1 bg-white border border-slate-100 rounded-lg shadow-lg hidden custom-dropdown-panel text-[13px] form-text13">
-                            <div class="p-2 border-b border-slate-50">
-                                <div class="relative">
-                                    <i class="fi fi-rr-search absolute left-3 top-1/2 -mt-[6px] text-slate-400 "></i>
-                                    <input type="text" id="email-notify-search" placeholder="搜索..." autocomplete="off"
-                                        class="w-full bg-[#f5f7fa] border-none rounded-md py-1.5 pl-8 pr-3 focus:ring-1 focus:ring-primary"
-                                        onkeyup="filterCustomOptions('email-notify')" />
-                                </div>
-                            </div>
-                            <ul id="email-notify-list" class="max-h-60 overflow-y-auto py-1">
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '-')">-</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[受理]门店已收到受理')">[受理]门店已收到受理
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[受理]已收到配送服务受理')">
-                                    [受理]已收到配送服务受理</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[通知]未付款返送')">[通知]未付款返送</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]已付款')">[检查]已付款</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]产品更换')">[检查]产品更换</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]免费/抛光')">[检查]免费/抛光</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]免费')">[检查]免费</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]合作商 - 已付款')">[检查]合作商 -
-                                    已付款</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]合作商 - 免费')">[检查]合作商 -
-                                    免费</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[咨询]合作伙伴修理延迟通知')">
-                                    [咨询]合作伙伴修理延迟通知</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查] 无法修复')">[检查] 无法修复</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查] 无法修复/假冒产品')">[检查]
-                                    无法修复/假冒产品</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]维修已取消')">[检查]维修已取消</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 已付款')">
-                                    [咨询]换取其他产品 - 已付款</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    执行 onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 免费')">
-                                    [咨询]换取其他产品 - 免费</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]换取其他产品 - 已付款')">
-                                    [检查]换取其他产品 - 已付款</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]换取其他产品 - 免费')">
-                                    [检查]换取其他产品 - 免费</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[付款]未结清金额 - 第1、2次（通用）')">
-                                    [付款]未结清金额 - 第1、2次（通用）</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[付款]未结清金额 - 最终')">[付款]未结清金额
-                                    - 最终</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[付款] 完了')">[付款] 完了</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]修理进行中 - 总部')">[检查]修理进行中
-                                    - 总部</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[检查]修理进行中 - 合作伙伴')">
-                                    [检查]修理进行中 - 合作伙伴</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[咨询]质保检查')">[咨询]质保检查</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[发货]转送至门店')">[发货]转送至门店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[发货]快递配送（跟踪查询）')">
-                                    [发货]快递配送（跟踪查询）</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[发货]修理取消 - 快递配送')">[发货]修理取消
-                                    - 快递配送</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[发货]修理取消 - 门店')">[发货]修理取消 -
-                                    门店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[发货]无法修复 - 快递配送')">[发货]无法修复
-                                    - 快递配送</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[发货]无法修复 - 门店')">[发货]无法修复 -
-                                    门店</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[通知] 已抵达门店并接收')">[通知]
-                                    已抵达门店并接收</li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[通知]门店取货完成')">[通知]门店取货完成
-                                </li>
-                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
-                                    onclick="selectCustomOption('email-notify', '[请求]调查问卷')">[请求]调查问卷</li>
-                            </ul>
-                        </div>
                     </div>
 
 
                 </div>
-            </div>
+            </div-->
 
             <div class="bg-white rounded-xl border shadow-sm border-slate-100 p-8 text-[13px] form-text13">
                 <!-- Global Tab Navigation -->
@@ -931,9 +796,13 @@
                         class="px-2 pb-3 font-bold text-slate-400 border-b-2 border-transparent hover:text-primary transition-all duration-200 whitespace-nowrap">
                         定价
                     </button>
+                    <button onclick="switchGlobalTab('notifications')" id="global-tab-notifications"
+                        class="px-2 pb-3 font-bold text-slate-400 border-b-2 border-transparent hover:text-primary transition-all duration-200 whitespace-nowrap">
+                        通知
+                    </button>
                     <button onclick="switchGlobalTab('logs')" id="global-tab-logs"
                         class="px-2 pb-3 font-bold text-slate-400 border-b-2 border-transparent hover:text-primary transition-all duration-200 whitespace-nowrap">
-                        操作日志
+                        日志
                     </button>
                 </div>
 
@@ -2480,6 +2349,74 @@
                     </div>
                 </div>
 
+                <div id="content-notifications" class="hidden">
+                    <!-- Notifications Tab Content -->
+                    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 mt-6">
+                        <div class="relative flex-1 max-w-md">
+                            <i class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text"
+                                class="w-full bg-white border border-slate-200 rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                placeholder="搜索通知内容、接收人或状态..." />
+                        </div>
+                        <button onclick="openAddNotificationModal()"
+                            class="flex items-center gap-1 font-bold text-primary hover:bg-blue-50 px-3 py-1.5 rounded transition-colors text-sm">
+                            <i class="bi bi-plus-circle"></i>
+                            发送通知
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto border border-slate-100 rounded-xl bg-white">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-slate-50/80 border-b border-slate-100">
+                                <tr>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        发送时间
+                                    </th>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        通知类型
+                                    </th>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        接收人
+                                    </th>
+                                    <th class="px-4 py-3 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        状态
+                                    </th>
+                                    <th class="px-4 py-4 font-bold text-slate-500 uppercase tracking-wider text-[11px]">
+                                        内容摘要
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50 text-[13px]">
+                                <!-- Notification Item 1 -->
+                                <tr class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-4 py-4 text-on-surface-variant whitespace-nowrap">
+                                        2023-11-02 10:30:45
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fi fi-rr-comment-alt text-blue-500"></i>
+                                            <span>短信 (SMS)</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="font-medium text-on-surface">Jameson Vance</span>
+                                            <span class="text-[11px] text-slate-400">138-8822-1922</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <span
+                                            class="px-2 py-0.5 rounded-full bg-green-50 text-green-600 font-bold text-[11px]">发送成功</span>
+                                    </td>
+                                    <td class="px-4 py-4 text-slate-500">
+                                        您的工单 [115001] 合作企业维修延迟
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div id="content-logs" class="hidden">
                     <!-- Operation Logs Tab Content -->
                     <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 mt-6">
@@ -3167,6 +3104,424 @@
         </div>
     </div>
 
+    <!-- Add Notification Modal -->
+    <div id="add-notification-modal" class="fixed inset-0 z-[9999] hidden">
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
+            onclick="closeAddNotificationModal()">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-lg shadow-lg overflow-hidden">
+            <div
+                class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0 z-10">
+                <h3 class="text-lg font-bold text-on-surface">发送通知</h3>
+                <button onclick="closeAddNotificationModal()"
+                    class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 transition-colors">
+                    <i class="fi fi-rr-cross-small text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto no-scrollbar">
+                <!-- Channel Selection -->
+                <div class="space-y-3">
+                    <label class="font-bold text-slate-400 uppercase tracking-wider text-xs">发送方式</label>
+                    <div class="flex p-1 bg-slate-100 rounded-xl">
+                        <button onclick="switchNotificationChannel('sms')" id="notify-channel-sms"
+                            class="flex-1 py-2 px-4 rounded-lg font-bold text-sm transition-all duration-200 bg-white text-primary shadow-sm">
+                            <i class="fi fi-rr-comment-alt mr-2"></i>消息通知 (SMS)
+                        </button>
+                        <button onclick="switchNotificationChannel('email')" id="notify-channel-email"
+                            class="flex-1 py-2 px-4 rounded-lg font-bold text-sm transition-all duration-200 text-slate-500 hover:text-slate-700">
+                            <i class="fi fi-rr-envelope mr-2"></i>邮件通知 (Email)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SMS Template Selector (Moved from Summary) -->
+                <div id="notify-sms-container" class="space-y-4">
+                    <div class="space-y-1 relative custom-select-wrapper" data-prefix="message-notify">
+                        <label class="font-bold text-slate-400 uppercase tracking-wider text-xs">消息模板</label>
+                        <div class="relative cursor-pointer" onclick="toggleCustomDropdown(event, 'message-notify')">
+                            <input type="text" id="message-notify-display" value="-" placeholder="请选择消息模板"
+                                class="w-full bg-[#f5f7fa] border-none rounded-lg py-[10px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8 text-sm"
+                                autocomplete="off" />
+                            <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                id="message-notify-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </div>
+                        <!-- SMS Template Dropdown Panel -->
+                        <div id="message-notify-dropdown"
+                            class="hidden fixed bg-white border border-slate-200 rounded-xl shadow-xl z-[10000] min-w-[280px]">
+                            <div class="p-2 border-b border-slate-50 bg-slate-50/50">
+                                <div class="relative">
+                                    <i
+                                        class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                                    <input type="text" id="message-notify-search"
+                                        onkeyup="filterCustomOptions('message-notify')" placeholder="搜索模板..."
+                                        class="w-full bg-white border-none rounded-lg py-1.5 pl-8 pr-3 text-xs focus:ring-1 focus:ring-primary" />
+                                </div>
+                            </div>
+                            <ul id="message-notify-list" class="max-h-60 overflow-y-auto py-1 text-[13px]">
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '-')">-</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[受理] 门店受理完成')">[受理]
+                                    门店受理完成
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[受理] 快递受理完成_圣水')">[受理]
+                                    快递受理完成_圣水</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 配件退回')">[通知] 配件退回
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 产品更换')">[判定] 产品更换
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 产品更换_眼镜店')">[判定]
+                                    产品更换_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_总公司(20日)')">[判定]
+                                    有偿_总公司(20日)</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_总公司_眼镜店(20日)')">
+                                    [判定] 有偿_总公司_眼镜店(20日)</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无偿')">[判定] 无偿</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无偿_眼镜店')">[判定]
+                                    无偿_眼镜店
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_3PL')">[判定]
+                                    有偿_3PL
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 有偿_眼镜店_3PL')">[判定]
+                                    有偿_眼镜店_3PL</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无偿/抛光')">[判定] 无偿/抛光
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无偿/抛光_眼镜店')">[判定]
+                                    无偿/抛光_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/无偿')">[判定]
+                                    合作企业/无偿</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/有偿')">[判定]
+                                    合作企业/有偿</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/有偿_眼镜店')">[判定]
+                                    合作企业/有偿_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 合作企业/无偿_眼镜店')">[判定]
+                                    合作企业/无偿_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 合作企业维修延迟通知')">[咨询]
+                                    合作企业维修延迟通知</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 合作企业维修延迟通知_眼镜店')">
+                                    [咨询]
+                                    合作企业维修延迟通知_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修')">[判定] 无法维修
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修_眼镜店')">[判定]
+                                    无法维修_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修/假货')">[判定]
+                                    无法维修/假货</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 无法维修/假货_眼镜店')">[判定]
+                                    无法维修/假货_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 维修取消')">[通知] 维修取消
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 维修取消_眼镜店')">[通知]
+                                    维修取消_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/有偿')">[咨询]
+                                    更换其他产品/有偿</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/有偿_眼镜店')">
+                                    [咨询]
+                                    更换其他产品/有偿_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/无偿')">[咨询]
+                                    更换其他产品/无偿</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 更换其他产品/无偿_眼镜店')">
+                                    [咨询]
+                                    更换其他产品/无偿_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/有偿')">[判定]
+                                    更换其他产品/有偿</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/有偿_眼镜店')">
+                                    [判定]
+                                    更换其他产品/有偿_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/无偿')">[判定]
+                                    更换其他产品/无偿</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 更换其他产品/无偿_眼镜店')">
+                                    [判定]
+                                    更换其他产品/无偿_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 镜片补偿')">[咨询] 镜片补偿
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次(通用)')">[付款]
+                                    未入账_第1次(通用)</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次(通用)')">[付款]
+                                    未入账_第2次(通用)</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 未入账 最终(退回)')">[通知]
+                                    未入账
+                                    最终(退回)</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次_合作企业')">[付款]
+                                    未入账_第1次_合作企业</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次_合作企业')">[付款]
+                                    未入账_第2次_合作企业</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次(通用)_眼镜店')">
+                                    [付款] 未入账_第1次(通用)_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次(通用)_眼镜店')">
+                                    [付款] 未入账_第2次(通用)_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 未入账 最终(退回)_眼镜店')">
+                                    [通知]
+                                    未入账 最终(退回)_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第1次_合作企业_眼镜店')">
+                                    [付款] 未入账_第1次_合作企业_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 未入账_第2次_合作企业_眼镜店')">
+                                    [付款] 未入账_第2次_合作企业_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 付款完成')">[付款] 付款完成
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[付款] 付款完成_眼镜店')">[付款]
+                                    付款完成_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 维修进行中_总公司')">[判定]
+                                    维修进行中_总公司</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[判定] 维修进行中_合作企业')">[判定]
+                                    维修进行中_合作企业</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[请求] 确认保证书')">[请求] 确认保证书
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[请求] 确认保证书_眼镜店')">[请求]
+                                    确认保证书_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 未接通（不在位）')">[咨询]
+                                    未接通（不在位）</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[咨询] 未接通_眼镜店')">[咨询]
+                                    未接通_眼镜店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[出库] 门店移动中_总公司')">[出库]
+                                    门店移动中_总公司</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[出库] 快递 (配送查询)')">[出库] 快递
+                                    (配送查询)</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[出库] 住宅_3PL')">[出库]
+                                    住宅_3PL
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[出库] 维修取消_快递')">[出库]
+                                    维修取消_快递</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[出库] 无法维修_快递')">[出库]
+                                    无法维修_快递</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[出库] 维修取消_门店')">[出库]
+                                    维修取消_门店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[出库] 无法维修_门店')">[出库]
+                                    无法维修_门店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 到达门店及领取')">[通知]
+                                    到达门店及领取</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 门店领取完成')">[通知]
+                                    门店领取完成
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[请求] 问卷调查')">[请求] 问卷调查
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('message-notify', '[通知] 门店信息指南')">[通知]
+                                    门店信息指南
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Template Selector (Moved from Summary) -->
+                <div id="notify-email-container" class="space-y-4 hidden">
+                    <div class="space-y-1 relative custom-select-wrapper" data-prefix="email-notify">
+                        <label class="font-bold text-slate-400 uppercase tracking-wider text-xs">邮件模板</label>
+                        <div class="relative cursor-pointer" onclick="toggleCustomDropdown(event, 'email-notify')">
+                            <input type="text" id="email-notify-display" value="-" placeholder="请选择邮件模板"
+                                class="w-full bg-[#f5f7fa] border-none rounded-lg py-[10px] px-3 focus:ring-1 focus:ring-primary cursor-pointer text-on-surface select-none pr-8 text-sm"
+                                autocomplete="off" />
+                            <svg class="absolute right-3 top-1/2 -mt-[8px] w-4 h-4 text-slate-500 pointer-events-none transition-transform duration-200"
+                                id="email-notify-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </div>
+                        <!-- Email Template Dropdown Panel -->
+                        <div id="email-notify-dropdown"
+                            class="hidden fixed bg-white border border-slate-200 rounded-xl shadow-xl z-[10000] min-w-[280px]">
+                            <div class="p-2 border-b border-slate-50 bg-slate-50/50">
+                                <div class="relative">
+                                    <i
+                                        class="fi fi-rr-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                                    <input type="text" id="email-notify-search"
+                                        onkeyup="filterCustomOptions('email-notify')" placeholder="搜索模板..."
+                                        class="w-full bg-white border-none rounded-lg py-1.5 pl-8 pr-3 text-xs focus:ring-1 focus:ring-primary" />
+                                </div>
+                            </div>
+                            <ul id="email-notify-list" class="max-h-60 overflow-y-auto py-1 text-[13px]">
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '-')">-</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[受理]门店已收到受理')">[受理]门店已收到受理
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[受理]已收到配送服务受理')">
+                                    [受理]已收到配送服务受理</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[通知]未付款返送')">[通知]未付款返送</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]已付款')">[检查]已付款</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]产品更换')">[检查]产品更换</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]免费/抛光')">[检查]免费/抛光</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]免费')">[检查]免费</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]合作商 - 已付款')">[检查]合作商 -
+                                    已付款</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]合作商 - 免费')">[检查]合作商 -
+                                    免费</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[咨询]合作伙伴修理延迟通知')">
+                                    [咨询]合作伙伴修理延迟通知</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查] 无法修复')">[检查] 无法修复</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查] 无法修复/假冒产品')">[检查]
+                                    无法修复/假冒产品</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]维修已取消')">[检查]维修已取消</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 已付款')">
+                                    [咨询]换取其他产品 - 已付款</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    执行="" onclick="selectCustomOption('email-notify', '[咨询]换取其他产品 - 免费')">
+                                    [咨询]换取其他产品 - 免费</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]换取其他产品 - 已付款')">
+                                    [检查]换取其他产品 - 已付款</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]换取其他产品 - 免费')">
+                                    [检查]换取其他产品 - 免费</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[付款]未结清金额 - 第1、2次（通用）')">
+                                    [付款]未结清金额 - 第1、2次（通用）</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[付款]未结清金额 - 最终')">[付款]未结清金额
+                                    - 最终</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[付款] 完了')">[付款] 完了</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]修理进行中 - 总部')">[检查]修理进行中
+                                    - 总部</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[检查]修理进行中 - 合作伙伴')">
+                                    [检查]修理进行中 - 合作伙伴</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[咨询]质保检查')">[咨询]质保检查</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[发货]转送至门店')">[发货]转送至门店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[发货]快递配送（跟踪查询）')">
+                                    [发货]快递配送（跟踪查询）</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[发货]修理取消 - 快递配送')">[发货]修理取消
+                                    - 快递配送</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[发货]修理取消 - 门店')">[发货]修理取消 -
+                                    门店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[发货]无法修复 - 快递配送')">[发货]无法修复
+                                    - 快递配送</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[发货]无法修复 - 门店')">[发货]无法修复 -
+                                    门店</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[通知] 已抵达门店并接收')">[通知]
+                                    已抵达门店并接收</li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[通知]门店取货完成')">[通知]门店取货完成
+                                </li>
+                                <li class="px-3 py-2 text-on-surface hover:bg-slate-50 cursor-pointer transition-colors"
+                                    onclick="selectCustomOption('email-notify', '[请求]调查问卷')">[请求]调查问卷</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipient Preview -->
+                <div class="p-4 bg-blue-50/50 rounded-xl border border-blue-100/50 space-y-2">
+                    <div class="flex items-center gap-2 text-primary">
+                        <i class="fi fi-rr-info text-sm"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider">接收人信息</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <div class="text-[10px] text-slate-400 uppercase font-bold">手机号码</div>
+                            <div class="text-[13px] font-mono text-on-surface">138****8888</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-slate-400 uppercase font-bold">电子邮件</div>
+                            <div class="text-[13px] font-mono text-on-surface">vance@example.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 py-4 border-t border-slate-50 bg-slate-50/30 flex items-center justify-end gap-3">
+                <button onclick="closeAddNotificationModal()"
+                    class="px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 transition-colors">取消</button>
+                <button onclick="sendNotification()"
+                    class="px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:opacity-90 transition-opacity shadow-sm shadow-primary/20">确认发送</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Add Repair Item Modal -->
     <div id="add-repair-item-modal" class="fixed text-[13px] form-text13 inset-0 z-[60] hidden">
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeAddRepairItemModal()"></div>
@@ -3318,11 +3673,13 @@
                 const tabs = {
                     'summary': document.getElementById('global-tab-summary'),
                     'fees': document.getElementById('global-tab-fees'),
+                    'notifications': document.getElementById('global-tab-notifications'),
                     'logs': document.getElementById('global-tab-logs')
                 };
                 const contents = {
                     'summary': document.getElementById('content-summary'),
                     'fees': document.getElementById('content-fees'),
+                    'notifications': document.getElementById('content-notifications'),
                     'logs': document.getElementById('content-logs')
                 };
 
@@ -3632,6 +3989,8 @@
                 const container = trigger.closest('.custom-select-wrapper');
                 let panel = prefix ? document.getElementById(prefix + '-dropdown') : container.querySelector('.custom-dropdown-panel');
 
+                if (!panel) return; // Null check for safety
+
                 // If already open and it's the same one, close it
                 if (activeDropdownPanel === panel) {
                     closeAllCustomDropdowns();
@@ -3759,18 +4118,78 @@
 
             // Reposition open dropdowns on scroll/resize (Removed as absolute positioning handles this naturally)
 
-            document.addEventListener('click', function (e) {
-                document.querySelectorAll('.custom-select-wrapper').forEach(container => {
-                    const prefix = container.getAttribute('data-prefix');
-                    const dropdown = document.getElementById(prefix + '-dropdown');
-                    if (dropdown && !dropdown.classList.contains('hidden') && !container.contains(e.target) && !dropdown.contains(e.target)) {
-                        dropdown.classList.add('hidden');
-                        const arrow = document.getElementById(prefix + '-arrow');
-                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+            function selectHeaderOption(type, value, text) {
+                const displayEl = document.getElementById('header-' + type + '-display');
+                if (displayEl) {
+                    if (type === 'pic') {
+                        displayEl.textContent = '负责人：' + text;
+                    } else {
+                        displayEl.textContent = text;
                     }
-                });
-            });
+                }
+
+                // Synchronize with the basic info section below
+                const basicInfoSection = document.getElementById('content-summary');
+                if (basicInfoSection) {
+                    const selects = basicInfoSection.querySelectorAll('select');
+                    if (type === 'status' && selects[0]) {
+                        selects[0].value = value;
+                    } else if (type === 'pic' && selects[1]) {
+                        selects[1].value = text;
+                    }
+                }
+                closeAllCustomDropdowns();
+            }
+
+
+            // Notification Modal Logic
+            function openAddNotificationModal() {
+                var m = document.getElementById('add-notification-modal');
+                m.classList.remove('hidden');
+                m.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeAddNotificationModal() {
+                var m = document.getElementById('add-notification-modal');
+                m.classList.add('hidden');
+                m.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+
+            function switchNotificationChannel(channel) {
+                const smsBtn = document.getElementById('notify-channel-sms');
+                const emailBtn = document.getElementById('notify-channel-email');
+                const smsContainer = document.getElementById('notify-sms-container');
+                const emailContainer = document.getElementById('notify-email-container');
+
+                if (channel === 'sms') {
+                    smsBtn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+                    smsBtn.classList.remove('text-slate-500');
+                    emailBtn.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                    emailBtn.classList.add('text-slate-500');
+
+                    smsContainer.classList.remove('hidden');
+                    emailContainer.classList.add('hidden');
+                } else {
+                    emailBtn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+                    emailBtn.classList.remove('text-slate-500');
+                    smsBtn.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                    smsBtn.classList.add('text-slate-500');
+
+                    emailContainer.classList.remove('hidden');
+                    smsContainer.classList.add('hidden');
+                }
+            }
+
+            function sendNotification() {
+                // Logic to send notification
+                alert('通知已成功发送！');
+                closeAddNotificationModal();
+            }
         </script>
+
+
 </body>
 
 </html>
