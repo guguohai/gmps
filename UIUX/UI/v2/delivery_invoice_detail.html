@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出库单列表 | 库存管理 | PRODUCT SERVICE</title>
+    <title>出库单详情 | 库存管理 | PRODUCT SERVICE</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
@@ -244,156 +244,181 @@
 
         <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA] form-text13">
       <div class="w-full max-w-full px-[30px] py-5">
-            
-        <nav class="mb-5 text-[13px] font-medium flex items-center">
-          <span class="text-slate-400">库存管理</span>
-          <span class="mx-2 text-slate-300">/</span>
-          <span class="text-slate-500">出库单</span>
-        </nav>
+            <nav class="mb-5 text-[13px] font-medium flex items-center">
+                <span class="text-primary font-bold">库存管理</span>
+                <span class="mx-2 text-slate-300">/</span>
+                <a href="./delivery_invoice_list.html" class="text-primary hover:underline font-bold uppercase tracking-tight">出库单</a>
+                <span class="mx-2 text-slate-300">/</span>
+                <span class="text-slate-500 uppercase tracking-tighter">详情</span>
+            </nav>
 
-        <div class="flex justify-between items-center mb-5 mt-2">
-          <div>
-            <h1 class="text-on-surface font-headline tracking-tight text-[16px] font-semibold">出库单</h1>
-          </div>
-          <div class="flex gap-2">
-                    <button class="h-8 px-3 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 shadow-sm flex items-center gap-1.5 text-xs font-bold leading-none"><i class="fi fi-rr-download text-[12px]"></i>导出</button>
-                    <button class="h-8 w-8 bg-primary text-white border border-transparent rounded-lg hover:opacity-90 transition-all flex items-center justify-center shadow-sm shadow-primary/20"><i class="fi fi-rr-plus text-[12px]"></i></button>
-                </div>
-        </div>
-
-            <!-- Filter Area -->
-            <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative transition-all duration-300 mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pr-[80px]">
+            <div class="space-y-8 w-full">
+                <!-- Page Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-2">
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库单编号</label>
-                        <input class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary" type="text" placeholder="输入编号" />
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tighter px-1">出库单详情</h2>
+                            <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-black rounded uppercase shadow-sm">已完成</span>
+                        </div>
+                        <p class="text-xs text-on-surface-variant font-medium px-1">编号：OUT20260410001</p>
                     </div>
-                    <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">业务来源类型</label>
-                        <select class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
-                            <option>全部</option>
-                            <option>申请单</option>
-                            <option>售后工单</option>
-                            <option>调拨单</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
-                        <select class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
-                            <option>全部</option>
-                            <option>待执行</option>
-                            <option>执行中</option>
-                            <option>已完成</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库时间</label>
-                        <input class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary" type="date" />
+                    <div class="flex items-center gap-2">
+                        <button class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 flex items-center gap-1.5 transition-all">
+                            <i class="fi fi-rr-disk w-4 h-4"></i>
+                            <span>保存更新</span>
+                        </button>
                     </div>
                 </div>
-                <button class="absolute right-6 top-[55px] w-9 h-9 bg-primary text-white rounded-lg flex items-center justify-center hover:opacity-95 shadow-sm shadow-primary/20">
-                    <i class="fi fi-rr-search text-[14px]"></i>
-                </button>
-            </div>
 
-            <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden min-w-0">
-                <div class="w-full overflow-x-auto no-scrollbar">
-                    <table class="w-full text-left text-[13px] whitespace-nowrap">
-                        <thead class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100">
-                            <tr>
-                                <th class="px-6 py-4">出库单编号</th>
-                                <th class="px-6 py-4">业务来源类型</th>
-                                <th class="px-6 py-4">来源单号</th>
-                                <th class="px-6 py-4">出库类型</th>
-                                <th class="px-6 py-4 border-r border-[#f1f5f9]">产品信息</th>
-                                <th class="px-6 py-4 text-center">数量</th>
-                                <th class="px-6 py-4">出库仓位</th>
-                                <th class="px-6 py-4">接收方</th>
-                                <th class="px-6 py-4 text-center">状态</th>
-                                <th class="px-6 py-4">出库时间</th>
-                                <th class="px-6 py-4">执行人</th>
-                                <th class="px-6 py-4 border-r border-[#f1f5f9]">更新时间</th>
-                                <th class="px-6 py-4 text-center sticky right-0 bg-slate-50/50 uppercase font-black text-[11px] tracking-widest">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <!-- Data 1 -->
-                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./delivery_invoice_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">OUT20260410001</td>
-                                <td class="px-6 py-4 text-slate-500">申请单</td>
-                                <td class="px-6 py-4 text-primary font-medium italic underline">REQ20260410001</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">维修领用</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9]">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-slate-800 tracking-tight">GM-PT-00056</span>
-                                        <span class="text-[11px] text-slate-400 italic">镜腿配件-黑色</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">2</td>
-                                <td class="px-6 py-4 text-slate-500 italic">PS配件仓-B03</td>
-                                <td class="px-6 py-4 text-slate-600 font-bold">维修中心</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-black uppercase">已完成</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-400">2026-04-10 10:30:00</td>
-                                <td class="px-6 py-4 text-slate-600">李晨</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400 italic font-medium">04-10 10:35</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white shadow-[-8px_0_12px_-6px_rgba(0,0,0,0.05)]">
-                                    <a href="./delivery_invoice_detail.html" class="text-primary font-bold">详情</a>
-                                </td>
-                            </tr>
-                            <!-- Data 2 -->
-                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./delivery_invoice_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">OUT20260410002</td>
-                                <td class="px-6 py-4 text-slate-500">售后工单</td>
-                                <td class="px-6 py-4 text-primary font-medium italic underline">ST20260409015</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">换货出库</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9]">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-slate-800 tracking-tight">GM-SN-00128</span>
-                                        <span class="text-[11px] text-slate-400 italic">GENTLE MONSTER LANG 01</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">1</td>
-                                <td class="px-6 py-4 text-slate-500 italic">PS主仓-A01</td>
-                                <td class="px-6 py-4 text-slate-600 font-bold">客户</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-black uppercase tracking-tighter shadow-sm">执行中</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-400">2026-04-10 13:20:00</td>
-                                <td class="px-6 py-4 text-slate-600">张敏</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400 italic font-medium">04-10 13:28</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white shadow-[-8px_0_12px_-6px_rgba(0,0,0,0.05)]">
-                                    <a href="./delivery_invoice_detail.html" class="text-primary font-bold">详情</a>
-                                </td>
-                            </tr>
-                            <!-- Data 3 -->
-                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./delivery_invoice_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">OUT20260410003</td>
-                                <td class="px-6 py-4 text-slate-500">调拨单</td>
-                                <td class="px-6 py-4 text-primary font-medium italic underline">TRF20260410001</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">调拨出库</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9]">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-slate-800 tracking-tight">GM-LS-00321</span>
-                                        <span class="text-[11px] text-slate-400 italic">镜片组件-透明</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">5</td>
-                                <td class="px-6 py-4 text-slate-500 italic">PS主仓-A02</td>
-                                <td class="px-6 py-4 text-slate-600 font-bold">3PL仓</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-black uppercase shadow-sm">待执行</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-400">2026-04-10 15:00:00</td>
-                                <td class="px-6 py-4 text-slate-600">王雪</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400 italic font-medium">04-10 14:50</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white shadow-[-8px_0_12px_-6px_rgba(0,0,0,0.05)]">
-                                    <a href="./delivery_invoice_detail.html" class="text-primary font-bold">详情</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Form Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
+                    <div class="px-8 py-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Field 1 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库单编号</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold" type="text" value="OUT20260410001" readonly />
+                            </div>
+                            <!-- Field 2 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">业务来源类型</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>申请单</option>
+                                    <option>售后工单</option>
+                                    <option>调拨单</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <!-- Field 3 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">来源单号</label>
+                                <div class="relative group">
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary underline pr-10 italic" type="text" value="REQ20260410001" />
+                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                </div>
+                            </div>
+                            <!-- Field 4 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库类型</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-medium">
+                                    <option selected>维修领用</option>
+                                    <option>换货出库</option>
+                                    <option>门店补货</option>
+                                    <option>调拨出库</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <!-- Field 5 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品编码</label>
+                                <div class="relative group">
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-mono pr-10" type="text" value="GM-PT-00056" />
+                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                </div>
+                            </div>
+                            <!-- Field 6 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-semibold italic" type="text" value="镜腿配件-黑色" readonly />
+                            </div>
+                            <!-- Field 7 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">规格/型号</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="V-Shape Standard" readonly />
+                            </div>
+                            <!-- Field 8 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库数量</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-black" type="number" value="2" />
+                            </div>
+                            <!-- Field 9 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">单位</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>个</option>
+                                    <option>件</option>
+                                    <option>副</option>
+                                    <option>套</option>
+                                </select>
+                            </div>
+                            <!-- Field 10 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库仓位</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>PS配件仓-B03</option>
+                                    <option>PS主仓-A01</option>
+                                </select>
+                            </div>
+                            <!-- Field 11 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">接收方类型</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>维修中心</option>
+                                    <option>门店</option>
+                                    <option>客户</option>
+                                    <option>3PL仓</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <!-- Field 12 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">接收方</label>
+                                <div class="relative group">
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold pr-10" type="text" value="维修中心" />
+                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                </div>
+                            </div>
+                            <!-- Field 13 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">配送方式</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>顺丰</option>
+                                    <option>门店自提</option>
+                                    <option>内部转运</option>
+                                    <option>无需配送</option>
+                                </select>
+                            </div>
+                            <!-- Field 14 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">物流单号</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-mono" type="text" value="SF1234567890" />
+                            </div>
+                            <!-- Field 15 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-bold">
+                                    <option>待执行</option>
+                                    <option>执行中</option>
+                                    <option selected>已完成</option>
+                                    <option>已取消</option>
+                                    <option>执行失败</option>
+                                </select>
+                            </div>
+                            <!-- Field 16 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库时间</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2026-04-10T10:30" />
+                            </div>
+                            <!-- Field 17 -->
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">执行人</label>
+                                <div class="relative group">
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary pr-10" type="text" value="李晨" />
+                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block lg:col-span-1"></div>
+                            <!-- Field 18 & 19 -->
+                            <div class="space-y-1 md:col-span-2">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">执行说明</label>
+                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2">物料已核对，由内部班车运送。</textarea>
+                            </div>
+                            <div class="space-y-1 md:col-span-2 lg:col-span-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">备注</label>
+                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2">急件处理</textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             </div>

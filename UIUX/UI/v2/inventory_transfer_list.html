@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>出库单列表 | 库存管理 | PRODUCT SERVICE</title>
+    <title>调拨单列表 | 库存管理 | PRODUCT SERVICE</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
@@ -172,8 +172,8 @@
           </button>
           <div class="menu-content py-1 bg-slate-50/50">
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_request_list.html">申请单</a>
-            <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./delivery_invoice_list.html">出库单</a>
-            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_transfer_list.html">调拨单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./delivery_invoice_list.html">出库单</a>
+            <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./inventory_transfer_list.html">调拨单</a>
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_discrepancy_list.html">差异处理</a>
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_sync_list.html">同步日志</a>
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_record_list.html">库存记录</a>
@@ -248,16 +248,16 @@
         <nav class="mb-5 text-[13px] font-medium flex items-center">
           <span class="text-slate-400">库存管理</span>
           <span class="mx-2 text-slate-300">/</span>
-          <span class="text-slate-500">出库单</span>
+          <span class="text-slate-500">调拨单</span>
         </nav>
 
         <div class="flex justify-between items-center mb-5 mt-2">
           <div>
-            <h1 class="text-on-surface font-headline tracking-tight text-[16px] font-semibold">出库单</h1>
+            <h1 class="text-on-surface font-headline tracking-tight text-[16px] font-semibold">调拨单</h1>
           </div>
           <div class="flex gap-2">
-                    <button class="h-8 px-3 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 shadow-sm flex items-center gap-1.5 text-xs font-bold leading-none"><i class="fi fi-rr-download text-[12px]"></i>导出</button>
-                    <button class="h-8 w-8 bg-primary text-white border border-transparent rounded-lg hover:opacity-90 transition-all flex items-center justify-center shadow-sm shadow-primary/20"><i class="fi fi-rr-plus text-[12px]"></i></button>
+                    <button class="h-8 px-3 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 shadow-sm flex items-center gap-1.5 text-xs font-bold leading-none"><i class="fi fi-rr-plus text-[12px]"></i>新增调拨</button>
+                    <button class="h-8 w-8 bg-primary text-white border border-transparent rounded-lg hover:opacity-90 transition-all flex items-center justify-center shadow-sm shadow-primary/20"><i class="fi fi-rr-refresh text-[12px]"></i></button>
                 </div>
         </div>
 
@@ -265,29 +265,29 @@
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative transition-all duration-300 mb-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pr-[80px]">
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库单编号</label>
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">调拨单编号</label>
                         <input class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary" type="text" placeholder="输入编号" />
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">业务来源类型</label>
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">调拨类型</label>
                         <select class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
                             <option>全部</option>
-                            <option>申请单</option>
-                            <option>售后工单</option>
-                            <option>调拨单</option>
+                            <option>门店补货</option>
+                            <option>维修调拨</option>
+                            <option>3PL补货</option>
                         </select>
                     </div>
                     <div class="space-y-1">
                         <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
                         <select class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
                             <option>全部</option>
-                            <option>待执行</option>
-                            <option>执行中</option>
+                            <option>待调出</option>
+                            <option>待调入</option>
                             <option>已完成</option>
                         </select>
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">出库时间</label>
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">申请日期</label>
                         <input class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary" type="date" />
                     </div>
                 </div>
@@ -301,95 +301,74 @@
                     <table class="w-full text-left text-[13px] whitespace-nowrap">
                         <thead class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100">
                             <tr>
-                                <th class="px-6 py-4">出库单编号</th>
-                                <th class="px-6 py-4">业务来源类型</th>
-                                <th class="px-6 py-4">来源单号</th>
-                                <th class="px-6 py-4">出库类型</th>
-                                <th class="px-6 py-4 border-r border-[#f1f5f9]">产品信息</th>
+                                <th class="px-6 py-4">调拨单编号</th>
+                                <th class="px-6 py-4">调出位置</th>
+                                <th class="px-6 py-4 border-r border-[#f1f5f9]">调入位置</th>
+                                <th class="px-6 py-4">产品编码</th>
+                                <th class="px-6 py-4">产品名称</th>
                                 <th class="px-6 py-4 text-center">数量</th>
-                                <th class="px-6 py-4">出库仓位</th>
-                                <th class="px-6 py-4">接收方</th>
+                                <th class="px-6 py-4">调拨类型</th>
                                 <th class="px-6 py-4 text-center">状态</th>
-                                <th class="px-6 py-4">出库时间</th>
-                                <th class="px-6 py-4">执行人</th>
+                                <th class="px-6 py-4">申请时间</th>
+                                <th class="px-6 py-4">完成时间</th>
+                                <th class="px-6 py-4">处理人</th>
                                 <th class="px-6 py-4 border-r border-[#f1f5f9]">更新时间</th>
-                                <th class="px-6 py-4 text-center sticky right-0 bg-slate-50/50 uppercase font-black text-[11px] tracking-widest">操作</th>
+                                <th class="px-6 py-4 text-center sticky right-0 bg-slate-50/50 uppercase font-black text-[11px]">操作</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             <!-- Data 1 -->
-                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./delivery_invoice_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">OUT20260410001</td>
-                                <td class="px-6 py-4 text-slate-500">申请单</td>
-                                <td class="px-6 py-4 text-primary font-medium italic underline">REQ20260410001</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">维修领用</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9]">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-slate-800 tracking-tight">GM-PT-00056</span>
-                                        <span class="text-[11px] text-slate-400 italic">镜腿配件-黑色</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">2</td>
-                                <td class="px-6 py-4 text-slate-500 italic">PS配件仓-B03</td>
-                                <td class="px-6 py-4 text-slate-600 font-bold">维修中心</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-black uppercase">已完成</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-400">2026-04-10 10:30:00</td>
-                                <td class="px-6 py-4 text-slate-600">李晨</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400 italic font-medium">04-10 10:35</td>
+                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_transfer_detail.html'">
+                                <td class="px-6 py-4 text-primary font-bold">TRF20260410001</td>
+                                <td class="px-6 py-4 text-slate-500 font-medium">PS主仓-A02</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600 font-bold">3PL仓-C01</td>
+                                <td class="px-6 py-4 text-slate-500">GM-LS-00321</td>
+                                <td class="px-6 py-4 text-slate-800 font-bold italic">镜片组件-透明</td>
+                                <td class="px-6 py-4 text-center font-black text-slate-700">5</td>
+                                <td class="px-6 py-4 text-slate-500">3PL补货</td>
+                                <td class="px-6 py-4 text-center font-bold text-amber-600 uppercase">待调出</td>
+                                <td class="px-6 py-4 text-slate-400 italic">04-10 09:40</td>
+                                <td class="px-6 py-4 text-slate-300">--</td>
+                                <td class="px-6 py-4 text-slate-600">王雪</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">09:45</td>
                                 <td class="px-6 py-4 text-center sticky right-0 bg-white shadow-[-8px_0_12px_-6px_rgba(0,0,0,0.05)]">
-                                    <a href="./delivery_invoice_detail.html" class="text-primary font-bold">详情</a>
+                                    <a href="./inventory_transfer_detail.html" class="text-primary font-bold">详情</a>
                                 </td>
                             </tr>
                             <!-- Data 2 -->
-                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./delivery_invoice_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">OUT20260410002</td>
-                                <td class="px-6 py-4 text-slate-500">售后工单</td>
-                                <td class="px-6 py-4 text-primary font-medium italic underline">ST20260409015</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">换货出库</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9]">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-slate-800 tracking-tight">GM-SN-00128</span>
-                                        <span class="text-[11px] text-slate-400 italic">GENTLE MONSTER LANG 01</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">1</td>
-                                <td class="px-6 py-4 text-slate-500 italic">PS主仓-A01</td>
-                                <td class="px-6 py-4 text-slate-600 font-bold">客户</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-black uppercase tracking-tighter shadow-sm">执行中</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-400">2026-04-10 13:20:00</td>
-                                <td class="px-6 py-4 text-slate-600">张敏</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400 italic font-medium">04-10 13:28</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white shadow-[-8px_0_12px_-6px_rgba(0,0,0,0.05)]">
-                                    <a href="./delivery_invoice_detail.html" class="text-primary font-bold">详情</a>
+                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_transfer_detail.html'">
+                                <td class="px-6 py-4 text-primary font-bold">TRF20260410002</td>
+                                <td class="px-6 py-4 text-slate-500 font-medium">PS配件仓-B01</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600 font-bold">维修中心临时库-R01</td>
+                                <td class="px-6 py-4 text-slate-500">GM-PT-00056</td>
+                                <td class="px-6 py-4 text-slate-800 font-bold italic">镜腿配件-黑色</td>
+                                <td class="px-6 py-4 text-center font-black text-slate-700">8</td>
+                                <td class="px-6 py-4 text-slate-500">维修调拨</td>
+                                <td class="px-6 py-4 text-center font-bold text-blue-600 uppercase">待调入</td>
+                                <td class="px-6 py-4 text-slate-400 italic">04-10 10:10</td>
+                                <td class="px-6 py-4 text-slate-300">--</td>
+                                <td class="px-6 py-4 text-slate-600">李晨</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">10:55</td>
+                                <td class="px-6 py-4 text-center sticky right-0 bg-white">
+                                    <a href="./inventory_transfer_detail.html" class="text-primary font-bold">详情</a>
                                 </td>
                             </tr>
                             <!-- Data 3 -->
-                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./delivery_invoice_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">OUT20260410003</td>
-                                <td class="px-6 py-4 text-slate-500">调拨单</td>
-                                <td class="px-6 py-4 text-primary font-medium italic underline">TRF20260410001</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">调拨出库</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9]">
-                                    <div class="flex flex-col">
-                                        <span class="font-bold text-slate-800 tracking-tight">GM-LS-00321</span>
-                                        <span class="text-[11px] text-slate-400 italic">镜片组件-透明</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">5</td>
-                                <td class="px-6 py-4 text-slate-500 italic">PS主仓-A02</td>
-                                <td class="px-6 py-4 text-slate-600 font-bold">3PL仓</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-black uppercase shadow-sm">待执行</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-400">2026-04-10 15:00:00</td>
-                                <td class="px-6 py-4 text-slate-600">王雪</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400 italic font-medium">04-10 14:50</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white shadow-[-8px_0_12px_-6px_rgba(0,0,0,0.05)]">
-                                    <a href="./delivery_invoice_detail.html" class="text-primary font-bold">详情</a>
+                            <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_transfer_detail.html'">
+                                <td class="px-6 py-4 text-primary font-bold">TRF20260410003</td>
+                                <td class="px-6 py-4 text-slate-500 font-medium">PS主仓-A01</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600 font-bold">上海门店-S01</td>
+                                <td class="px-6 py-4 text-slate-500">GM-SN-00128</td>
+                                <td class="px-6 py-4 text-slate-800 font-bold italic">GENTLE MONSTER LANG 01</td>
+                                <td class="px-6 py-4 text-center font-black text-slate-700">3</td>
+                                <td class="px-6 py-4 text-slate-500">门店补货</td>
+                                <td class="px-6 py-4 text-center font-bold text-green-600 uppercase">已完成</td>
+                                <td class="px-6 py-4 text-slate-400 italic">04-10 08:30</td>
+                                <td class="px-6 py-4 text-slate-400">14:20</td>
+                                <td class="px-6 py-4 text-slate-600">张敏</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">14:20</td>
+                                <td class="px-6 py-4 text-center sticky right-0 bg-white">
+                                    <a href="./inventory_transfer_detail.html" class="text-primary font-bold">详情</a>
                                 </td>
                             </tr>
                         </tbody>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>售后工作台 (Dashboard) - PRODUCT SERVICE</title>
+  <title>Dashboard | PRODUCT SERVICE</title>
   <link rel="icon" type="image/png" sizes="32x32" href="./logo.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="./logo.png" />
   <!-- Tailwind CSS -->
@@ -150,70 +150,71 @@
 <body class="text-on-surface">
   <!-- Top Navigation Bar -->
   <header
-    class="bg-white border-b border-[#cbd0dd] fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
-    <div class="flex items-center gap-8">
-      <!-- Logo & Brand -->
-      <div class="flex items-center gap-3">
-        <img class="w-6 h-6 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
-        <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
-      </div>
+    class="bg-white border-b border-[#cbd0dd] fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between">
+    <div class="max-w-[1440px] mx-auto w-full flex items-center justify-between px-[30px] h-full">
+      <div class="flex items-center gap-8">
+        <!-- Logo & Brand -->
+        <div class="flex items-center gap-3">
+          <img class="w-6 h-6 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
+          <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
+        </div>
 
-      <!-- Search Bar -->
-      <div class="relative hidden md:block">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg"
-          width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path
-            d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z">
-          </path>
-        </svg>
-        <input
-          class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-          style="background-color: #f5f7fa; width: 364px" type="text" placeholder="Scan barcode" />
-      </div>
-
-    </div>
-
-    <!-- Right Actions -->
-    <div class="flex items-center gap-4 h-full">
-      <!-- Language Dropdown -->
-      <div class="relative">
-        <button
-          class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center"
-          title="Language" onclick="toggleDropdown('language-dropdown')">
-          <i class="fi fi-rr-globe text-[20px] leading-none"></i>
-        </button>
-        <!-- Language Dropdown Menu -->
-        <div id="language-dropdown"
-          class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
-          <a href="#"
-            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">中文</a>
-          <a href="#"
-            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">한국어</a>
-          <a href="#"
-            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">English</a>
+        <!-- Search Bar -->
+        <div class="relative hidden md:block">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg"
+            width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z">
+            </path>
+          </svg>
+          <input
+            class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+            style="background-color: #f5f7fa; width: 364px" type="text" placeholder="Scan barcode" />
         </div>
       </div>
 
-      <!-- User Dropdown -->
-      <div class="relative">
-        <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8 cursor-pointer"
-          onclick="toggleDropdown('user-dropdown')">
-          <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px">
-            <svg t="1774707118806" style="fill: #657489" viewBox="0 0 1024 1024" version="1.1"
-              xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20">
-              <path
-                d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0"
-                p-id="1651"></path>
-            </svg>
+      <!-- Right Actions -->
+      <div class="flex items-center gap-4 h-full">
+        <!-- Language Dropdown -->
+        <div class="relative">
+          <button
+            class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center"
+            title="Language" onclick="toggleDropdown('language-dropdown')">
+            <i class="fi fi-rr-globe text-[20px] leading-none"></i>
+          </button>
+          <!-- Language Dropdown Menu -->
+          <div id="language-dropdown"
+            class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
+            <a href="#"
+              class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">中文</a>
+            <a href="#"
+              class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">한국어</a>
+            <a href="#"
+              class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">English</a>
           </div>
         </div>
-        <!-- User Dropdown Menu -->
-        <div id="user-dropdown"
-          class="hidden absolute right-0 top-full mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
-          <a href="#"
-            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">个人信息</a>
-          <a href="#"
-            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">退出</a>
+
+        <!-- User Dropdown -->
+        <div class="relative">
+          <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8 cursor-pointer"
+            onclick="toggleDropdown('user-dropdown')">
+            <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px">
+              <svg t="1774707118806" style="fill: #657489" viewBox="0 0 1024 1024" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20">
+                <path
+                  d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0"
+                  p-id="1651"></path>
+              </svg>
+            </div>
+          </div>
+          <!-- User Dropdown Menu -->
+          <div id="user-dropdown"
+            class="hidden absolute right-0 top-full mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-100 py-1 z-50">
+            <a href="#"
+              class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">个人信息</a>
+            <a href="#"
+              class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">退出</a>
+          </div>
         </div>
       </div>
     </div>
@@ -223,40 +224,38 @@
   <div class="flex pt-16">
     <!-- Sidebar Navigation -->
     <aside id="sidebar"
-      class="bg-white border-r border-[#cbd0dd] fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40 transition-all duration-300">
-      <nav class="py-4 flex-grow space-y-1">
-        <!-- Dashboard - Active -->
-        <a class="flex items-center px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary"
+      class="bg-white sticky top-16 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40 border-r border-[#cbd0dd]">
+      <nav class="py-4 flex-grow space-y-1 text-[13px]">
+        <!-- Dashboard -->
+        <a class="flex items-center px-6 py-3 text-primary bg-blue-50/50 font-bold border-r-4 border-primary"
           href="./dashboard.html">
           <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
           <span class="text-[13px]">Dashboard</span>
         </a>
-
-        <!-- 工单管理 Menu Group -->
+        <!-- 工单管理 -->
         <div class="menu-group">
           <button
             class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
             onclick="toggleMenu(this)">
             <div class="flex items-center">
-              <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <i class="fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
               <span class="text-[13px]">工单管理</span>
             </div>
             <i
               class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
           </button>
-          <div class="menu-content hidden py-1 bg-slate-50/50">
+          <div class="menu-content hidden py-1">
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-              href="./ticket_list.html">列表</a>
+              href="./ticket_list.html">工单列表</a>
           </div>
         </div>
-
-        <!-- 产品管理 Menu Group -->
+        <!-- 产品管理 -->
         <div class="menu-group">
           <button
             class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
             onclick="toggleMenu(this)">
             <div class="flex items-center">
-              <i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <i class="fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
               <span class="text-[13px]">产品管理</span>
             </div>
             <i
@@ -264,81 +263,88 @@
           </button>
           <div class="menu-content hidden py-1">
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-              href="./product_list.html">列表</a>
+              href="./product_list.html">产品列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
           </div>
         </div>
-
-        <!-- 库存 Menu Group -->
+        <!-- 库存管理 -->
         <div class="menu-group">
           <button
             class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
             onclick="toggleMenu(this)">
             <div class="flex items-center">
-              <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-              <span class="text-[13px]">库存</span>
+              <i class="fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">库存管理</span>
             </div>
             <i
               class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
           </button>
           <div class="menu-content hidden py-1">
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-              href="./inventory_request_list.html">申请列表</a>
+              href="./inventory_request_list.html">申请单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./delivery_invoice_list.html">出库单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./inventory_transfer_list.html">调拨单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./inventory_discrepancy_list.html">差异处理</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./inventory_sync_list.html">同步日志</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_record_list.html">库存记录</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
           </div>
         </div>
-
-        <!-- 小零件 Menu Group -->
+        <!-- 小零件管理 -->
         <div class="menu-group">
           <button
             class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
             onclick="toggleMenu(this)">
             <div class="flex items-center">
-              <i class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-              <span class="text-[13px]">小零件</span>
+              <i class="fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">小零件管理</span>
             </div>
             <i
               class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
           </button>
           <div class="menu-content hidden py-1">
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-              href="./parts_list.html">列表</a>
+              href="./parts_list.html">小零件列表</a>
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-              href="./parts_request_list.html">申请列表</a>
+              href="./parts_request_list.html">申请单</a>
           </div>
         </div>
-
-        <!-- 服务 Menu Group -->
+        <!-- 服务管理 -->
         <div class="menu-group">
           <button
             class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
             onclick="toggleMenu(this)">
             <div class="flex items-center">
-              <i class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-              <span class="text-[13px]">服务</span>
+              <i class="fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">服务管理</span>
             </div>
             <i
               class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
           </button>
           <div class="menu-content hidden py-1">
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-              href="./service_survey.html">问卷</a>
+              href="./service_survey.html">问卷列表</a>
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-              href="./service_consultation.html">咨询</a>
+              href="./service_consultation.html">咨询列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./service_notice_list.html">通知记录</a>
           </div>
         </div>
-
-        <!-- 用户权限 Menu Group -->
+        <!-- 权限管理 -->
         <div class="menu-group">
           <button
             class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
             onclick="toggleMenu(this)">
             <div class="flex items-center">
-              <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-              <span class="text-[13px]">用户权限</span>
+              <i class="fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">权限管理</span>
             </div>
-            <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-              style="fill: none; stroke: currentColor; stroke-width: 2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
+            <i
+              class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
           </button>
           <div class="menu-content hidden py-1">
             <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
@@ -351,23 +357,35 @@
               href="./role_permission_list.html">角色权限</a>
           </div>
         </div>
+        <!-- 系统配置 -->
+        <div class="menu-group">
+          <button
+            class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
+            onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-settings w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">系统配置</span>
+            </div>
+            <i
+              class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./config_dict_list.html">数据字典</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./config_template_list.html">模板配置</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
+              href="./config_status_list.html">状态配置</a>
+          </div>
+        </div>
       </nav>
+    </aside>
 
-      <!-- Collapse Button -->
-      <div class="border-t border-slate-100 p-4">
-        <button class="w-full flex items-center px-2 text-slate-400 hover:text-primary transition-colors"
-          onclick="toggleSidebar()">
-          <svg class="w-4 h-4 mr-3 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          <span class="text-xs font-semibold uppercase">Collapse</span>
-        </button>
-      </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="ml-64 flex-1 min-h-screen bg-[#F5F7FA] p-8">
+    <main class="flex-1 min-h-screen bg-[#F5F7FA] p-8 overflow-y-auto">
+      <div class="max-w-[1440px] mx-auto w-full">
       <!-- Page Header -->
       <div class="flex justify-between items-end mb-8">
         <div>
@@ -735,6 +753,7 @@
             </button>
           </div>
         </div>
+      </div>
       </div>
     </main>
   </div>

@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工单详情 | Ticket Details - PRODUCT SERVICE</title>
+    <title>工单详情 | 工单管理 | PRODUCT SERVICE</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -347,171 +347,131 @@
     <!-- Main Layout -->
     <div class="flex pt-16 h-screen">
         <!-- Sidebar Navigation -->
-        <aside id="sidebar"
-            class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] font-medium z-40 border-r border-[#cbd0dd]">
+    <aside id="sidebar"
+      class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40 border-r border-[#cbd0dd]">
             <nav class="py-4 flex-grow space-y-1 text-[13px]">
-                <!-- Dashboard -->
-                <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all"
-                    href="./dashboard.html">
-                    <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                    <span class="text-[13px]">Dashboard</span>
-                </a>
-
-                <!-- 工单管理 Menu Group - Active -->
-                <div class="menu-group">
-                    <button
-                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group"
-                        onclick="toggleMenu(this)">
-                        <div class="flex items-center">
-                            <i class="fi fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">工单管理</span>
-                        </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="menu-content py-1 bg-slate-50/50">
-                        <a class="block pl-14 py-2 text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full"
-                            href="./ticket_list.html">列表</a>
-                    </div>
-                </div>
-
-                <!-- 产品管理 Menu Group -->
-                <div class="menu-group">
-                    <button
-                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
-                        onclick="toggleMenu(this)">
-                        <div class="flex items-center">
-                            <i class="fi fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">产品管理</span>
-                        </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
-                            href="./product_list.html">列表</a>
-                    </div>
-                </div>
-
-                <!-- 库存 Menu Group -->
-                <div class="menu-group">
-                    <button
-                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
-                        onclick="toggleMenu(this)">
-                        <div class="flex items-center">
-                            <i class="fi fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">库存</span>
-                        </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
-                            href="./inventory_request_list.html">申请列表</a>
-                    </div>
-                </div>
-
-                <!-- 小零件 Menu Group -->
-                <div class="menu-group">
-                    <button
-                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
-                        onclick="toggleMenu(this)">
-                        <div class="flex items-center">
-                            <i
-                                class="fi fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">小零件</span>
-                        </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
-                            href="./parts_list.html">列表</a>
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
-                            href="./parts_request_list.html">申请列表</a>
-                    </div>
-                </div>
-
-                <!-- 服务 Menu Group -->
-                <div class="menu-group">
-                    <button
-                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
-                        onclick="toggleMenu(this)">
-                        <div class="flex items-center">
-                            <i
-                                class="fi fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span>服务</span>
-                        </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
-                            href="./service_survey.html">问卷</a>
-                        <a class="block pl-14 py-2 text-slate-500 hover:text-primary transition-colors"
-                            href="./service_consultation.html">咨询</a>
-                    </div>
-                </div>
-
-                <!-- 用户权限 Menu Group -->
-                <div class="menu-group">
-                    <button
-                        class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group"
-                        onclick="toggleMenu(this)">
-                        <div class="flex items-center">
-                            <i class="fi fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                            <span class="text-[13px]">用户权限</span>
-                        </div>
-                        <svg class="w-[12px] h-[12px] text-slate-500 transition-transform duration-200"
-                            style="fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div class="menu-content hidden py-1">
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-                            href="./user_list.html">用户列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-                            href="./role_list.html">角色列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-                            href="./permission_list.html">权限列表</a>
-                        <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors"
-                            href="./role_permission_list.html">角色权限</a>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Collapse Button -->
-            <div class="border-t border-slate-100 bg-white p-4">
-                <button
-                    class="w-full flex items-center px-6 py-4 text-slate-400 hover:text-primary transition-colors group"
-                    onclick="toggleSidebar()">
-                    <i class="fi fi-rr-chevron-left w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
-                    <span class="text-xs font-semibold">Collapse</span>
-                </button>
+        <!-- Dashboard -->
+        <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all" href="./dashboard.html">
+          <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+          <span class="text-[13px]">Dashboard</span>
+        </a>
+        <!-- 工单管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">工单管理</span>
             </div>
-        </aside>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center" style="transform: rotate(180deg);"></i>
+          </button>
+          <div class="menu-content py-1 bg-slate-50/50">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./ticket_list.html">工单列表</a>
+          </div>
+        </div>
+        <!-- 产品管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">产品管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./product_list.html">产品列表</a>
+          </div>
+        </div>
+        <!-- 库存管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">库存管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_request_list.html">申请单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./delivery_invoice_list.html">出库单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_transfer_list.html">调拨单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_discrepancy_list.html">差异处理</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_sync_list.html">同步日志</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_record_list.html">库存记录</a>
+          </div>
+        </div>
+        <!-- 小零件管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">小零件管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_list.html">小零件列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_request_list.html">申请单</a>
+          </div>
+        </div>
+        <!-- 服务管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">服务管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_survey.html">问卷列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_consultation.html">咨询列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_notice_list.html">通知记录</a>
+          </div>
+        </div>
+        <!-- 权限管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">权限管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">用户列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_list.html">角色列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./permission_list.html">权限列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_permission_list.html">角色权限</a>
+          </div>
+        </div>
+        <!-- 系统配置 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-settings w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">系统配置</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./config_dict_list.html">数据字典</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./config_template_list.html">模板配置</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./config_status_list.html">状态配置</a>
+          </div>
+        </div>
+      </nav>
+    </aside>
 
-        <!-- Main Content -->
-        <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA] px-[30px] py-5">
-
-            <!-- Breadcrumb -->
-            <nav class="mb-5 font-medium text-[13px]">
-                <span class="text-primary">工单管理</span>
-                <span class="mx-2 text-slate-500">></span>
-                <span class="text-primary">工单列表</span>
-                <span class="mx-2 text-slate-500">></span>
-                <span class="text-slate-500">工单详情</span>
-            </nav>
+    <!-- Main Content -->
+    <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA] px-[30px] py-5">
+      <!-- Breadcrumb -->
+      <nav class="mb-5 font-medium text-[13px] flex items-center">
+        <span class="text-slate-400">工单管理</span>
+        <span class="mx-2 text-slate-300">/</span>
+        <a href="./ticket_list.html" class="text-primary hover:underline">工单列表</a>
+        <span class="mx-2 text-slate-300">/</span>
+        <span class="text-slate-500">工单详情</span>
+      </nav>
 
             <!-- Page Header -->
             <div class="w-full mb-4">
