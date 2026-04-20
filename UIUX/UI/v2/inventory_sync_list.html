@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -244,19 +244,17 @@
 
         <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA] form-text13">
       <div class="w-full max-w-full px-[30px] py-5">
-            <nav class="mb-5 text-[13px] font-medium flex items-center">
-                <span class="text-primary font-bold">库存管理</span>
-                <span class="mx-2 text-slate-300">/</span>
-                <span class="text-slate-500 uppercase tracking-tighter">同步日志</span>
-            </nav>
-
-            <div class="flex justify-between items-center mb-6">
-                <div class="flex items-center gap-3">
-                    <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tighter px-1">同步日志列表</h2>
+            <div class="flex justify-between items-center mb-5">
+                <div>
+                    <h1 class="text-on-surface font-headline tracking-tight text-[13px] font-medium flex items-center">
+                        <span class="text-slate-400">库存管理</span>
+                        <span class="mx-2 text-slate-300">/</span>
+                        <span class="text-slate-500">同步日志</span>
+                    </h1>
                 </div>
-                <div class="flex gap-2 text-[13px] font-medium">
-                    <button class="h-8 px-3 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 shadow-sm flex items-center gap-1.5 text-xs font-bold leading-none"><i class="fi fi-rr-download text-[12px]"></i>导出</button>
-                    <button class="h-8 w-8 bg-primary text-white border border-transparent rounded-lg hover:opacity-90 transition-all flex items-center justify-center shadow-sm shadow-primary/20"><i class="fi fi-rr-refresh text-[12px]"></i></button>
+                <div class="flex gap-2">
+                    <button class="h-8 px-3 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center gap-1.5 shadow-sm text-xs"><i class="fi fi-rr-download text-[12px]"></i>导出</button>
+                    <button class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm" title="Refresh"><i class="fi fi-rr-refresh text-[12px]"></i></button>
                 </div>
             </div>
 
@@ -264,30 +262,33 @@
             <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative transition-all duration-300 mb-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pr-[80px]">
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">SAP/PS单据号</label>
-                        <input class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary font-body" type="text" placeholder="输入编号" />
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步批次号</label>
+                        <input class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary font-body" type="text" placeholder="输入批次号" />
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步类型</label>
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步对象</label>
                         <select class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
                             <option>全部</option>
-                            <option>入库同步</option>
-                            <option>出库同步</option>
-                            <option>调拨同步</option>
-                            <option>基础资料</option>
+                            <option>产品库存</option>
+                            <option>价格主数据</option>
+                            <option>库存冻结信息</option>
+                            <option>仓位信息</option>
+                            <option>其他</option>
                         </select>
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步状态</label>
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
                         <select class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
                             <option>全部</option>
-                            <option>成功</option>
-                            <option>失败</option>
-                            <option>重试中</option>
+                            <option>待执行</option>
+                            <option>执行中</option>
+                            <option>执行成功</option>
+                            <option>部分成功</option>
+                            <option>执行失败</option>
                         </select>
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步时间</label>
+                        <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">开始时间</label>
                         <input class="w-full h-9 bg-[#f5f7fa] border-none rounded-lg text-sm px-3 focus:ring-1 focus:ring-primary font-body" type="date" />
                     </div>
                 </div>
@@ -298,82 +299,96 @@
 
             <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden min-w-0">
                 <div class="w-full overflow-x-auto no-scrollbar">
-                    <table class="w-full text-left text-[13px] whitespace-nowrap">
+                    <table class="min-w-[1800px] w-full text-left text-[13px] whitespace-nowrap">
                         <thead class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100">
                             <tr>
-                                <th class="px-6 py-4">同步编号</th>
-                                <th class="px-6 py-4 border-r border-[#f1f5f9]">接口名称</th>
+                                <th class="px-6 py-4">同步批次号</th>
+                                <th class="px-6 py-4">同步对象</th>
                                 <th class="px-6 py-4">同步类型</th>
-                                <th class="px-6 py-4">同步方向</th>
-                                <th class="px-6 py-4">产品编码</th>
-                                <th class="px-6 py-4 text-center">数量</th>
-                                <th class="px-6 py-4">SAP单据号</th>
-                                <th class="px-6 py-4">PS单据号</th>
+                                <th class="px-6 py-4">开始时间</th>
+                                <th class="px-6 py-4">结束时间</th>
                                 <th class="px-6 py-4 text-center">状态</th>
-                                <th class="px-6 py-4">同步时间</th>
-                                <th class="px-6 py-4 text-center">耗时 (ms)</th>
+                                <th class="px-6 py-4 text-center">成功数量</th>
+                                <th class="px-6 py-4 text-center">失败数量</th>
+                                <th class="px-6 py-4 text-center">差异数量</th>
+                                <th class="px-6 py-4">触发方式</th>
                                 <th class="px-6 py-4 border-r border-[#f1f5f9]">更新时间</th>
-                                <th class="px-6 py-4 text-center sticky right-0 bg-slate-50/50">Detail</th>
+                                <th class="px-6 py-4 text-center sticky right-0 bg-slate-50/50">操作</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
-                            <!-- Data 1 -->
                             <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_sync_detail.html'">
-                                <td class="px-6 py-4 text-slate-500 font-mono">LOG20260410001</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] font-medium text-slate-800 tracking-tighter">API_PURCHASE_ORDER_POST</td>
-                                <td class="px-6 py-4 text-slate-500">入库同步</td>
-                                <td class="px-6 py-4"><span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-black uppercase">SAP -> PS</span></td>
-                                <td class="px-6 py-4 text-slate-500">GM-SN-00128</td>
-                                <td class="px-6 py-4 text-center font-black">10</td>
-                                <td class="px-6 py-4 text-slate-600 italic">4500001234</td>
-                                <td class="px-6 py-4 text-primary font-bold">INVTRX20260410001</td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-black uppercase">成功</span></td>
-                                <td class="px-6 py-4 text-slate-400">09:15:22</td>
-                                <td class="px-6 py-4 text-center text-slate-600">325</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">09:15:23</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white">
-                                    <a href="./inventory_sync_detail.html" class="text-primary font-bold"><i class="fi fi-rr-eye"></i></a>
-                                </td>
+                                <td class="px-6 py-4 text-primary">SYNC20260410001</td>
+                                <td class="px-6 py-4 text-slate-600">产品库存</td>
+                                <td class="px-6 py-4 text-slate-500">全量同步</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 03:00:00</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 03:18:00</td>
+                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px]">执行成功</span></td>
+                                <td class="px-6 py-4 text-center text-slate-700">1250</td>
+                                <td class="px-6 py-4 text-center text-slate-700">0</td>
+                                <td class="px-6 py-4 text-center text-slate-700">6</td>
+                                <td class="px-6 py-4 text-slate-500">定时任务</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">2026-04-10 03:18:00</td>
+                                <td class="px-6 py-4 text-center sticky right-0 bg-white"><a href="./inventory_sync_detail.html" class="text-primary">详情</a></td>
                             </tr>
-                            <!-- Data 2 -->
                             <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_sync_detail.html'">
-                                <td class="px-6 py-4 text-slate-500 font-mono">LOG20260410002</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] font-medium text-slate-800 tracking-tighter">API_STOCK_TRANSFER_REQ</td>
-                                <td class="px-6 py-4 text-slate-500">调拨同步</td>
-                                <td class="px-6 py-4"><span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded text-[10px] font-black uppercase">PS -> SAP</span></td>
-                                <td class="px-6 py-4 text-slate-500">GM-PT-00056</td>
-                                <td class="px-6 py-4 text-center font-black">2</td>
-                                <td class="px-6 py-4 text-slate-600 italic">--</td>
-                                <td class="px-6 py-4 text-primary font-bold">TRF20260410001</td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 bg-rose-100 text-rose-700 rounded text-[10px] font-black uppercase shadow-sm">失败</span></td>
-                                <td class="px-6 py-4 text-slate-400">10:30:15</td>
-                                <td class="px-6 py-4 text-center text-slate-600">1250</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">10:30:16</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white">
-                                    <a href="./inventory_sync_detail.html" class="text-primary font-bold"><i class="fi fi-rr-eye"></i></a>
-                                </td>
+                                <td class="px-6 py-4 text-primary">SYNC20260410002</td>
+                                <td class="px-6 py-4 text-slate-600">库存冻结信息</td>
+                                <td class="px-6 py-4 text-slate-500">增量同步</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 10:00:00</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 10:03:00</td>
+                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px]">部分成功</span></td>
+                                <td class="px-6 py-4 text-center text-slate-700">48</td>
+                                <td class="px-6 py-4 text-center text-slate-700">2</td>
+                                <td class="px-6 py-4 text-center text-slate-700">1</td>
+                                <td class="px-6 py-4 text-slate-500">补偿任务</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">2026-04-10 10:03:00</td>
+                                <td class="px-6 py-4 text-center sticky right-0 bg-white"><a href="./inventory_sync_detail.html" class="text-primary">详情</a></td>
                             </tr>
-                            <!-- Data 3 -->
                             <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_sync_detail.html'">
-                                <td class="px-6 py-4 text-slate-500 font-mono">LOG20260410003</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] font-medium text-slate-800 tracking-tighter">API_DELIVERY_CONFIRM</td>
-                                <td class="px-6 py-4 text-slate-500">出库同步</td>
-                                <td class="px-6 py-4"><span class="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-black uppercase">PS -> SAP</span></td>
-                                <td class="px-6 py-4 text-slate-500">GM-LS-00321</td>
-                                <td class="px-6 py-4 text-center font-black">5</td>
-                                <td class="px-6 py-4 text-slate-600 italic">800201923</td>
-                                <td class="px-6 py-4 text-primary font-bold">OUT20260410001</td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-black uppercase">成功</span></td>
-                                <td class="px-6 py-4 text-slate-400">14:05:48</td>
-                                <td class="px-6 py-4 text-center text-slate-600">412</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">14:05:49</td>
-                                <td class="px-6 py-4 text-center sticky right-0 bg-white">
-                                    <a href="./inventory_sync_detail.html" class="text-primary font-bold"><i class="fi fi-rr-eye"></i></a>
-                                </td>
+                                <td class="px-6 py-4 text-primary">SYNC20260410003</td>
+                                <td class="px-6 py-4 text-slate-600">价格主数据</td>
+                                <td class="px-6 py-4 text-slate-500">补偿同步</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 15:30:00</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 15:36:00</td>
+                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 bg-rose-100 text-rose-700 rounded text-[10px]">执行失败</span></td>
+                                <td class="px-6 py-4 text-center text-slate-700">0</td>
+                                <td class="px-6 py-4 text-center text-slate-700">35</td>
+                                <td class="px-6 py-4 text-center text-slate-700">0</td>
+                                <td class="px-6 py-4 text-slate-500">手工触发</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">2026-04-10 15:36:00</td>
+                                <td class="px-6 py-4 text-center sticky right-0 bg-white"><a href="./inventory_sync_detail.html" class="text-primary">详情</a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
+                <p class="text-[10px] font-bold text-slate-500 uppercase">
+                    共 128 条，显示 1-10
+                </p>
+                <div class="flex items-center gap-2">
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400 disabled:opacity-50" disabled>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">
+                        1
+                    </button>
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
+                        2
+                    </button>
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
+                        3
+                    </button>
+                    <span class="text-slate-400 px-1">...</span>
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
             </div>
             </div>
         </main>
@@ -419,3 +434,7 @@
   </script>
 </body>
 </html>
+
+
+
+

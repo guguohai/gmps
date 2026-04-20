@@ -262,12 +262,7 @@
                         </div>
                         <p class="text-xs text-on-surface-variant font-medium px-1">编号：DIFF20260410001</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <button class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 flex items-center gap-1.5 transition-all">
-                            <i class="fi fi-rr-disk w-4 h-4"></i>
-                            <span>保存更新</span>
-                        </button>
-                    </div>
+                    <div class="flex items-center gap-2"></div>
                 </div>
 
                 <!-- Section 1: 差异信息 -->
@@ -277,7 +272,7 @@
                         <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">差异信息</h3>
                     </div>
                     <div class="px-8 py-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异单编号</label>
                                 <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold italic" type="text" value="DIFF20260410001" readonly />
@@ -285,8 +280,10 @@
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异类型</label>
                                 <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option selected>同步差异</option>
                                     <option>盘点差异</option>
+                                    <option selected>同步差异</option>
+                                    <option>出库差异</option>
+                                    <option>入库差异</option>
                                     <option>冻结差异</option>
                                     <option>其他</option>
                                 </select>
@@ -294,16 +291,18 @@
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异来源</label>
                                 <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option>盘点</option>
                                     <option selected>SAP同步</option>
-                                    <option>仓库盘点</option>
+                                    <option>出库复核</option>
+                                    <option>入库复核</option>
+                                    <option>冻结校验</option>
                                     <option>人工发现</option>
-                                    <option>系统校验</option>
                                 </select>
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">来源单号</label>
                                 <div class="relative group">
-                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary underline pr-10" type="text" value="SYNC-20260410" />
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary underline pr-10" type="text" value="SYNC20260410001" />
                                     <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
                                 </div>
                             </div>
@@ -326,7 +325,7 @@
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">发现时间</label>
                                 <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2026-04-10T08:20" />
                             </div>
-                            <div class="space-y-3 lg:col-span-4 grid grid-cols-3 gap-6 pt-2 border-t border-slate-50 mt-2">
+                            <div class="space-y-3 lg:col-span-2 grid grid-cols-3 gap-6 pt-2 border-t border-slate-50 mt-2">
                                 <div class="space-y-1">
                                     <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest text-center block">SAP数量</label>
                                     <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-center text-lg py-2 px-3 focus:ring-1 focus:ring-primary font-black text-slate-700" type="number" value="20" />
@@ -351,18 +350,15 @@
                         <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">原因判断</h3>
                     </div>
                     <div class="px-8 py-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="space-y-1 md:col-span-1 lg:col-span-1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                            <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异原因</label>
                                 <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                     <option selected>少记入库</option>
                                     <option>少记出库</option>
-                                    <option>多记入库</option>
-                                    <option>多记出库</option>
-                                    <option>盘点亏损</option>
-                                    <option>盘点溢余</option>
-                                    <option>冻结未同步</option>
-                                    <option>系统同步故障</option>
+                                    <option>冻结未释放</option>
+                                    <option>盘点差异</option>
+                                    <option>其他</option>
                                 </select>
                             </div>
                             <div class="space-y-1">
@@ -374,7 +370,7 @@
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">处理时间</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2026-04-10T09:00" />
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2026-04-10T09:05" />
                             </div>
                         </div>
                     </div>
@@ -382,28 +378,34 @@
 
                 <!-- Section 3: 处理决策 -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/30 flex items-center gap-2">
-                        <i class="fi fi-sr-settings text-primary text-[14px]"></i>
-                        <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">处理决策</h3>
+                    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/30 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fi fi-sr-settings text-primary text-[14px]"></i>
+                            <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">处理决策</h3>
+                        </div>
+                        <button class="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg shadow-sm hover:opacity-90 flex items-center gap-1.5 transition-all">
+                            <i class="fi fi-rr-file-check w-4 h-4"></i>
+                            <span>生成结果记录</span>
+                        </button>
                     </div>
                     <div class="px-8 py-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">处理方式</label>
                                 <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
                                     <option selected>补录入库记录</option>
                                     <option>补录出库记录</option>
-                                    <option>SAP库存调整</option>
-                                    <option>释放冻结库存</option>
-                                    <option>忽略差异</option>
-                                    <option>其他</option>
+                                    <option>补录释放记录</option>
+                                    <option>冻结调整记录</option>
+                                    <option>库存调整记录</option>
+                                    <option>人工确认无差异</option>
                                 </select>
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">修正数量</label>
                                 <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold" type="number" value="2" />
                             </div>
-                            <div class="space-y-1 lg:col-span-3">
+                            <div class="space-y-1 lg:col-span-2">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">处理说明</label>
                                 <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2">经核实为SAP入库同步延迟，在PS系统中补录入库记录以平账。</textarea>
                             </div>
@@ -418,33 +420,40 @@
                         <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">处理结果</h3>
                     </div>
                     <div class="px-8 py-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">状态</label>
                                 <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-bold">
+                                    <option>待确认</option>
                                     <option>待处理</option>
-                                    <option selected>处理中</option>
-                                    <option>已完成</option>
-                                    <option>已忽略</option>
+                                    <option>处理中</option>
+                                    <option selected>已完成</option>
+                                    <option>已关闭</option>
                                 </select>
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">结果类型</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-medium" type="text" value="库存变动流水" />
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>补录入库</option>
+                                    <option>补录出库</option>
+                                    <option>冻结调整</option>
+                                    <option>库存调整</option>
+                                    <option>无差异关闭</option>
+                                </select>
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">结果单号</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary italic" type="text" value="INVTRX20260410011" />
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary italic underline" type="text" value="INVTRX20260410011" />
                             </div>
                             <div class="space-y-1">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">结果状态</label>
                                 <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-bold text-green-600">
-                                    <option selected>执行成功</option>
-                                    <option>等待执行</option>
+                                    <option selected>已完成</option>
+                                    <option>待执行</option>
                                     <option>执行失败</option>
                                 </select>
                             </div>
-                            <div class="space-y-1 lg:col-span-4">
+                            <div class="space-y-1 lg:col-span-2">
                                 <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">备注</label>
                                 <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2"></textarea>
                             </div>

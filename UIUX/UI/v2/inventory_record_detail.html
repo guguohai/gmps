@@ -258,14 +258,18 @@
                     <div class="space-y-1">
                         <div class="flex items-center gap-3">
                             <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tighter">库存记录详情</h2>
-                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-black rounded uppercase shadow-sm">已出库</span>
+                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-black rounded uppercase shadow-sm">入库</span>
                         </div>
                         <p class="text-xs text-on-surface-variant font-medium">交易编号：INVTRX20260410001</p>
                     </div>
                     <div class="flex items-center gap-2">
+                        <button class="px-[18px] py-2 bg-slate-100 text-slate-700 text-sm font-bold rounded-lg shadow-sm hover:bg-slate-200 flex items-center gap-1.5 transition-all">
+                            <i class="fi fi-rr-file-export w-4 h-4"></i>
+                            <span>导出</span>
+                        </button>
                         <button class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 flex items-center gap-1.5 transition-all">
-                            <i class="fi fi-rr-disk w-4 h-4"></i>
-                            <span>保存更新</span>
+                            <i class="fi fi-rr-print w-4 h-4"></i>
+                            <span>打印</span>
                         </button>
                     </div>
                 </div>
@@ -273,110 +277,78 @@
                 <!-- Form Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
                     <div class="px-8 py-8">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                             <!-- Field 1 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">交易编号</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold" type="text" value="INVTRX20260410001" readonly />
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 font-bold text-slate-700">INVTRX20260410001</div>
                             </div>
                             <!-- Field 2 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">记录类型</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option selected>入库</option>
-                                    <option>出库</option>
-                                    <option>调拨调出</option>
-                                    <option>调拨调入</option>
-                                    <option>冻结</option>
-                                    <option>释放</option>
-                                    <option>补录入库</option>
-                                    <option>补录出库</option>
-                                    <option>库存调整</option>
-                                </select>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">入库</div>
                             </div>
                             <!-- Field 3 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品编码</label>
-                                <div class="relative group">
-                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-mono pr-10" type="text" value="GM-SN-00128" />
-                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
-                                </div>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 font-mono text-slate-700">GM-SN-00128</div>
                             </div>
                             <!-- Field 4 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-semibold italic" type="text" value="GENTLE MONSTER LANG 01" readonly />
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 font-semibold text-slate-700">GENTLE MONSTER LANG 01</div>
                             </div>
                             <!-- Field 5 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">仓库/位置</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option selected>PS主仓-A01</option>
-                                    <option>PS配件仓-B03</option>
-                                    <option>3PL仓-C02</option>
-                                </select>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">PS主仓-A01</div>
                             </div>
                             <!-- Field 6 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">变动数量</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-black" type="number" value="10" />
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 font-bold text-slate-700">10</div>
                             </div>
                             <!-- Field 7 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">变动方向</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option selected>增加</option>
-                                    <option>减少</option>
-                                    <option>冻结</option>
-                                    <option>释放</option>
-                                </select>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-green-700 font-bold">增加</div>
                             </div>
                             <!-- Field 8 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">变动前数量</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary italic" type="text" value="25" readonly />
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">25</div>
                             </div>
                             <!-- Field 9 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">变动后数量</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary italic font-bold" type="text" value="35" readonly />
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700 font-bold">35</div>
                             </div>
                             <!-- Field 10 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">业务来源类型</label>
-                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
-                                    <option selected>申请单</option>
-                                    <option>出库单</option>
-                                    <option>调拨单</option>
-                                    <option>差异处理</option>
-                                    <option>其他</option>
-                                </select>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">申请单</div>
                             </div>
                             <!-- Field 11 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">来源单号</label>
-                                <div class="relative group">
-                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary underline pr-10" type="text" value="REQ20260410003" />
-                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3">
+                                    <a href="./inventory_request_detail.html" class="text-primary font-bold underline">REQ20260410003</a>
                                 </div>
                             </div>
                             <!-- Field 12 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">操作时间</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2026-04-10T09:15" />
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">2026-04-10 09:15:00</div>
                             </div>
                             <!-- Field 13 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">操作人</label>
-                                <div class="relative group">
-                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary pr-10" type="text" value="张敏" />
-                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
-                                </div>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">张敏</div>
                             </div>
                             <!-- Field 14 -->
-                            <div class="space-y-1 md:col-span-3 lg:col-span-2">
+                            <div class="space-y-1 md:col-span-2 lg:col-span-2">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">备注</label>
-                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2">维修补货入库</textarea>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700 min-h-[42px]">维修补货入库</div>
                             </div>
                         </div>
                     </div>

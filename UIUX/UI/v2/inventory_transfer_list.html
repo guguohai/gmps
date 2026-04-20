@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -245,19 +245,17 @@
         <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA] form-text13">
       <div class="w-full max-w-full px-[30px] py-5">
             
-        <nav class="mb-5 text-[13px] font-medium flex items-center">
-          <span class="text-slate-400">库存管理</span>
-          <span class="mx-2 text-slate-300">/</span>
-          <span class="text-slate-500">调拨单</span>
-        </nav>
-
-        <div class="flex justify-between items-center mb-5 mt-2">
+        <div class="flex justify-between items-center mb-5">
           <div>
-            <h1 class="text-on-surface font-headline tracking-tight text-[16px] font-semibold">调拨单</h1>
+            <h1 class="text-on-surface font-headline tracking-tight text-[13px] font-medium flex items-center">
+              <span class="text-slate-400">库存管理</span>
+              <span class="mx-2 text-slate-300">/</span>
+              <span class="text-slate-500">调拨单</span>
+            </h1>
           </div>
           <div class="flex gap-2">
-                    <button class="h-8 px-3 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 shadow-sm flex items-center gap-1.5 text-xs font-bold leading-none"><i class="fi fi-rr-plus text-[12px]"></i>新增调拨</button>
-                    <button class="h-8 w-8 bg-primary text-white border border-transparent rounded-lg hover:opacity-90 transition-all flex items-center justify-center shadow-sm shadow-primary/20"><i class="fi fi-rr-refresh text-[12px]"></i></button>
+                    <button class="h-8 px-3 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center gap-1.5 shadow-sm text-xs"><i class="fi fi-rr-plus text-[12px]"></i>新增调拨</button>
+                    <button class="h-8 w-8 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors flex items-center justify-center shadow-sm" title="Refresh"><i class="fi fi-rr-refresh text-[12px]"></i></button>
                 </div>
         </div>
 
@@ -298,7 +296,7 @@
 
             <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden min-w-0">
                 <div class="w-full overflow-x-auto no-scrollbar">
-                    <table class="w-full text-left text-[13px] whitespace-nowrap">
+                    <table class="min-w-[1750px] w-full text-left text-[13px] whitespace-nowrap">
                         <thead class="bg-slate-50/50 text-slate-500 uppercase font-bold tracking-wider border-b border-slate-100">
                             <tr>
                                 <th class="px-6 py-4">调拨单编号</th>
@@ -306,7 +304,7 @@
                                 <th class="px-6 py-4 border-r border-[#f1f5f9]">调入位置</th>
                                 <th class="px-6 py-4">产品编码</th>
                                 <th class="px-6 py-4">产品名称</th>
-                                <th class="px-6 py-4 text-center">数量</th>
+                                <th class="px-6 py-4 text-center">调拨数量</th>
                                 <th class="px-6 py-4">调拨类型</th>
                                 <th class="px-6 py-4 text-center">状态</th>
                                 <th class="px-6 py-4">申请时间</th>
@@ -319,61 +317,88 @@
                         <tbody class="divide-y divide-slate-100">
                             <!-- Data 1 -->
                             <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_transfer_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">TRF20260410001</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">PS主仓-A02</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600 font-bold">3PL仓-C01</td>
+                                <td class="px-6 py-4 text-primary">TRF20260410001</td>
+                                <td class="px-6 py-4 text-slate-500">PS主仓-A02</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600">3PL仓-C01</td>
                                 <td class="px-6 py-4 text-slate-500">GM-LS-00321</td>
-                                <td class="px-6 py-4 text-slate-800 font-bold italic">镜片组件-透明</td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">5</td>
+                                <td class="px-6 py-4 text-slate-800 italic">镜片组件-透明</td>
+                                <td class="px-6 py-4 text-center text-slate-700">5</td>
                                 <td class="px-6 py-4 text-slate-500">3PL补货</td>
-                                <td class="px-6 py-4 text-center font-bold text-amber-600 uppercase">待调出</td>
-                                <td class="px-6 py-4 text-slate-400 italic">04-10 09:40</td>
-                                <td class="px-6 py-4 text-slate-300">--</td>
+                                <td class="px-6 py-4 text-center text-amber-600 uppercase">待调出</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 09:40:00</td>
+                                <td class="px-6 py-4 text-slate-300"></td>
                                 <td class="px-6 py-4 text-slate-600">王雪</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">09:45</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">2026-04-10 09:45:00</td>
                                 <td class="px-6 py-4 text-center sticky right-0 bg-white shadow-[-8px_0_12px_-6px_rgba(0,0,0,0.05)]">
-                                    <a href="./inventory_transfer_detail.html" class="text-primary font-bold">详情</a>
+                                    <a href="./inventory_transfer_detail.html" class="text-primary">详情</a>
                                 </td>
                             </tr>
                             <!-- Data 2 -->
                             <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_transfer_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">TRF20260410002</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">PS配件仓-B01</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600 font-bold">维修中心临时库-R01</td>
+                                <td class="px-6 py-4 text-primary">TRF20260410002</td>
+                                <td class="px-6 py-4 text-slate-500">PS配件仓-B01</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600">维修中心临时库-R01</td>
                                 <td class="px-6 py-4 text-slate-500">GM-PT-00056</td>
-                                <td class="px-6 py-4 text-slate-800 font-bold italic">镜腿配件-黑色</td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">8</td>
+                                <td class="px-6 py-4 text-slate-800 italic">镜腿配件-黑色</td>
+                                <td class="px-6 py-4 text-center text-slate-700">8</td>
                                 <td class="px-6 py-4 text-slate-500">维修调拨</td>
-                                <td class="px-6 py-4 text-center font-bold text-blue-600 uppercase">待调入</td>
-                                <td class="px-6 py-4 text-slate-400 italic">04-10 10:10</td>
-                                <td class="px-6 py-4 text-slate-300">--</td>
+                                <td class="px-6 py-4 text-center text-blue-600 uppercase">待调入</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 10:10:00</td>
+                                <td class="px-6 py-4 text-slate-300"></td>
                                 <td class="px-6 py-4 text-slate-600">李晨</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">10:55</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">2026-04-10 10:55:00</td>
                                 <td class="px-6 py-4 text-center sticky right-0 bg-white">
-                                    <a href="./inventory_transfer_detail.html" class="text-primary font-bold">详情</a>
+                                    <a href="./inventory_transfer_detail.html" class="text-primary">详情</a>
                                 </td>
                             </tr>
                             <!-- Data 3 -->
                             <tr class="hover:bg-blue-50/30 transition-colors pointer-cursor" onclick="location.href='./inventory_transfer_detail.html'">
-                                <td class="px-6 py-4 text-primary font-bold">TRF20260410003</td>
-                                <td class="px-6 py-4 text-slate-500 font-medium">PS主仓-A01</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600 font-bold">上海门店-S01</td>
+                                <td class="px-6 py-4 text-primary">TRF20260410003</td>
+                                <td class="px-6 py-4 text-slate-500">PS主仓-A01</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-600">上海门店-S01</td>
                                 <td class="px-6 py-4 text-slate-500">GM-SN-00128</td>
-                                <td class="px-6 py-4 text-slate-800 font-bold italic">GENTLE MONSTER LANG 01</td>
-                                <td class="px-6 py-4 text-center font-black text-slate-700">3</td>
+                                <td class="px-6 py-4 text-slate-800 italic">GENTLE MONSTER LANG 01</td>
+                                <td class="px-6 py-4 text-center text-slate-700">3</td>
                                 <td class="px-6 py-4 text-slate-500">门店补货</td>
-                                <td class="px-6 py-4 text-center font-bold text-green-600 uppercase">已完成</td>
-                                <td class="px-6 py-4 text-slate-400 italic">04-10 08:30</td>
-                                <td class="px-6 py-4 text-slate-400">14:20</td>
+                                <td class="px-6 py-4 text-center text-green-600 uppercase">已完成</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 08:30:00</td>
+                                <td class="px-6 py-4 text-slate-400">2026-04-10 14:20:00</td>
                                 <td class="px-6 py-4 text-slate-600">张敏</td>
-                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">14:20</td>
+                                <td class="px-6 py-4 border-r border-[#f1f5f9] text-slate-400">2026-04-10 14:20:00</td>
                                 <td class="px-6 py-4 text-center sticky right-0 bg-white">
-                                    <a href="./inventory_transfer_detail.html" class="text-primary font-bold">详情</a>
+                                    <a href="./inventory_transfer_detail.html" class="text-primary">详情</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
+                <p class="text-[10px] font-bold text-slate-500 uppercase">
+                    共 128 条，显示 1-10
+                </p>
+                <div class="flex items-center gap-2">
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400 disabled:opacity-50" disabled>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">
+                        1
+                    </button>
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
+                        2
+                    </button>
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:bg-white transition-colors">
+                        3
+                    </button>
+                    <span class="text-slate-400 px-1">...</span>
+                    <button class="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
             </div>
             </div>
         </main>
@@ -419,3 +444,7 @@
   </script>
 </body>
 </html>
+
+
+
+

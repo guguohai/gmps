@@ -258,14 +258,18 @@
                     <div class="space-y-1">
                         <div class="flex items-center gap-3">
                             <h2 class="text-2xl font-extrabold text-on-surface font-headline tracking-tighter px-1">同步日志详情</h2>
-                            <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-black rounded uppercase shadow-sm">成功</span>
+                            <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-black rounded uppercase shadow-sm">执行成功</span>
                         </div>
-                        <p class="text-xs text-on-surface-variant font-medium px-1 italic">同步编号：LOG20260410001</p>
+                        <p class="text-xs text-on-surface-variant font-medium px-1 italic">同步批次号：SYNC20260410001</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button class="px-[18px] py-2 bg-slate-100 text-slate-600 text-sm font-bold rounded-lg shadow-sm hover:bg-slate-200 flex items-center gap-1.5 transition-all">
-                            <i class="fi fi-rr-refresh w-4 h-4"></i>
-                            <span>再次同步</span>
+                        <button class="px-[18px] py-2 bg-slate-100 text-slate-700 text-sm font-bold rounded-lg shadow-sm hover:bg-slate-200 flex items-center gap-1.5 transition-all">
+                            <i class="fi fi-rr-file-export w-4 h-4"></i>
+                            <span>导出</span>
+                        </button>
+                        <button class="px-[18px] py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-sm hover:opacity-90 flex items-center gap-1.5 transition-all">
+                            <i class="fi fi-rr-print w-4 h-4"></i>
+                            <span>打印</span>
                         </button>
                     </div>
                 </div>
@@ -273,104 +277,91 @@
                 <!-- Form Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
                     <div class="px-8 py-8">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                             <!-- Field 1 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步编号</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-mono text-slate-500" type="text" value="LOG20260410001" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步批次号</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 font-mono text-slate-700">SYNC20260410001</div>
                             </div>
                             <!-- Field 2 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">接口名称</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-slate-700 tracking-tighter" type="text" value="API_PURCHASE_ORDER_POST" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步对象</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">产品库存</div>
                             </div>
                             <!-- Field 3 -->
                             <div class="space-y-1">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步类型</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="入库同步" readonly />
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">全量同步</div>
                             </div>
                             <!-- Field 4 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步方向</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-black text-blue-600" type="text" value="SAP -> PS" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">触发方式</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">定时任务</div>
                             </div>
                             <!-- Field 5 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品编码</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-mono" type="text" value="GM-SN-00128" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">开始时间</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">2026-04-10 03:00:00</div>
                             </div>
                             <!-- Field 6 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">产品名称</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary italic font-medium" type="text" value="GENTLE MONSTER LANG 01" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">结束时间</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">2026-04-10 03:18:00</div>
                             </div>
                             <!-- Field 7 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">数量</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-black" type="number" value="10" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">状态</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-green-700">执行成功</div>
                             </div>
                             <!-- Field 8 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">SAP单据号</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold italic" type="text" value="4500001234" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">成功数量</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">1250</div>
                             </div>
                             <!-- Field 9 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">PS单据号</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary underline" type="text" value="INVTRX20260410001" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">失败数量</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">0</div>
                             </div>
                             <!-- Field 10 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步状态</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-black text-green-600 uppercase" type="text" value="SUCCESS" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">差异数量</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">6</div>
                             </div>
                             <!-- Field 11 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">同步时间</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="text" value="2026-04-10 09:15:22" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">来源系统</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">SAP</div>
                             </div>
                             <!-- Field 12 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">耗时 (ms)</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold" type="text" value="325" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">目标系统</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">PS Admin</div>
                             </div>
                             <!-- Field 13 -->
                             <div class="space-y-1">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">重试次数</label>
-                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="number" value="0" readonly />
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">执行任务名称</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">inventory_full_sync_job</div>
                             </div>
-                            <div class="lg:col-span-2"></div>
-                            <!-- Field 14: 请求报文 -->
-                            <div class="space-y-1 lg:col-span-3">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">请求报文</label>
-                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-[12px] py-3 px-3 focus:ring-1 focus:ring-primary font-mono text-slate-600" rows="6" readonly>{
-  "header": { "source": "SAP", "type": "PO_POST", "timestamp": "2026-04-10T09:15:20Z" },
-  "body": {
-    "po_number": "4500001234",
-    "items": [
-      { "material": "GM-SN-00128", "quantity": 10, "plant": "PS01", "storage_loc": "A01" }
-    ]
-  }
-}</textarea>
+                            <div class="space-y-1">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">执行人</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700">系统定时同步</div>
                             </div>
-                            <!-- Field 15: 响应报文 -->
-                            <div class="space-y-1 lg:col-span-3">
-                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">响应报文</label>
-                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-[12px] py-3 px-3 focus:ring-1 focus:ring-primary font-mono text-slate-600" rows="6" readonly>{
-  "status": "success",
-  "ps_trx_id": "INVTRX20260410001",
-  "message": "Inventory record created successfully"
-}</textarea>
+                            <div class="space-y-1 lg:col-span-2">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">异常摘要</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700 min-h-[42px]"></div>
                             </div>
-                            <!-- Field 16: 错误信息 -->
-                            <div class="space-y-1 lg:col-span-3">
-                                <label class="text-[12px] font-bold text-rose-400 uppercase tracking-wider">错误信息</label>
-                                <textarea class="w-full bg-[#fef2f2] border-none rounded-lg text-[12px] py-3 px-3 focus:ring-1 focus:ring-primary font-mono text-rose-600 italic" rows="2" readonly></textarea>
+                            <div class="space-y-1 lg:col-span-2">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">失败明细</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700 min-h-[84px]">本批次失败数量为 0，无失败明细。</div>
                             </div>
-                            <!-- Field 17: 备注 -->
-                            <div class="space-y-1 lg:col-span-3">
+                            <div class="space-y-1 lg:col-span-2">
+                                <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">处理结果</label>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700 min-h-[42px]">同步完成，已更新产品库存数据并记录差异项。</div>
+                            </div>
+                            <div class="space-y-1 lg:col-span-2">
                                 <label class="text-[12px] font-bold text-slate-400 uppercase tracking-wider">备注</label>
-                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2" readonly></textarea>
+                                <div class="w-full bg-[#f5f7fa] rounded-lg text-sm py-2 px-3 text-slate-700 min-h-[42px]"></div>
                             </div>
                         </div>
                     </div>
