@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>差异处理详情 | 库存管理 | PRODUCT SERVICE</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/solid/all.css" />
+    <style>
+        @font-face {
+            font-family: 'uicons-solid';
+            src: url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff2') format('woff2'),
+                url('https://cdn-uicons.flaticon.com/uicons-solid/webfonts/uicons-solid.woff') format('woff');
+            font-weight: normal; font-style: normal;
+        }
+        [class^="fi-sr-"] {
+            font-family: 'uicons-solid' !important;
+            speak: none; font-style: normal; font-weight: normal; font-variant: normal;
+            text-transform: none; line-height: 1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#177ee5",
+                        "on-surface": "#26343d",
+                        "on-surface-variant": "#52616a",
+                        "background": "#F5F7FA",
+                        "outline": "#cbd0dd",
+                        "surface": "#ffffff",
+                    },
+                    fontFamily: { headline: ["Manrope"], body: ["Inter"] },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }
+                }
+            }
+        }
+    </script>
+    <style>
+        .form-text13 input,
+        .form-text13 textarea,
+        .form-text13 select,
+        .form-text13 button {
+            font-size: 13px !important;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: 'Inter', sans-serif; background-color: #F5F7FA; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+
+<body class="text-on-surface bg-background min-h-screen">
+    <header
+    class="bg-white border-b border-[#cbd0dd] fixed top-0 left-0 right-0 z-50 h-16 px-6 flex items-center justify-between">
+    <div class="flex items-center gap-8">
+      <!-- Logo & Brand -->
+      <div class="flex items-center gap-3">
+        <img class="w-6 h-6 rounded-lg" src="logo.png" alt="PRODUCT SERVICE Logo" />
+        <span class="text-lg font-bold text-[#6e7891] tracking-tight font-headline">PRODUCT SERVICE</span>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="relative hidden md:block">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg"
+          width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0z">
+          </path>
+        </svg>
+        <input
+          class="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+          style="background-color: #f5f7fa; width: 440px" type="text" placeholder="Scan barcode" />
+      </div>
+
+    </div>
+
+    <!-- Right Actions -->
+    <div class="flex items-center gap-4 h-full">
+      <!-- Language Dropdown -->
+      <div class="relative">
+        <button
+          class="p-2 hover:bg-slate-50 rounded-full text-slate-500 transition-colors flex items-center justify-center"
+          title="Language" onclick="toggleDropdown('language-dropdown')">
+          <i class="fi fi-rr-globe text-[20px] leading-none"></i>
+        </button>
+        <!-- Language Dropdown Menu -->
+        <div id="language-dropdown"
+          class="hidden absolute right-0 top-full mt-2 w-32 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50">
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">中文</a>
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">한국어</a>
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">English</a>
+        </div>
+      </div>
+
+      <!-- User Dropdown -->
+      <div class="relative">
+        <div class="flex items-center gap-3 pl-4 border-l border-slate-200 h-8 cursor-pointer"
+          onclick="toggleDropdown('user-dropdown')">
+          <div class="w-9 h-9 flex items-center justify-center bg-[#e3e7ed]" style="border-radius: 50px">
+            <svg t="1774707118806" style="fill: #657489" viewBox="0 0 1024 1024" version="1.1"
+              xmlns="http://www.w3.org/2000/svg" p-id="1650" width="20" height="20">
+              <path
+                d="M502.178909 38.632727c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273z m0 0c-131.072 0-237.521455 104.168727-237.521454 232.727273s106.402909 232.727273 237.521454 232.727273c131.165091 0 237.568-104.168727 237.568-232.727273s-106.309818-232.727273-237.568-232.727273zM413.184 581.678545c-169.472 0-306.874182 134.609455-306.874182 300.590546v19.316364c0 67.909818 137.402182 67.956364 306.874182 67.956363h197.957818c169.425455 0 306.781091-2.513455 306.781091-67.956363v-19.316364c0-165.981091-137.355636-300.590545-306.781091-300.590546H413.184z m0 0"
+                p-id="1651"></path>
+            </svg>
+          </div>
+        </div>
+        <!-- User Dropdown Menu -->
+        <div id="user-dropdown"
+          class="hidden absolute right-0 top-full mt-2 w-40 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50">
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">个人信息</a>
+          <a href="#"
+            class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors">退出</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="flex pt-16 h-screen">
+        <aside id="sidebar" class="bg-white fixed left-0 top-16 bottom-0 w-64 flex flex-col h-[calc(100vh-64px)] overflow-y-auto no-scrollbar font-['Manrope'] text-[13px] font-medium z-40 border-r border-[#cbd0dd]">
+            <nav class="py-4 flex-grow space-y-1 text-[13px]">
+        <!-- Dashboard -->
+        <a class="flex items-center px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all" href="./dashboard.html">
+          <i class="fi fi-rr-dashboard w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+          <span class="text-[13px]">仪表盘</span>
+        </a>
+        <!-- 工单管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-ticket w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">工单管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./ticket_list.html">工单列表</a>
+          </div>
+        </div>
+        <!-- 产品管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-box w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">产品管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./product_list.html">产品列表</a>
+          </div>
+        </div>
+        <!-- 库存管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-primary bg-blue-50/50 font-bold transition-all border-r-4 border-primary group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-boxes w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">库存管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center" style="transform: rotate(180deg);"></i>
+          </button>
+          <div class="menu-content py-1 bg-slate-50/50">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_request_list.html">申请单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./delivery_invoice_list.html">出库单</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_transfer_list.html">调拨单</a>
+            <a class="block pl-14 py-2 text-[13px] text-primary font-bold transition-colors relative after:content-[''] after:absolute after:left-[-12px] after:top-1/2 after:-translate-y-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="./inventory_discrepancy_list.html">差异处理</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_sync_list.html">同步日志</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./inventory_record_list.html">库存记录</a>
+          </div>
+        </div>
+        <!-- 小零件管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-settings-sliders w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">小零件管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_list.html">小零件列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./parts_request_list.html">申请单</a>
+          </div>
+        </div>
+        <!-- 服务管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-message-question w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">服务管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_survey.html">问卷列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_consultation.html">咨询列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./service_notice_list.html">通知记录</a>
+          </div>
+        </div>
+        <!-- 权限管理 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-users-alt w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">权限管理</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./user_list.html">用户列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_list.html">角色列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./permission_list.html">权限列表</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./role_permission_list.html">角色权限</a>
+          </div>
+        </div>
+        <!-- 系统配置 -->
+        <div class="menu-group">
+          <button class="menu-toggle w-full flex items-center justify-between px-6 py-3 text-slate-600 hover:bg-slate-50 hover:text-primary transition-all group" onclick="toggleMenu(this)">
+            <div class="flex items-center">
+              <i class="fi-rr-settings w-[16px] h-[16px] mr-3 flex items-center justify-center"></i>
+              <span class="text-[13px]">系统配置</span>
+            </div>
+            <i class="fi fi-rr-angle-small-down w-[12px] h-[12px] text-slate-500 transition-transform duration-200 flex items-center justify-center"></i>
+          </button>
+          <div class="menu-content hidden py-1">
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./config_dict_list.html">数据字典</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./config_template_list.html">模板配置</a>
+            <a class="block pl-14 py-2 text-[13px] text-slate-500 hover:text-primary transition-colors" href="./config_status_list.html">状态配置</a>
+          </div>
+        </div>
+      </nav>
+        </aside>
+
+        <main class="ml-64 flex-1 min-w-0 min-h-[calc(100vh-64px)] bg-[#F5F7FA] form-text13">
+      <div class="w-full max-w-full px-[30px] py-5">
+            <div class="mb-5 flex items-start justify-between gap-4 flex-nowrap">
+                <div class="min-w-0 flex-1">
+                    <nav class="text-[13px] font-medium flex items-center whitespace-nowrap">
+                        <span class="text-primary font-bold">库存管理</span>
+                        <span class="mx-2 text-slate-300">/</span>
+                        <a href="./inventory_discrepancy_list.html" class="text-primary hover:underline font-bold uppercase tracking-tight">差异处理</a>
+                        <span class="mx-2 text-slate-300">/</span>
+                        <span class="text-slate-500 uppercase tracking-tighter">详情</span>
+                    </nav>
+                    <!--
+                    <div class="mt-3 inline-flex max-w-full rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+                        <div class="flex items-start gap-2 text-amber-800">
+                            <i class="fi fi-rr-triangle-warning text-base leading-none mt-0.5"></i>
+                            <p class="text-[12px] leading-5 whitespace-normal break-words">该出库单存在未复核字段，请保存前再次确认出库数量与仓位信息。</p>
+                        </div>
+                    </div>
+                    -->
+                </div>
+                <div class="flex items-center gap-2 shrink-0"></div>
+            </div>
+
+            <div class="space-y-8 w-full pb-20">
+
+                <!-- Section 1: 差异信息 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mt-6">
+                    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/30 flex items-center gap-2">
+                        <i class="fi fi-sr-info text-primary text-[14px]"></i>
+                        <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">差异信息</h3>
+                    </div>
+                    <div class="px-8 py-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异单编号</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold italic" type="text" value="DIFF20260410001" readonly />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异类型</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option>盘点差异</option>
+                                    <option selected>同步差异</option>
+                                    <option>出库差异</option>
+                                    <option>入库差异</option>
+                                    <option>冻结差异</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异来源</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option>盘点</option>
+                                    <option selected>SAP同步</option>
+                                    <option>出库复核</option>
+                                    <option>入库复核</option>
+                                    <option>冻结校验</option>
+                                    <option>人工发现</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">来源单号</label>
+                                <div class="relative group">
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary underline pr-10" type="text" value="SYNC20260410001" />
+                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">产品编码</label>
+                                <div class="relative group">
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-mono pr-10" type="text" value="GM-SN-00128" />
+                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">产品名称</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-semibold italic" type="text" value="GENTLE MONSTER LANG 01" readonly />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">仓库/位置</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-medium" type="text" value="PS主仓-A01" />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">发现时间</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2026-04-10T08:20" />
+                            </div>
+                            <div class="space-y-3 lg:col-span-2 grid grid-cols-3 gap-6 pt-2 border-t border-slate-50 mt-2">
+                                <div class="space-y-1">
+                                    <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest text-center block">SAP数量</label>
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-center text-lg py-2 px-3 focus:ring-1 focus:ring-primary font-black text-slate-700" type="number" value="20" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest text-center block">PS数量</label>
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-center text-lg py-2 px-3 focus:ring-1 focus:ring-primary font-black text-slate-700" type="number" value="18" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[11px] font-black text-rose-400 uppercase tracking-widest text-center block">差异数量</label>
+                                    <input class="w-full bg-[#fef2f2] border border-rose-100 rounded-lg text-center text-lg py-2 px-3 focus:ring-1 focus:ring-primary font-black text-rose-600 shadow-inner" type="number" value="2" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: 原因判断 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/30 flex items-center gap-2">
+                        <i class="fi fi-sr-search text-primary text-[14px]"></i>
+                        <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">原因判断</h3>
+                    </div>
+                    <div class="px-8 py-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">差异原因</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>少记入库</option>
+                                    <option>少记出库</option>
+                                    <option>冻结未释放</option>
+                                    <option>盘点差异</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">处理人</label>
+                                <div class="relative group">
+                                    <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary pr-10" type="text" value="张敏" />
+                                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary"><i class="fi fi-rr-search text-sm"></i></button>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">处理时间</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" type="datetime-local" value="2026-04-10T09:05" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: 处理决策 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/30 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fi fi-sr-settings text-primary text-[14px]"></i>
+                            <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">处理决策</h3>
+                        </div>
+                        <button class="px-3 py-1.5 bg-primary text-white text-xs font-bold rounded-lg shadow-sm hover:opacity-90 flex items-center gap-1.5 transition-all">
+                            <i class="fi fi-rr-file-check w-4 h-4"></i>
+                            <span>生成结果记录</span>
+                        </button>
+                    </div>
+                    <div class="px-8 py-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">处理方式</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>补录入库记录</option>
+                                    <option>补录出库记录</option>
+                                    <option>补录释放记录</option>
+                                    <option>冻结调整记录</option>
+                                    <option>库存调整记录</option>
+                                    <option>人工确认无差异</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">修正数量</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold" type="number" value="2" />
+                            </div>
+                            <div class="space-y-1 lg:col-span-2">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">处理说明</label>
+                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2">经核实为SAP入库同步延迟，在PS系统中补录入库记录以平账。</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: 处理结果 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-50 bg-slate-50/30 flex items-center gap-2">
+                        <i class="fi fi-sr-check-circle text-primary text-[14px]"></i>
+                        <h3 class="text-[13px] font-black text-slate-700 uppercase tracking-wider font-headline">处理结果</h3>
+                    </div>
+                    <div class="px-8 py-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">状态</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-bold">
+                                    <option>待确认</option>
+                                    <option>待处理</option>
+                                    <option>处理中</option>
+                                    <option selected>已完成</option>
+                                    <option>已关闭</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">结果类型</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none">
+                                    <option selected>补录入库</option>
+                                    <option>补录出库</option>
+                                    <option>冻结调整</option>
+                                    <option>库存调整</option>
+                                    <option>无差异关闭</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">结果单号</label>
+                                <input class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary font-bold text-primary italic underline" type="text" value="INVTRX20260410011" />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">结果状态</label>
+                                <select class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary appearance-none font-bold text-green-600">
+                                    <option selected>已完成</option>
+                                    <option>待执行</option>
+                                    <option>执行失败</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1 lg:col-span-2">
+                                <label class="text-[11px] font-black text-slate-400 uppercase tracking-widest">备注</label>
+                                <textarea class="w-full bg-[#f5f7fa] border-none rounded-lg text-sm py-2 px-3 focus:ring-1 focus:ring-primary" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleMenu(btn) {
+            const content = btn.nextElementSibling;
+            const allMenus = document.querySelectorAll('.menu-content');
+            allMenus.forEach(menu => { if (menu !== content) { menu.classList.add('hidden'); const arrow = menu.previousElementSibling.querySelector('.fi-rr-angle-small-down'); if (arrow) arrow.style.transform = 'rotate(0deg)'; } });
+            content.classList.toggle('hidden');
+            const arrow = btn.querySelector('.fi-rr-angle-small-down');
+            if (arrow) arrow.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+    
+
+    // Toggle dropdown (for language and user)
+    function toggleDropdown(dropdownId) {
+      const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
+      allDropdowns.forEach((dropdown) => {
+        if (dropdown.id !== dropdownId) {
+          dropdown.classList.add("hidden");
+        }
+      });
+
+      const dropdown = document.getElementById(dropdownId);
+      if (dropdown) {
+        dropdown.classList.toggle("hidden");
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function (event) {
+      const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
+
+      allDropdowns.forEach((dropdown) => {
+        const trigger = event.target.closest('[onclick*="' + dropdown.id + '"]');
+        if (dropdown && !trigger && !dropdown.contains(event.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

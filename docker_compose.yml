@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  core-api:
+    build:
+      context: ./apps/core_api
+      dockerfile: Dockerfile
+    ports:
+      - "${CORE_API_PORT:-8000}:8000"
+    env_file: .env
+    volumes:
+      - ./apps/core_api:/app
+
+  admin-web:
+    build:
+      context: ./v3
+    ports:
+      - "${ADMIN_WEB_PORT:-3000}:3000"
+    volumes:
+      - ./v3:/app
+      - /app/node_modules
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${DB_USER:-ps_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-ps_password}
+      POSTGRES_DB: ${DB_NAME:-ps_db}
+    ports:
+      - "${DB_PORT:-5432}:5432"
