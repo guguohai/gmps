@@ -1,21 +1,30 @@
-# Microservices Overview
+# infra/docker
 
-This directory contains independent microservices that handle specific domains or integrations.
+This directory stores Docker-related infrastructure assets that are shared at the repository level.
 
-## Services List
+## Recommended contents
 
-### 1. [Integration SAP](integration_sap/)
-- Responsibility: Synchronizing data with the SAP ERP system.
-- Tech Stack: Python (FastAPI).
+- `docker-compose.dev.yml`: local development orchestration
+- `docker-compose.test.yml`: test environment orchestration
+- `docker-compose.prod.yml`: production or pre-release orchestration templates
+- `entrypoint.sh` or `wait-for-*.sh`: container startup helpers
+- shared runtime config that does not belong to a single service
+- centralized service Dockerfiles
 
-### 2. [Integration Logistics](integration_logistics/)
-- Responsibility: Connecting with external logistics providers (tracking, shipping).
+## What should stay outside this directory
 
-### 3. [Notification Service](notification_service/)
-- Responsibility: Sending emails, SMS, and system notifications.
+- service source code: keep in `apps/` or `services/`
+- nginx config: keep in `infra/nginx/`
+- SQL init and migration scripts: keep in `infra/sql/`
+- deployment scripts: keep in `infra/scripts/`
 
-### 4. [File Service](file_service/)
-- Responsibility: Managing file uploads, downloads, and storage (S3/Local).
+## Current convention in this repository
 
-### 5. [Scheduler Worker](scheduler_worker/)
-- Responsibility: Handling background tasks and cron jobs.
+- Root `docker_compose.yml` is a convenience entrypoint for local development
+- `infra/docker/docker-compose.dev.yml` is the canonical infra compose file
+- Service Dockerfiles are centralized here:
+  - `infra/docker/core_api.Dockerfile`
+  - `infra/docker/notification_service.Dockerfile`
+  - `infra/docker/admin_web.Dockerfile`
+
+Service source code stays in `apps/` and `services/`, while build logic stays in `infra/docker/`.
