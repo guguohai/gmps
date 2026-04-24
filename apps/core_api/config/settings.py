@@ -145,3 +145,8 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+# MySQL 8 supports index names up to 64 characters. The canonical schema in
+# infra/sql/init.sql intentionally uses descriptive names longer than Django's
+# cross-database 30-character check.
+SILENCED_SYSTEM_CHECKS = ['models.E034']
