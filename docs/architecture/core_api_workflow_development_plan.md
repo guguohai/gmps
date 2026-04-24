@@ -32,6 +32,8 @@
 
 工单状态、动作和流转的完整规格见 `docs/architecture/ticket_workflow_spec.md`。`core_api` 开发时应优先按该规格补齐主流程闭环，再逐步接入支付、退款、物流和自动任务的边界场景。
 
+小程序查询工单详情接口的实现说明见 `docs/architecture/miniapp_ticket_detail_api_implementation.md`。该接口用于小程序收到统一通知后，按工单编号拉取最新聚合详情。
+
 ## 模块划分
 
 ### workflow app
