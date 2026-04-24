@@ -1,11 +1,15 @@
 from fastapi import APIRouter, Depends
+from app.core.security import verify_token
 from app.schemas.miniapp import MiniAppPushRequest, MiniAppPushResponse
 from app.tasks.miniapp import push_to_miniapp_task
 
 router = APIRouter(prefix="/miniapp", tags=["Mini-Program Notification"])
 
 @router.post("/push", response_model=MiniAppPushResponse)
-async def push_notification(request: MiniAppPushRequest):
+async def push_notification(
+    request: MiniAppPushRequest,
+    token_payload: dict = Depends(verify_token),
+):
     """
     Trigger a push notification to the external Mini-Program client.
     """

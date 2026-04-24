@@ -21,10 +21,11 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)) 
             algorithms=[settings.JWT_ALGORITHM],
         )
         user_id: int = payload.get("user_id")
-        if user_id is None:
+        service_name: str = payload.get("service_name") or payload.get("service")
+        if user_id is None and service_name is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid token: missing user_id",
+                detail="Invalid token: missing user_id or service_name",
             )
         return payload
     except JWTError:

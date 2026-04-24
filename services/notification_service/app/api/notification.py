@@ -1,8 +1,9 @@
+import json
+
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from typing import Optional
-from datetime import datetime
 
 from app.core.database import get_db
 from app.core.security import verify_token
@@ -12,8 +13,40 @@ from app.schemas.notification import (
     NotificationTemplateOut,
     NotificationLogOut,
 )
+from app.tasks.miniapp import push_to_miniapp_task
 
 router = APIRouter(prefix="/notifications", tags=["Notifications"])
+
+
+def render_template(value: str, variables: dict | None) -> str:
+    rendered = value or ""
+    if not variables:
+        return rendered
+
+    for key, raw_value in variables.items():
+        text_value = str(raw_value)
+        rendered = rendered.replace(f"{{{{{key}}}}}", text_value)
+        rendered = rendered.replace(f"{{{key}}}", text_value)
+        rendered = rendered.replace(f"${{{key}}}", text_value)
+    return rendered
+
+
+def dispatch_notification(req: NotificationSendRequest, title: str, content: str) -> tuple[str, str | None]:
+    if req.channel.value == "MINI_PROGRAM":
+        ticket_no = req.biz_no or (req.variables or {}).get("ticket_no") or ""
+        push_to_miniapp_task.delay(
+            message_id=req.message_id,
+            event_code=req.event_code or req.template_code,
+            event_name=req.event_name or title or req.template_code,
+            ticket_no=str(ticket_no),
+            event_time=(req.event_time.isoformat() if req.event_time else ""),
+            summary=content[:500] if content else None,
+            ext=req.variables,
+        )
+        return "PENDING", None
+
+    # Email/SMS/System adapters are intentionally thin until provider SDKs are configured.
+    return "SUCCESS", None
 
 
 @router.post("/send", response_model=NotificationSendResponse, summary="Send a notification")
@@ -26,7 +59,19 @@ def send_notification(
     Send a notification via the specified channel.
     Looks up the template, renders content, dispatches, and logs the result.
     """
-    # 1. Look up template
+    existing = db.execute(
+        text("SELECT id, send_status FROM notification_send_log WHERE message_id = :message_id LIMIT 1"),
+        {"message_id": req.message_id},
+    ).mappings().first()
+
+    if existing:
+        return NotificationSendResponse(
+            success=True,
+            message=f"Notification already accepted with status {existing['send_status']}",
+            send_log_id=existing["id"],
+            duplicated=True,
+        )
+
     template = db.execute(
         text("SELECT * FROM notification_template WHERE template_code = :code AND status = 'ENABLED' LIMIT 1"),
         {"code": req.template_code},
@@ -38,44 +83,47 @@ def send_notification(
             detail=f"Template '{req.template_code}' not found or disabled",
         )
 
-    # 2. Render content (simple variable substitution)
-    content = template["template_content"] or ""
-    title = template["template_title"] or ""
-    if req.variables:
-        for key, value in req.variables.items():
-            content = content.replace(f"{{{{{key}}}}}", str(value))
-            title = title.replace(f"{{{{{key}}}}}", str(value))
+    content = render_template(template["template_content"] or "", req.variables)
+    title = render_template(template["template_title"] or "", req.variables)
+    send_status, fail_reason = dispatch_notification(req, title, content)
 
-    # 3. Dispatch (placeholder - integrate actual SMS/Email/WeChat SDK here)
-    send_status = "SUCCESS"
-    error_message = None
-
-    # 4. Log the send result
     result = db.execute(
         text("""
             INSERT INTO notification_send_log
-                (template_code, channel, recipient, send_status, ticket_id,
-                 rendered_title, rendered_content, sent_at, error_message, created_at)
+                (ticket_id, template_id, message_id, event_code, event_name, biz_no,
+                 channel_type, template_name, receiver, receiver_type, summary,
+                 event_time, sent_at, send_status, retry_count, fail_reason,
+                 request_payload, response_payload, created_at)
             VALUES
-                (:template_code, :channel, :recipient, :send_status, :ticket_id,
-                 :rendered_title, :rendered_content, NOW(), :error_message, NOW())
+                (:ticket_id, :template_id, :message_id, :event_code, :event_name, :biz_no,
+                 :channel_type, :template_name, :receiver, :receiver_type, :summary,
+                 :event_time, CASE WHEN :send_status = 'SUCCESS' THEN NOW() ELSE NULL END,
+                 :send_status, 0, :fail_reason, :request_payload, :response_payload, NOW())
         """),
         {
-            "template_code": req.template_code,
-            "channel": req.channel.value,
-            "recipient": req.recipient,
-            "send_status": send_status,
             "ticket_id": req.ticket_id,
-            "rendered_title": title,
-            "rendered_content": content,
-            "error_message": error_message,
+            "template_id": template["id"],
+            "message_id": req.message_id,
+            "event_code": req.event_code,
+            "event_name": req.event_name,
+            "biz_no": req.biz_no,
+            "channel_type": req.channel.value,
+            "template_name": template["template_name"],
+            "receiver": req.receiver,
+            "receiver_type": req.receiver_type,
+            "summary": content[:500] if content else None,
+            "event_time": req.event_time,
+            "send_status": send_status,
+            "fail_reason": fail_reason,
+            "request_payload": json.dumps(req.model_dump(mode="json"), ensure_ascii=False),
+            "response_payload": json.dumps({"title": title, "content": content}, ensure_ascii=False),
         },
     )
     db.commit()
 
     return NotificationSendResponse(
         success=True,
-        message=f"Notification sent via {req.channel.value}",
+        message=f"Notification accepted via {req.channel.value}",
         send_log_id=result.lastrowid,
     )
 
@@ -121,7 +169,7 @@ def list_send_logs(
         query += " AND ticket_id = :ticket_id"
         params["ticket_id"] = ticket_id
     if channel:
-        query += " AND channel = :channel"
+        query += " AND channel_type = :channel"
         params["channel"] = channel
 
     query += " ORDER BY id DESC LIMIT :limit OFFSET :offset"
