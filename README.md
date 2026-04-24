@@ -73,3 +73,111 @@
 ├─ docker_compose.yml             # 本地/测试环境编排文件
 └─ README.md                      # 项目说明文档
 ```
+
+
+## Docker 相关约定
+- 标准编排文件位于 `infra/docker/docker-compose.dev.yml`
+- 根目录 `docker_compose.yml` 作为本地启动便捷入口保留
+- 服务 Dockerfile 统一位于 `infra/docker/`
+
+## Docker 配置说明
+
+- 根目录 `.env` 既作为应用运行时环境变量文件，也作为 Docker Compose 的变量来源
+- `docker_compose.yml` 和 `infra/docker/docker-compose.dev.yml` 中的 MySQL、Redis、端口、镜像版本等配置，都通过 `${VAR}` 从 `.env` 读取
+- `env_file` 用于把 `.env` 注入到应用容器内部；`${VAR}` 用于 Compose 在启动前解析编排文件，这两者是不同层级
+- 新环境请先复制 `.env.example` 为 `.env`，再按实际环境修改密码、端口和密钥
+
+## 本地 Docker 启动
+
+1. 准备配置文件
+
+```bash
+cp .env.example .env
+```
+
+2. 按需修改根目录 `.env`
+
+重点关注这些变量：
+- `MYSQL_ROOT_PASSWORD`
+- `MYSQL_PASSWORD`
+- `MYSQL_DATABASE`
+- `MYSQL_PORT`
+- `REDIS_PORT`
+- `CORE_API_PORT`
+- `NOTIFICATION_SERVICE_PORT`
+- `ADMIN_WEB_PORT`
+
+3. 启动容器
+
+使用根目录便捷入口：
+
+```bash
+docker compose --env-file .env -f docker_compose.yml up --build
+```
+
+或使用标准编排文件：
+
+```bash
+docker compose --env-file .env -f infra/docker/docker-compose.dev.yml up --build
+```
+
+4. 后台运行
+
+```bash
+docker compose --env-file .env -f infra/docker/docker-compose.dev.yml up -d --build
+```
+
+5. 停止容器
+
+```bash
+docker compose --env-file .env -f infra/docker/docker-compose.dev.yml down
+```
+
+6. 停止并清理数据卷
+
+```bash
+docker compose --env-file .env -f infra/docker/docker-compose.dev.yml down -v
+```
+
+## 部署到 Docker 主机
+
+适用于测试机或云服务器上直接用 Docker Compose 部署。
+
+1. 安装 Docker 和 Docker Compose 插件
+2. 拉取或上传项目代码到目标主机
+3. 在项目根目录创建生产环境 `.env`
+4. 修改生产环境变量
+
+生产环境至少要调整：
+- `DEBUG=False`
+- `MYSQL_ROOT_PASSWORD`
+- `MYSQL_PASSWORD`
+- `SECRET_KEY`
+- `JWT_SECRET_KEY`
+- 各服务对外暴露端口
+- 第三方回调地址和密钥
+
+5. 启动服务
+
+```bash
+docker compose --env-file .env -f infra/docker/docker-compose.dev.yml up -d --build
+```
+
+6. 查看服务状态
+
+```bash
+docker compose --env-file .env -f infra/docker/docker-compose.dev.yml ps
+```
+
+7. 查看日志
+
+```bash
+docker compose --env-file .env -f infra/docker/docker-compose.dev.yml logs -f
+```
+
+## 部署建议
+
+- 生产环境不要把真实 `.env` 提交到仓库
+- `.env.example` 只保留模板值
+- 如果后续区分环境，建议增加 `.env.dev`、`.env.test`、`.env.prod`
+- 当前仓库还没有单独的生产编排文件，后续可以在 `infra/docker/` 下增加 `docker-compose.prod.yml`
