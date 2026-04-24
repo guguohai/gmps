@@ -1,0 +1,61 @@
+templates:
+  - template_code: TICKET_PAYMENT_SUCCESS_MINI_PROGRAM
+    template_type: MINI_PROGRAM
+    template_name: 支付成功通知
+    template_title: 支付成功通知
+    template_content: 您的售后工单已支付成功，工单编号：{{ticket_no}}。
+    business_scene: TICKET
+    trigger_node: PAY_SUCCESS
+    lang_code: zh_CN
+    variable_desc: ticket_no
+    is_default: 1
+    status: ENABLED
+    remark: 支付成功后发送
+  - template_code: TICKET_OUTBOUND_MINI_PROGRAM
+    template_type: MINI_PROGRAM
+    template_name: 发货通知
+    template_title: 发货通知
+    template_content: 您的售后工单已发出，工单编号：{{ticket_no}}，运单号：{{tracking_no}}。
+    business_scene: TICKET
+    trigger_node: SUBMIT_OUTBOUND
+    lang_code: zh_CN
+    variable_desc: ticket_no,tracking_no
+    is_default: 1
+    status: ENABLED
+    remark: 提交出库后发送
+  - template_code: TICKET_COMPLETED_MINI_PROGRAM
+    template_type: MINI_PROGRAM
+    template_name: 服务完成通知
+    template_title: 服务完成通知
+    template_content: 您的售后工单已完成，工单编号：{{ticket_no}}。感谢您的耐心等待。
+    business_scene: TICKET
+    trigger_node: AUTO_COMPLETE
+    lang_code: zh_CN
+    variable_desc: ticket_no
+    is_default: 1
+    status: ENABLED
+    remark: 服务完成后发送
+  - template_code: SURVEY_REMIND_MINI_PROGRAM
+    template_type: MINI_PROGRAM
+    template_name: 问卷提醒通知
+    template_title: 问卷提醒通知
+    template_content: 您的售后服务已完成，欢迎填写满意度问卷。问卷编号：{{survey_no}}。
+    business_scene: SURVEY
+    trigger_node: SURVEY_CREATE
+    lang_code: zh_CN
+    variable_desc: survey_no
+    is_default: 1
+    status: ENABLED
+    remark: 问卷创建后发送
+  - template_code: TICKET_CUSTOMER_CONFIRM_MINI_PROGRAM
+    template_type: MINI_PROGRAM
+    template_name: 客户确认事项通知
+    template_title: 客户确认事项通知
+    template_content: 您的售后工单有待确认事项，请尽快查看并处理。工单编号：{{ticket_no}}。
+    business_scene: CONSULTATION
+    trigger_node: WAIT_CONFIRM
+    lang_code: zh_CN
+    variable_desc: ticket_no
+    is_default: 1
+    status: ENABLED
+    remark: 事项进入待客户确认后发送

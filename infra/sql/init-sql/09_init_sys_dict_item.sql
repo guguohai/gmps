@@ -1,7 +1,7 @@
 INSERT INTO sys_dict_item (
-  dict_type, item_code, item_name, item_name_en, item_name_ko,
-  parent_code, sort_no, is_default, status, ext_value1, ext_value2,
-  remark, created_by, created_at
+  dict_type, dict_code, dict_name, dict_name_en, dict_name_ko,
+  parent_id, sort_no, is_default, status, ext_value_1, ext_value_2,
+  remark, updated_by, updated_at
 ) VALUES
 ('PAYMENT_METHOD', 'WECHAT_PAY', '微信支付', 'WeChat Pay', '위챗페이', NULL, 10, 1, 'ENABLED', NULL, NULL, '小程序支付方式', NULL, NOW()),
 ('PAYMENT_METHOD', 'OFFLINE_PAY', '线下支付', 'Offline Payment', '오프라인 결제', NULL, 20, 0, 'ENABLED', NULL, NULL, '预留', NULL, NOW()),

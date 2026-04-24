@@ -1,0 +1,296 @@
+roles:
+  - role_code: CS_MANAGER
+    role_name: 客服主管
+    role_type: BUSINESS_ROLE
+    role_desc: 负责申请审核、工单关闭等操作
+    status: ENABLED
+  - role_code: RECEIVE_OPERATOR
+    role_name: 接收专员
+    role_type: BUSINESS_ROLE
+    role_desc: 负责确认接收产品
+    status: ENABLED
+  - role_code: JUDGE_OPERATOR
+    role_name: 判定专员
+    role_type: BUSINESS_ROLE
+    role_desc: 负责提交判定、客户确认、生成支付单
+    status: ENABLED
+  - role_code: SERVICE_ENGINEER
+    role_name: 服务工程师
+    role_type: BUSINESS_ROLE
+    role_desc: 负责开始处理、等待配件、提交处理完成
+    status: ENABLED
+  - role_code: FULFILLMENT_OPERATOR
+    role_name: 履约专员
+    role_type: BUSINESS_ROLE
+    role_desc: 负责出库准备、提交出库
+    status: ENABLED
+  - role_code: STORE_OPERATOR
+    role_name: 门店操作员
+    role_type: BUSINESS_ROLE
+    role_desc: 负责门店收货、门店可取、客户取件确认
+    status: ENABLED
+  - role_code: SYSTEM_ADMIN
+    role_name: 系统管理员
+    role_type: SYSTEM_ROLE
+    role_desc: 负责用户、角色、权限、配置维护
+    status: ENABLED
+
+permissions:
+  - permission_code: MENU_TICKET
+    permission_name: 工单管理
+    permission_type: MENU
+    permission_path: /ticket
+    component_path: /ticket/index
+    sort_no: 10
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 工单管理菜单
+  - permission_code: MENU_INVENTORY
+    permission_name: 库存管理
+    permission_type: MENU
+    permission_path: /inventory
+    component_path: /inventory/index
+    sort_no: 20
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 库存管理菜单
+  - permission_code: MENU_SURVEY
+    permission_name: 问卷管理
+    permission_type: MENU
+    permission_path: /survey
+    component_path: /survey/index
+    sort_no: 30
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 问卷管理菜单
+  - permission_code: MENU_CONSULTATION
+    permission_name: 咨询管理
+    permission_type: MENU
+    permission_path: /consultation
+    component_path: /consultation/index
+    sort_no: 35
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 咨询管理菜单
+  - permission_code: MENU_SETTING
+    permission_name: 系统配置
+    permission_type: MENU
+    permission_path: /setting
+    component_path: /setting/index
+    sort_no: 40
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 系统配置菜单
+  - permission_code: BTN_TICKET_APPROVE
+    permission_name: 工单审核通过
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 10
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 审核通过按钮权限
+  - permission_code: BTN_TICKET_REJECT
+    permission_name: 工单审核驳回
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 20
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 审核驳回按钮权限
+  - permission_code: BTN_TICKET_RECEIVE
+    permission_name: 确认接收
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 30
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 确认接收按钮权限
+  - permission_code: BTN_TICKET_JUDGE_FREE
+    permission_name: 提交无偿判定
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 40
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 提交无偿判定按钮权限
+  - permission_code: BTN_TICKET_JUDGE_PAID
+    permission_name: 提交有偿判定
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 50
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 提交有偿判定按钮权限
+  - permission_code: BTN_TICKET_CREATE_PAYMENT
+    permission_name: 生成支付单
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 60
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 生成支付单按钮权限
+  - permission_code: BTN_TICKET_START_REPAIR
+    permission_name: 开始处理
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 70
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 开始处理按钮权限
+  - permission_code: BTN_TICKET_MARK_WAIT_PARTS
+    permission_name: 标记等待配件
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 80
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 等待配件按钮权限
+  - permission_code: BTN_TICKET_SUBMIT_REPAIR_DONE
+    permission_name: 提交处理完成
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 90
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 提交处理完成按钮权限
+  - permission_code: BTN_TICKET_SUBMIT_OUTBOUND
+    permission_name: 提交出库
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 100
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 提交出库按钮权限
+  - permission_code: BTN_TICKET_CONFIRM_STORE_RECEIVE
+    permission_name: 确认门店收货
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 110
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 确认门店收货按钮权限
+  - permission_code: BTN_TICKET_CONFIRM_CUSTOMER_PICKUP
+    permission_name: 确认客户取件
+    permission_type: BUTTON
+    parent_code: MENU_TICKET
+    sort_no: 120
+    is_visible: 1
+    status: ENABLED
+    permission_desc: 确认客户取件按钮权限
+
+role_permissions:
+  - role_code: CS_MANAGER
+    permission_code: MENU_TICKET
+    is_granted: 1
+    remark: 客服主管可访问工单管理
+  - role_code: CS_MANAGER
+    permission_code: BTN_TICKET_APPROVE
+    is_granted: 1
+    remark: 客服主管可审核通过
+  - role_code: CS_MANAGER
+    permission_code: BTN_TICKET_REJECT
+    is_granted: 1
+    remark: 客服主管可审核驳回
+  - role_code: RECEIVE_OPERATOR
+    permission_code: MENU_TICKET
+    is_granted: 1
+    remark: 接收专员可访问工单管理
+  - role_code: RECEIVE_OPERATOR
+    permission_code: BTN_TICKET_RECEIVE
+    is_granted: 1
+    remark: 接收专员可确认接收
+  - role_code: JUDGE_OPERATOR
+    permission_code: MENU_TICKET
+    is_granted: 1
+    remark: 判定专员可访问工单管理
+  - role_code: JUDGE_OPERATOR
+    permission_code: BTN_TICKET_JUDGE_FREE
+    is_granted: 1
+    remark: 判定专员可提交无偿判定
+  - role_code: JUDGE_OPERATOR
+    permission_code: BTN_TICKET_JUDGE_PAID
+    is_granted: 1
+    remark: 判定专员可提交有偿判定
+  - role_code: JUDGE_OPERATOR
+    permission_code: BTN_TICKET_CREATE_PAYMENT
+    is_granted: 1
+    remark: 判定专员可生成支付单
+  - role_code: SERVICE_ENGINEER
+    permission_code: MENU_TICKET
+    is_granted: 1
+    remark: 服务工程师可访问工单管理
+  - role_code: SERVICE_ENGINEER
+    permission_code: BTN_TICKET_START_REPAIR
+    is_granted: 1
+    remark: 服务工程师可开始处理
+  - role_code: SERVICE_ENGINEER
+    permission_code: BTN_TICKET_MARK_WAIT_PARTS
+    is_granted: 1
+    remark: 服务工程师可标记等待配件
+  - role_code: SERVICE_ENGINEER
+    permission_code: BTN_TICKET_SUBMIT_REPAIR_DONE
+    is_granted: 1
+    remark: 服务工程师可提交处理完成
+  - role_code: FULFILLMENT_OPERATOR
+    permission_code: MENU_TICKET
+    is_granted: 1
+    remark: 履约专员可访问工单管理
+  - role_code: FULFILLMENT_OPERATOR
+    permission_code: BTN_TICKET_SUBMIT_OUTBOUND
+    is_granted: 1
+    remark: 履约专员可提交出库
+  - role_code: STORE_OPERATOR
+    permission_code: MENU_TICKET
+    is_granted: 1
+    remark: 门店操作员可访问工单管理
+  - role_code: STORE_OPERATOR
+    permission_code: BTN_TICKET_CONFIRM_STORE_RECEIVE
+    is_granted: 1
+    remark: 门店操作员可确认门店收货
+  - role_code: STORE_OPERATOR
+    permission_code: BTN_TICKET_CONFIRM_CUSTOMER_PICKUP
+    is_granted: 1
+    remark: 门店操作员可确认客户取件
+
+dict_items:
+  - dict_type: PAYMENT_METHOD
+    dict_code: WECHAT_PAY
+    dict_name: 微信支付
+    dict_name_en: WeChat Pay
+    dict_name_ko: 위챗페이
+    sort_no: 10
+    is_default: 1
+    status: ENABLED
+    remark: 小程序支付方式
+  - dict_type: PAYMENT_METHOD
+    dict_code: OFFLINE_PAY
+    dict_name: 线下支付
+    dict_name_en: Offline Payment
+    sort_no: 20
+    is_default: 0
+    status: ENABLED
+    remark: 预留
+  - dict_type: DELIVERY_METHOD
+    dict_code: EXPRESS
+    dict_name: 快递
+    dict_name_en: Express
+    sort_no: 10
+    is_default: 1
+    status: ENABLED
+    remark: 快递返还
+  - dict_type: DELIVERY_METHOD
+    dict_code: STORE_PICKUP
+    dict_name: 门店取件
+    dict_name_en: Store Pickup
+    sort_no: 20
+    is_default: 0
+    status: ENABLED
+    remark: 门店取件
+  - dict_type: DELIVERY_METHOD
+    dict_code: THREE_PL
+    dict_name: 3PL发货
+    dict_name_en: 3PL Delivery
+    sort_no: 30
+    is_default: 0
+    status: ENABLED
+    remark: 3PL发货

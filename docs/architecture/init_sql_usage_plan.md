@@ -221,6 +221,38 @@
 
 这些不能作为正式初始化数据使用。它们缺少真实用户、用户角色、仓库库位和问卷模板，需要后续按实际业务补齐。
 
+## 已落地的导入方式
+
+当前已新增 Django management command：
+
+```bash
+python apps/core_api/manage.py seed_config --mode validate
+python apps/core_api/manage.py seed_config --mode upsert
+python apps/core_api/manage.py seed_config --mode replace --yes
+```
+
+默认优先读取 `infra/seed` 下的 YAML：
+
+```text
+infra/seed/roles.yaml
+infra/seed/workflow.ticket.yaml
+infra/seed/notification_templates.yaml
+```
+
+如需兼容旧 SQL，可显式指定：
+
+```bash
+python apps/core_api/manage.py seed_config --mode upsert --format sql
+```
+
+详细说明见：
+
+```text
+infra/sql/seed/README.md
+```
+
+`upsert` 模式会在运行时把 YAML 转换为 SQL 并追加 `ON DUPLICATE KEY UPDATE`，方便反复导入和修改。`replace` 模式会先清空配置表，再重新导入，仅建议本地和测试环境使用。
+
 ## 建议补充的校验
 
 为了让初始化 SQL 能稳定支撑开发，建议增加一个配置一致性检查脚本或管理命令。
@@ -267,4 +299,3 @@
 - 对照 `ticket_workflow_spec.md` 补齐第一阶段必须流转。
 - 对照人工动作补齐按钮权限和动作权限。
 - 明确 `_pending` 文件不参与正式初始化。
-

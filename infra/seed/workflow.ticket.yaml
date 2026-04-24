@@ -1,0 +1,893 @@
+statuses:
+  - biz_type: TICKET
+    status_code: MAIN_APPLY
+    status_name: 受理
+    status_name_en: Apply
+    status_level: MAIN
+    sort_no: 10
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: MAIN_RECEIVE
+    status_name: 接收
+    status_name_en: Receive
+    status_level: MAIN
+    sort_no: 20
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: MAIN_JUDGE
+    status_name: 判定
+    status_name_en: Judge
+    status_level: MAIN
+    sort_no: 30
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: MAIN_PAYMENT
+    status_name: 支付
+    status_name_en: Payment
+    status_level: MAIN
+    sort_no: 40
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: MAIN_PROCESS
+    status_name: 处理
+    status_name_en: Process
+    status_level: MAIN
+    sort_no: 50
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: MAIN_FULFILLMENT
+    status_name: 履约
+    status_name_en: Fulfillment
+    status_level: MAIN
+    sort_no: 60
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: MAIN_COMPLETED
+    status_name: 完成
+    status_name_en: Completed
+    status_level: MAIN
+    sort_no: 70
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: MAIN_CLOSED
+    status_name: 关闭
+    status_name_en: Closed
+    status_level: MAIN
+    sort_no: 80
+    status: ENABLED
+
+  - biz_type: TICKET
+    status_code: CUSTOMER_APPLYING
+    status_name: 申请处理中
+    status_name_en: Applying
+    status_level: CUSTOMER
+    main_status_code: MAIN_APPLY
+    progress_node_code: NODE_APPLY
+    sort_no: 10
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_WAIT_RECEIVE
+    status_name: 待接收
+    status_name_en: Waiting Receive
+    status_level: CUSTOMER
+    main_status_code: MAIN_RECEIVE
+    progress_node_code: NODE_RECEIVE
+    sort_no: 20
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_INSPECTING
+    status_name: 检测中
+    status_name_en: Inspecting
+    status_level: CUSTOMER
+    main_status_code: MAIN_JUDGE
+    progress_node_code: NODE_INSPECT
+    sort_no: 30
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_WAIT_PAYMENT
+    status_name: 待支付
+    status_name_en: Waiting Payment
+    status_level: CUSTOMER
+    main_status_code: MAIN_PAYMENT
+    progress_node_code: NODE_PAYMENT
+    sort_no: 40
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_PROCESSING
+    status_name: 处理中
+    status_name_en: Processing
+    status_level: CUSTOMER
+    main_status_code: MAIN_PROCESS
+    progress_node_code: NODE_PROCESS
+    sort_no: 50
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_DELIVERING
+    status_name: 返还中
+    status_name_en: Delivering
+    status_level: CUSTOMER
+    main_status_code: MAIN_FULFILLMENT
+    progress_node_code: NODE_DELIVERY
+    sort_no: 60
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_COMPLETED
+    status_name: 已完成
+    status_name_en: Completed
+    status_level: CUSTOMER
+    main_status_code: MAIN_COMPLETED
+    progress_node_code: NODE_COMPLETED
+    is_final: 1
+    sort_no: 70
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_CLOSED
+    status_name: 已关闭
+    status_name_en: Closed
+    status_level: CUSTOMER
+    main_status_code: MAIN_CLOSED
+    progress_node_code: NODE_CLOSED
+    is_final: 1
+    sort_no: 80
+    status: ENABLED
+
+  - biz_type: TICKET
+    status_code: WAIT_APPLY_REVIEW
+    status_name: 待申请审核
+    status_name_en: Wait Apply Review
+    status_level: BIZ
+    main_status_code: MAIN_APPLY
+    customer_status_code: CUSTOMER_APPLYING
+    progress_node_code: NODE_APPLY
+    is_initial: 1
+    sort_no: 10
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: APPLY_REJECTED
+    status_name: 申请审核驳回
+    status_name_en: Apply Rejected
+    status_level: BIZ
+    main_status_code: MAIN_CLOSED
+    customer_status_code: CUSTOMER_CLOSED
+    progress_node_code: NODE_CLOSED
+    is_final: 1
+    sort_no: 20
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_RECEIVE
+    status_name: 待接收
+    status_name_en: Wait Receive
+    status_level: BIZ
+    main_status_code: MAIN_RECEIVE
+    customer_status_code: CUSTOMER_WAIT_RECEIVE
+    progress_node_code: NODE_RECEIVE
+    sort_no: 30
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: RECEIVED
+    status_name: 已接收待检测
+    status_name_en: Received
+    status_level: BIZ
+    main_status_code: MAIN_JUDGE
+    customer_status_code: CUSTOMER_INSPECTING
+    progress_node_code: NODE_RECEIVE
+    sort_no: 40
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: JUDGED_FREE
+    status_name: 判定无偿
+    status_name_en: Judged Free
+    status_level: BIZ
+    main_status_code: MAIN_PROCESS
+    customer_status_code: CUSTOMER_PROCESSING
+    progress_node_code: NODE_INSPECT
+    is_system_only: 1
+    sort_no: 70
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: JUDGED_PAID
+    status_name: 判定有偿
+    status_name_en: Judged Paid
+    status_level: BIZ
+    main_status_code: MAIN_PAYMENT
+    customer_status_code: CUSTOMER_WAIT_PAYMENT
+    progress_node_code: NODE_PAYMENT
+    is_system_only: 1
+    sort_no: 80
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_PAYMENT
+    status_name: 付款待机
+    status_name_en: Wait Payment
+    status_level: BIZ
+    main_status_code: MAIN_PAYMENT
+    customer_status_code: CUSTOMER_WAIT_PAYMENT
+    progress_node_code: NODE_PAYMENT
+    sort_no: 90
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: PAYMENT_OVERDUE
+    status_name: 支付逾期
+    status_name_en: Payment Overdue
+    status_level: BIZ
+    main_status_code: MAIN_PAYMENT
+    customer_status_code: CUSTOMER_WAIT_PAYMENT
+    progress_node_code: NODE_PAYMENT
+    is_system_only: 1
+    sort_no: 95
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: PAYMENT_COMPLETED
+    status_name: 支付完成
+    status_name_en: Payment Completed
+    status_level: BIZ
+    main_status_code: MAIN_PROCESS
+    customer_status_code: CUSTOMER_PROCESSING
+    progress_node_code: NODE_PAYMENT
+    is_system_only: 1
+    sort_no: 100
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: REPAIRING
+    status_name: 处理中
+    status_name_en: Repairing
+    status_level: BIZ
+    main_status_code: MAIN_PROCESS
+    customer_status_code: CUSTOMER_PROCESSING
+    progress_node_code: NODE_PROCESS
+    sort_no: 120
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_PARTS
+    status_name: 等待配件
+    status_name_en: Wait Parts
+    status_level: BIZ
+    main_status_code: MAIN_PROCESS
+    customer_status_code: CUSTOMER_PROCESSING
+    progress_node_code: NODE_PROCESS
+    sort_no: 125
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_OUTBOUND
+    status_name: 待出库
+    status_name_en: Wait Outbound
+    status_level: BIZ
+    main_status_code: MAIN_FULFILLMENT
+    customer_status_code: CUSTOMER_PROCESSING
+    progress_node_code: NODE_PROCESS
+    sort_no: 130
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: OUTBOUNDED
+    status_name: 已出库
+    status_name_en: Outbounded
+    status_level: BIZ
+    main_status_code: MAIN_FULFILLMENT
+    customer_status_code: CUSTOMER_DELIVERING
+    progress_node_code: NODE_DELIVERY
+    sort_no: 140
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: DELIVERING
+    status_name: 配送中
+    status_name_en: Delivering
+    status_level: BIZ
+    main_status_code: MAIN_FULFILLMENT
+    customer_status_code: CUSTOMER_DELIVERING
+    progress_node_code: NODE_DELIVERY
+    sort_no: 150
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: STORE_ARRIVED
+    status_name: 门店到货
+    status_name_en: Store Arrived
+    status_level: BIZ
+    main_status_code: MAIN_FULFILLMENT
+    customer_status_code: CUSTOMER_DELIVERING
+    progress_node_code: NODE_DELIVERY
+    sort_no: 160
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: STORE_RECEIVED
+    status_name: 门店收货完成
+    status_name_en: Store Received
+    status_level: BIZ
+    main_status_code: MAIN_FULFILLMENT
+    customer_status_code: CUSTOMER_DELIVERING
+    progress_node_code: NODE_DELIVERY
+    sort_no: 170
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: STORE_READY_PICKUP
+    status_name: 门店可取
+    status_name_en: Store Ready Pickup
+    status_level: BIZ
+    main_status_code: MAIN_FULFILLMENT
+    customer_status_code: CUSTOMER_DELIVERING
+    progress_node_code: NODE_DELIVERY
+    sort_no: 175
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_SIGNED
+    status_name: 客户签收完成
+    status_name_en: Customer Signed
+    status_level: BIZ
+    main_status_code: MAIN_COMPLETED
+    customer_status_code: CUSTOMER_COMPLETED
+    progress_node_code: NODE_COMPLETED
+    sort_no: 180
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CUSTOMER_PICKED
+    status_name: 客户取件完成
+    status_name_en: Customer Picked
+    status_level: BIZ
+    main_status_code: MAIN_COMPLETED
+    customer_status_code: CUSTOMER_COMPLETED
+    progress_node_code: NODE_COMPLETED
+    sort_no: 190
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: COMPLETED
+    status_name: 服务完成
+    status_name_en: Completed
+    status_level: BIZ
+    main_status_code: MAIN_COMPLETED
+    customer_status_code: CUSTOMER_COMPLETED
+    progress_node_code: NODE_COMPLETED
+    is_final: 1
+    sort_no: 200
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CLOSED_UNPAID_RETURN
+    status_name: 未付款退回关闭
+    status_name_en: Closed Unpaid Return
+    status_level: BIZ
+    main_status_code: MAIN_CLOSED
+    customer_status_code: CUSTOMER_CLOSED
+    progress_node_code: NODE_CLOSED
+    is_final: 1
+    sort_no: 210
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: CLOSED_CANCELED
+    status_name: 取消关闭
+    status_name_en: Closed Canceled
+    status_level: BIZ
+    main_status_code: MAIN_CLOSED
+    customer_status_code: CUSTOMER_CLOSED
+    progress_node_code: NODE_CLOSED
+    is_final: 1
+    sort_no: 220
+    status: ENABLED
+
+actions:
+  - biz_type: TICKET
+    action_code: APPLY_APPROVE
+    action_name: 申请审核通过
+    action_type: MANUAL
+    need_remark: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: APPLY_REJECT
+    action_name: 申请审核驳回
+    action_type: MANUAL
+    need_remark: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: CONFIRM_RECEIVE
+    action_name: 确认收到产品
+    action_type: MANUAL
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: SUBMIT_JUDGE_FREE
+    action_name: 提交无偿判定
+    action_type: MANUAL
+    need_remark: 1
+    need_attachment: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: SUBMIT_JUDGE_PAID
+    action_name: 提交有偿判定
+    action_type: MANUAL
+    need_remark: 1
+    need_attachment: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: CREATE_PAYMENT_ORDER
+    action_name: 生成支付单
+    action_type: MANUAL
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: PAY_SUCCESS
+    action_name: 支付成功回写
+    action_type: API
+    need_operator: 0
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: MARK_PAYMENT_OVERDUE
+    action_name: 标记支付逾期
+    action_type: JOB
+    need_operator: 0
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: PAY_TIMEOUT_CLOSE
+    action_name: 支付超时关闭
+    action_type: JOB
+    need_operator: 0
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: START_REPAIR
+    action_name: 开始处理
+    action_type: MANUAL
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: AUTO_START_REPAIR
+    action_name: 自动进入处理
+    action_type: JOB
+    need_operator: 0
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: MARK_WAIT_PARTS
+    action_name: 标记等待配件
+    action_type: MANUAL
+    need_remark: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: PARTS_ARRIVED
+    action_name: 配件到齐继续处理
+    action_type: MANUAL
+    need_remark: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: SUBMIT_REPAIR_DONE
+    action_name: 提交处理完成
+    action_type: MANUAL
+    need_remark: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: SUBMIT_OUTBOUND
+    action_name: 提交出库
+    action_type: MANUAL
+    need_attachment: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: SYNC_LOGISTICS
+    action_name: 物流状态回写
+    action_type: API
+    need_operator: 0
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: CONFIRM_STORE_RECEIVE
+    action_name: 确认门店收货
+    action_type: MANUAL
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: MARK_STORE_READY_PICKUP
+    action_name: 标记门店可取
+    action_type: MANUAL
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: CONFIRM_CUSTOMER_PICKUP
+    action_name: 确认客户取件
+    action_type: MANUAL
+    need_operator: 1
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: AUTO_COMPLETE
+    action_name: 自动服务完成
+    action_type: JOB
+    need_operator: 0
+    status: ENABLED
+  - biz_type: TICKET
+    action_code: CANCEL_TICKET
+    action_name: 取消工单
+    action_type: MANUAL
+    need_remark: 1
+    need_confirm: 1
+    need_operator: 1
+    status: ENABLED
+
+transitions:
+  - biz_type: TICKET
+    from_status_code: WAIT_APPLY_REVIEW
+    action_code: APPLY_APPROVE
+    to_status_code: WAIT_RECEIVE
+    transition_type: MANUAL
+    role_code: CS_MANAGER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: WAIT_APPLY_REVIEW
+    action_code: APPLY_REJECT
+    to_status_code: APPLY_REJECTED
+    transition_type: MANUAL
+    role_code: CS_MANAGER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: WAIT_RECEIVE
+    action_code: CONFIRM_RECEIVE
+    to_status_code: RECEIVED
+    transition_type: MANUAL
+    role_code: RECEIVE_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: RECEIVED
+    action_code: SUBMIT_JUDGE_FREE
+    to_status_code: JUDGED_FREE
+    transition_type: MANUAL
+    role_code: JUDGE_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: RECEIVED
+    action_code: SUBMIT_JUDGE_PAID
+    to_status_code: JUDGED_PAID
+    transition_type: MANUAL
+    role_code: JUDGE_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: JUDGED_PAID
+    action_code: CREATE_PAYMENT_ORDER
+    to_status_code: WAIT_PAYMENT
+    transition_type: MANUAL
+    role_code: JUDGE_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: WAIT_PAYMENT
+    action_code: PAY_SUCCESS
+    to_status_code: PAYMENT_COMPLETED
+    transition_type: API
+    is_system_only: 1
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: WAIT_PAYMENT
+    action_code: MARK_PAYMENT_OVERDUE
+    to_status_code: PAYMENT_OVERDUE
+    transition_type: JOB
+    is_system_only: 1
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: PAYMENT_OVERDUE
+    action_code: PAY_TIMEOUT_CLOSE
+    to_status_code: CLOSED_UNPAID_RETURN
+    transition_type: JOB
+    is_system_only: 1
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: JUDGED_FREE
+    action_code: START_REPAIR
+    to_status_code: REPAIRING
+    transition_type: MANUAL
+    role_code: SERVICE_ENGINEER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: PAYMENT_COMPLETED
+    action_code: START_REPAIR
+    to_status_code: REPAIRING
+    transition_type: MANUAL
+    role_code: SERVICE_ENGINEER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: JUDGED_FREE
+    action_code: AUTO_START_REPAIR
+    to_status_code: REPAIRING
+    transition_type: JOB
+    is_system_only: 1
+    priority: 20
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: PAYMENT_COMPLETED
+    action_code: AUTO_START_REPAIR
+    to_status_code: REPAIRING
+    transition_type: JOB
+    is_system_only: 1
+    priority: 20
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: REPAIRING
+    action_code: MARK_WAIT_PARTS
+    to_status_code: WAIT_PARTS
+    transition_type: MANUAL
+    role_code: SERVICE_ENGINEER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: WAIT_PARTS
+    action_code: PARTS_ARRIVED
+    to_status_code: REPAIRING
+    transition_type: MANUAL
+    role_code: SERVICE_ENGINEER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: REPAIRING
+    action_code: SUBMIT_REPAIR_DONE
+    to_status_code: WAIT_OUTBOUND
+    transition_type: MANUAL
+    role_code: SERVICE_ENGINEER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: WAIT_OUTBOUND
+    action_code: SUBMIT_OUTBOUND
+    to_status_code: OUTBOUNDED
+    transition_type: MANUAL
+    role_code: FULFILLMENT_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: OUTBOUNDED
+    action_code: SYNC_LOGISTICS
+    to_status_code: DELIVERING
+    transition_type: API
+    is_system_only: 1
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: DELIVERING
+    action_code: SYNC_LOGISTICS
+    to_status_code: CUSTOMER_SIGNED
+    transition_type: API
+    is_system_only: 1
+    priority: 20
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: DELIVERING
+    action_code: SYNC_LOGISTICS
+    to_status_code: STORE_ARRIVED
+    transition_type: API
+    is_system_only: 1
+    condition_expr: delivery_method == STORE_PICKUP
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: STORE_ARRIVED
+    action_code: CONFIRM_STORE_RECEIVE
+    to_status_code: STORE_RECEIVED
+    transition_type: MANUAL
+    role_code: STORE_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: STORE_RECEIVED
+    action_code: MARK_STORE_READY_PICKUP
+    to_status_code: STORE_READY_PICKUP
+    transition_type: MANUAL
+    role_code: STORE_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: STORE_READY_PICKUP
+    action_code: CONFIRM_CUSTOMER_PICKUP
+    to_status_code: CUSTOMER_PICKED
+    transition_type: MANUAL
+    role_code: STORE_OPERATOR
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: CUSTOMER_SIGNED
+    action_code: AUTO_COMPLETE
+    to_status_code: COMPLETED
+    transition_type: JOB
+    is_system_only: 1
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: CUSTOMER_PICKED
+    action_code: AUTO_COMPLETE
+    to_status_code: COMPLETED
+    transition_type: JOB
+    is_system_only: 1
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: WAIT_RECEIVE
+    action_code: CANCEL_TICKET
+    to_status_code: CLOSED_CANCELED
+    transition_type: MANUAL
+    role_code: CS_MANAGER
+    priority: 10
+    status: ENABLED
+  - biz_type: TICKET
+    from_status_code: RECEIVED
+    action_code: CANCEL_TICKET
+    to_status_code: CLOSED_CANCELED
+    transition_type: MANUAL
+    role_code: CS_MANAGER
+    priority: 20
+    status: ENABLED
+
+action_permissions:
+  - biz_type: TICKET
+    status_code: WAIT_APPLY_REVIEW
+    action_code: APPLY_APPROVE
+    role_code: CS_MANAGER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_APPLY_REVIEW
+    action_code: APPLY_REJECT
+    role_code: CS_MANAGER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_RECEIVE
+    action_code: CONFIRM_RECEIVE
+    role_code: RECEIVE_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_RECEIVE
+    action_code: CANCEL_TICKET
+    role_code: CS_MANAGER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: RECEIVED
+    action_code: SUBMIT_JUDGE_FREE
+    role_code: JUDGE_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: RECEIVED
+    action_code: SUBMIT_JUDGE_PAID
+    role_code: JUDGE_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: RECEIVED
+    action_code: CANCEL_TICKET
+    role_code: CS_MANAGER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: JUDGED_PAID
+    action_code: CREATE_PAYMENT_ORDER
+    role_code: JUDGE_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: JUDGED_FREE
+    action_code: START_REPAIR
+    role_code: SERVICE_ENGINEER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: PAYMENT_COMPLETED
+    action_code: START_REPAIR
+    role_code: SERVICE_ENGINEER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: REPAIRING
+    action_code: MARK_WAIT_PARTS
+    role_code: SERVICE_ENGINEER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_PARTS
+    action_code: PARTS_ARRIVED
+    role_code: SERVICE_ENGINEER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: REPAIRING
+    action_code: SUBMIT_REPAIR_DONE
+    role_code: SERVICE_ENGINEER
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: WAIT_OUTBOUND
+    action_code: SUBMIT_OUTBOUND
+    role_code: FULFILLMENT_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: STORE_ARRIVED
+    action_code: CONFIRM_STORE_RECEIVE
+    role_code: STORE_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: STORE_RECEIVED
+    action_code: MARK_STORE_READY_PICKUP
+    role_code: STORE_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+  - biz_type: TICKET
+    status_code: STORE_READY_PICKUP
+    action_code: CONFIRM_CUSTOMER_PICKUP
+    role_code: STORE_OPERATOR
+    allow_execute: 1
+    status: ENABLED
+
+auto_rules:
+  - biz_type: TICKET
+    rule_code: RULE_FREE_AUTO_START_REPAIR
+    from_status_code: JUDGED_FREE
+    action_code: AUTO_START_REPAIR
+    trigger_mode: TIME
+    trigger_expr: +D3
+    calendar_type: WORKDAY
+    is_holiday_excluded: 1
+    retryable: 1
+    status: ENABLED
+  - biz_type: TICKET
+    rule_code: RULE_PAID_AUTO_START_REPAIR
+    from_status_code: PAYMENT_COMPLETED
+    action_code: AUTO_START_REPAIR
+    trigger_mode: TIME
+    trigger_expr: +D3
+    calendar_type: WORKDAY
+    is_holiday_excluded: 1
+    retryable: 1
+    status: ENABLED
+  - biz_type: TICKET
+    rule_code: RULE_MARK_PAYMENT_OVERDUE
+    from_status_code: WAIT_PAYMENT
+    action_code: MARK_PAYMENT_OVERDUE
+    trigger_mode: TIME
+    trigger_expr: +D29
+    calendar_type: NATURAL_DAY
+    retryable: 1
+    status: ENABLED
+  - biz_type: TICKET
+    rule_code: RULE_PAY_TIMEOUT_CLOSE
+    from_status_code: PAYMENT_OVERDUE
+    action_code: PAY_TIMEOUT_CLOSE
+    trigger_mode: TIME
+    trigger_expr: +D1
+    calendar_type: NATURAL_DAY
+    retryable: 1
+    status: ENABLED
+  - biz_type: TICKET
+    rule_code: RULE_SIGNED_AUTO_COMPLETE
+    from_status_code: CUSTOMER_SIGNED
+    action_code: AUTO_COMPLETE
+    trigger_mode: TIME
+    trigger_expr: +D1
+    calendar_type: WORKDAY
+    is_holiday_excluded: 1
+    retryable: 1
+    status: ENABLED
+  - biz_type: TICKET
+    rule_code: RULE_PICKED_AUTO_COMPLETE
+    from_status_code: CUSTOMER_PICKED
+    action_code: AUTO_COMPLETE
+    trigger_mode: TIME
+    trigger_expr: +D1
+    calendar_type: WORKDAY
+    is_holiday_excluded: 1
+    retryable: 1
+    status: ENABLED
