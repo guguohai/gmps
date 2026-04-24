@@ -1,0 +1,2 @@
+-- TODO: survey_template / question / option 初始化 SQL
+-- 文档 B.2.6 标注为后续补充项，需待首批问卷模板与题目确认后补充。

@@ -1,0 +1,2 @@
+-- TODO: warehouse / warehouse_location 初始化 SQL
+-- 文档 B.2.6 标注为后续补充项，需待正式仓库、库位编码确认后补充。
