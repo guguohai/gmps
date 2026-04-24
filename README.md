@@ -38,6 +38,7 @@
 
 ## 目录
 
+```text
    根目录/
 ├─ apps/                          # 应用层目录
 │  ├─ admin_web/                  # 管理后台前端
@@ -71,3 +72,4 @@
 ├─ .env.example                   # 环境变量示例文件
 ├─ docker_compose.yml             # 本地/测试环境编排文件
 └─ README.md                      # 项目说明文档
+```
