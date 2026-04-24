@@ -1,21 +1,34 @@
-# Microservices Overview
+# 微服务总览
 
-This directory contains independent microservices that handle specific domains or integrations.
+`services` 目录用于放置独立微服务。这里的服务主要承担外部系统集成、异步任务、基础能力和高独立性的业务子域。
 
-## Services List
+`core_api` 仍然是工单、状态机和核心业务数据的事实源。微服务不能绕过 `core_api` 直接修改工单状态。
 
-### 1. [Integration SAP](integration_sap/)
-- Responsibility: Synchronizing data with the SAP ERP system.
-- Tech Stack: Python (FastAPI).
+## 服务清单
 
-### 2. [Integration Logistics](integration_logistics/)
-- Responsibility: Connecting with external logistics providers (tracking, shipping).
+### 1. [SAP 集成服务](integration_sap/)
 
-### 3. [Notification Service](notification_service/)
-- Responsibility: Sending emails, SMS, and system notifications.
+负责对接 SAP ERP，例如配件价格、SO/DO、换新、库存或财务相关同步。
 
-### 4. [File Service](file_service/)
-- Responsibility: Managing file uploads, downloads, and storage (S3/Local).
+### 2. [物流集成服务](integration_logistics/)
 
-### 5. [Scheduler Worker](scheduler_worker/)
-- Responsibility: Handling background tasks and cron jobs.
+负责对接外部物流服务商，例如发货下单、物流轨迹查询、签收状态同步。
+
+### 3. [通知服务](notification_service/)
+
+负责短信、邮件、小程序消息、系统通知等消息分发。
+
+### 4. [文件服务](file_service/)
+
+负责文件上传、下载、存储和访问管理，例如维修照片、凭证、附件等。
+
+### 5. [定时任务服务](scheduler_worker/)
+
+负责定时任务和后台异步任务，例如支付超期、自动完成、补偿查询和周期性同步。
+
+### 6. [支付服务](payment_service/)
+
+负责支付订单、渠道回调、退款、补偿查询、对账、幂等和支付审计日志。
+
+支付服务只拥有支付域数据，不直接修改工单状态。支付结果需要回写 `core_api`，由 `core_api` 通过工单状态机完成状态流转。
+
