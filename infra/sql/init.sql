@@ -1,11 +1,3 @@
--- Gentle Monster 中国区售后系统
--- MySQL 8 Schema
--- 基于《GM数据库设计文档0423》附录B.1整理
--- 说明：
--- 1) 优先采用文档附录B.1中的正式DDL口径
--- 2) 个别在检索片段中未完整展开的表，按0423文档字段说明与命名规范补齐为可执行SQL
--- 3) ticket / ticket_progress 采用0423版本口径，包含 source_request_no、apply_channel、progress_title 等字段
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -66,7 +58,7 @@ DROP TABLE IF EXISTS store;
 DROP TABLE IF EXISTS customer;
 
 CREATE TABLE customer (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   customer_phone VARCHAR(32) NOT NULL,
   customer_name VARCHAR(100) NOT NULL,
   email VARCHAR(100) NULL,
@@ -81,7 +73,7 @@ CREATE TABLE customer (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE store (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   store_code VARCHAR(64) NOT NULL,
   store_name VARCHAR(100) NOT NULL,
   store_type VARCHAR(64) NULL,
@@ -95,7 +87,7 @@ CREATE TABLE store (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE product (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   product_code VARCHAR(64) NOT NULL,
   product_name VARCHAR(200) NOT NULL,
   product_category VARCHAR(64) NULL,
@@ -111,7 +103,7 @@ CREATE TABLE product (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE part (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   part_code VARCHAR(64) NOT NULL,
   part_name VARCHAR(200) NOT NULL,
   color VARCHAR(50) NULL,
@@ -125,7 +117,7 @@ CREATE TABLE part (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE warehouse (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   warehouse_code VARCHAR(64) NOT NULL,
   warehouse_name VARCHAR(100) NOT NULL,
   warehouse_type VARCHAR(64) NULL,
@@ -137,7 +129,7 @@ CREATE TABLE warehouse (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE sys_user (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   user_no VARCHAR(64) NOT NULL,
   username VARCHAR(100) NOT NULL,
   full_name VARCHAR(100) NOT NULL,
@@ -159,7 +151,7 @@ CREATE TABLE sys_user (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE sys_role (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   role_code VARCHAR(64) NOT NULL,
   role_name VARCHAR(100) NOT NULL,
   role_type VARCHAR(64) NULL,
@@ -172,7 +164,7 @@ CREATE TABLE sys_role (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE sys_permission (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   permission_code VARCHAR(64) NOT NULL,
   permission_name VARCHAR(100) NOT NULL,
   permission_type VARCHAR(32) NOT NULL,
@@ -192,7 +184,7 @@ CREATE TABLE sys_permission (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE part_config (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   part_id BIGINT NOT NULL,
   qty_type VARCHAR(64) NOT NULL,
   qty_name VARCHAR(100) NOT NULL,
@@ -206,7 +198,7 @@ CREATE TABLE part_config (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE warehouse_location (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   warehouse_id BIGINT NOT NULL,
   location_code VARCHAR(64) NOT NULL,
   location_name VARCHAR(100) NOT NULL,
@@ -221,7 +213,7 @@ CREATE TABLE warehouse_location (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE sys_user_role (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   user_id BIGINT NOT NULL,
   role_id BIGINT NOT NULL,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -233,7 +225,7 @@ CREATE TABLE sys_user_role (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE sys_role_permission (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   role_id BIGINT NOT NULL,
   permission_id BIGINT NOT NULL,
   is_granted TINYINT NOT NULL DEFAULT 1,
@@ -248,7 +240,7 @@ CREATE TABLE sys_role_permission (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE wf_status (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   biz_type VARCHAR(32) NOT NULL,
   status_code VARCHAR(64) NOT NULL,
   status_name VARCHAR(100) NOT NULL,
@@ -272,7 +264,7 @@ CREATE TABLE wf_status (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE wf_action (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   biz_type VARCHAR(32) NOT NULL,
   action_code VARCHAR(64) NOT NULL,
   action_name VARCHAR(100) NOT NULL,
@@ -289,7 +281,7 @@ CREATE TABLE wf_action (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE wf_transition (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   biz_type VARCHAR(32) NOT NULL,
   from_status_code VARCHAR(64) NOT NULL,
   action_code VARCHAR(64) NOT NULL,
@@ -309,7 +301,7 @@ CREATE TABLE wf_transition (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE wf_action_permission (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   biz_type VARCHAR(32) NOT NULL,
   status_code VARCHAR(64) NOT NULL,
   action_code VARCHAR(64) NOT NULL,
@@ -323,7 +315,7 @@ CREATE TABLE wf_action_permission (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE wf_auto_rule (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   biz_type VARCHAR(32) NOT NULL,
   rule_code VARCHAR(64) NOT NULL,
   from_status_code VARCHAR(64) NOT NULL,
@@ -342,7 +334,7 @@ CREATE TABLE wf_auto_rule (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_no VARCHAR(64) NOT NULL,
   source_request_no VARCHAR(64) NULL,
   apply_channel VARCHAR(32) NULL,
@@ -391,7 +383,7 @@ CREATE TABLE ticket (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_snapshot (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   customer_name VARCHAR(100) NOT NULL,
   customer_phone VARCHAR(32) NOT NULL,
@@ -426,7 +418,7 @@ CREATE TABLE ticket_snapshot (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_repair (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   hq_inbound_date DATETIME NULL,
   expected_outbound_date DATE NULL,
@@ -461,7 +453,7 @@ CREATE TABLE ticket_repair (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_payment (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   payment_order_no VARCHAR(64) NOT NULL,
   payment_status VARCHAR(64) NOT NULL,
@@ -491,7 +483,7 @@ CREATE TABLE ticket_payment (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_payment_event_log (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_payment_id BIGINT NOT NULL,
   ticket_id BIGINT NOT NULL,
   event_type VARCHAR(32) NOT NULL,
@@ -512,7 +504,7 @@ CREATE TABLE ticket_payment_event_log (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_refund (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   ticket_payment_id BIGINT NOT NULL,
   refund_no VARCHAR(64) NOT NULL,
@@ -536,7 +528,7 @@ CREATE TABLE ticket_refund (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_fulfillment (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   delivery_method VARCHAR(32) NULL,
   delivery_status VARCHAR(64) NULL,
@@ -561,7 +553,7 @@ CREATE TABLE ticket_fulfillment (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_inbound_logistics (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   customer_phone VARCHAR(32) NULL,
   carrier_name VARCHAR(100) NULL,
@@ -581,7 +573,7 @@ CREATE TABLE ticket_inbound_logistics (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_consultation (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   consultation_no VARCHAR(64) NOT NULL,
   item_type VARCHAR(32) NOT NULL,
@@ -619,7 +611,7 @@ CREATE TABLE ticket_consultation (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_cancel_log (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   cancel_source VARCHAR(32) NOT NULL,
   cancel_reason VARCHAR(200) NULL,
@@ -638,7 +630,7 @@ CREATE TABLE ticket_cancel_log (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_consultation_attachment (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   consultation_id BIGINT NOT NULL,
   attachment_type VARCHAR(32) NOT NULL,
   file_name VARCHAR(255) NULL,
@@ -651,7 +643,7 @@ CREATE TABLE ticket_consultation_attachment (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_attachment (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   file_name VARCHAR(255) NOT NULL,
   title VARCHAR(200) NULL,
@@ -670,7 +662,7 @@ CREATE TABLE ticket_attachment (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_progress (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   progress_time DATETIME NOT NULL,
   progress_type VARCHAR(64) NOT NULL,
@@ -688,7 +680,7 @@ CREATE TABLE ticket_progress (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_status_log (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   from_status_code VARCHAR(64) NULL,
   action_code VARCHAR(64) NOT NULL,
@@ -707,7 +699,7 @@ CREATE TABLE ticket_status_log (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_action_log (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   action_code VARCHAR(64) NOT NULL,
   action_name VARCHAR(100) NULL,
@@ -724,7 +716,7 @@ CREATE TABLE ticket_action_log (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_exception (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   exception_type VARCHAR(64) NOT NULL,
   exception_code VARCHAR(64) NULL,
@@ -744,7 +736,7 @@ CREATE TABLE ticket_exception (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE ticket_available_action (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NOT NULL,
   action_code VARCHAR(64) NOT NULL,
   action_name VARCHAR(100) NULL,
@@ -759,7 +751,7 @@ CREATE TABLE ticket_available_action (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE inventory_balance (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   item_type VARCHAR(32) NOT NULL,
   product_id BIGINT NULL,
   part_id BIGINT NULL,
@@ -776,7 +768,7 @@ CREATE TABLE inventory_balance (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE inventory_txn (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   txn_no VARCHAR(64) NOT NULL,
   item_type VARCHAR(32) NOT NULL,
   product_id BIGINT NULL,
@@ -805,7 +797,7 @@ CREATE TABLE inventory_txn (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE inventory_request (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   request_no VARCHAR(64) NOT NULL,
   ticket_id BIGINT NULL,
   product_id BIGINT NOT NULL,
@@ -830,7 +822,7 @@ CREATE TABLE inventory_request (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE part_request (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   part_request_no VARCHAR(64) NOT NULL,
   ticket_id BIGINT NULL,
   requester_id BIGINT NULL,
@@ -859,7 +851,7 @@ CREATE TABLE part_request (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE inventory_diff (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   diff_no VARCHAR(64) NOT NULL,
   diff_source VARCHAR(64) NOT NULL,
   item_type VARCHAR(32) NOT NULL,
@@ -889,7 +881,7 @@ CREATE TABLE inventory_diff (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE inventory_sync_log (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   sync_batch_no VARCHAR(64) NOT NULL,
   sync_object VARCHAR(64) NOT NULL,
   sync_type VARCHAR(64) NOT NULL,
@@ -915,7 +907,7 @@ CREATE TABLE inventory_sync_log (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE survey_template (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   template_no VARCHAR(64) NOT NULL,
   template_name VARCHAR(200) NOT NULL,
   template_desc TEXT NULL,
@@ -928,7 +920,7 @@ CREATE TABLE survey_template (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE survey_template_question (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   template_id BIGINT NOT NULL,
   sort_no INT NOT NULL DEFAULT 0,
   question_no VARCHAR(64) NOT NULL,
@@ -944,7 +936,7 @@ CREATE TABLE survey_template_question (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE survey_template_option (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   question_id BIGINT NOT NULL,
   sort_no INT NOT NULL DEFAULT 0,
   option_no VARCHAR(64) NOT NULL,
@@ -958,7 +950,7 @@ CREATE TABLE survey_template_option (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE survey_task (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   survey_no VARCHAR(64) NOT NULL,
   ticket_id BIGINT NOT NULL,
   template_id BIGINT NULL,
@@ -979,7 +971,7 @@ CREATE TABLE survey_task (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE survey_answer (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   survey_task_id BIGINT NOT NULL,
   question_id BIGINT NOT NULL,
   question_no VARCHAR(64) NOT NULL,
@@ -999,7 +991,7 @@ CREATE TABLE survey_answer (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE notification_template (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   template_code VARCHAR(64) NOT NULL,
   template_type VARCHAR(64) NOT NULL,
   template_name VARCHAR(200) NOT NULL,
@@ -1019,7 +1011,7 @@ CREATE TABLE notification_template (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE notification_send_log (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   ticket_id BIGINT NULL,
   template_id BIGINT NULL,
   message_id VARCHAR(64) NULL,
@@ -1051,7 +1043,7 @@ CREATE TABLE notification_send_log (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE sys_dict_item (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   dict_type VARCHAR(64) NOT NULL,
   dict_code VARCHAR(64) NOT NULL,
   dict_name VARCHAR(100) NOT NULL,
@@ -1075,7 +1067,7 @@ CREATE TABLE sys_dict_item (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE external_interface_config (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
   system_code VARCHAR(64) NOT NULL,
   interface_type VARCHAR(64) NOT NULL,
   interface_name VARCHAR(100) NULL,
